@@ -2,8 +2,8 @@
     border-right:1px solid #111111;
     /* sidebar will always take 30% of the screen */
     flex:0.3;
-    /*dont be less that 250px*/
-    min-width: 250px;
+    /*dont be less that 130px*/
+    min-width: 180px;
     padding-left: 20px;
     padding-right: 20px;
 }

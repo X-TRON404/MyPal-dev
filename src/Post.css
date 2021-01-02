@@ -1,21 +1,25 @@
 
 .post{
-    background-color: white;
-    max-width: 500px;
-    border:1px solid lightgray;
-    margin-bottom: 45px;
+    background-color: #2E3236;
+    border-bottom:0.3px solid lightgray;
+    margin-bottom: 30px;
+    min-width: fit-content;
+    /*if content is bigger than the available space in the container make it scrollable along y-direction*/
+    overflow-y: scroll;
+
 }
+
 
 .post__image{
 width: 100%;
 object-fit: contain;
-border-top:1px solid lightgray;
-border-bottom:1px solid lightgray;
+
 }
 
 .post__text{
 font-weight: normal;
 padding: 20px;
+color: aliceblue;
 
 }
 
@@ -26,6 +30,9 @@ display:flex;
 align-items: center;
 padding: 20px 10px;
 }
+.post__header > h3{
+    color: aliceblue;
+}
 
 .post__avatar{
 margin-right: 10px;
@@ -35,11 +42,20 @@ margin-right: 10px;
     padding: 20px;
 }
 
+.post__comments > p{
+color: aliceblue;
+}
+
 .post__commentBox{
     display: flex;
     padding: 20px;
-    
+ 
 }
+.post__commentBox > Button{ 
+background-color:rgb(115, 137, 218);
+color:aliceblue;
+}
+
 .post__input{
     flex:1;
     border:none;
@@ -49,5 +65,12 @@ margin-right: 10px;
 .post_button{
     flex:0;
     border: none ;
-    border-top: 1px solid lightgray;
+    border-top: 1px solid lightgray !; 
+
+} 
+
+.post__footer{
+    display: flex;
+    justify-content:space-between;
+    margin:10px 20px;
 }

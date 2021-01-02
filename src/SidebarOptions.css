@@ -3,6 +3,7 @@
     /*vertically align icon and text*/
     align-items: center;
     cursor: pointer;
+   
 }
 
 /*material-ui adds its own class 'MuiSvgIcon-root' to its */

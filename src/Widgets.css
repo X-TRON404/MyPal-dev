@@ -2,7 +2,7 @@
     flex:0.3;
     border-left:1px solid #111111;
 }
-.widgets__input{
+.widgets__inputBox{
 display: flex;
 align-items:center;
 background-color: #191919;
@@ -13,9 +13,11 @@ margin-left:20px;
 
 }
 
-.widgets__input > input{
-    border:none;
-    background-color: #191919;
+.widgets__input{
+    width: 100%;
+}
+.widgets__searchIcon{
+color: aliceblue;
 }
 
 .widgets___widgetContainer{

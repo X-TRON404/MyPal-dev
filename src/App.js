@@ -96,6 +96,9 @@ function App() {
     .catch((error) => { alert(error.message)})
     //close the model
     setOpenSignIn(false)
+    //empty the fields
+    setEmail('')
+    setPassword('')
   }
 //====================================sign up the user=========================================
   const signUp = (e) => {

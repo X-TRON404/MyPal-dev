@@ -1,0 +1,28 @@
+.imageUpload{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: fixed;
+    bottom: 0;
+    background-color: #FAFAFA;
+    border: 1px solid lightgray;
+}
+
+.imageUpload__uploadProgress{
+    width: 100%;
+}
+
+.imageUpload__caption{
+margin-top: 8px;
+flex: 1;
+}
+
+.imageUpload__fileInput{
+flex: 0;
+padding:10px;
+}

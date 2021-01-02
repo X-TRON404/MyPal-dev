@@ -1,0 +1,32 @@
+.widgets{
+    flex:0.3;
+    border-left:1px solid #111111;
+}
+.widgets__input{
+display: flex;
+align-items:center;
+background-color: #191919;
+padding:10px;
+border-radius: 20px;
+margin-top:10px;
+margin-left:20px;
+
+}
+
+.widgets__input > input{
+    border:none;
+    background-color: #191919;
+}
+
+.widgets___widgetContainer{
+    margin-top: 15px;
+    margin-left:20px;
+    padding:20px;
+    background-color:#191919;
+    border-radius:20px;
+}
+
+.widgets__widgetContainer >h2 {
+    font-size: 18px;
+    font-weight: 800;
+}

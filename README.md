@@ -71,4 +71,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### Dependencies
 npm install @material-ui/core
+
 npm install @material-ui/icons

@@ -1,6 +1,5 @@
 import React from 'react'
 //Get material-ui icons
-import TwitterIcon from '@material-ui/icons/Twitter';
 import SidebarOptions from './SidebarOptions'
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
@@ -16,7 +15,6 @@ import './Sidebar.css'
 function Sidebar() {
     return (
         <div className="sidebar">
-            <TwitterIcon className="sidebar__twitterIcon"/>
             {/*pass icons as props to SidebarOptions component*/}
             {/*keep i captial of Icon to let react know you are passing a component*/}
             <SidebarOptions active text="Home" Icon={HomeIcon}/>
@@ -27,7 +25,7 @@ function Sidebar() {
             <SidebarOptions text="Lists" Icon={ListAltIcon}/>
             <SidebarOptions text="Profile" Icon={PermIdentityIcon}/>
             <SidebarOptions text="More" Icon={MoreHorizIcon}/>
-            <Button variant="outlined"  className="sidebar__tweet" fullWidth>Tweet</Button>
+            <Button variant="outlined"  className="sidebar__tweet" fullWidth>Texx</Button>
         </div>
     )
 }

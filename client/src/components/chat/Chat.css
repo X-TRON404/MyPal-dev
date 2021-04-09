@@ -1,0 +1,38 @@
+
+.chat{
+display: flex;
+flex-direction:column;
+align-items: center;
+color: grey;
+margin-bottom: 30px;
+min-width: fit-content;
+overflow-y: scroll !important;
+}
+
+ .MuiBadge-root{
+    margin-left: 10px ;
+}
+
+.chat__online{
+    text-align: center;
+}
+
+.chat__onlineMembers{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    
+}
+.chat__offline{
+    text-align: center;
+}
+
+.chat__offlineMembers{
+    opacity: 0.4;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+.MuiCard-root :hover{
+    background-color:'#363A3E' !important;
+}

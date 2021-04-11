@@ -1,0 +1,35 @@
+
+.widgetsChat{
+display: flex;
+flex-direction:column;
+align-items: center;
+color: grey;
+margin-bottom: 30px;
+min-width: fit-content;
+overflow: scroll !important;
+}
+
+ .MuiBadge-root{
+    margin-left: 10px ;
+}
+
+.widgetsChat__online{
+    text-align: center;
+}
+
+.widgetsChat__onlineMembers{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    
+}
+.widgetsChat__offline{
+    text-align: center;
+}
+
+.widgetsChat__offlineMembers{
+    opacity: 0.4;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}

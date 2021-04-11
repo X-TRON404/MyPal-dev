@@ -1,6 +1,7 @@
 .widgets{
     flex:0.3;
     border-left:1px solid #111111;
+    /* overflow-y: scroll; */
 }
 .widgets__inputBox{
 display: flex;

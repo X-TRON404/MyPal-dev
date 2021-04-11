@@ -1,13 +1,16 @@
 import {useState,useEffect} from 'react';
 import './App.css';
-import Post from './Post';
-import {DataBase,auth} from './firebase'
+import {auth} from './firebase'
 import {makeStyles} from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
 import { Button, Input } from '@material-ui/core';
 import ImageUpload from './ImageUpload';
 import Sidebar from './Sidebar';
 import Widgets from './Widgets';
+import { BrowserRouter as Router } from 'react-router-dom'
+import {Route,Switch} from 'react-router-dom'
+import Feed from './Feed'
+import Chat from './chat/Chat'
 
 //====================================Modal styles=========================================
 function getModalStyle() {
@@ -36,8 +39,6 @@ function App() {
   const classes = useStyles();
 
   const [modalStyle] = useState(getModalStyle);
-  //posts array
-  const [posts, setPosts] = useState([]);
   //initially unless fired dont show the model for sign in
   const [openSignIn,setOpenSignIn] = useState(false);
   //initially unless fired dont show the model for sign up
@@ -77,17 +78,6 @@ function App() {
   }
 
 },[user,username])
-
-//====================================Post changes listner=========================================
-  useEffect(()=>{
-  //onSnapshot = listner to changes in posts 
-  //everytime the posts change run this code
-  //grab the collection 'posts' from the database and order 'docs' in the collection by timestamp
-  DataBase.collection('posts').orderBy('timestamp','desc').onSnapshot(snapshot =>{
-    //Now set the  id=doc.id and post=doc.data to the fields in the 'posts' variable that we defined above
-    setPosts(snapshot.docs.map(doc =>({id:doc.id,post:doc.data()})))
-      })
-  },[]);
 
 //====================================sign in the user=========================================
   const signIn = (e) => {
@@ -165,16 +155,20 @@ function App() {
                                                 {/*sidebar*/}
       <div className="app__body">
           <Sidebar/>
-
-                                                  {/*posts*/}
-            <div className="app__posts">
-            {
-              //render only those posts by id who are newly added to the database dont render the entire post list  
-            posts.map(({id,post})=>(<Post key={post.id} postId={id} user={user} username={post.username} caption={post.caption} imageUrl={post.imageUrl}></Post>))
-              }
-            </div>
-
-                                                    {/*top communities*/}
+{/* =================================================REACT ROUTER COMES HERE================================================================================= */}
+              <div className="app__feed">
+                <Router>
+                    <Switch> 
+                        <Route path="/">
+                            <Feed/>
+                        </Route>                                                                                                            
+                        <Route path="/chats/:chatId">
+                            <Chat/>
+                        </Route>  
+                    </Switch>
+                </Router>
+              </div>   
+{/* ======================================================================================================================================================= */}
 
                               {/*show image upload only if the user is logged in*/}
 

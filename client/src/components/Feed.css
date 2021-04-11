@@ -1,12 +1,6 @@
-.chat{
+.feed{
     flex:0.4;
     background-color: #2E3236;
     padding: 20px;
     overflow-y: scroll;
-  }
-
-
-.chat__header{
-margin-left: 40px;
-color:grey;
 }

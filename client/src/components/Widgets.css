@@ -11,6 +11,7 @@ padding:10px;
 border-radius: 20px;
 margin-top:10px;
 margin-left:20px;
+margin-right: 20px;
 
 }
 
@@ -24,6 +25,7 @@ color: aliceblue;
 .widgets___widgetContainer{
     margin-top: 15px;
     margin-left:20px;
+    margin-right: 20px;
     padding:10px;
     background-color:#191919;
     border-radius:20px;

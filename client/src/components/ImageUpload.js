@@ -1,16 +1,23 @@
 import React,{useState} from 'react';
-import { Button } from '@material-ui/core';
 import {storage,DataBase} from './firebase';
 import firebase from 'firebase';
 import './ImageUpload.css'
+import {IconButton, Input, Modal} from '@material-ui/core';
+import SendIcon from '@material-ui/icons/Send';
+import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 function ImageUpload({username}) {
     //caption
     const [caption,setCaption] = useState('');
     //image 
     const [image,setImage] = useState(null);
-    //profress bar
+    //progress bar
     const [progress,setProgress] = useState(0); 
+    //open the modal 
+    const [openProgress,setOpenProgress] = useState(false)
+
+
 
     //get the name of the first image file you selected (image as a file)
     const handleChange = (e) =>{
@@ -21,6 +28,7 @@ function ImageUpload({username}) {
     const handleUpload = () =>{
   //=============================={Upload the image to firebase database}========================
             if (image) {
+            
             //Access the storage and upolad the image in the 'images' folder and give it the name =image.name
             const uploadTask = storage.ref(`images/${image.name}`).put(image)
         
@@ -34,6 +42,7 @@ function ImageUpload({username}) {
                     const progress_ = Math.round(
                         (snapshot.bytesTransferred/snapshot.totalBytes)*100
                     );
+                    setOpenProgress(true)
                     setProgress(progress_)
                 },
                 //catch the error
@@ -69,6 +78,7 @@ function ImageUpload({username}) {
                             })
                             //once done set clear the input 
                             setProgress(0);
+                            setOpenProgress(false)
                             setCaption("");
                             setImage(null)
 
@@ -85,11 +95,32 @@ function ImageUpload({username}) {
 
     return (
         <div className="imageUpload">
-            <progress className="imageUpload__uploadProgress" value={progress} max="100"/>
-            {/*input the image and caption from the user*/}
-            <input className="imageUpload__caption" type="text" placeholder="Enter a caption..." onChange={(e)=>setCaption(e.target.value)} value={caption}></input>
-            <input className="imageUpload__fileInput" type="file" placeholder="Choose a file" onChange={handleChange}/>
-            <Button onClick={handleUpload}>Upload</Button>
+
+                                                        {/*Modal for progress of upload*/}
+                <Modal  mageUpload__progressModal="imageUpload__progressModal" open={openProgress} onClose={()=>{setOpenProgress(false)}}> 
+                                                                        {/*progress bar*/}
+                        <LinearProgress  variant="determinate" className="imageUpload__uploadProgress" value={progress} max="100"/>
+                </Modal>
+
+
+                                                        {/*post upload form */}
+            <div className="imageUpload__form">
+                <form onSubmit={(e)=>{e.preventDefault()}}>
+                        {/*input the image and caption from the user*/}
+                        
+                        <input style={{color:"aliceblue"}} className="imageUpload__fileInput" accept="image/*" id="image-button-file" type="file" placeholder="Choose a file" onChange={handleChange} />
+                        <label htmlFor="image-button-file">
+                            <IconButton color="primary" aria-label="upload picture" component="span">
+                                <AddPhotoAlternateIcon/>
+                            </IconButton>
+                        </label>
+                        
+                        <Input className="imageUpload__caption" type="text" placeholder="Enter a caption..." onChange={(e)=>setCaption(e.target.value)} value={caption}/>
+                        <IconButton className="imageUpload___iconButton" disabled = {!image} variant ='contained' color="primary" type ='submit' onClick={handleUpload}>
+                            <SendIcon />
+                        </IconButton>
+                </form>
+           </div>
         </div>
     )
 }

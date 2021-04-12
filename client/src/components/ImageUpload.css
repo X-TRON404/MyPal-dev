@@ -7,23 +7,47 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
-    margin-bottom: 10px;
     position: fixed;
     bottom: 0;
-    background-color: #FAFAFA;
-    border: 1px solid lightgray;
+    background-color: #1A1A1A;
+    border:none;
 }
 
-.imageUpload__uploadProgress{
+.imageUpload__form > form{
+    display: flex;
     width: 100%;
+    flex-direction: row;
+    align-items: center;    
+    justify-content: space-between;
 }
 
 .imageUpload__caption{
-margin-top: 8px;
 flex: 1;
 }
 
 .imageUpload__fileInput{
-flex: 0;
+flex: 0 !important;
 padding:10px;
+display: none !important;
 }
+
+
+.imageUpload__iconButton{
+flex: 0 !important;
+}
+
+
+.imageUpload__progressModal{
+    width: 100px;
+    margin-top:500px;
+    align-items: center !important;
+    width: 100%;
+}
+.imageUpload__uploadProgress{
+    margin-top: 400px;
+    width: 100%;
+    margin-left: 30px;
+    margin-right: 30px;
+
+}
+

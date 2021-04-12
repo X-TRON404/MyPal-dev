@@ -6,7 +6,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { Button, Input } from '@material-ui/core';
 import {DataBase} from './firebase'
 import firebase from 'firebase';
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline'
+import CommentIcon from '@material-ui/icons/Comment';
 import RepeatIcon from '@material-ui/icons/Repeat'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import PublishIcon from '@material-ui/icons/Publish';
@@ -73,7 +73,7 @@ const changeColor = (e) => {
             <h4 className="post__text"><strong>{username+" "}</strong>:{" "+caption}</h4>
             <div className="post__footer">
                                                     {/*Comment icon*/}
-                            <ChatBubbleOutlineIcon fontsize="small" cursor="pointer"/>
+                            <CommentIcon fontsize="small" cursor="pointer"/>
                                                     {/*Re-tweet icon*/}
                             <RepeatIcon fontsize="small" cursor="pointer"/>
                                                     {/*like icon*/}

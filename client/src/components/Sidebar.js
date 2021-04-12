@@ -17,7 +17,7 @@ function Sidebar() {
         <div className="sidebar">
             {/*pass icons as props to SidebarOptions component*/}
             {/*keep i captial of Icon to let react know you are passing a component*/}
-            <SidebarOptions active text="Home" Icon={HomeIcon}/>
+            <SidebarOptions active text="Home" Icon={HomeIcon}></SidebarOptions>
             <SidebarOptions text="Explore" Icon={SearchIcon}/>
             <SidebarOptions text="Notifications" Icon={NotificationsNoneIcon}/>
             <SidebarOptions text="Messages" Icon={MailOutlineIcon}/>

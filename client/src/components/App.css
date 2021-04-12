@@ -3,6 +3,13 @@
   margin: 0;
   }
   
+
+
+  @media (max-width:450px){
+
+
+  }
+
   .app{
     background-color:#363A3E;
   }
@@ -28,9 +35,8 @@
     display: flex;
   }
 
+  /*CHANGE FEED WIDTH*/
   .app__feed{
-
-      flex:0.4;
       background-color: #2E3236;
       padding: 20px;
       overflow-y: scroll;  

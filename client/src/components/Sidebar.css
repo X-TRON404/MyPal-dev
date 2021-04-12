@@ -1,9 +1,18 @@
+
+/* =================================================Hide the sidebar for displays smaller than 450px================================================== */
+@media (max-width:450px){
+    .sidebar{
+        display: none;
+    }
+}
+
+/* ========================================================================================================================================== */
 .sidebar{
     border-right:1px solid #111111;
     /* sidebar will always take 30% of the screen */
     flex:0.3;
-    /*dont be less that 130px*/
-    min-width: 180px;
+    /*dont be less that 300px*/                                      /*SIDEBAR WIDTH*/         
+    min-width: 300px;
     padding-left: 20px;
     padding-right: 20px;
 }

@@ -160,7 +160,7 @@ function App() {
                 <Router>
                     <Switch> 
                         <Route path="/">
-                            <Feed/>
+                            <Feed user={user}/>
                         </Route>                                                                                                            
                         <Route path="/chats/:chatId">
                             <Chat/>

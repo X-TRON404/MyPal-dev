@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import Post from './Post';
-import {DataBase} from './firebase'
+import {auth, DataBase} from './firebase'
 
 
-function Feed() {
+function Feed({user}) {
 //posts array
 const [posts, setPosts] = useState([]);
-//flag to keep track of whether the user has logged in or not (user who's signed in )
-const [user,setUser] = useState(null);
+
+//==============================================Use this when we will use context API============================
+// //flag to keep track of whether the user has logged in or not (user who's signed in )
+// const [user,setUser] = useState(null);
+//===============================================================================================================
+
 //====================================Post changes listner=========================================
     useEffect( () => {
         //onSnapshot = listner to changes in posts 

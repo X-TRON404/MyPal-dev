@@ -1,4 +1,15 @@
-import firebase from 'firebase';
+//not including entire firebase bundle 
+//just including the firebase/app to reduce loading time
+
+
+// This import loads the firebase namespace
+import firebase from 'firebase/app';
+// These imports load individual services into the firebase namespace.
+import 'firebase/firestore';
+import 'firebase/auth';
+import 'firebase/database';
+import 'firebase/storage'
+
 const firebaseApp = firebase.initializeApp({
     apiKey: "AIzaSyCH-EjSPlON22U5C0a-Eg2dmTeqGzzyeLQ",
     authDomain: "mypal-7c455.firebaseapp.com",
@@ -12,5 +23,7 @@ const firebaseApp = firebase.initializeApp({
 const DataBase = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 const storage = firebaseApp.storage();
+// const pref = firebaseApp.performance();
+// const analytics = firebaseApp.analytics();
 
-export  {DataBase,auth,storage};
+export  {DataBase,auth,storage}; 

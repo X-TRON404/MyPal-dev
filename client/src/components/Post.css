@@ -51,8 +51,15 @@ color: aliceblue;
     padding: 20px;
  
 }
+
+.post__commentBox >form {
+width: 100%;
+flex-direction: row;
+align-items: center;    
+justify-content: space-between;
+}
+
 .post__commentBox > Button{ 
-background-color:rgb(115, 137, 218);
 color:aliceblue;
 }
 
@@ -63,10 +70,9 @@ color:aliceblue;
     border-top: 1px solid lightgray;
 }
 .post_button{
-    flex:0;
-    border: none ;
-    border-top: 1px solid lightgray !; 
-
+    flex:0 !important; 
+    border: none;
+    display: none !important;
 } 
 
 .post__footer{

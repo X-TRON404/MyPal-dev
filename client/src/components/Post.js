@@ -3,20 +3,23 @@
 import React , {useState,useEffect} from 'react'
 import './Post.css'
 import Avatar from '@material-ui/core/Avatar';
-import { Button, Input } from '@material-ui/core';
+import {IconButton, Input } from '@material-ui/core';
 import {DataBase} from './firebase'
 import firebase from 'firebase';
 import CommentIcon from '@material-ui/icons/Comment';
 import RepeatIcon from '@material-ui/icons/Repeat'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import PublishIcon from '@material-ui/icons/Publish';
+import SendIcon from '@material-ui/icons/Send';
+
+
 
 
 function Post({postId,user,username,caption,imageUrl}) {
     //store comments from the database for a praticular post in an array (GET from DataBase)
-    const [comments, setComments] = useState([])
+    const [comments, setComments] = useState([]);
     //input comment for a post from the user  (POST to DataBase)
-    const [comment, setComment] = useState('')
+    const [comment, setComment] = useState('');
 
 //======================================Post comments to the database=======================================
     const postComment = (e) => {
@@ -31,10 +34,10 @@ function Post({postId,user,username,caption,imageUrl}) {
         )
         //clear the input after posting
         setComment('')
-    }
+}
 
 
-//====================================Get the post from the database and display=========================================
+//====================================Get the comments from the database and display=========================================
     useEffect(() => {
         let unsubscribe;
         //if a postId is passed
@@ -50,7 +53,8 @@ function Post({postId,user,username,caption,imageUrl}) {
             unsubscribe()
         };
         //when postId changes fire the code above
-    },[postId])
+},[postId])
+
 //======================================change color of the like button on click=======================================
 const [favouritesColor, setfavouritesColor] = useState("")
 const changeColor = (e) => {
@@ -95,7 +99,9 @@ const changeColor = (e) => {
                 user &&(
                 <form className="post__commentBox">
                     <Input style={{color:"aliceblue"}} className="post__input" type="text" placeholder="Add a comment..." value={comment} onChange={(e)=> setComment(e.target.value)}/>
-                    <Button  className="post__button" disabled={!comment} type="submit" onClick={postComment}>Post</Button>
+                    <IconButton  disabled={!comment}  variant ='contained' color="primary" type ='submit' onClick={postComment}>
+                            <SendIcon/>
+                    </IconButton>
                 </form>) 
             }
         </div>

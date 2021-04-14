@@ -11,6 +11,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import {Route,Switch} from 'react-router-dom'
 import Feed from './Feed'
 import Chat from './chat/Chat'
+import {useStateValue} from '../contexts/StateProvider';
+import { actionTypes } from '../contexts/reducer';
 
 //====================================Modal styles=========================================
 function getModalStyle() {
@@ -35,6 +37,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 //========================================================================================================
 function App() {
+
+  const [{},dispatch] = useStateValue();
 
   const classes = useStyles();
 
@@ -83,6 +87,14 @@ function App() {
   const signIn = (e) => {
     e.preventDefault();
     auth.signInWithEmailAndPassword(email,password)
+    .then((result)=>{
+      dispatch(
+          {
+          type:actionTypes.SET_USER,
+          user:result.user
+          }
+        )
+    })
     .catch((error) => { alert(error.message)})
     //close the model
     setOpenSignIn(false)
@@ -160,7 +172,7 @@ function App() {
                 <Router>
                     <Switch> 
                         <Route path="/">
-                            <Feed user={user}/>
+                            <Feed/>
                         </Route>                                                                                                            
                         <Route path="/chats/:chatId">
                             <Chat/>

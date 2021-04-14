@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useContext} from 'react';
 import {storage,DataBase} from './firebase';
 import firebase from 'firebase';
 import './ImageUpload.css'
@@ -6,6 +6,7 @@ import {IconButton, Input, Modal} from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import LinearProgress from '@material-ui/core/LinearProgress'
+import {UserContext} from '../contexts/StateProvider' 
 
 function ImageUpload({username}) {
     //caption
@@ -97,7 +98,7 @@ function ImageUpload({username}) {
         <div className="imageUpload">
 
                                                         {/*Modal for progress of upload*/}
-                <Modal  mageUpload__progressModal="imageUpload__progressModal" open={openProgress} onClose={()=>{setOpenProgress(false)}}> 
+                <Modal  imageUpload__progressModal="imageUpload__progressModal" open={openProgress} onClose={()=>{setOpenProgress(false)}}> 
                                                                         {/*progress bar*/}
                         <LinearProgress  variant="determinate" className="imageUpload__uploadProgress" value={progress} max="100"/>
                 </Modal>

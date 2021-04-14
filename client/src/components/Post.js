@@ -1,6 +1,6 @@
 //post component
 
-import React , {useState,useEffect} from 'react'
+import React , {useState,useEffect,useContext} from 'react'
 import './Post.css'
 import Avatar from '@material-ui/core/Avatar';
 import {IconButton, Input } from '@material-ui/core';
@@ -11,11 +11,15 @@ import RepeatIcon from '@material-ui/icons/Repeat'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import PublishIcon from '@material-ui/icons/Publish';
 import SendIcon from '@material-ui/icons/Send';
+import {useStateValue} from '../contexts/StateProvider'
 
 
 
 
-function Post({postId,user,username,caption,imageUrl}) {
+
+function Post({postId,username,caption,imageUrl}) {
+    //get the user from the provider
+    const [{user}, dispatch] = useStateValue();
     //store comments from the database for a praticular post in an array (GET from DataBase)
     const [comments, setComments] = useState([]);
     //input comment for a post from the user  (POST to DataBase)

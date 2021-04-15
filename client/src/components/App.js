@@ -103,15 +103,23 @@ function App() {
     setPassword('')
   }
 //====================================sign up the user=========================================
+//bug:requires sign in after sign up
   const signUp = (e) => {
     e.preventDefault();
     auth.createUserWithEmailAndPassword(email,password)
     //createUserWithEmailAndPassword will create a user object 
     .then((authUser)=>{
       return authUser.user.updateProfile({
-        //set displayname attribute of user object to usename
+        //set displayname attribute of user object to username
         displayName:username
       })
+    }).then((result)=>{
+      dispatch(
+          {
+          type:actionTypes.SET_USER,
+          user:result.user
+          }
+        )
     })
     .catch((error)=>{alert(error.message)})
     setOpen(false)

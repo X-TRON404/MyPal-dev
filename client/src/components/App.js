@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 //========================================================================================================
 function App() {
-
+  
   const [{},dispatch] = useStateValue();
 
   const classes = useStyles();
@@ -57,6 +57,33 @@ function App() {
   const [password,setPassword] = useState('');
   //flag to keep track of whether the user has logged in or not (user who's signed in )
   const [user,setUser] = useState(null);
+  //user stored in local storage
+  let userFromLocalStorage
+ 
+//====================================Get the user from the local storage on refresh======================
+  useEffect(()=>{
+
+    userFromLocalStorage = localStorage.getItem('user')
+    //if there is a user object saved in local storage then set it equal to 'user'
+    if (userFromLocalStorage){
+      //JSON.parse will convert stringify to JSON
+      setUser(JSON.parse(userFromLocalStorage))
+      try {
+        
+        dispatch(
+            {
+            type:actionTypes.SET_USER,
+            user:JSON.parse(userFromLocalStorage)
+            }
+          )
+        
+      }
+    
+    catch (err){
+      alert(err.message)
+    }
+  }
+  },[])
 
 //====================================Authorization state listner=========================================
   useEffect(()=>{
@@ -67,7 +94,13 @@ function App() {
     if (authUser){
       console.log(authUser)
       //capture the user inside the auth state in the 'setuser' variable
-      //survive the refresh
+
+      //=============survive the refresh================
+      //you can only store string items in local storage
+
+      localStorage.setItem('user',JSON.stringify(authUser))
+
+
       setUser(authUser)
     }
     // else if user has logged out set user to null
@@ -82,7 +115,12 @@ function App() {
   }
 
 },[user,username])
+//sign up inside sign in
+const handleSignUp= () => {
+  setOpen(true)
+  setOpenSignIn(false)
 
+}
 //====================================sign in the user=========================================
   const signIn = (e) => {
     e.preventDefault();
@@ -93,11 +131,13 @@ function App() {
           type:actionTypes.SET_USER,
           user:result.user
           }
-        )
+        );
+      localStorage.setItem('user',JSON.stringify(result.user))
     })
     .catch((error) => { alert(error.message)})
     //close the model
     setOpenSignIn(false)
+    
     //empty the fields
     setEmail('')
     setPassword('')
@@ -127,6 +167,7 @@ function App() {
 //===============================================================================================
   return (
     <div className="app">
+       
                                       {/*Modal for sign up*/}
       <Modal  open={open} onClose={()=>{setOpen(false)}}>
         <div style={modalStyle} className={classes.paper}>
@@ -143,15 +184,21 @@ function App() {
       </Modal>
 
                                         {/*Modal for sign in*/}
-      <Modal  open={openSignIn} onClose={()=>{setOpenSignIn(false)}}>
+
+                                     {/*if user is not logged in then keep sign in modal open*/}
+                                     {/*if the user chooses sign up option then close the sign in modal*/}
+      <Modal  open={open?false:(!user?true : openSignIn)} onClose={()=>{setOpenSignIn(false)}}>
         <div style={modalStyle} className={classes.paper}>
           <form className="app__signup">
             <center>
               <img  className="app__headerImage" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png" alt="ig-logo"/>  
             </center>
+            <p>Enter your credentials to Log in to texx</p>
             <Input placeholder="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
             <Input placeholder="password" type="text" value={password} onChange={(e) => setPassword(e.target.value)}/>
             <Button onClick={signIn}>Sign In</Button>
+            <p>New to texx? Sign up</p>
+            <Button onClick={handleSignUp}>Sign up</Button>
           </form>
         </div>
       </Modal>
@@ -167,13 +214,14 @@ function App() {
           <Button onClick={()=>{auth.signOut()}}>Log out</Button>:
             //else null (logged out) then give sign in or sign out button
           <div className="app__loginContainer">
-            <Button onClick={()=>{setOpenSignIn(true)}}>Sign In</Button>
-            <Button onClick={()=>{setOpen(true)}}>Sign up</Button>
+          
+
           </div>
           }
       </div>
                                                 {/*sidebar*/}
-      <div className="app__body">
+                           {/* if user does not exists then reduce the opacity of the body */}
+      <div className={user?'app__body':'app__bodyUserNotLoggedIn' }>
           <Sidebar/>
 {/* =================================================REACT ROUTER COMES HERE================================================================================= */}
               <div className="app__feed">

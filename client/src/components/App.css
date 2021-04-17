@@ -34,7 +34,10 @@
   .app__body{
     display: flex;
   }
-
+  .app__bodyUserNotLoggedIn{
+    display: flex;
+    opacity: 0.2;
+  }
   /*CHANGE FEED WIDTH*/
   .app__feed{
       background-color: #2E3236;

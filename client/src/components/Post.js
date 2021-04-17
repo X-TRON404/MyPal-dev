@@ -6,9 +6,8 @@ import Avatar from '@material-ui/core/Avatar';
 import {IconButton, Input } from '@material-ui/core';
 import {DataBase} from './firebase'
 import firebase from 'firebase';
-import CommentIcon from '@material-ui/icons/Comment';
+import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
 import RepeatIcon from '@material-ui/icons/Repeat'
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PublishIcon from '@material-ui/icons/Publish';
 import SendIcon from '@material-ui/icons/Send';
@@ -26,16 +25,20 @@ function Post({postId,username,caption,imageUrl}) {
     const [comments, setComments] = useState([]);
     //input comment for a post from the user  (POST to DataBase)
     const [comment, setComment] = useState('');
-    //store comments from the database for a praticular post in an array (GET from DataBase)
+    //store likes from the database for a praticular post in an array (GET from DataBase)
     const [likes, setLikes] = useState([]);
     //input comment for a post from the user  (POST to DataBase)
     const [like, setLike] = useState(false);
     //change color of the like button on click
-    const [favouritesColor, setfavouritesColor] = useState('')
+    const [favouritesColor, setfavouritesColor] = useState(false)
     //to make sure user likes the post only once
     const [firstTimeLike,setFirstTimeLike] = useState(true) 
-    const likeColor = 'red'
-    const notLikeColor = ''
+    //
+    const [likeColor,setLikeColor] = useState('')
+  
+    
+
+    
 
 //================================================
 // posts-(doc)------
@@ -48,7 +51,6 @@ function Post({postId,username,caption,imageUrl}) {
 //                                               |__like
 //                                               |__timestamp
 //                                               |__username
-
 
 //======================================Post likes to the database=======================================
 
@@ -66,10 +68,11 @@ function Post({postId,username,caption,imageUrl}) {
         //whenever a new document is created it takes the like state of the previous document
         //to not to do this change the like state whenver a new document is created 
 
+        
 
 //=======================================liking the document first time==========================================================================
         
-        console.log("To ckeck if my filter works",(likes.filter(like => (like.username===user.displayName))).length)
+        
 
 
 
@@ -78,6 +81,7 @@ function Post({postId,username,caption,imageUrl}) {
         if (    !(likes.filter(like => (like.username===user.displayName))).length     ){
         console.log("if statement")
         //add like to the 'postLikes' collection of the particular post 
+        setLike(true)   
         DataBase.collection('posts').doc(postId).collection('postLikes').doc(user.displayName).set(
             {
                 like:like,
@@ -86,8 +90,9 @@ function Post({postId,username,caption,imageUrl}) {
 
             }
         )
-        setFirstTimeLike(false)
-        setLike(true)
+        setfavouritesColor(true)
+        setLikeColor('red')
+    
         }
 
 //=======================================liking the document NOT first time==========================================================================
@@ -96,6 +101,7 @@ function Post({postId,username,caption,imageUrl}) {
         //hence this will be true 
         else if(  (likes.filter(like => (like.username===user.displayName))).length     ){
             console.log("else statement")
+            setLike(!like)
             //update like to the 'postLikes' collection of the particular post 
             DataBase.collection('posts').doc(postId).collection('postLikes').doc(user.displayName).update(
                 {
@@ -103,12 +109,12 @@ function Post({postId,username,caption,imageUrl}) {
                     timestamp:firebase.firestore.FieldValue.serverTimestamp()
                 }
             )
-            setLike(!like)         
-            
+                  
+        setfavouritesColor(!favouritesColor)
+        
+        setLikeColor(favouritesColor?'red':'')
         }
-        //change the color of the like button
-        like?setfavouritesColor('red'):setfavouritesColor('')
-
+        
 }
 //======================================Post comments to the database=======================================
 const postComment = (e) => {
@@ -142,6 +148,8 @@ const postComment = (e) => {
                 (snapshot) =>{
                     //set likes to the data inside the doc
                             setLikes(snapshot.docs.map((doc) => (doc.data())))
+                           
+
                 })
         }
         return  () => {
@@ -149,15 +157,24 @@ const postComment = (e) => {
         
         };
         //when postId changes fire the code above
-},[postId])
+},[postId,user])
 
+// if (user){
+//     let x = likes.filter(like => (like.username===user.displayName))[0] 
 
-
+//     for (let i=0;i<x.length;i++)
+//     {
+//         let k=x[i]
+//         if(typeof k === "undefined") {
+//             console.log(k,"object no.",i)
+//         }  
+//     }
+// }
+// console.log("Like object of the particluar user to change the color of the like buttons that user likes", ( user ?(   (likes.length) ? ( (                 ).like            ):'test'):'test'))
 //========================================================================================================================
     return (
         <div className="post">
             <div className="post__header">
-                {console.log("username from posts",user)}
                                                {/*avatar managed by@material-ui/core*/}
                 <Avatar className="post__avatar" alt={username} src="/static/images/avatar/1.jpg"></Avatar>
                 <h3>{username}</h3>
@@ -166,24 +183,22 @@ const postComment = (e) => {
             <h4 className="post__text"><strong>{username+" "}</strong>:{" "+caption}</h4>
             <div className="post__footer">
                                                     {/*Comment icon*/}
-                            <CommentIcon fontsize="small" cursor="pointer"/>
+                            <ChatBubbleOutlineRoundedIcon fontsize="small" cursor="pointer"/>
                                                     {/*Re-tweet icon*/}
                             <RepeatIcon fontsize="small" cursor="pointer"/>
                                                     {/*like icon*/}
-
-
-                                                    
-                            <FlipMove>
                             
-                                {likes.map((like)=>{
-                                    //bug 
-                                    (<FavoriteIcon  fontsize="small" cursor="pointer" onClick={postLike} style={like.like&&{color:likeColor}}>{ user?(like && (like.username===user.displayName)?(like?(<strong>You</strong>):<strong></strong>):(<strong>{like.username}</strong>)):(<p></p>) }</FavoriteIcon>)
-                                
-                            })}
+                                            
+                            <FlipMove>   
+                                {/* (like && (like.username===user.displayName)?(like.like?(<strong>You</strong>):(<strong></strong>)):(<strong>{like.username}</strong>)):(<strong></strong>) )}</p>       */}
+                            <FavoriteIcon   fontsize="small" cursor="pointer" onClick={postLike} style={{color:likeColor}} /> 
+                                {likes.map((like)=>
+                                    (<p><strong>{user && (user.displayName===like.username?(like.like?(<strong>You{JSON.stringify(like.like)}</strong>):(<strong></strong>)):(like.username))}</strong></p>)
+                                )}
                             </FlipMove>
                                                     
-                                                    {/*publish icon*/}
-                            <PublishIcon fontsize="small" cursor="pointer"/>
+                                             
+                         
             </div>
                                               {/*display the comments from the database */}
             <div className="post__comments">

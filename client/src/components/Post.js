@@ -55,10 +55,10 @@ function Post({postId,username,caption,imageUrl}) {
 //======================================Post likes to the database=======================================
 
 //===================================================TO DO===============================================
-//delete the previous like collection
+//delete the previous like collection --Done
 // later on change this operation to server side
-// use your own hashing algorithm which takes username as input also for creating a doc inside the 'postLikes' collection 
-//user can not survive refresh. Add facility to survive refresh.
+// use your own hashing algorithm which takes username as input also for creating a doc inside the 'postLikes' collection --Done
+//user can not survive refresh. Add facility to survive refresh. --Done
 //=======================================================================================================
     const postLike = (e) => {
         e.preventDefault(); 
@@ -82,7 +82,7 @@ function Post({postId,username,caption,imageUrl}) {
         console.log("if statement")
         //add like to the 'postLikes' collection of the particular post 
         setLike(true)   
-        DataBase.collection('posts').doc(postId).collection('postLikes').doc(user.displayName).set(
+        DataBase.collection('posts').doc(postId).collection('postLikes').doc(user.uid).set(
             {
                 like:like,
                 username:user.displayName,
@@ -103,7 +103,7 @@ function Post({postId,username,caption,imageUrl}) {
             console.log("else statement")
             setLike(!like)
             //update like to the 'postLikes' collection of the particular post 
-            DataBase.collection('posts').doc(postId).collection('postLikes').doc(user.displayName).update(
+            DataBase.collection('posts').doc(postId).collection('postLikes').doc(user.uid).update(
                 {
                     like:like,
                     timestamp:firebase.firestore.FieldValue.serverTimestamp()
@@ -113,9 +113,16 @@ function Post({postId,username,caption,imageUrl}) {
         setfavouritesColor(!favouritesColor)
         
         setLikeColor(favouritesColor?'red':'')
-        }
-        
+        }    
 }
+//======================================Add the selected user to chats list=============================================
+const addToChats = () => {
+    DataBase.collection('users').doc(user.uid).collection('chats').add({
+        chat_username:username,
+        timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+
+    })
+} 
 //======================================Post comments to the database=======================================
 const postComment = (e) => {
     e.preventDefault();
@@ -178,6 +185,7 @@ const postComment = (e) => {
                                                {/*avatar managed by@material-ui/core*/}
                 <Avatar className="post__avatar" alt={username} src="/static/images/avatar/1.jpg"></Avatar>
                 <h3>{username}</h3>
+                <button onClick={addToChats}>Add to chats</button>
             </div>
             <img className="post__image" src={imageUrl} alt={username+" "+caption}/>
             <h4 className="post__text"><strong>{username+" "}</strong>:{" "+caption}</h4>

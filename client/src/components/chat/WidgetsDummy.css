@@ -1,0 +1,17 @@
+
+.widgetsChat{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    color: grey;
+    margin-bottom: 30px;
+    min-width: fit-content;
+    overflow: scroll !important;
+    }
+    
+     .MuiBadge-root{
+        margin-left: 10px ;
+    }
+  
+    
+  

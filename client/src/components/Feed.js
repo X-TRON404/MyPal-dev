@@ -25,7 +25,7 @@ const [posts, setPosts] = useState([]);
             <div className="feed__posts"> 
                  {
                 //render only those posts by id who are newly added to the database dont render the entire post list  
-                posts.map(({id,post})=>(<Post key={post.id} postId={id} user={user} username={post.username} caption={post.caption} imageUrl={post.imageUrl}></Post>))
+                posts.map(({id,post})=>(<Post key={post.id} postId={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl}></Post>))
                 } 
             </div>    
     </div>

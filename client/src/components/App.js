@@ -1,6 +1,6 @@
 import {useState,useEffect} from 'react';
 import './App.css';
-import {auth} from './firebase'
+import {auth, DataBase} from './firebase'
 import {makeStyles} from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
 import { Button, Input } from '@material-ui/core';
@@ -13,6 +13,7 @@ import Feed from './Feed'
 import Chat from './chat/Chat'
 import {useStateValue} from '../contexts/StateProvider';
 import { actionTypes } from '../contexts/reducer';
+import firebase from 'firebase/app'
 
 //====================================Modal styles=========================================
 function getModalStyle() {
@@ -55,6 +56,8 @@ function App() {
   const [email,setEmail] = useState('');
   //store password
   const [password,setPassword] = useState('');
+  //store bio
+  const [bio,setBio] = useState('');
   //flag to keep track of whether the user has logged in or not (user who's signed in )
   const [user,setUser] = useState(null);
   //user stored in local storage
@@ -68,6 +71,7 @@ function App() {
     if (userFromLocalStorage){
       //JSON.parse will convert stringify to JSON
       setUser(JSON.parse(userFromLocalStorage))
+      console.log(JSON.parse(userFromLocalStorage))
       try {
         
         dispatch(
@@ -76,6 +80,7 @@ function App() {
             user:JSON.parse(userFromLocalStorage)
             }
           )
+        
         
       }
     
@@ -133,14 +138,16 @@ const handleSignUp= () => {
           }
         );
       localStorage.setItem('user',JSON.stringify(result.user))
+
+    //empty the fields
+    setEmail('')
+    setPassword('')
+
     })
     .catch((error) => { alert(error.message)})
     //close the model
     setOpenSignIn(false)
     
-    //empty the fields
-    setEmail('')
-    setPassword('')
   }
 //====================================sign up the user=========================================
 //bug:requires sign in after sign up
@@ -148,22 +155,35 @@ const handleSignUp= () => {
     e.preventDefault();
     auth.createUserWithEmailAndPassword(email,password)
     //createUserWithEmailAndPassword will create a user object 
-    .then((authUser)=>{
-      return authUser.user.updateProfile({
+    .then(function(authUser){
+        authUser.user.updateProfile({
         //set displayname attribute of user object to username
         displayName:username
-      })
-    }).then((result)=>{
-      dispatch(
-          {
-          type:actionTypes.SET_USER,
-          user:result.user
-          }
-        )
-    })
-    .catch((error)=>{alert(error.message)})
+      }).then((result)=>{
+          console.log(result)
+          //added the newly created user to our database
+          DataBase.collection('users').doc(authUser.user.uid).set({
+            email:authUser.user.email,
+            displayName:authUser.user.displayName,
+            bio:bio,
+            timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+           })
+          })
+                    })
+    .catch((error)=>{alert(error.message+"from dispatch signup")})
+
     setOpen(false)
   }
+//==================================================Log out =======================================
+const logout = () => {
+//remove the user from the local storage
+// localStorage.setItem('user','null')
+auth.signOut().then(() => {
+  console.log("sucessfully singned out")
+}).catch((error) => {
+  alert(error.message)
+});
+}
 //===============================================================================================
   return (
     <div className="app">
@@ -178,6 +198,7 @@ const handleSignUp= () => {
             <Input placeholder="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
             <Input placeholder="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
             <Input placeholder="password" type="text" value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <Input placeholder="Add your biography" type="text" value={bio} onChange={(e)=>setBio(e.target.value)}/>
             <Button onClick={signUp}>Sign up</Button>
           </form>
         </div>
@@ -211,7 +232,7 @@ const handleSignUp= () => {
                                             {/*sign up/sign in or log out the user*/}
           { user ?
             //if user is not null(logged in) then give log out button
-          <Button onClick={()=>{auth.signOut()}}>Log out</Button>:
+          <Button onClick={logout}>Log out</Button>:
             //else null (logged out) then give sign in or sign out button
           <div className="app__loginContainer">
           

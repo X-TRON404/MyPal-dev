@@ -6,9 +6,11 @@ import {IconButton, Input, Modal} from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import LinearProgress from '@material-ui/core/LinearProgress'
-import {UserContext} from '../contexts/StateProvider' 
+import {useStateValue} from '../contexts/StateProvider'
 
 function ImageUpload({username}) {
+    //get the user from the provider
+    const [{user}, dispatch] = useStateValue();
     //caption
     const [caption,setCaption] = useState('');
     //image 
@@ -74,10 +76,11 @@ function ImageUpload({username}) {
                             //set image url attribute to the 'url' we got from the getDownloadURL() method
                                 imageUrl:url,
                             //get the username as a prop from the 'App.js' file
-                                username:username
-
+                                username:username,
+                            //post the id of the user from 'user' object  
+                                user_id:user.uid
                             })
-                            //once done set clear the input 
+                            //once done set clear the input c
                             setProgress(0);
                             setOpenProgress(false)
                             setCaption("");

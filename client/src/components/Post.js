@@ -3,7 +3,7 @@
 import React , {useState,useEffect,useContext} from 'react'
 import './Post.css'
 import Avatar from '@material-ui/core/Avatar';
-import {IconButton, Input } from '@material-ui/core';
+import {Button, IconButton, Input } from '@material-ui/core';
 import {DataBase} from './firebase'
 import firebase from 'firebase';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
@@ -18,7 +18,7 @@ import FlipMove from 'react-flip-move';
 
 
 
-function Post({postId,username,caption,imageUrl}) {
+function Post({postId,username,user_id,caption,imageUrl}) {
     //get the user from the provider
     const [{user}, dispatch] = useStateValue();
     //store comments from the database for a praticular post in an array (GET from DataBase)
@@ -35,46 +35,32 @@ function Post({postId,username,caption,imageUrl}) {
     const [firstTimeLike,setFirstTimeLike] = useState(true) 
     //
     const [likeColor,setLikeColor] = useState('')
-  
-    
+    //to store users in chat list after getting them from the database
+    const [chats,setChats] = useState([]) 
+    //the problem with let here is  it is making everything empty after 
+    //to store uid and bool for if the user is present in the chat list
+    const [chats_array,setChats_array]= useState([])
+    const [isPresent,setIsPresent] = useState(false)
 
-    
 
-//================================================
-// posts-(doc)------
-//                 |___comments (collection)-----|
-//                 |                             |__comment
-//                 |                             |__timestamp
-//                 |                             |__username
-//                 |
-//                 |___postLikes    (collection)-----|
-//                                               |__like
-//                                               |__timestamp
-//                                               |__username
+//==================================================check whether user is present in the chat list=========================================================================
+    const isPresentInChats = (user_id,chats_array) => {
+        for (const chat of chats_array){
+            if (chat[0]===user_id){
+                return true
+            }
+        }
 
-//======================================Post likes to the database=======================================
+}
+//======================================Post likes to the database===================================================================================
 
-//===================================================TO DO===============================================
-//delete the previous like collection --Done
-// later on change this operation to server side
-// use your own hashing algorithm which takes username as input also for creating a doc inside the 'postLikes' collection --Done
-//user can not survive refresh. Add facility to survive refresh. --Done
-//=======================================================================================================
     const postLike = (e) => {
         e.preventDefault(); 
-//bug:whenever a new document is created it takes the like state of the previous document
-//like color doesnt change when we likw the post for the first time
 
+//like color doesnt change when we like the post for the first time
         //whenever a new document is created it takes the like state of the previous document
         //to not to do this change the like state whenver a new document is created 
-
-        
-
-//=======================================liking the document first time==========================================================================
-        
-        
-
-
+//=======================================liking the document first time=============================
 
         //if there is a document named by 'user.displayName' in the collection 'postLikes' that means this is not the first time we are liking the document 
         //creating a document named 'user.displayName' hence this will be !(false) hence true
@@ -95,7 +81,7 @@ function Post({postId,username,caption,imageUrl}) {
     
         }
 
-//=======================================liking the document NOT first time==========================================================================
+//=======================================liking the document NOT first time==========================
 
         //if not liking the post for the first time meaning the document by the name 'user.displayName' already exists in the collection postLikes
         //hence this will be true 
@@ -115,15 +101,76 @@ function Post({postId,username,caption,imageUrl}) {
         setLikeColor(favouritesColor?'red':'')
         }    
 }
-//======================================Add the selected user to chats list=============================================
+//======================================Get the list of users in chatlist===============================================================================
+useEffect(()=>{
+    let unsubscribe2
+    if (user)
+    {unsubscribe2 = DataBase.collection('users').doc(user.uid).collection('chats').orderBy('timestamp','desc').onSnapshot((snapshot)=>{
+                        setChats(snapshot.docs.map((doc) => (doc.data())))
+                        // console.log(chats[1].chat_user_id + " chats from db")
+    
+                    })
+    }
+return  () => {
+    unsubscribe2()
+};
+//when postId changes fire the code above
+},[,user_id,user])
+
+//========================================================================================================================
+
+useEffect(() => {
+    //Run this function when the post component loads or there are changes in user object or chats object 
+        //because we want to run this function only after the data from the database has been fetched and the component in which we are mapping this data (Button) that,
+        //loads after the component which calls for this function (<Avatar>) is loaded  
+        console.log("running AddButton")
+            //loop through the object list of 'chats' 
+            // if the 'chat_user_id' is already present in the chats object, then set the the second dimension true
+            //convert each object into an array and loop through it
+            let cha =[];
+            //to store the return from the function if the user is present in the chat list 
+            for (const chat of Object.entries(chats)){
+                if (user_id===chat.chat_user_id){
+                    
+                    // console.log([chat[1].chat_user_id,true])
+                    // console.log([chat[1].chat_user_id,true][0])
+                    // first dimension is for uid 
+                    // second dimension is a bool for checking whether the 'chat_user_id' is already present in the chats
+               
+                    cha.push([chat[1].chat_user_id,true])
+                    // console.log("chats_array "+chats_array)
+                    
+                    
+                }
+                else{
+                    cha.push([chat[1].chat_user_id,false])
+                    // console.log("chats_array "+chats_array)
+                    
+                }
+               
+
+            }
+            setChats_array(cha)
+            setIsPresent(isPresentInChats(user_id,chats_array))
+            console.log(isPresent)
+
+        },[,chats,user])
+//======================================Add the selected user to chats list============================================
 const addToChats = () => {
-    DataBase.collection('users').doc(user.uid).collection('chats').add({
+    //if the document by the user_id already exists then it wont change it
+    //if logged in user 'user.uid' == 'user_id' user who wrote the post  then dont add it to chats list
+    if(!(user.uid===user_id)){
+    DataBase.collection('users').doc(user.uid).collection('chats').doc(user_id).set({
         chat_username:username,
+        //user id of the user who wrote the post
+        chat_user_id:user_id,
         timestamp:firebase.firestore.FieldValue.serverTimestamp(),
 
-    })
+        })
+    }
+    
 } 
-//======================================Post comments to the database=======================================
+//======================================Post comments to the database========================================================================================
 const postComment = (e) => {
     e.preventDefault();
     //add comment to the 'comments' collection of the particular post 
@@ -137,8 +184,7 @@ const postComment = (e) => {
     //clear the input after posting
     setComment('')
 }
-
-//====================================Get the comments and likes from the database and display=========================================
+//====================================Get the comments and likes from the database and display=================================================================
     useEffect(() => {
         let unsubscribe;
         //if a postId is passed
@@ -156,17 +202,16 @@ const postComment = (e) => {
                     //set likes to the data inside the doc
                             setLikes(snapshot.docs.map((doc) => (doc.data())))
                            
-
                 })
         }
         return  () => {
             unsubscribe()
         
         };
-        //when postId changes fire the code above
+        //when postId,user changes or page loads fire the code above
 },[postId,user])
 
-// if (user){
+//==============================================================================================================================================================
 //     let x = likes.filter(like => (like.username===user.displayName))[0] 
 
 //     for (let i=0;i<x.length;i++)
@@ -178,16 +223,61 @@ const postComment = (e) => {
 //     }
 // }
 // console.log("Like object of the particluar user to change the color of the like buttons that user likes", ( user ?(   (likes.length) ? ( (                 ).like            ):'test'):'test'))
-//========================================================================================================================
+//================================================================================================================================================================
     return (
         <div className="post">
-            <div className="post__header">
+            <div className="post__header" >
                                                {/*avatar managed by@material-ui/core*/}
                 <Avatar className="post__avatar" alt={username} src="/static/images/avatar/1.jpg"></Avatar>
                 <h3>{username}</h3>
-                <button onClick={addToChats}>Add to chats</button>
+                {/*==================================================================================================================================== */}
+ 
+                {/* {user.uid === user_id && <Button onClick={addToChats}>Add to chats</Button>} */}
+     
+                {/*initially when chats array does not exists as it is made after calling the addToChats function  */}
+                {/*if the array is empty (initial condition) */}
+                {/* {console.log("array length")}
+                {console.log((Array.isArray(chats_array) && chats_array.length) === 0 )} */}
+                {/* {console.log(chats_array)} */}
+                {/*to check whether the user is present in the chats_array*/}
+                
+
+                {
+                    //Dont show anything for the post which are written by the user who is logged in
+                    !(user.uid === user_id) &&  
+                    //when there are no chats (chat array is empty)
+                    (
+                         (Array.isArray(chats_array) && chats_array.length) === 0 ? (<Button onClick={addToChats}>Add to chats</Button>) : 
+                    (
+                    //when there are chats
+                    //check if the user is present in the chats_array
+                    isPresent? 
+                     //if present
+                    ( 
+                    chats_array.map((chat)=>(
+                    //chat[0] contains the 'uid' of the 'user' who wrote the post 
+                    //find the array element corresponding to the given post
+                    //this is done by mathcing the 'user_id' from 'posts' to chat_user_id (chat[0])
+                    //then check bool chat[1] for whether the element is present in an array or not
+                    //if the element is not present then show <Add to chats> else show <Chat>
+                    <span>{(chat[0]==user_id) && ((chat[1])?(<Button key={user_id} onClick={addToChats}>Add to chats</Button>):(<Button key={user_id}>Chat</Button>))}</span>
+                    ))
+
+                    ):
+                    //if not present
+                    (<Button key={user_id} onClick={addToChats}>Add  chats</Button>)
+                        )    
+                            )
+                    }
+                {/* {                chats_array.map((chat)=>{
+                                    console.log(chat+"chta")
+                })
+                } */}
+             
+            {/*===========================================================================================================================================*/}
             </div>
-            <img className="post__image" src={imageUrl} alt={username+" "+caption}/>
+            {/* always run onLoad inside an img tag */}
+            <img className="post__image" src={imageUrl} alt={username+" "+caption} />
             <h4 className="post__text"><strong>{username+" "}</strong>:{" "+caption}</h4>
             <div className="post__footer">
                                                     {/*Comment icon*/}

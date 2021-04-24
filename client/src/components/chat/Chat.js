@@ -5,17 +5,21 @@ import {InsertEmoticon, MicOutlined} from '@material-ui/icons';
 import './Chat.css'
 import {DataBase} from '../firebase';
 
-function Chat({user}) {
+function Chat({user,chat_user_id}) {
 const [input, setInput] = useState('')
 const {chatId} = useParams()
+//set the chat name in the
 const [chatName,setChatName] = useState('')
+//get the messages from the database
+const [messages,setMessages] = useState([])
 
 //everytime roomId changes pull the messages for that roomId from the database
 useEffect(() => {
-    // .collection('messages').doc(chatId)
+    
     if (chatId){
-        DataBase.collection('users').doc(user.uid).collection('chats').onSnapshot((snapshot)=>(
-            setChatName(snapshot.data().name)
+        //here the chat_user_id is taken from the user who posted that particular post to database
+        DataBase.collection('users').doc(user.uid).collection('chats').doc(chat_user_id).collection('messages').onSnapshot((snapshot)=>(
+            setMessages(snapshot.data())
         ))
     }
     

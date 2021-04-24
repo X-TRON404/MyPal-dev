@@ -52,12 +52,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 //==================================================================================================================
 function WidgetsChat() {
-    //get the user from the provider  **********Dont know why but not working this way
+    //get the user from the provider  
     const [{user}, dispatch] = useStateValue();
-    //hence for now directly I am accessing the user from the local storage 
-    
-    // const  uid = firebase.auth().currentUser.uid;
-    
     const classes = useStyles();
     const [messages, setMessages] = useState([]);
     const [chats, setChats] = useState([])
@@ -92,25 +88,25 @@ function WidgetsChat() {
                  <div className="widgetsChat__onlineMembers">
             {
                 chats.map((chat)=>(
-<BrowserRouter>
-            <Link to={`/chats/${chat.chat_username}`} key={chat.chat_username}>
-                    <ButtonBase>
-                        <Card className={classes.root}>
-                                <Avatar className={classes.avatar} alt={'d'} src="/static/images/avatar/1.jpg"></Avatar>
-                                <div className={classes.details}>
-                                        <CardContent className={classes.content}>
-                                            <Typography component="p" variant="p">
-                                                {chat.chat_username}
-                                            </Typography>
-                                            <Typography className={classes.typoStatus} variant="caption">
-                                                status like I am using texx
-                                            </Typography>
-                                        </CardContent>
-                                </div>
-                        </Card>
-                    </ButtonBase>
-            </Link>
- </BrowserRouter>
+                <BrowserRouter>
+                            <Link to={`/chats/${chat.chat_user_id}`} key={chat.chat_user_id}>
+                                    <ButtonBase>
+                                        <Card className={classes.root}>
+                                                <Avatar className={classes.avatar} alt={'d'} src="/static/images/avatar/1.jpg"></Avatar>
+                                                <div className={classes.details}>
+                                                        <CardContent className={classes.content}>
+                                                            <Typography component="p" variant="p">
+                                                                {chat.chat_username}
+                                                            </Typography>
+                                                            <Typography className={classes.typoStatus} variant="caption">
+                                                                status like I am using texx
+                                                            </Typography>
+                                                        </CardContent>
+                                                </div>
+                                        </Card>
+                                    </ButtonBase>
+                            </Link>
+                </BrowserRouter>
                 
                 ))
             }

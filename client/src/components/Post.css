@@ -34,6 +34,17 @@ padding: 20px 10px;
     color: aliceblue;
 }
 
+.post__header > button{
+
+    background-color:#556ab5;
+    color: aliceblue;
+    margin-left: 55px;
+}
+
+.post__header > button:hover{
+    background-color: #7389DA;
+}
+
 .post__avatar{
 margin-right: 10px;
 }

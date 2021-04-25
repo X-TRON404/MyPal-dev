@@ -248,7 +248,7 @@ auth.signOut().then(() => {
               <div className="app__feed">
                 <Router>
                     <Switch> 
-                        <Route path="/">
+                        <Route exact path="/">
                             <Feed/>
                         </Route>                                                                                                            
                         <Route path="/chats/:chatId">

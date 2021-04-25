@@ -103,16 +103,16 @@ function Post({postId,username,user_id,caption,imageUrl}) {
 }
 //======================================Get the list of users in chatlist===============================================================================
 useEffect(()=>{
-    let unsubscribe2
+    let unsubscribe
     if (user)
-    {unsubscribe2 = DataBase.collection('users').doc(user.uid).collection('chats').orderBy('timestamp','desc').onSnapshot((snapshot)=>{
+    {unsubscribe = DataBase.collection('users').doc(user.uid).collection('chats').orderBy('timestamp','desc').onSnapshot((snapshot)=>{
                         setChats(snapshot.docs.map((doc) => (doc.data())))
-                        // console.log(chats[1].chat_user_id + " chats from db")
+                    
     
                     })
     }
 return  () => {
-    unsubscribe2()
+    unsubscribe()
 };
 //when postId changes fire the code above
 },[,user_id,user])
@@ -242,7 +242,8 @@ const postComment = (e) => {
                 {/*to check whether the user is present in the chats_array*/}
                 
 
-                {
+                { //to stop react from freaking out when the user is not logged in
+                 user && (
                     //Dont show anything for the post which are written by the user who is logged in
                     !(user.uid === user_id) &&  
                     //when there are no chats (chat array is empty)
@@ -267,7 +268,8 @@ const postComment = (e) => {
                     //if not present
                     (<Button key={user_id} onClick={addToChats}>Add  chats</Button>)
                         )    
-                            )
+                            ) 
+                                )
                     }
                 {/* {                chats_array.map((chat)=>{
                                     console.log(chat+"chta")

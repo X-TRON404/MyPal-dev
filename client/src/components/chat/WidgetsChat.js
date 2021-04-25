@@ -60,6 +60,7 @@ function WidgetsChat() {
 
 
 
+
     
     useEffect(() => {
         //if user is logged out it throws an error hence using try catch

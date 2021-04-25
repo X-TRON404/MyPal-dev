@@ -10,4 +10,11 @@
 margin-left: 40px;
 color:grey;
 }
-
+.chat__input{
+  display: flex;
+  
+}
+.chat__inputForm{
+  flex:1;
+  display: flex;
+}

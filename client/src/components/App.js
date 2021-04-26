@@ -7,13 +7,14 @@ import { Button, Input } from '@material-ui/core';
 import ImageUpload from './ImageUpload';
 import Sidebar from './Sidebar';
 import Widgets from './Widgets';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router ,Link} from 'react-router-dom'
 import {Route,Switch} from 'react-router-dom'
 import Feed from './Feed'
 import Chat from './chat/Chat'
 import {useStateValue} from '../contexts/StateProvider';
 import { actionTypes } from '../contexts/reducer';
 import firebase from 'firebase/app'
+import SendMessage from './chat/SendMessage'
 
 //====================================Modal styles=========================================
 function getModalStyle() {
@@ -38,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 //========================================================================================================
 function App() {
-  
-  const [{},dispatch] = useStateValue();
-
+  //dispatch for the user
+  const [{chatId,chatInput},dispatch] = useStateValue();
+  console.log(chatId,chatInput)
   const classes = useStyles();
 
   const [modalStyle] = useState(getModalStyle);
@@ -62,7 +63,7 @@ function App() {
   const [user,setUser] = useState(null);
   //user stored in local storage
   let userFromLocalStorage
- 
+
 //====================================Get the user from the local storage on refresh======================
   useEffect(()=>{
 
@@ -227,7 +228,9 @@ auth.signOut().then(() => {
                                               {/*header*/}
       <div className="app__header">
           {/* <img className="app__headerImage" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png" alt="ig-logo"/> */}
-          <h1>Texx</h1>
+          <Router>
+            <Link to="/"><h1>Texx</h1></Link>
+          </Router>
 
                                             {/*sign up/sign in or log out the user*/}
           { user ?
@@ -245,18 +248,22 @@ auth.signOut().then(() => {
       <div className={user?'app__body':'app__bodyUserNotLoggedIn' }>
           <Sidebar/>
 {/* =================================================REACT ROUTER COMES HERE================================================================================= */}
-              <div className="app__feed">
+
                 <Router>
-                    <Switch> 
+                    <Switch>             
                         <Route exact path="/">
-                            <Feed/>
-                        </Route>                                                                                                            
+                          <div className="app__feed">
+                              <Feed/>
+                          </div>     
+                        </Route>                                                                                                               
                         <Route path="/chats/:chatId">
-                            <Chat/>
-                        </Route>  
+                          <div className="app__chat">
+                              <Chat/>
+                          </div>
+                          </Route>  
                     </Switch>
                 </Router>
-              </div>   
+
 {/* ======================================================================================================================================================= */}
 
                               {/*show image upload only if the user is logged in*/}
@@ -264,7 +271,8 @@ auth.signOut().then(() => {
           {/*\used otional so it won't crash if these is no 'user.displayName' at the start and use 'user' instead */}
           {user?.displayName ?
           //if logged in show image upload button
-          (<ImageUpload username={user.displayName}/>):
+          
+          (chatInput?(<SendMessage chatId={chatId}/>):(<ImageUpload username={user.displayName}/>)):
           //else show sign in /sign up
           (<Modal  open={openRequired} onClose={()=>{setOpenRequired(false)}}>
             <div style={modalStyle} className={classes.paper}>
@@ -278,6 +286,7 @@ auth.signOut().then(() => {
             </div>
           </Modal>)
             }
+
                                                 {/*widgets*/}
           <Widgets/>
     </div>

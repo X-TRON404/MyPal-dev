@@ -10,10 +10,11 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import {ButtonBase} from '@material-ui/core';
-import {BrowserRouter, Link} from 'react-router-dom';
+import {BrowserRouter, Link, useHistory} from 'react-router-dom';
 import {DataBase} from '../firebase'
 import firebase from 'firebase/app';
 import {useStateValue} from '../../contexts/StateProvider';
+import { actionTypes } from '../../contexts/reducer';
 import { Unsubscribe } from '@material-ui/icons';
 //==================================================Card Styles==============================================
 const useStyles = makeStyles((theme) => ({
@@ -57,11 +58,10 @@ function WidgetsChat() {
     const classes = useStyles();
     const [messages, setMessages] = useState([]);
     const [chats, setChats] = useState([])
-
-
-
-
+    let history = useHistory();
+       
     
+
     useEffect(() => {
         //if user is logged out it throws an error hence using try catch
         try {
@@ -90,7 +90,16 @@ function WidgetsChat() {
             {
                 chats.map((chat)=>(
                 <BrowserRouter>
-                            <Link to={`/chats/${chat.chat_user_id}`} key={chat.chat_user_id}>
+                            <Link to={`/chats/${chat.chat_user_id}`} key={chat.chat_user_id} onClick={   
+                                ()=>{ //dispatch the chat_user_id when the user clicks on the Link, to the global state
+                                      //later used in App.js to render <SendMessage> and pass 'chatId' to SendMessage
+                                          dispatch(
+                                                        {
+                                                        type:actionTypes.SET_CHAT_INPUT,
+                                                        chatId:chat.chat_user_id,
+                                                        chatInput:true,
+                                                        
+                                                        })}}>
                                     <ButtonBase>
                                         <Card className={classes.root}>
                                                 <Avatar className={classes.avatar} alt={'d'} src="/static/images/avatar/1.jpg"></Avatar>

@@ -1,5 +1,6 @@
 .chat{
     flex:0.4;
+    display: flex;
     background-color: #2E3236;
     padding: 20px;
     overflow-y: scroll;
@@ -10,11 +11,4 @@
 margin-left: 40px;
 color:grey;
 }
-.chat__input{
-  display: flex;
-  
-}
-.chat__inputForm{
-  flex:1;
-  display: flex;
-}
+

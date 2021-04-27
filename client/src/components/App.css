@@ -18,7 +18,9 @@
     margin-bottom: 10px;
     position: relative;
     z-index: 200;
+    overflow-x: scroll;
     }
+    
     .app__feed{
       background-color: #2E3236;
       padding: 10px;
@@ -75,8 +77,8 @@
       background-color: #363A3E;
       padding: 20px;
       overflow-y: scroll;  
-  
   }
+
 .app__chat{
   background-color: #363A3E;
   padding: 20px;

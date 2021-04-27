@@ -37,10 +37,11 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
     width: 400,
-    backgroundColor:theme.palette.background.paper,
+    backgroundColor:'#2E3336',
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    color:'white'
   },
 }));
 //========================================================================================================
@@ -202,11 +203,11 @@ auth.signOut().then(() => {
             <center>
               {/* <img  className="app__headerImage" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png" alt="ig-logo"/>   */}
             </center>
-            <Input placeholder="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
-            <Input placeholder="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <Input placeholder="password" type="text" value={password} onChange={(e) => setPassword(e.target.value)}/>
-            <Input placeholder="Add your biography" type="text" value={bio} onChange={(e)=>setBio(e.target.value)}/>
-            <Button onClick={signUp}>Sign up</Button>
+            <Input style ={{color:'aliceblue'}} placeholder="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
+            <Input style ={{color:'aliceblue'}} placeholder="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <Input style ={{color:'aliceblue'}} placeholder="password" type="text" value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <Input style ={{color:'aliceblue'}} placeholder="Add your biography" type="text" value={bio} onChange={(e)=>setBio(e.target.value)}/>
+            <Button style ={{color:'aliceblue'}} onClick={signUp}>Sign up</Button>
           </form>
         </div>
       </Modal>
@@ -219,14 +220,14 @@ auth.signOut().then(() => {
         <div style={modalStyle} className={classes.paper}>
           <form className="app__signup">
             <center>
-              <img  className="app__headerImage" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png" alt="ig-logo"/>  
+                TEXX-IMAGE
             </center>
-            <p>Enter your credentials to Log in to texx</p>
-            <Input placeholder="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <Input placeholder="password" type="text" value={password} onChange={(e) => setPassword(e.target.value)}/>
-            <Button onClick={signIn}>Sign In</Button>
-            <p>New to texx? Sign up</p>
-            <Button onClick={handleSignUp}>Sign up</Button>
+            <p style={{margin:'10px'}} >Enter your credentials to Log in to texx</p>
+            <Input style ={{color:'aliceblue',margin:'10px'}} placeholder="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <Input style ={{color:'aliceblue',margin:'10px'}} placeholder="password" type="text" value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <Button style ={{color:'aliceblue',backgroundColor:'#556AB5'}} onClick={signIn}>Sign In</Button>
+            <p style={{margin:'10px'}}>New to texx? Sign up</p>
+            <Button style ={{color:'aliceblue',backgroundColor:'#556AB5'}} onClick={handleSignUp}>Sign up</Button>
           </form>
         </div>
       </Modal>

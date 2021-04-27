@@ -101,6 +101,14 @@ function WidgetsChat() {
                                     <ButtonBase>
                                         <Card className={classes.root}>
                                                 <Avatar className={classes.avatar} alt={'d'} src="/static/images/avatar/1.jpg"></Avatar>
+                                                    <Badge
+                                                        overlap="circle"
+                                                        anchorOrigin={{
+                                                        vertical: 'bottom',
+                                                        horizontal: 'right',
+                                                        }}
+                                                       
+                                                    ></Badge>
                                                 <div className={classes.details}>
                                                         <CardContent className={classes.content}>
                                                             <Typography component="p" variant="p">

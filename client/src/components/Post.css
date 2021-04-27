@@ -1,5 +1,22 @@
 
+  @media (min-width: 0px) and (max-width:450px){
+    .post{
+        display: flex;
+        flex-direction:column;
+        background-color: #363A3E;
+        border-bottom:0.3px solid lightgray;
+        margin-bottom: 30px;
+        min-width: fit-content;
+        /*if content is bigger than the available space in the container make it scrollable along y-direction*/
+        overflow-y: scroll;
+    
+    }
+}
+
+
 .post{
+    display: flex;
+    flex-direction:column;
     background-color: #363A3E;
     border-bottom:0.3px solid lightgray;
     margin-bottom: 30px;
@@ -28,7 +45,8 @@ align-items: center = align the avatar and the username in the center  */
 .post__header{
 display:flex;
 align-items: center;
-padding: 20px 10px;
+padding-top: 10px; 
+padding-bottom: 10px;
 }
 .post__header > h3{
     color: aliceblue;
@@ -40,7 +58,15 @@ padding: 20px 10px;
     color: aliceblue;
     margin-left: 55px;
 }
+.post__header > span > button{
 
+    background-color:#556ab5;
+    color: aliceblue;
+    margin-left: 55px;
+}
+.post__header > span > button:hover{
+    background-color: #7389DA;
+}
 .post__header > button:hover{
     background-color: #7389DA;
 }

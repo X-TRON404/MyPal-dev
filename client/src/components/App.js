@@ -15,6 +15,12 @@ import {useStateValue} from '../contexts/StateProvider';
 import { actionTypes } from '../contexts/reducer';
 import firebase from 'firebase/app'
 import SendMessage from './chat/SendMessage'
+//Get material-ui icons
+import SidebarOptions from './SidebarOptions'
+import SearchIcon from '@material-ui/icons/Search';
+import HomeIcon from '@material-ui/icons/Home';
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
 //====================================Modal styles=========================================
 function getModalStyle() {
@@ -246,7 +252,17 @@ auth.signOut().then(() => {
                                                 {/*sidebar*/}
                            {/* if user does not exists then reduce the opacity of the body */}
       <div className={user?'app__body':'app__bodyUserNotLoggedIn' }>
+        <div className="app__sidebarMobile">
+            {/*pass icons as props to SidebarOptions component*/}
+            {/*keep i captial of Icon to let react know you are passing a component*/}
+            <SidebarOptions active  Icon={HomeIcon}></SidebarOptions>
+            <SidebarOptions  Icon={SearchIcon}/>
+            <SidebarOptions  Icon={NotificationsNoneIcon}/>
+            <SidebarOptions  Icon={MoreHorizIcon}/>
+        </div>
+        
           <Sidebar/>
+
 {/* =================================================REACT ROUTER COMES HERE================================================================================= */}
 
                 <Router>

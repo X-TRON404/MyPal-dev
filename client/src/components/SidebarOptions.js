@@ -6,8 +6,8 @@ function SidebarOptions({active,text,Icon}) {
     return (
         //change of the color of the icon with active link
         <div className={`sidebarOptions ${active && 'sidebarOptions--active'}`}>
-            <Icon/>
-            <h2>{text}</h2>
+            <Icon style={{color:"aliceblue"}}/>
+            <h2 style={{color:"aliceblue"}}>{text}</h2>
         </div>
     )
 }

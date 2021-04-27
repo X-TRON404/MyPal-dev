@@ -18,13 +18,6 @@ padding: 20px;
     margin-right: 20px;
 }
 
-.sidebarOptions:hover{
-    background-color: #7389DA;
-    border-radius: 30px;
-    color: var(--twitter-color);
-    transition: color 100ms ease-out ;
-
-}
 
 .sidebarOptions--active{
     color: var(--twitter-color);

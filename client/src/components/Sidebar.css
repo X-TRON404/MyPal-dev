@@ -8,6 +8,7 @@
 
 /* ========================================================================================================================================== */
 .sidebar{
+    background-color: #2E3236;
     border-right:1px solid #111111;
     /* sidebar will always take 30% of the screen */
     flex:0.3;
@@ -15,6 +16,7 @@
     min-width: 300px;
     padding-left: 20px;
     padding-right: 20px;
+
 }
 
 .sidebar__tweet{
@@ -32,4 +34,12 @@
     font-size: 30px !important;
     margin-left: 20px;
     margin-top: 20px;
+}
+
+.MuiSvgIcon-root:hover{
+    background-color:#6B6B6B;
+    border-radius: 30px;
+    color: var(--twitter-color);
+    transition: color 100ms ease-out ;
+
 }

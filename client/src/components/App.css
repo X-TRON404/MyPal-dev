@@ -9,7 +9,7 @@
     .app__sidebarMobile{
     display: flex;
     width: 100%;
-    background-color: #1A1A1A;
+    background-color: #2E3336;
     flex-direction: row;
     align-items: center;    
     justify-content: space-between;
@@ -65,13 +65,13 @@
   }
   /*CHANGE FEED WIDTH*/
   .app__feed{
-      background-color: #2E3236;
+      background-color: #363A3E;
       padding: 20px;
       overflow-y: scroll;  
   
   }
 .app__chat{
-  background-color: #2E3236;
+  background-color: #363A3E;
   padding: 20px;
   overflow-y: scroll; 
   width:100%
@@ -82,7 +82,6 @@
   }
   
   .app__headerImage{
-  
     object-fit: contain;
   }
 

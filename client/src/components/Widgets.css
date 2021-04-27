@@ -13,16 +13,17 @@
     flex:0.3;
     border-left:1px solid #111111;
     /* overflow-y: scroll; */
+    background-color: #2E3236;
 }
 .widgets__inputBox{
-display: flex;
-align-items:center;
-background-color: #191919;
-padding:10px;
-border-radius: 20px;
-margin-top:10px;
-margin-left:20px;
-margin-right: 20px;
+    display: flex;
+    align-items:center;
+    background-color: #191919;
+    padding:10px;
+    border-radius: 20px;
+    margin-top:10px;
+    margin-left:20px;
+    margin-right: 20px;
 
 }
 

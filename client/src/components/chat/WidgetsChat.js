@@ -10,7 +10,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import {ButtonBase} from '@material-ui/core';
-import {BrowserRouter, Link, useHistory} from 'react-router-dom';
+import {BrowserRouter, Link} from 'react-router-dom';
 import {DataBase} from '../firebase'
 import firebase from 'firebase/app';
 import {useStateValue} from '../../contexts/StateProvider';
@@ -58,8 +58,6 @@ function WidgetsChat() {
     const classes = useStyles();
     const [messages, setMessages] = useState([]);
     const [chats, setChats] = useState([])
-    let history = useHistory();
-       
     
 
     useEffect(() => {

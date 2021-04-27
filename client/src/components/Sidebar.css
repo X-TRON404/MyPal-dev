@@ -4,8 +4,25 @@
     .sidebar{
         display: none;
     }
+    .sidebarOptions:hover{
+
+    
+    }
+    .sidebarOptions > .MuiSvgIcon-root:hover{
+       color:#6B6B6B;
+
+    }
 }
 
+@media (min-width: 451px) and (max-width: 2000px) {
+    .sidebarOptions:hover{
+        background-color:#6B6B6B;
+        border-radius: 30px;
+        color: var(--twitter-color);
+        transition: color 100ms ease-out ;
+    
+    }
+}
 /* ========================================================================================================================================== */
 .sidebar{
     background-color: #2E3236;
@@ -33,11 +50,4 @@
     font-size: 30px !important;
     margin-left: 20px;
     margin-top: 20px;
-}
-.sidebarOptions:hover{
-    background-color:#6B6B6B;
-    border-radius: 30px;
-    color: var(--twitter-color);
-    transition: color 100ms ease-out ;
-
 }

@@ -9,7 +9,6 @@
 /* ========================================================================================================================================== */
 .sidebar{
     background-color: #2E3236;
-    border-right:1px solid #111111;
     /* sidebar will always take 30% of the screen */
     flex:0.3;
     /*dont be less that 300px*/                                      /*SIDEBAR WIDTH*/         

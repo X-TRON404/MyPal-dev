@@ -11,7 +11,6 @@
 
 .widgets{
     flex:0.3;
-    border-left:1px solid #111111;
     /* overflow-y: scroll; */
     background-color: #2E3236;
 }

@@ -37,8 +37,8 @@ function SendMessage(chatId) {
     <div className="sendMessage">
             <form className="chat__inputForm" onSubmit={(e)=>{e.preventDefault()}}>
                 <InsertEmoticon/>
-                <Input style={{color:"aliceblue"}} className="sendMessage__input" value={input} onChange={(e)=>setInput(e.target.value)} type="text"/>
-                <SendIcon onClick={sendMessage} type="submit">Send a message</SendIcon>
+                <Input style={{color:"aliceblue"}} className="sendMessage__input" value={input} onChange={(e)=>setInput(e.target.value)} type="text" placeholder="   Send a texx..."/>
+                <SendIcon onClick={sendMessage} type="submit"/>
                 <MicOutlined/>
             </form>
     </div>

@@ -10,13 +10,13 @@
     display: flex;
     width: 100%;
     background-color: #2E3336;
-    flex-direction: row;
     align-items: center;    
     justify-content: space-between;
+    margin-top: 2px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10px;
-    position: fixed;
+    position: relative;
     z-index: 200;
     }
     .app__feed{
@@ -26,6 +26,12 @@
       margin-top: 65px; 
   
   }
+  .app__body{
+    display: flex;
+    height: 100vh;
+    margin-top: -90px;
+  }
+
 }
 
   @media (min-width: 451px) and (max-width: 2000px) {
@@ -39,20 +45,21 @@
   }
   
   .app__header{
+  flex: 1;
   /*object-fit:contain = however the container changes just keep the image same size
   image will always look perfect not streched or something  
   (keep the aspect ratio even when page is resized) */
-  object-fit: contain;
+  /* object-fit: contain;
   background-color: #363A3E;
   padding: 20px;
-  border-bottom: 1px solid #111111;
+  border-bottom: 1px solid #111111; */
   /*keep the elements in the header side by side rather than one on top of the other */
   display: flex;
   /*keep space between two elements*/
   justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  /*position: sticky;
+  top: 0;*/
+  z-index: 100
   }
   
   .app__body{

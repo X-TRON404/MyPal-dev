@@ -3,7 +3,7 @@ import './App.css';
 import {auth, DataBase} from './firebase'
 import {makeStyles} from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
-import { Button, Input } from '@material-ui/core';
+import { Button, Input, Paper } from '@material-ui/core';
 import ImageUpload from './ImageUpload';
 import Sidebar from './Sidebar';
 import Widgets from './Widgets';
@@ -43,6 +43,16 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
     color:'white'
   },
+  root: {
+  display: 'flex',
+  objectFit: 'contain',
+  backgroundColor: '#363A3E',
+  padding: '20px',
+  position: 'sticky',
+  zIndex: 100,
+   
+}  
+
 }));
 //========================================================================================================
 function App() {
@@ -233,35 +243,37 @@ auth.signOut().then(() => {
       </Modal>
 
                                               {/*header*/}
-      <div className="app__header">
-          {/* <img className="app__headerImage" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png" alt="ig-logo"/> */}
-          <Router>
-            <Link to="/"><h1>Texx</h1></Link>
-          </Router>
+      <Paper className={classes.root} elevation={3}>
+          <div className="app__header">
+              {/* <img className="app__headerImage" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png" alt="ig-logo"/> */}
+              <Router>
+                <Link to="/"><h1>Texx</h1></Link>
+              </Router>
 
-                                            {/*sign up/sign in or log out the user*/}
-          { user ?
-            //if user is not null(logged in) then give log out button
-          <Button onClick={logout}>Log out</Button>:
-            //else null (logged out) then give sign in or sign out button
-          <div className="app__loginContainer">
-          
-
+                                                {/*sign up/sign in or log out the user*/}
+              { user ?
+                //if user is not null(logged in) then give log out button
+              <Button onClick={logout}>Log out</Button>:
+                //else null (logged out) then give sign in or sign out button
+              <div className="app__loginContainer">
+        
+              </div>
+              }
           </div>
-          }
-      </div>
-                                                {/*sidebar*/}
-                           {/* if user does not exists then reduce the opacity of the body */}
-      <div className={user?'app__body':'app__bodyUserNotLoggedIn' }>
-        <div className="app__sidebarMobile">
+      </Paper>
+      <div className="app__sidebarMobile">
             {/*pass icons as props to SidebarOptions component*/}
             {/*keep i captial of Icon to let react know you are passing a component*/}
             <SidebarOptions active  Icon={HomeIcon}></SidebarOptions>
             <SidebarOptions  Icon={SearchIcon}/>
             <SidebarOptions  Icon={NotificationsNoneIcon}/>
+            {/*when you click this show widgets*/}
             <SidebarOptions  Icon={MoreHorizIcon}/>
         </div>
-        
+                                                {/*sidebar*/}
+                           {/* if user does not exists then reduce the opacity of the body */}
+      <div className={user?'app__body':'app__bodyUserNotLoggedIn' }>
+
           <Sidebar/>
 
 {/* =================================================REACT ROUTER COMES HERE================================================================================= */}
@@ -305,7 +317,7 @@ auth.signOut().then(() => {
             }
 
                                                 {/*widgets*/}
-          <Widgets/>
+          <Widgets id={'widget'}/>
     </div>
        
     </div>

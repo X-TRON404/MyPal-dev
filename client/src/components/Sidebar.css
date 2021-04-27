@@ -35,8 +35,7 @@
     margin-left: 20px;
     margin-top: 20px;
 }
-
-.MuiSvgIcon-root:hover{
+.sidebarOptions:hover{
     background-color:#6B6B6B;
     border-radius: 30px;
     color: var(--twitter-color);

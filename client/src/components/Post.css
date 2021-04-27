@@ -58,6 +58,11 @@ padding-bottom: 10px;
     color: aliceblue;
     margin-left: 55px;
 }
+.post__header > .MuiSvgIcon-root {
+margin-left: auto;
+color: aliceblue;
+}
+
 .post__header > span > button{
 
     background-color:#556ab5;

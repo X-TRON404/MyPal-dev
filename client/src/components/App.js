@@ -21,6 +21,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import PermIdentityIcon from '@material-ui/icons/PermIdentity';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 
 //====================================Modal styles=========================================
 function getModalStyle() {
@@ -268,6 +271,9 @@ auth.signOut().then(() => {
             <SidebarOptions  Icon={SearchIcon}/>
             <SidebarOptions  Icon={NotificationsNoneIcon}/>
             {/*when you click this show widgets*/}
+            <SidebarOptions  Icon={PermIdentityIcon}/>
+            <SidebarOptions  Icon={ListAltIcon}/>
+            <SidebarOptions  Icon={BookmarkBorderIcon}/>
             <SidebarOptions  Icon={MoreHorizIcon}/>
         </div>
                                                 {/*sidebar*/}

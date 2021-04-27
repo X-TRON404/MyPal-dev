@@ -13,6 +13,8 @@ import PublishIcon from '@material-ui/icons/Publish';
 import SendIcon from '@material-ui/icons/Send';
 import {useStateValue} from '../contexts/StateProvider'
 import FlipMove from 'react-flip-move';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import ShareIcon from '@material-ui/icons/Share';
 
 
 
@@ -275,6 +277,7 @@ const postComment = (e) => {
                                     console.log(chat+"chta")
                 })
                 } */}
+                <MoreVertIcon/>
              
             {/*===========================================================================================================================================*/}
             </div>
@@ -282,13 +285,7 @@ const postComment = (e) => {
             <img className="post__image" src={imageUrl} alt={username+" "+caption} />
             <h4 className="post__text"><strong>{username+" "}</strong>:{" "+caption}</h4>
             <div className="post__footer">
-                                                    {/*Comment icon*/}
-                            <ChatBubbleOutlineRoundedIcon fontsize="small" cursor="pointer"/>
-                                                    {/*Re-tweet icon*/}
-                            <RepeatIcon fontsize="small" cursor="pointer"/>
-                                                    {/*like icon*/}
-                            
-                                            
+                                                     {/*like icon*/}
                             <FlipMove>   
                                 {/* (like && (like.username===user.displayName)?(like.like?(<strong>You</strong>):(<strong></strong>)):(<strong>{like.username}</strong>)):(<strong></strong>) )}</p>       */}
                             <FavoriteIcon   fontsize="small" cursor="pointer" onClick={postLike} style={{color:likeColor}} /> 
@@ -296,9 +293,16 @@ const postComment = (e) => {
                                     (<p><strong>{user && (user.displayName===like.username?(like.like?(<strong>You{JSON.stringify(like.like)}</strong>):(<strong></strong>)):(like.username))}</strong></p>)
                                 )}
                             </FlipMove>
-                                                    
-                                             
+                                                    {/*Comment icon*/}
+                            <ChatBubbleOutlineRoundedIcon fontsize="small" cursor="pointer"/>
+                                                    {/*share icon*/}
+                            <ShareIcon/> 
+                                                    {/*Re-post icon*/}
+                            <RepeatIcon fontsize="small" cursor="pointer"/>
+
+                            
                          
+                                                 
             </div>
                                               {/*display the comments from the database */}
             <div className="post__comments">

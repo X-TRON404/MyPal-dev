@@ -3,7 +3,7 @@
 import React , {useState,useEffect,useContext} from 'react'
 import './Post.css'
 import Avatar from '@material-ui/core/Avatar';
-import {Button, IconButton, Input } from '@material-ui/core';
+import {Button, Collapse, IconButton, Input, makeStyles, Popover, Typography } from '@material-ui/core';
 import {DataBase} from './firebase'
 import firebase from 'firebase';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
@@ -16,11 +16,22 @@ import FlipMove from 'react-flip-move';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ShareIcon from '@material-ui/icons/Share';
 
-
-
+//============================================Comments pop-over styles==================================== 
+    const useStyles = makeStyles((theme) => ({
+        popover: {
+          pointerEvents: 'none',
+        },
+        paper: {
+          padding: theme.spacing(1),
+          backgroundColor:'#363A3E',
+          color:'aliceblue'
+        },
+      }));
+//==========================================================================================================
 
 
 function Post({postId,username,user_id,caption,imageUrl}) {
+    const classes = useStyles();
     //get the user from the provider
     const [{user}, dispatch] = useStateValue();
     //store comments from the database for a praticular post in an array (GET from DataBase)
@@ -43,7 +54,27 @@ function Post({postId,username,user_id,caption,imageUrl}) {
     //to store uid and bool for if the user is present in the chat list
     const [chats_array,setChats_array]= useState([])
     const [isPresent,setIsPresent] = useState(false)
-
+    //for commentsIcon onclick collapse
+    const [expanded, setExpanded] =  useState(false);
+    //for commentsIcon onhover popup
+    const [anchorEl, setAnchorEl] =  useState(null);
+    //commentsIcon onclick collapse
+    const handleExpandClick = () => {
+      setExpanded(!expanded);
+    };
+    //commentsIcon onhover popup
+    const open = Boolean(anchorEl);
+    const handleHover = (e) => {
+        setAnchorEl(e.currentTarget);
+      };
+    //open the popover that we open on hover on commentsIcon
+    const handlePopoverOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+      };
+    //close the popover that we open on hover on commentsIcon
+      const handlePopoverClose = () => {
+        setAnchorEl(null);
+      };
 //==================================================check whether user is present in the chat list=========================================================================
     const isPresentInChats = (user_id,chats_array) => {
         for (const chat of chats_array){
@@ -286,19 +317,50 @@ const postComment = (e) => {
             <div className="post__footer">
                                                      {/*like icon*/}
 
-                            <FlipMove>   
-                                {/* (like && (like.username===user.displayName)?(like.like?(<strong>You</strong>):(<strong></strong>)):(<strong>{like.username}</strong>)):(<strong></strong>) )}</p>       */}
-                           
-                                <FavoriteIcon   fontsize="small" cursor="pointer" onClick={postLike} style={{color:likeColor}} /> 
-                                    {likes.map((like)=>
-                                        (<p><strong>{user && (user.displayName===like.username?(like.like?(<strong>You{JSON.stringify(like.like)}</strong>):(<strong></strong>)):(like.username))}</strong></p>)
-                                    )}
-     
-                            </FlipMove>
-                                 {/*Comment icon*/}
-                                 <IconButton>
-                                    <ChatBubbleOutlineRoundedIcon fontsize="small" cursor="pointer"/>
+                            <div className="post__likes">
+                                <FlipMove>   
+                                    {/* (like && (like.username===user.displayName)?(like.like?(<strong>You</strong>):(<strong></strong>)):(<strong>{like.username}</strong>)):(<strong></strong>) )}</p>       */}
+                            
+                                    <FavoriteIcon   fontsize="small" cursor="pointer" onClick={postLike} style={{color:likeColor}} /> 
+
+                                        {likes.map((like)=>
+                                            (<p style={{color:'aliceblue'}} ><strong>{user && (user.displayName===like.username?(like.like?(<strong>You{JSON.stringify(like.like)}</strong>):(<strong></strong>)):(like.username))}</strong></p>)
+                                        )}
+                                </FlipMove>
+                                <Typography style={{color:'aliceblue'}}>Liked by {likes.length}</Typography>
+                            </div>
+                            
+                                            {/*collapse  comments*/}
+                                                {/*Comment icon*/}
+                            <div className="post__commentsIcon">
+                                 <IconButton onClick={handleExpandClick} id="comments-icon"   onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose} disabled={comments.length===0}>
+                                    <ChatBubbleOutlineRoundedIcon fontsize="small" cursor="pointer" aria-expanded={expanded} aria-label="show more comments"/>
                                 </IconButton>
+                                            {/*pop over on hover*/}
+                                            <Popover 
+                                            id="mouse-over-popover"
+                                            className={classes.popover}
+                                            classes={{
+                                            paper: classes.paper,
+                                            }}
+                                            open={open}
+                                            anchorEl={anchorEl}
+                                            anchorOrigin={{
+                                            vertical: 'bottom',
+                                            horizontal: 'left',
+                                            }}
+                                            transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'left',
+                                            }}
+                                            onClose={handlePopoverClose}
+                                            disableRestoreFocus
+                                        >
+                                            <Typography>Click on the icon to load all comments</Typography>
+                                        </Popover>
+                                <Typography style={{color:'aliceblue'}}>{comments.length} Comments</Typography>
+                            </div>
+
                                                     {/*share icon*/}
                             <IconButton>
                                 <ShareIcon fontsize="small" cursor="pointer" onClick={() => {
@@ -327,12 +389,13 @@ const postComment = (e) => {
             </div>
                                               {/*display the comments from the database */}
             <div className="post__comments">
-                {
-                    comments.map((comment) => (
-                        //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
-                        <p><strong>{comment.username}</strong>{comment.text}</p>
-                    ))
-                } 
+                    <Collapse in={expanded} timeout="auto" unmountOnExit >
+                       { comments.map((comment) => (
+                            //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
+                            <p style={{color:"#dae1e7"}}><strong>{comment.username+":"}</strong>{comment.text}</p>
+                        ))
+                       } 
+                    </Collapse>
             </div>
                                                {/*post the comment to the database*/}
             {//if the user is logged in then only show the post comment section

@@ -25,6 +25,7 @@ import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import Event from './Event'
+import Profile from './Profile'
 
 //====================================Modal styles=========================================
 function getModalStyle() {

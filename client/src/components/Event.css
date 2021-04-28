@@ -1,0 +1,79 @@
+@media (min-width: 0px) and (max-width:450px){
+.event{
+    display: flex;
+    flex-direction: column;
+    background-color:#2E3336;
+    width: 100%;
+    min-width: fit-content;
+    margin-top: 20px;
+
+}
+
+}
+@media (min-width: 451px) and (max-width: 2048px) {
+.event{
+    display: flex;
+    flex-direction: column;
+    background-color:#2E3336;
+    width: 100%;
+    min-width: 650px;
+    margin-top: 20px;
+}
+
+}
+.event__title {
+    color: #F3EFEF;
+}
+.event__date {
+    color: #F3EFEF;
+}
+.event__time {
+    color: #F3EFEF;
+}
+.event__location {
+    color: #F3EFEF;
+}
+.event__header{
+    display: flex;
+    padding-right: 10px;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+.event__headerInfo{
+display: flex;
+flex-direction: column;
+width: 100%;
+}
+.event__thubnail{
+    width: 100%;
+    object-fit: contain;
+}
+
+.event__description > .MuiTypography-body2 {
+    color: #F3EFEF;
+}
+.event__footer{
+    display: flex;
+    padding-bottom: 5px;
+    padding-right: 10px;
+}
+.event__interested >button{
+    margin-left: 10px;
+    background-color: green;
+    color: #F3EFEF;
+}
+.event__interested >button:hover{
+    background-color: #1aac09;
+    color: #F3EFEF;
+}
+.event__actions{
+    margin-left: 10px;
+}
+.event__actions > button {
+    background-color: #556ab5;
+    color: #F3EFEF;
+}
+.event__actions > button:hover{
+    background-color: #7389DA;
+    color: #F3EFEF;
+}

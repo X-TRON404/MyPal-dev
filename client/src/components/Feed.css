@@ -1,6 +1,21 @@
-.feed{
-    flex:0.4;
-    background-color: #2E3236;
-    padding: 20px;
-    overflow-y: scroll;
+
+@media (min-width: 0px) and (max-width:450px){
+    .feed{
+        flex:0.4;
+        background-color: #2E3236;
+        padding: 20px;
+        overflow-y: scroll;
+    }
+
 }
+@media (min-width: 451px) and (max-width:2048px){
+    .feed{
+        flex:0.4;
+        background-color: #2E3236;
+        padding: 20px;
+        overflow-y: scroll;
+        padding-left: 200px;
+        padding-right: 200px;
+    }
+    
+  }

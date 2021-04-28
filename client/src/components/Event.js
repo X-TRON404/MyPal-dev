@@ -66,7 +66,19 @@ function Event() {
                     </CardActions>
     
                     <CardActions className="event__actions">
-                            <Button size="small" >
+                            <Button size="small" onClick={() => {
+                                            if (navigator.share) {
+                                                navigator.share({
+                                                        title: document.title,
+                                                        text: "Event short description",
+                                                        url: window.location.href,
+                                                    })
+                                                    .then(() => console.log('Successful share'))
+                                                    .catch((error) => alert('Error sharing', error));
+                                            } else {
+                                                alert("Web Share API is not supported in your browser.")
+                                            }
+                                        }} >
                             Share with friends
                             </Button>
                             <Button size="small" >

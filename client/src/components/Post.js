@@ -44,7 +44,6 @@ function Post({postId,username,user_id,caption,imageUrl}) {
     const [chats_array,setChats_array]= useState([])
     const [isPresent,setIsPresent] = useState(false)
 
-
 //==================================================check whether user is present in the chat list=========================================================================
     const isPresentInChats = (user_id,chats_array) => {
         for (const chat of chats_array){
@@ -286,19 +285,41 @@ const postComment = (e) => {
             <h4 className="post__text"><strong>{username+" "}</strong>:{" "+caption}</h4>
             <div className="post__footer">
                                                      {/*like icon*/}
+
                             <FlipMove>   
                                 {/* (like && (like.username===user.displayName)?(like.like?(<strong>You</strong>):(<strong></strong>)):(<strong>{like.username}</strong>)):(<strong></strong>) )}</p>       */}
-                            <FavoriteIcon   fontsize="small" cursor="pointer" onClick={postLike} style={{color:likeColor}} /> 
-                                {likes.map((like)=>
-                                    (<p><strong>{user && (user.displayName===like.username?(like.like?(<strong>You{JSON.stringify(like.like)}</strong>):(<strong></strong>)):(like.username))}</strong></p>)
-                                )}
+                           
+                                <FavoriteIcon   fontsize="small" cursor="pointer" onClick={postLike} style={{color:likeColor}} /> 
+                                    {likes.map((like)=>
+                                        (<p><strong>{user && (user.displayName===like.username?(like.like?(<strong>You{JSON.stringify(like.like)}</strong>):(<strong></strong>)):(like.username))}</strong></p>)
+                                    )}
+     
                             </FlipMove>
-                                                    {/*Comment icon*/}
-                            <ChatBubbleOutlineRoundedIcon fontsize="small" cursor="pointer"/>
+                                 {/*Comment icon*/}
+                                 <IconButton>
+                                    <ChatBubbleOutlineRoundedIcon fontsize="small" cursor="pointer"/>
+                                </IconButton>
                                                     {/*share icon*/}
-                            <ShareIcon/> 
+                            <IconButton>
+                                <ShareIcon fontsize="small" cursor="pointer" onClick={() => {
+                                                if (navigator.share) {
+                                                    navigator.share({
+                                                            title: document.title,
+                                                            text: caption,
+                                                            url: window.location.href,
+                                                        })
+                                                        .then(() => console.log('Successful share'))
+                                                        .catch((error) => alert('Error sharing', error));
+                                                } else {
+                                                    alert("Web Share API is not supported in your browser.")
+                                                }
+                                            }}> 
+                                </ShareIcon> 
+                            </IconButton>
                                                     {/*Re-post icon*/}
-                            <RepeatIcon fontsize="small" cursor="pointer"/>
+                            <IconButton>                       
+                                   <RepeatIcon fontsize="small" cursor="pointer"/>
+                            </IconButton>
 
                             
                          

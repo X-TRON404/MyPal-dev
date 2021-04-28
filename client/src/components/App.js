@@ -24,6 +24,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+import Event from './Event'
 
 //====================================Modal styles=========================================
 function getModalStyle() {
@@ -288,7 +289,7 @@ auth.signOut().then(() => {
                     <Switch>             
                         <Route exact path="/">
                           <div className="app__feed">
-                              <Feed/>
+                             <Feed/>
                           </div>     
                         </Route>                                                                                                               
                         <Route path="/chats/:chatId">

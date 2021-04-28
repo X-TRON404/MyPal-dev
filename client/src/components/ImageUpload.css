@@ -1,5 +1,5 @@
 .imageUpload{
-    z-index: 100;
+    z-index: 10;
     padding: 10px;
     display: flex;
     flex-direction: column;

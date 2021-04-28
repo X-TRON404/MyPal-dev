@@ -20,7 +20,7 @@
     z-index: 200;
     overflow-x: scroll;
     }
-    
+
     .app__feed{
       background-color: #2E3236;
       padding: 10px;
@@ -30,15 +30,20 @@
   }
   .app__body{
     display: flex;
-    height: 100vh;
+    height: 88vh;
     margin-top: -90px;
   }
 
 }
 
-  @media (min-width: 451px) and (max-width: 2000px) {
+  @media (min-width: 451px) and (max-width: 2048px) {
       .app__sidebarMobile{
         display:none;
+      }
+      .app__body{
+        display: flex;
+        height: 88vh;
+        overflow-x: hidden;
       }
   }
 
@@ -64,10 +69,6 @@
   z-index: 100
   }
   
-  .app__body{
-    display: flex;
-    height: 100vh;
-  }
   .app__bodyUserNotLoggedIn{
     display: flex;
     opacity: 0.2;

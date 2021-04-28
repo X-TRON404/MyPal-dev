@@ -25,7 +25,9 @@
     overflow-y: scroll;
 
 }
+@media (min-width: 451px) and (max-width:2048px){
 
+}
 
 .post__image{
 width: 100%;
@@ -79,7 +81,14 @@ color: aliceblue;
 .post__avatar{
 margin-right: 10px;
 }
-
+.post__likes{
+    display: flex;
+    flex-direction: column;
+}
+.post__commentsIcon{
+    display: flex;
+    flex-direction: column;
+}
 .post__comments{
     padding: 20px;
 }
@@ -120,5 +129,6 @@ color:aliceblue;
 .post__footer{
     display: flex;
     justify-content:space-between;
+    align-items: center;
     margin:10px 20px;
 }

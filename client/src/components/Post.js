@@ -64,9 +64,6 @@ function Post({postId,username,user_id,caption,imageUrl}) {
     };
     //commentsIcon onhover popup
     const open = Boolean(anchorEl);
-    const handleHover = (e) => {
-        setAnchorEl(e.currentTarget);
-      };
     //open the popover that we open on hover on commentsIcon
     const handlePopoverOpen = (event) => {
         setAnchorEl(event.currentTarget);

@@ -78,7 +78,9 @@ function ImageUpload({username}) {
                             //get the username as a prop from the 'App.js' file
                                 username:username,
                             //post the id of the user from 'user' object  
-                                user_id:user.uid
+                                user_id:user.uid,
+                            //initially set likesCount to 0 
+                                likesCount:0
                             })
                             //once done set clear the input c
                             setProgress(0);

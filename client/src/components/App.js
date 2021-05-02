@@ -1,4 +1,4 @@
-import {useState,useEffect} from 'react';
+import React, {useState,useEffect, Suspense,lazy} from 'react';
 import './App.css';
 import {auth, DataBase} from './firebase'
 import {makeStyles} from '@material-ui/core/styles'
@@ -85,6 +85,7 @@ function App() {
   const [user,setUser] = useState(null);
   //user stored in local storage
   let userFromLocalStorage
+  const Profile = React.lazy(() => import('./Profile'))
 
 //====================================Get the user from the local storage on refresh======================
   useEffect(()=>{
@@ -273,7 +274,9 @@ auth.signOut().then(() => {
             <SidebarOptions  Icon={SearchIcon}/>
             <SidebarOptions  Icon={NotificationsNoneIcon}/>
             {/*when you click this show widgets*/}
-            <SidebarOptions  Icon={PermIdentityIcon}/>
+            <Router>
+                <Link to='/profile' onClick={()=>window.location.href= '/profile'}><SidebarOptions  Icon={PermIdentityIcon}/></Link>
+            </Router>
             <SidebarOptions  Icon={ListAltIcon}/>
             <SidebarOptions  Icon={BookmarkBorderIcon}/>
             <SidebarOptions  Icon={MoreHorizIcon}/>
@@ -298,6 +301,14 @@ auth.signOut().then(() => {
                               <Chat/>
                           </div>
                           </Route>  
+                        <Route path="/profile">
+                          <div className="app__profile" >
+                            {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <Profile/>
+                            </Suspense>
+                          </div>
+                        </Route> 
                     </Switch>
                 </Router>
 

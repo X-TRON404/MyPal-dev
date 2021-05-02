@@ -59,7 +59,7 @@ function Post({postId,username,user_id,caption,imageUrl,likesCount}) {
     const [anchorEl, setAnchorEl] =  useState(null);
     const [likeCount,setLikeCount] = useState(0)
     //create a reference to post doc
-    const postRef = DataBase.collection('posts').doc(postId)
+    const postRef = DataBase.collection('users').doc(user.uid).collection('posts').doc(postId)
     //firebase increment for incrementing the likecount
     const increment = firebase.firestore.FieldValue.increment(1)
     //firebase decrement for decrementing the likecount
@@ -111,7 +111,7 @@ function Post({postId,username,user_id,caption,imageUrl,likesCount}) {
         postRef.update({ likesCount: increment })
         // setLikeCount(likeCount=>likeCount+=1)     
                //add like to the 'postLikes' collection of the particular post 
-        DataBase.collection('posts').doc(postId).collection('postLikes').doc(user.uid).set(
+               DataBase.collection('users').doc(user.uid).collection('posts').doc(postId).collection('postLikes').doc(user.uid).set(
             {
                 like:true,
                 username:user.displayName,
@@ -134,7 +134,7 @@ function Post({postId,username,user_id,caption,imageUrl,likesCount}) {
             // else if(like===false){
             //     (setLikeCount(likeCount=>likeCount-=1))
             // }
-            DataBase.collection('posts').doc(postId).collection('postLikes').doc(user.uid).update(
+            DataBase.collection('users').doc(user.uid).collection('posts').doc(postId).collection('postLikes').doc(user.uid).update(
                 {
                     like:like,
                     timestamp:firebase.firestore.FieldValue.serverTimestamp()
@@ -216,7 +216,7 @@ const addToChats = () => {
 const postComment = (e) => {
     e.preventDefault();
     //add comment to the 'comments' collection of the particular post 
-    DataBase.collection('posts').doc(postId).collection('comments').add(
+    DataBase.collection('users').doc(user.uid).collection('posts').doc(postId).collection('comments').add(
         {
          text:comment,
          username:user.displayName,
@@ -232,7 +232,7 @@ const postComment = (e) => {
         //if a postId is passed
         if (postId){
             //get a snapshot listner for 'comments' collection inside the passed 'postId' doc inside the collection 'posts'
-             DataBase.collection('posts').doc(postId).collection('comments').orderBy('timestamp','desc').onSnapshot(
+            DataBase.collection('users').doc(user.uid).collection('posts').doc(postId).collection('comments').onSnapshot(
                     (snapshot) =>{
                         //set comments to the data inside the doc
                                 setComments(snapshot.docs.map((doc) => (doc.data())))
@@ -240,7 +240,7 @@ const postComment = (e) => {
 
     
                               //get a snapshot listner for 'postLikes' collection inside the passed 'postId' doc inside the collection 'posts'
-                        DataBase.collection('posts').doc(postId).collection('postLikes').orderBy('timestamp','desc').onSnapshot(
+            DataBase.collection('users').doc(user.uid).collection('posts').doc(postId).collection('postLikes').orderBy('timestamp','desc').onSnapshot(
                                 (snapshot) =>{
                  
                                                         setLikes(snapshot.docs.map((doc) => ({id:doc.id,like:doc.data()})))
@@ -339,7 +339,7 @@ const postComment = (e) => {
 
                     ):
                     //if not present
-                    (<Button key={user_id} onClick={addToChats}>Add  chats</Button>)
+                    (<Button key={user_id} onClick={addToChats}>Add chats</Button>)
                         )    
                             ) 
                                 )
@@ -435,6 +435,7 @@ const postComment = (e) => {
                         ))
                        } 
                     </Collapse>
+                    
             </div>
                                                {/*post the comment to the database*/}
             {//if the user is logged in then only show the post comment section

@@ -97,7 +97,7 @@ function WidgetsChat() {
                                                         chatId:chat.chat_user_id,
                                                         chatInput:true,
                                                         
-                                                        })}}>
+                                                        }); window.location.href= `/chats/${chat.chat_user_id}` }}>
                                     <ButtonBase>
                                         <Card className={classes.root}>
                                                 <Avatar className={classes.avatar} alt={'d'} src="/static/images/avatar/1.jpg"></Avatar>

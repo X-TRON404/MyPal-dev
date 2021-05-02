@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -17,23 +17,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import './Profile.css'
 import { Button } from '@material-ui/core';
-
-
-
-
-
-
-
-{/* <Avatar/>
-<displayName/>
-<>
-<Joined on/> */}
-
-
-
-
-
-
+import {useStateValue} from '../contexts/StateProvider'
+import { DataBase } from './firebase';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -62,12 +47,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Profile() {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+    //get the user from the provider
+    const [{user}, dispatch] = useStateValue();
+    const classes = useStyles();
+    //store the user fields from the database 
+    const [userInfo,setUserInfo] = useState([])
+    //store the number of posts inside posts collection
+    const [numberOfPosts, setNumberOfPosts] = useState(0)
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  useEffect(() => {
+      //load the user info from Database on load or when user changes
+      const unsubscribe = DataBase.collection('users').doc(user.uid).onSnapshot(snapshot=>{
+                                  setUserInfo(snapshot.data());
+                                  console.log(userInfo)
+      })
+
+                          DataBase.collection('users').doc(user.uid).collection('posts').onSnapshot(snapshot=>{
+                                  setNumberOfPosts(snapshot.size)
+                          })
+      return () => {
+          unsubscribe()
+      }
+  }, [user])
 
     return (
         <div className="profile">
@@ -76,7 +77,7 @@ function Profile() {
                         <div className="profile__headerTop">
                                 <Avatar className={classes.avatar} alt={'username'} src="/static/images/avatar/1.jpg" ></Avatar>
                                 <div className="profle__headerInfo">
-                                    <Typography>{'username'}</Typography>
+                                    <Typography>{user.displayName}</Typography>
                                     <Typography>{`Joined on " + ${'Joining date'}`}</Typography>
                                 </div>
                             <IconButton aria-label="settings">
@@ -86,7 +87,7 @@ function Profile() {
                         </div>
                         <center className="profile__headerEditButton"><Button >Edit Profile</Button></center>
                         <div className="profile__headerTypography">
-                            <Typography>Biography</Typography>
+                            <Typography>{userInfo.bio}</Typography>
                             <Typography>Interests</Typography>
                         </div>
                     </div>
@@ -100,7 +101,7 @@ function Profile() {
                                 <Typography variant="body2" >
                                     POSTS
                                 </Typography>
-                                <p>{'no. of posts'}</p>
+                                <p>{numberOfPosts}</p>    
                             </div>
                             <div className="profile__footerStatsEvents">
                                 <Typography variant="body2" >
@@ -110,7 +111,7 @@ function Profile() {
                             </div>
                             <div className="profile__footerStatsFriends">
                                 <Typography variant="body2" >
-                                    NEW FRIENDS
+                                    FRIENDS
                                 </Typography>
                                 <p>{'no. of friends'}</p>
                             </div>

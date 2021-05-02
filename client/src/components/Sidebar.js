@@ -10,8 +10,9 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import {Button} from '@material-ui/core';
-
 import './Sidebar.css'
+import { BrowserRouter as Router,Link} from 'react-router-dom'
+
 function Sidebar() {
     return (
         <div className="sidebar">
@@ -23,7 +24,9 @@ function Sidebar() {
             <SidebarOptions text="Messages" Icon={MailOutlineIcon}/>
             <SidebarOptions text="Bookmarks" Icon={BookmarkBorderIcon}/>
             <SidebarOptions text="Lists" Icon={ListAltIcon}/>
-            <SidebarOptions text="Profile" Icon={PermIdentityIcon}/>
+            <Router>
+                <Link to='/profile' onClick={()=>window.location.href='/profile'}><SidebarOptions text="Profile" Icon={PermIdentityIcon}/></Link>
+            </Router>
             <SidebarOptions text="More" Icon={MoreHorizIcon}/>
             <Button variant="outlined"  className="sidebar__tweet" fullWidth>Texx</Button>
         </div>

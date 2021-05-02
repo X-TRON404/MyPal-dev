@@ -86,6 +86,7 @@ function App() {
   //user stored in local storage
   let userFromLocalStorage
   const Profile = React.lazy(() => import('./Profile'))
+  const Feed = React.lazy(() => import('./Feed'))
 
 //====================================Get the user from the local storage on refresh======================
   useEffect(()=>{
@@ -293,7 +294,10 @@ auth.signOut().then(() => {
                     <Switch>             
                         <Route exact path="/">
                           <div className="app__feed">
-                             <Feed/>
+                            {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <Feed/>
+                            </Suspense>
                           </div>     
                         </Route>                                                                                                               
                         <Route path="/chats/:chatId">

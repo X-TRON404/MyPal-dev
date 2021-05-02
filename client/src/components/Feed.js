@@ -15,7 +15,7 @@ const [posts, setPosts] = useState([]);
         //onSnapshot = listner to changes in posts 
         //everytime the posts change run this code
         //grab the collection 'posts' from the database and order 'docs' in the collection by timestamp
-        DataBase.collection('users').doc(user.uid).collection('posts').orderBy('timestamp','desc').onSnapshot(snapshot =>{
+        DataBase.collection('posts').orderBy('timestamp','desc').onSnapshot(snapshot =>{
         //Now set the  id=doc.id and post=doc.data to the fields in the 'posts' variable that we defined above
         setPosts(snapshot.docs.map(doc =>({id:doc.id,post:doc.data()})))
             })

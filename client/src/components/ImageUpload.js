@@ -68,7 +68,7 @@ function ImageUpload({username}) {
                     .getDownloadURL()
                     //add the image to the 'posts' folder of the database
                     .then((url)=>{
-                        DataBase.collection('users').doc(user.uid).collection('posts').add({
+                        DataBase.collection('posts').add({
                             //set the attribute to the time stamp of the server which serves the file
                                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                             //set the cation attribute to the cation user entered   

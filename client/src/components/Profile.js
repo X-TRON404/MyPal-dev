@@ -62,9 +62,9 @@ function Profile() {
                                   console.log(userInfo)
       })
 
-                          DataBase.collection('users').doc(user.uid).collection('posts').onSnapshot(snapshot=>{
-                                  setNumberOfPosts(snapshot.size)
-                          })
+                        //   DataBase.collection('users').doc(user.uid).collection('posts').onSnapshot(snapshot=>{
+                        //           setNumberOfPosts(snapshot.size)
+                        //   })
       return () => {
           unsubscribe()
       }
@@ -87,7 +87,7 @@ function Profile() {
                         </div>
                         <center className="profile__headerEditButton"><Button >Edit Profile</Button></center>
                         <div className="profile__headerTypography">
-                            <Typography>{userInfo.bio}</Typography>
+                            <Typography>{userInfo?.bio}</Typography>
                             <Typography>Interests</Typography>
                         </div>
                     </div>
@@ -98,10 +98,13 @@ function Profile() {
                         </Typography>
                         <div className="profile__footerStats">
                             <div className="profile__footerStatsPosts">
+                                 
                                 <Typography variant="body2" >
-                                    POSTS
+                                    Posts
                                 </Typography>
-                                <p>{numberOfPosts}</p>    
+                                <p>{numberOfPosts}</p>
+                                  
+                               
                             </div>
                             <div className="profile__footerStatsEvents">
                                 <Typography variant="body2" >

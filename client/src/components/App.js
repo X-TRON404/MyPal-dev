@@ -24,8 +24,13 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
-import Event from './Event'
-import Profile from './Profile'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import CreateEvent from './CreateEvent'
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
+
 
 //====================================Modal styles=========================================
 function getModalStyle() {
@@ -82,7 +87,11 @@ function App() {
   //store bio
   const [bio,setBio] = useState('');
   //flag to keep track of whether the user has logged in or not (user who's signed in )
-  const [user,setUser] = useState(null);
+  const [user,setUser] = useState([]);
+  //save userId 
+  const [useId,setUserId] = useState(null)
+  //show password for password field
+  const [showPassword,setShowPassword] = useState(false)
   //user stored in local storage
   let userFromLocalStorage
   const Profile = React.lazy(() => import('./Profile'))
@@ -222,7 +231,27 @@ auth.signOut().then(() => {
             </center>
             <Input style ={{color:'aliceblue'}} placeholder="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
             <Input style ={{color:'aliceblue'}} placeholder="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <Input style ={{color:'aliceblue'}} placeholder="password" type="text" value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <Input style ={{color:'aliceblue'}} placeholder="password" type="text" />
+            <Input style ={{color:'aliceblue',margin:'10px'}}
+            id="standard-adornment-password"
+            placeholder="password"
+            type={showPassword ? 'text' : 'password'}
+            value={password} onChange={(e) => setPassword(e.target.value)}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={() => 
+                    setShowPassword(!showPassword )
+                  }
+                  onMouseDown={(e) => 
+                    e.preventDefault()}
+                >
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
             <Input style ={{color:'aliceblue'}} placeholder="Add your biography" type="text" value={bio} onChange={(e)=>setBio(e.target.value)}/>
             <Button style ={{color:'aliceblue'}} onClick={signUp}>Sign up</Button>
           </form>
@@ -241,7 +270,26 @@ auth.signOut().then(() => {
             </center>
             <p style={{margin:'10px'}} >Enter your credentials to Log in to texx</p>
             <Input style ={{color:'aliceblue',margin:'10px'}} placeholder="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <Input style ={{color:'aliceblue',margin:'10px'}} placeholder="password" type="text" value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <Input style ={{color:'aliceblue',margin:'10px'}}
+            id="standard-adornment-password"
+            placeholder="password"
+            type={showPassword ? 'text' : 'password'}
+            value={password} onChange={(e) => setPassword(e.target.value)}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={() => 
+                    setShowPassword(!showPassword )
+                  }
+                  onMouseDown={(e) => 
+                    e.preventDefault()}
+                >
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
             <Button style ={{color:'aliceblue',backgroundColor:'#556AB5'}} onClick={signIn}>Sign In</Button>
             <p style={{margin:'10px'}}>New to texx? Sign up</p>
             <Button style ={{color:'aliceblue',backgroundColor:'#556AB5'}} onClick={handleSignUp}>Sign up</Button>
@@ -271,7 +319,9 @@ auth.signOut().then(() => {
       <div className="app__sidebarMobile">
             {/*pass icons as props to SidebarOptions component*/}
             {/*keep i captial of Icon to let react know you are passing a component*/}
-            <SidebarOptions active  Icon={HomeIcon}></SidebarOptions>
+            <Router>
+                <Link to='/' onClick={()=>window.location.href= '/'}><SidebarOptions active  Icon={HomeIcon}/></Link>
+            </Router>
             <SidebarOptions  Icon={SearchIcon}/>
             <SidebarOptions  Icon={NotificationsNoneIcon}/>
             {/*when you click this show widgets*/}
@@ -295,8 +345,8 @@ auth.signOut().then(() => {
                         <Route exact path="/">
                           <div className="app__feed">
                             {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
-                            <Suspense fallback={<div>Loading...</div>}>
-                                <Feed/>
+                            <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
+                             <CreateEvent/>
                             </Suspense>
                           </div>     
                         </Route>                                                                                                               
@@ -308,7 +358,7 @@ auth.signOut().then(() => {
                         <Route path="/profile">
                           <div className="app__profile" >
                             {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
-                            <Suspense fallback={<div>Loading...</div>}>
+                            <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
                                 <Profile/>
                             </Suspense>
                           </div>

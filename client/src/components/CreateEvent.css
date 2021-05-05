@@ -1,0 +1,35 @@
+
+.createEvent{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.createEvent_formContainer{
+    display: flex;
+    flex:1;
+}
+.createEvent__form{
+    display: flex;
+    flex:1;
+    flex-direction: column;
+    justify-content: center;
+}
+.createEvent__fileInput{
+    flex: 0 !important;
+    padding:10px;
+    display: none !important;
+    }
+.MuiIconButton-root{
+    font-size :0 !important;
+}
+
+.MuiFormLabel-root {
+    color:gray !important;
+}
+
+.MuiInputBase-input{
+    color: aliceblue !important;
+   
+}
+

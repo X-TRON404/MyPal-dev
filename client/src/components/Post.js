@@ -3,7 +3,7 @@
 import React , {useState,useEffect,useContext} from 'react'
 import './Post.css'
 import Avatar from '@material-ui/core/Avatar';
-import {Button, Collapse, IconButton, Input, makeStyles, Popover, Typography } from '@material-ui/core';
+import {Button, Collapse, IconButton, Input, makeStyles, Modal, Popover, Typography } from '@material-ui/core';
 import {DataBase} from './firebase'
 import firebase from 'firebase';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
@@ -15,6 +15,7 @@ import {useStateValue} from '../contexts/StateProvider'
 import FlipMove from 'react-flip-move';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ShareIcon from '@material-ui/icons/Share';
+import SimpleModal from './AvatarHoverModal'
 
 //============================================Comments pop-over styles==================================== 
     const useStyles = makeStyles((theme) => ({
@@ -27,9 +28,18 @@ import ShareIcon from '@material-ui/icons/Share';
           color:'aliceblue'
         },
       }));
-//==========================================================================================================
-
-
+//=============================================Modal styles============================================
+  function getModalStyle() {
+    const top = -50 ;
+    const left = -50 ;  
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+    };
+  }
+  
+//=======================================================================================================
 function Post({postId,username,user_id,caption,imageUrl,likesCount}) {
     const classes = useStyles();
     //get the user from the provider
@@ -64,6 +74,10 @@ function Post({postId,username,user_id,caption,imageUrl,likesCount}) {
     const increment = firebase.firestore.FieldValue.increment(1)
     //firebase decrement for decrementing the likecount
     const decrement = firebase.firestore.FieldValue.increment(-1)
+    //avatar hover modal
+    const [hoverOpen, setHoverOpen] = useState(false)
+    //modal styles
+    const [modalStyle] = useState(getModalStyle);
 
     //commentsIcon onclick collapse
     const handleExpandClick = () => {
@@ -79,19 +93,25 @@ function Post({postId,username,user_id,caption,imageUrl,likesCount}) {
       const handlePopoverClose = () => {
         setAnchorEl(null);
       };
-      const checkLengthOfObject = (exampleObject) => {
-        var key, count = 0;
 
-        // Check if every key has its own property
-        for (key in exampleObject) {
-            if (exampleObject.hasOwnProperty(key))
-        
-                // If the key is found, add it to the total length
-                count++;
-        }
-         return count;
+    //open the Avatar modal
+    const handleHoverModalOpen = () => {
+        setHoverOpen(true)
+    }
+    //close the Avatar modal
+    const handleHoverModalClose = () => {
+        setHoverOpen(false)
+    }
 
-      }
+    const convertToDate = (timestamp) => {
+        console.log(timestamp)
+        let currentDate = firebase.firestore.Timestamp.now();
+        console.log(currentDate)
+        let diff = Math.abs(timestamp - currentDate );
+        const dateInMillis  = diff * 1000;
+        let date = new Date(dateInMillis).toLocaleTimeString();
+        return(date.replace(/:\d+ /, ' ')+"hrs ago")
+    }
 //==================================================check whether user is present in the chat list=========================================================================
     const isPresentInChats = (user_id,chats_array) => {
         for (const chat of chats_array){
@@ -301,7 +321,15 @@ const postComment = (e) => {
         <div className="post">
             <div className="post__header" >
                                                {/*avatar managed by@material-ui/core*/}
-                <Avatar className="post__avatar" alt={username} src="/static/images/avatar/1.jpg"></Avatar>
+                <Avatar className="post__avatar" alt={username} src="/static/images/avatar/1.jpg"  onClick={handleHoverModalOpen} />
+                <Modal
+                        open={hoverOpen}
+                        onClose={()=>setHoverOpen(false)}
+                        aria-labelledby="simple-modal-title"
+                        aria-describedby="simple-modal-description"
+                    >
+                    <center><img style={{width:"fit-content"}} alt={username} src={imageUrl}/></center>
+                </Modal>
                 <h3>{username}</h3>
                 {/*==================================================================================================================================== */}
  
@@ -431,7 +459,7 @@ const postComment = (e) => {
                     <Collapse in={expanded} timeout="auto" unmountOnExit >
                        { comments.map((comment) => (
                             //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
-                            <p style={{color:"#dae1e7"}}><strong>{comment.username+":"}</strong>{comment.text}</p>
+                            <p style={{color:"#dae1e7"}}><strong>{comment.username+":"}</strong>{comment.text}<span>{" "+convertToDate(comment.timestamp)}</span></p>
                         ))
                        } 
                     </Collapse>

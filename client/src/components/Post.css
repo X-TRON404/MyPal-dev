@@ -81,6 +81,11 @@ color: aliceblue;
 .post__avatar{
 margin-right: 10px;
 }
+.post__avatarModal{
+    top:100;
+    left:100;
+    transform: translate(-100, -100);
+}
 .post__likes{
     display: flex;
     flex-direction: column;

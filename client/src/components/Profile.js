@@ -72,7 +72,7 @@ function Profile() {
 
     return (
         <div className="profile">
-                <Card className="profile__card" elevation={8}>
+                <Card className="profile__card" elevation={1}>
                     <div className="profile__header">
                         <div className="profile__headerTop">
                                 <Avatar className={classes.avatar} alt={'username'} src="/static/images/avatar/1.jpg" ></Avatar>

@@ -3,10 +3,13 @@
 
   @media (min-width: 0px) and (max-width:450px){
     .profile{
-        margin-top:160px;
+        margin-top:80px;
         max-width:400;
         min-width:300;
         background-color: '#363A3E';
+      }
+      .profile__headerTop{
+          padding-top: 10px;
       }
       .profile__headerTop > .MuiIconButton-root {
         margin-left: 30px;
@@ -18,7 +21,6 @@
     .profile{
         max-width:500;
         min-width:400;
-        margin-right: 8px;
         background-color: '#363A3E';
         
       }
@@ -70,7 +72,7 @@ padding-bottom: 30px;
     flex-direction: column;
     background-color: #3F4347;
     padding: 10px;
-    height: 40vh;
+    height: 57vh;
 }
 .profile__footer > .MuiCardContent-root:last-child{
     color: aliceblue;

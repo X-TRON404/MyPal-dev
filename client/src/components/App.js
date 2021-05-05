@@ -346,7 +346,7 @@ auth.signOut().then(() => {
                           <div className="app__feed">
                             {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
                             <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
-                             <CreateEvent/>
+                             <Feed/>
                             </Suspense>
                           </div>     
                         </Route>                                                                                                               

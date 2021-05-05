@@ -1,19 +1,64 @@
+@media (min-width: 0px) and (max-width:450px){  
+    .createEventWrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-left: 20px;
+        margin-top:20px;
+        overflow-y: scroll;
+    }
+    .createEvent{
+        display: flex;
+        justify-content: center;
+        margin-left:4px;
+    }
+    #createEvent_h2{
+        padding: 5px;
+        color:gray;
+    }
+}    
+    
+    @media (min-width: 451px) and (max-width: 2048px) {  
 
-.createEvent{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
+        .createEventWrapper{
+            display: flex;
+            flex-direction: column;
+            width: 700px;
+          
+            justify-content: center;
+        }
+        .createEvent{
+            display: flex;
+            justify-content: center;
+           
+        } 
+        #createEvent_h2{
+            margin-left: 280px;
+            color:gray;
+            padding: 5px;
+        }
+    }     
 
 .createEvent_formContainer{
     display: flex;
     flex:1;
 }
 .createEvent__form{
+    padding: 10px;
     display: flex;
     flex:1;
     flex-direction: column;
     justify-content: center;
+}
+.createEvent__form > .createEvent__title{
+    margin-top:10px;
+}
+.createEvent__form > .createEvent__venue{
+    margin-top:10px;
+}
+.createEvent__form >  .createEvent__textarea{
+    margin-top: 10px;
 }
 .createEvent__fileInput{
     flex: 0 !important;
@@ -32,4 +77,13 @@
     color: aliceblue !important;
    
 }
-
+/* text area */
+.MuiFormControl-root  {
+    margin-top: 10px !important;
+}
+.MuiButton-containedPrimary {
+    margin-top: 10px !important;
+}
+.MuiFilledInput-adornedEnd {
+    margin-bottom: 10px !important;
+}

@@ -2,8 +2,7 @@ import React,{useState,useContext} from 'react';
 import {storage,DataBase} from './firebase';
 import firebase from 'firebase';
 import './ImageUpload.css'
-import {Button, IconButton, Input, Modal} from '@material-ui/core';
-import SendIcon from '@material-ui/icons/Send';
+import {Button, IconButton, Input, Modal,TextField} from '@material-ui/core';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import LinearProgress from '@material-ui/core/LinearProgress'
 import {useStateValue} from '../contexts/StateProvider'
@@ -115,7 +114,10 @@ function CreateEvent() {
 }
 
     return (
+        <div className="createEventWrapper">
+            <h2 id="createEvent_h2"> CREATE EVENT </h2>
         <div className="createEvent">
+                                                         
 
                                                         {/*Modal for progress of upload*/}
                 <Modal  imageUpload__progressModal="createEvent__progressModal" open={openProgress} onClose={()=>{setOpenProgress(false)}}> 
@@ -130,19 +132,28 @@ function CreateEvent() {
                         {/*input the image and caption from the user*/}
                         <Input style={{color:"aliceblue"}}  className="createEvent__title" type="text" placeholder="Enter a the name for the event..." onChange={(e)=>setTitle(e.target.value)} value={title}/>
                         <input className="createEvent__fileInput" accept="image/*"  id="imageThumbnail-button-file" type="file" placeholder="Choose a file" onChange={handleImageChange} />
-                        <label htmlFor="imageThumbnail-button-file">
+                        <label htmlFor="imageThumbnail-button-file" style={{color:"gray"}}>
                             <IconButton color="primary" aria-label="upload thumbnail" component="span">
                                 <AddPhotoAlternateIcon /> 
                             </IconButton>
+                            Choose a thumnail image
                         </label>  
                         {/*change the 'dateTime' from the <DateTimeSelect/> component*/}
                         <DateTimeSelect changeDate={dateTime => setdateTime(dateTime)} dateTime={dateTime}/>
-                        <Input style={{color:"aliceblue"}}  className="createEvent__description" type="text" placeholder="Enter a decription..." onChange={(e)=>setDescription(e.target.value)} value={description}/>
+                        <TextField placeholder="Enter a decription..." className = "createEvent__textarea" onChange={(e)=>setDescription(e.target.value)} value={description}
+                            id="outlined-multiline-static"
+                            label="Multiline description"
+                            multiline
+                            rows={4}
+                            defaultValue="Default Value"
+                            variant="outlined"
+                            />
                         <Input style={{color:"aliceblue"}}  className="createEvent__venue" type="text" placeholder="Enter a Venue/Link..." onChange={(e)=>setVenue(e.target.value)} value={venue}/>
                         <Button className="createEvent___iButton" disabled = {!imageThumbnail} variant ='contained' color="primary" type ='submit' onClick={handleUpload}>Create the event</Button>
                 </form>
            </div>
         </div>
+    </div>
     )
 }
 

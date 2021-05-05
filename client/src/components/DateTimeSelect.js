@@ -218,7 +218,7 @@ function DateTimeSelect(props) {
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <div className="dateTimeSelect">
           <KeyboardDateTimePicker
-            format={'dd-MMM-yyyy'}
+            format={'dd-MMM-yyyy:KK:mm a'}
             label="Choose date and time for event"
             inputVariant="filled"
             helperText=""

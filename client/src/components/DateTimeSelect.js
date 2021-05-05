@@ -18,9 +18,9 @@ const CURRENT_THEME = {
   el3: "#3C464B",
   text: "#210124",
   textInv: "#F0EDEE",
-  main: "#019EE2",
+  main: "#3857c5",//change color here 
   secondary: "#4DBBEB",
-  mainShadow: "#13232B",
+  mainShadow: "#556AB5",
   danger: "#DB162F",
   warning: "",
   font1: `"Roboto Slab", "Times New Roman", serif`,
@@ -87,11 +87,11 @@ const CssTextField = withStyles({
       backgroundColor: CURRENT_THEME.el3,
       // boxShadow: "0px 0px 15px 0px rgb(26,181,225, 0.5)"
       "&.Mui-focused": {
-        borderColor: "#1ab5e1",
+        borderColor: "#556AB5",
         backgroundColor: CURRENT_THEME.el2,
         // boxShadow: "0px 0px 15px 0px rgb(26,181,225, 0.5)"
         boxShadow: `0px 0px 10px 0px ${CURRENT_THEME.main}, 0px 0px 40px 0px ${CURRENT_THEME.main}, 0px 0px 80px 0px ${CURRENT_THEME.main}`
-        // boxShadow: '0px 0px 15px 0px #1ab5e1, 0px 0px 15px 0px #1ab5e1'
+        // boxShadow: '0px 0px 15px 0px #556AB5, 0px 0px 15px 0px #556AB5'
       }
     },
 

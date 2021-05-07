@@ -24,10 +24,7 @@
 .event__title {
     color: #F3EFEF;
 }
-.event__date {
-    color: #F3EFEF;
-}
-.event__time {
+.event__dateTime {
     color: #F3EFEF;
 }
 .event__location {
@@ -48,7 +45,10 @@ width: 100%;
     width: 100%;
     object-fit: contain;
 }
-
+/*image height inside the event*/
+.makeStyles-media-9 {
+    height: 320px  !important;
+}
 .event__description > .MuiTypography-body2 {
     color: #F3EFEF;
 }

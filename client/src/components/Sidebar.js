@@ -25,12 +25,19 @@ function Sidebar() {
             <SidebarOptions text="Notifications" Icon={NotificationsNoneIcon}/>
             <SidebarOptions text="Messages" Icon={MailOutlineIcon}/>
             <SidebarOptions text="Bookmarks" Icon={BookmarkBorderIcon}/>
-            <SidebarOptions text="Lists" Icon={ListAltIcon}/>
+            <Router>
+                <Link to='/eventsFeed' onClick={()=>window.location.href='/eventsFeed'}><SidebarOptions text="Events" Icon={ListAltIcon}/></Link>
+            </Router>
             <Router>
                 <Link to='/profile' onClick={()=>window.location.href='/profile'}><SidebarOptions text="Profile" Icon={PermIdentityIcon}/></Link>
             </Router>
             <SidebarOptions text="More" Icon={MoreHorizIcon}/>
-            <Button variant="outlined"  className="sidebar__tweet" fullWidth>Texx</Button>
+            <Router>
+                <Link to='/createEvent' onClick={()=>window.location.href='/createEvent'}><Button variant="outlined"  className="sidebar__event" fullWidth>Create an event</Button></Link>
+            </Router>
+            <Router>
+                <Link to='/createConfession' onClick={()=>window.location.href='/createConfession'}><Button variant="outlined"  className="sidebar__event" fullWidth>Write an annonymous confession</Button></Link>
+            </Router>
         </div>
     )
 }

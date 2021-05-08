@@ -26,9 +26,12 @@
 }
 .event__dateTime {
     color: #F3EFEF;
+    margin-top: 10px;
 }
 .event__location {
     color: #F3EFEF;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .event__header{
     display: flex;

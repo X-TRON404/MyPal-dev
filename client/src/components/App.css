@@ -97,7 +97,14 @@
   overflow-y: scroll; 
   width:100%
 }
-  .app__signup{
+.app__createEvent{
+  background-color: #363A3E;
+  padding: 20px;
+  overflow-y: scroll; 
+  width:100%
+}
+
+.app__signup{
     display: flex;
     flex-direction: column;
   }

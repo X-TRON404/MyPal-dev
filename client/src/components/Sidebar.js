@@ -36,7 +36,7 @@ function Sidebar() {
                 <Link to='/createEvent' onClick={()=>window.location.href='/createEvent'}><Button variant="outlined"  className="sidebar__event" fullWidth>Create an event</Button></Link>
             </Router>
             <Router>
-                <Link to='/createConfession' onClick={()=>window.location.href='/createConfession'}><Button variant="outlined"  className="sidebar__event" fullWidth>Write an annonymous confession</Button></Link>
+                <Link to='/createConfessions' onClick={()=>window.location.href='/createConfessions'}><Button variant="outlined"  className="sidebar__event" fullWidth>Write an annonymous confession</Button></Link>
             </Router>
         </div>
     )

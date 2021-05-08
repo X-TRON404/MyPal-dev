@@ -18,8 +18,8 @@
 
 }
 
-.sidebar__tweet{
-    background-color: var(--twitter-color) !important;
+.sidebar__event{
+    background-color: #556ab5 !important;
     border: none;
     color: white !important;
     font-weight: 900 !important;
@@ -28,7 +28,18 @@
     height: 50px !important;
     margin-top: 20px !important;
 }
-.sidebar__twitterIcon{
+.sidebar__event:hover{
+    background-color: #7389DA !important;
+}
+.sidebar__event > button{
+    background-color: #556ab5 !important;
+}
+.sidebar__event >button :hover{
+    background-color: #7389DA !important;
+
+}
+
+.sidebar__createEventIcon{
     color: var(--twitter-color);
     font-size: 30px !important;
     margin-left: 20px;

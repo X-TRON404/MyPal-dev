@@ -19,24 +19,30 @@ const useStyles = makeStyles({
     height: 140,
   },
 });
-function Event() {
+function Event({eventId, dateTime, venue, username,title, description, user_id, imageUrl, interestedCount}) {
+
+    const convertToDate = (date) => {
+        //convert to miliseconds
+        let k = date.seconds*1000
+        let dat = Date(k)
+        dat = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: "long" ,day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(k)
+        return dat
+    }
+//=====
     const classes = useStyles();
     return (
         <div className="event">
             <div className="event__header">
                 <div className="event__headerInfo">
                     <Typography className="event__title"  variant="h5">
-                        {"Event Title"}
+                        {title}
                     </Typography>
-                    <Typography  className="event__date">
-                        {"Date"}
-                    </Typography>
-                    <Typography  className="event__time">
-                        {"Time"}
-                    </Typography>
-                    <Typography  className="event__location">
-                        {"Location/Link"}
-                    </Typography>
+                    <span className="event__dateTime">
+                        Date and time:{" "+convertToDate(dateTime)}
+                    </span>
+                    <span  className="event__location">
+                        Venue:{venue}
+                    </span>
                 </div>
                 <MoreVertIcon style={{color:'white'}}/>
             </div>
@@ -46,15 +52,14 @@ function Event() {
                     <CardActionArea>
                         <CardMedia
                         className={classes.media}
-                        image={"Event Image"}
-                        title={"Event Title"}
+                        image={imageUrl}
                         />
                     </CardActionArea>
                 </div>
 
                 <CardContent className="event__description">
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {"Event short description"}
+                        {description}
                     </Typography>
                 </CardContent>
 

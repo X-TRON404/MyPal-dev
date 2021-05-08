@@ -1,7 +1,6 @@
 import React,{useState,useContext} from 'react';
 import {storage,DataBase} from './firebase';
 import firebase from 'firebase';
-import './ImageUpload.css'
 import {Button, IconButton, Input, Modal,TextField} from '@material-ui/core';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import LinearProgress from '@material-ui/core/LinearProgress'

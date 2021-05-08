@@ -79,6 +79,11 @@
       padding: 20px;
       overflow-y: scroll;  
   }
+  .app__eventsFeed{
+    background-color: #363A3E;
+    padding: 20px;
+    overflow-y: scroll;  
+}
 
 .app__chat{
   background-color: #363A3E;

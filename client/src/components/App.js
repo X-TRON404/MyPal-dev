@@ -30,6 +30,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import FeedEvents from './FeedEvents'
 
 
 //====================================Modal styles=========================================
@@ -363,6 +364,22 @@ auth.signOut().then(() => {
                             </Suspense>
                           </div>
                         </Route> 
+                        <Route path="/createEvent">
+                          <div className="app__createEvent" >
+                            {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
+                            <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
+                              <CreateEvent/>
+                            </Suspense>
+                          </div>
+                        </Route>
+                        <Route path="/eventsFeed">
+                          <div className="app__eventsFeed" >
+                            {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
+                            <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
+                              <FeedEvents/>
+                            </Suspense>
+                          </div>
+                        </Route>  
                     </Switch>
                 </Router>
 

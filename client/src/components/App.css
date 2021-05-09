@@ -25,13 +25,10 @@
       background-color: #2E3236;
       padding: 10px;
       overflow-y: scroll;
-      margin-top: 65px; 
   
   }
   .app__body{
-    display: flex;
     height: 88vh;
-    margin-top: -90px;
   }
 
 }
@@ -75,37 +72,46 @@
   }
   /*CHANGE FEED WIDTH*/
   .app__feed{
+      display: flex;
+      justify-content: center;
+      padding-left: 15px;
+      padding-right: 15px;
       background-color: #363A3E;
-      padding: 20px;
       overflow-y: scroll;  
   }
   .app__eventsFeed{
+    flex:0.6;
+    display: flex;
+    justify-content: center;
     background-color: #363A3E;
-    padding: 20px;
     overflow-y: scroll;  
 }
 
 .app__chat{
+  display: flex;
+  justify-content: center;
   background-color: #363A3E;
-  padding: 20px;
   overflow-y: scroll; 
   width:100%
 }
 .app__profile{
+  display: flex;
+  justify-content: center;
   background-color: #363A3E;
-  padding: 20px;
   overflow-y: scroll; 
   width:100%
 }
 .app__createEvent{
+  display: flex;
+  justify-content: center;
   background-color: #363A3E;
-  padding: 20px;
   overflow-y: scroll; 
   width:100%
 }
 .app__createConfessions{
+  display: flex;
+  justify-content: center;
   background-color: #363A3E;
-  padding: 20px;
   overflow-y: scroll; 
   width:100%
 }

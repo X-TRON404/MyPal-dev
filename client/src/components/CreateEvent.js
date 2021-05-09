@@ -14,7 +14,7 @@ function CreateEvent() {
     //description
     const [description,setDescription] = useState('');
     //image 
-    const [imageThumbnail,setImageThumbnail] = useState(null);
+    const [imageThumbnail,setImageThumbnail] = useState(false);
     //progress bar
     const [progress,setProgress] = useState(0); 
     //open the modal 
@@ -130,12 +130,14 @@ function CreateEvent() {
                 <form className="createEvent__form" onSubmit={(e)=>{e.preventDefault()}}>
                         {/*input the image and caption from the user*/}
                         <Input style={{color:"aliceblue"}}  className="createEvent__title" type="text" placeholder="Enter a the name for the event..." onChange={(e)=>setTitle(e.target.value)} value={title}/>
-                        <input className="createEvent__fileInput" accept="image/*"  id="imageThumbnail-button-file" type="file" placeholder="Choose a file" onChange={handleImageChange} />
+                        {/*if image is selected then show selected else show choose an image*/}
+                        <input className="createEvent__fileInput" accept="image/*"  id="imageThumbnail-button-file" type="file" onChange={handleImageChange} />
+                        {console.log(imageThumbnail)}
                         <label htmlFor="imageThumbnail-button-file" style={{color:"gray"}}>
                             <IconButton color="primary" aria-label="upload thumbnail" component="span">
                                 <AddPhotoAlternateIcon /> 
                             </IconButton>
-                            Choose a thumnail image
+                            {imageThumbnail?"Image selected":"Choose a thumnail image"}
                         </label>  
                         {/*change the 'dateTime' from the <DateTimeSelect/> component*/}
                         <DateTimeSelect changeDate={dateTime => setdateTime(dateTime)} dateTime={dateTime}/>

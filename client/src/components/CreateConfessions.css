@@ -1,0 +1,35 @@
+@media (min-width: 0px) and (max-width:450px){  
+    .createConfessions{
+        display: flex;
+        flex-direction: column;
+        justify-content:center ;
+        width: 100%;
+      
+    }
+
+}    
+    
+    @media (min-width: 451px) and (max-width: 2048px) {  
+
+        .createConfessions{
+            display: flex;
+            justify-content: center;
+            flex:0.4;
+            width: 100%;
+        }
+        
+    }     
+
+#createConfessions_h2{
+    display: flex;
+    justify-content: center;
+    color:gray;
+    padding: 5px;
+}
+.createConfessions__form{
+    padding: 10px;
+    display: flex;
+    flex:1;
+    flex-direction: column;
+    justify-content: center;
+}

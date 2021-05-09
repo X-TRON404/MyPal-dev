@@ -1,14 +1,36 @@
-.chat{
-    flex:0.4;
+@media (min-width: 0px) and (max-width:450px){  
+  .chat{
     display: flex;
-    background-color: #2E3236;
-    padding: 20px;
+    flex: 1;
+    flex-direction: column;
+    background-color: '#363A3E';
+    margin-top:10px;
     overflow-y: scroll;
   }
 
 
 .chat__header{
-margin-left: 40px;
-color:grey;
-}
+  color:grey;
+  padding:10px;
+  }
+  
+
+}  
+@media (min-width: 451px) and (max-width:2048px){  
+  .chat{
+    display: flex;
+    justify-content: center;
+    background-color: '#363A3E';
+    padding-top: 10px;
+    overflow-y: scroll;
+  }
+
+
+
+.chat__header{
+  color:grey;
+  }
+  
+
+}  
 

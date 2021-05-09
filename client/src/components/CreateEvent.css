@@ -12,6 +12,8 @@
         overflow-y: scroll;
     }
     #createEvent_h2{
+        display: flex;
+        justify-content: center;
         padding: 5px;
         color:gray;
     }
@@ -33,7 +35,8 @@
            
         } 
         #createEvent_h2
-        {
+        {   display: flex;
+            justify-content: center;
             color:gray;
             padding: 5px;
         }

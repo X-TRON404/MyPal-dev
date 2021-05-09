@@ -4,8 +4,6 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
-        margin-top:60px;
-        margin-bottom:40px;
     }
     .createEvent{
         display: flex;
@@ -25,15 +23,17 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            width: 100%;
         }
         .createEvent{
             display: flex;
             justify-content: center;
+            align-items: center;
             overflow-y: scroll;
            
         } 
-        #createEvent_h2{
-            margin-left: 280px;
+        #createEvent_h2
+        {
             color:gray;
             padding: 5px;
         }

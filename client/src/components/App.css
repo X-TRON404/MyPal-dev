@@ -30,7 +30,6 @@
   .app__body{
     height: 88vh;
   }
-
 }
 
   @media (min-width: 451px) and (max-width: 2048px) {
@@ -84,7 +83,8 @@
     display: flex;
     justify-content: center;
     background-color: #363A3E;
-    overflow-y: scroll;  
+    overflow-y: scroll; 
+    padding: 8px; 
 }
 
 .app__chat{

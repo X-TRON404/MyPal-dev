@@ -3,7 +3,7 @@ import './App.css';
 import {auth, DataBase} from './firebase'
 import {makeStyles} from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
-import { Button, Input, Paper } from '@material-ui/core';
+import { Avatar, Button, Input, Paper } from '@material-ui/core';
 import ImageUpload from './ImageUpload';
 import Sidebar from './Sidebar';
 import Widgets from './Widgets';
@@ -297,20 +297,17 @@ const handleSignUp= () => {
               <Router>
                 <Link to="/" onClick={()=>window.location.href= '/'}><h1>Texx</h1></Link>
               </Router>
+                {/*profile section*/}
+              <Avatar className="post__avatar" alt={username} src="/static/images/avatar/1.jpg"  onClick={()=>window.location.href='/profile'} />
+           
           </div>
       </Paper>
       <div className="app__sidebarMobile">
             {/*pass icons as props to SidebarOptions component*/}
             {/*keep i captial of Icon to let react know you are passing a component*/}
-            <Router>
-                <Link to='/' onClick={()=>window.location.href= '/'}><SidebarOptions active  Icon={HomeIcon}/></Link>
-            </Router>
             <SidebarOptions  Icon={SearchIcon}/>
             <SidebarOptions  Icon={NotificationsNoneIcon}/>
             {/*when you click this show widgets*/}
-            <Router>
-                <Link to='/profile' onClick={()=>window.location.href= '/profile'}><SidebarOptions  Icon={PermIdentityIcon}/></Link>
-            </Router>
             <SidebarOptions  Icon={ListAltIcon}/>
             <SidebarOptions  Icon={BookmarkBorderIcon}/>
             <SidebarOptions  Icon={MoreHorizIcon}/>

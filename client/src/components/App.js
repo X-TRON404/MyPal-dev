@@ -3,13 +3,12 @@ import './App.css';
 import {auth, DataBase} from './firebase'
 import {makeStyles} from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
-import { Avatar, Button, Input, Paper } from '@material-ui/core';
+import { Avatar, Backdrop, Button, Input, Paper } from '@material-ui/core';
 import ImageUpload from './ImageUpload';
 import Sidebar from './Sidebar';
 import Widgets from './Widgets';
 import { BrowserRouter as Router ,Link} from 'react-router-dom'
 import {Route,Switch} from 'react-router-dom'
-import Feed from './Feed'
 import Chat from './chat/Chat'
 import {useStateValue} from '../contexts/StateProvider';
 import { actionTypes } from '../contexts/reducer';
@@ -18,10 +17,8 @@ import SendMessage from './chat/SendMessage'
 //Get material-ui icons
 import SidebarOptions from './SidebarOptions'
 import SearchIcon from '@material-ui/icons/Search';
-import HomeIcon from '@material-ui/icons/Home';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -33,6 +30,13 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FeedEvents from './FeedEvents'
 import CreatConfessons from './CreateConfessions'
 import BottomNavigationMobile from './BottomNavigationMobile'
+import SpeedDial from '@material-ui/lab/SpeedDial';
+import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
+import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
+import EventIcon from '@material-ui/icons/Event';
+import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
+import EditIcon from '@material-ui/icons/Edit';
+import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
 
 
 //====================================Modal styles=========================================
@@ -62,9 +66,17 @@ const useStyles = makeStyles((theme) => ({
   backgroundColor: '#363A3E',
   padding: '20px',
   position: 'sticky',
-  zIndex: 100,
-   
-}  
+  zIndex: 100, 
+},
+backdrop: {
+  zIndex: 1,
+  color: '#ffffff',
+},
+speedDial: {
+  position: 'fixed',
+  bottom: theme.spacing(12),
+  right: theme.spacing(2),
+}
 
 }));
 //========================================================================================================
@@ -95,10 +107,19 @@ function App() {
   const [useId,setUserId] = useState(null)
   //show password for password field
   const [showPassword,setShowPassword] = useState(false)
+  //open speedDial
+  const [openSpeedDial, setOpenSpeedDial] = useState(false);
   //user stored in local storage
   let userFromLocalStorage
+  //lazy loading
   const Profile = React.lazy(() => import('./Profile'))
   const Feed = React.lazy(() => import('./Feed'))
+  //actions for speedDial
+  const actions = [
+    { icon: <AddPhotoAlternateIcon/>, name: 'Post' },
+    { icon: <EventIcon/>, name: 'Plan event' },
+    { icon: <WhatshotSharpIcon />, name: 'confess' },
+  ];
 
 //====================================Get the user from the local storage on refresh======================
   useEffect(()=>{
@@ -311,7 +332,35 @@ const handleSignUp= () => {
             <SidebarOptions  Icon={ListAltIcon}/>
             <SidebarOptions  Icon={BookmarkBorderIcon}/>
             <SidebarOptions  Icon={MoreHorizIcon}/>
-        </div>
+      </div>
+                                      {/*SpeedDial for mobile view*/}
+      <div className="app__speedDialMobile">
+            <Backdrop className={classes.backdrop} open={openSpeedDial} />
+            <SpeedDial
+              ariaLabel="SpeedDial tooltip example"
+              className={classes.speedDial}
+              hidden={false}
+              icon={<SpeedDialIcon openIcon={<EditIcon/>} />}
+              onClose={()=>{setOpenSpeedDial(false)}}
+              onOpen={()=>{setOpenSpeedDial(true)}}
+              open={openSpeedDial}
+            >
+              {actions.map((action) => (
+                <SpeedDialAction
+                  key={action.name}
+                  icon={action.icon}
+                  tooltipTitle={action.name}
+                  tooltipOpen
+                  onClick={()=>{setOpenSpeedDial(true)}}
+                />
+              ))}
+            </SpeedDial>
+      </div>
+
+
+
+
+
                                                 {/*sidebar*/}
                            {/* if user does not exists then reduce the opacity of the body */}
       <div className={user?'app__body':'app__bodyUserNotLoggedIn' }>

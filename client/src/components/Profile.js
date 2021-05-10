@@ -18,7 +18,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import './Profile.css'
 import { Button } from '@material-ui/core';
 import {useStateValue} from '../contexts/StateProvider'
-import { DataBase } from './firebase';
+import { auth, DataBase } from './firebase';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,6 +54,7 @@ function Profile() {
     const [userInfo,setUserInfo] = useState([])
     //store the number of posts inside posts collection
     const [numberOfPosts, setNumberOfPosts] = useState(0)
+//===========================================================================================
 
   useEffect(() => {
       //load the user info from Database on load or when user changes
@@ -69,6 +70,17 @@ function Profile() {
           unsubscribe()
       }
   }, [user])
+//==================================================Log out =======================================
+const logout = () => {
+    //remove the user from the local storage
+    // localStorage.setItem('user','null')
+    auth.signOut().then(() => {
+      console.log("sucessfully singned out")
+    }).catch((error) => {
+      alert(error.message)
+    });
+    }
+//============================================================================================
 
     return (
         <div className="profile">
@@ -83,13 +95,16 @@ function Profile() {
                             <IconButton aria-label="settings">
                                 <MoreVertIcon />
                             </IconButton>
-                            
                         </div>
+                                              {/*Edit button*/}
                         <center className="profile__headerEditButton"><Button >Edit Profile</Button></center>
                         <div className="profile__headerTypography">
                             <Typography>{userInfo?.bio}</Typography>
                             <Typography>Interests</Typography>
                         </div>
+
+                                            {/*log out button*/}
+                        <Button className="profile__logoutButton" onClick={logout}>Log out</Button>
                     </div>
                     <div className="profile__footer">
                     <CardContent>
@@ -110,13 +125,13 @@ function Profile() {
                                 <Typography variant="body2" >
                                     EVENTS
                                 </Typography>
-                                <p>{'no. of events took part in '}</p>
+                                <p>{'#events'}</p>
                             </div>
                             <div className="profile__footerStatsFriends">
                                 <Typography variant="body2" >
                                     FRIENDS
                                 </Typography>
-                                <p>{'no. of friends'}</p>
+                                <p>{'#friends'}</p>
                             </div>
                         </div>
                     </CardContent>

@@ -4,6 +4,7 @@
         flex-direction: column;
         justify-content:center ;
         width: 100%;
+        margin-bottom: 30px;
       
     }
 
@@ -14,7 +15,8 @@
         .createConfessions{
             display: flex;
             justify-content: center;
-            flex:0.4;
+            flex:1;
+            max-width: 800px;
             width: 100%;
         }
         

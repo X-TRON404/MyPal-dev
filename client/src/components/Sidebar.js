@@ -30,7 +30,7 @@ function Sidebar() {
             </Router>
             <SidebarOptions text="More" Icon={MoreHorizIcon}/>
             <Router>
-                <Link to='/createEvent' onClick={()=>window.location.href='/createEvent'}><Button variant="outlined"  className="sidebar__event" fullWidth>Create an event</Button></Link>
+                <Link to='/createEvent' onClick={()=>window.location.href='/createEvent'}><Button variant="outlined"  className="sidebar__event" fullWidth>New event</Button></Link>
             </Router>
             <Router>
                 <Link to='/createConfessions' onClick={()=>window.location.href='/createConfessions'}><Button variant="outlined"  className="sidebar__event" fullWidth>Write an annonymous confession</Button></Link>

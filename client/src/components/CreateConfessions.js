@@ -32,7 +32,7 @@ function CreateConfessions() {
                                     id="outlined-multiline-static"
                                     label="Write a confession..."
                                     multiline
-                                    rows={4}
+                                    rows={15}
                                     defaultValue="Default Value"
                                     variant="outlined"
                                     />

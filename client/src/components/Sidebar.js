@@ -28,9 +28,6 @@ function Sidebar() {
             <Router>
                 <Link to='/eventsFeed' onClick={()=>window.location.href='/eventsFeed'}><SidebarOptions text="Events" Icon={ListAltIcon}/></Link>
             </Router>
-            <Router>
-                <Link to='/profile' onClick={()=>window.location.href='/profile'}><SidebarOptions text="Profile" Icon={PermIdentityIcon}/></Link>
-            </Router>
             <SidebarOptions text="More" Icon={MoreHorizIcon}/>
             <Router>
                 <Link to='/createEvent' onClick={()=>window.location.href='/createEvent'}><Button variant="outlined"  className="sidebar__event" fullWidth>Create an event</Button></Link>

@@ -33,6 +33,7 @@ import EventIcon from '@material-ui/icons/Event';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import EditIcon from '@material-ui/icons/Edit';
 import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
+import FeedConfessions from './FeedConfessions';
 
 
 //====================================Modal styles=========================================
@@ -113,8 +114,8 @@ function App() {
   //actions for speedDial
   const actions = [
     { icon: <AddPhotoAlternateIcon/>, name: 'Post' },
-    { icon: <EventIcon/>, name: 'Plan event' },
-    { icon: <WhatshotSharpIcon />, name: 'confess' },
+    { icon: <EventIcon onClick={()=>window.location.href= '/createEvent'}/>, name: 'New event' },
+    { icon: <WhatshotSharpIcon onClick={()=>window.location.href= '/createConfessions'}/>, name: 'confess' },
   ];
 
 //====================================Get the user from the local storage on refresh======================
@@ -322,7 +323,10 @@ const handleSignUp= () => {
       <div className="app__sidebarMobile">
             {/*pass icons as props to SidebarOptions component*/}
             {/*keep i captial of Icon to let react know you are passing a component*/}
-            <SidebarOptions  Icon={SearchIcon}/>
+            <div className="app__sidebarMobileInputBox">
+              <Input style={{color:"aliceblue"}} className="app__sidebarMobileInput" type= "text" placeholder="Search Texx"/>
+              <SearchIcon style={{color:"aliceblue"}}/>
+            </div>
       </div>
                                       {/*SpeedDial for mobile view*/}
       <div className="app__speedDialMobile">
@@ -390,7 +394,15 @@ const handleSignUp= () => {
                               <CreateEvent/>
                             </Suspense>
                           </div>
-                        </Route>
+                        </Route> 
+                        <Route path="/createConfessions">
+                          <div className="app__creatConfessions" >
+                            {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
+                            <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
+                              <CreatConfessons/>
+                            </Suspense>
+                          </div>
+                        </Route> 
                         <Route path="/eventsFeed">
                           <div className="app__eventsFeed" >
                             {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
@@ -398,12 +410,12 @@ const handleSignUp= () => {
                               <FeedEvents/>
                             </Suspense>
                           </div>
-                        </Route>  
-                        <Route path="/createConfessions">
-                          <div className="app__creatConfessions" >
+                        </Route> 
+                        <Route path="/confessionsFeed">
+                          <div className="app__confessionsFeed" >
                             {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
                             <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
-                              <CreatConfessons/>
+                              <FeedConfessions/>
                             </Suspense>
                           </div>
                         </Route> 

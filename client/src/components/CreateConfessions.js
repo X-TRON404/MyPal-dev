@@ -1,12 +1,9 @@
-import React,{useState,useContext} from 'react';
-import {storage,DataBase} from './firebase';
+import React,{useState} from 'react';
+import {DataBase} from './firebase';
 import firebase from 'firebase';
-import {Button, IconButton, Input, Modal,TextField} from '@material-ui/core';
-import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
-import LinearProgress from '@material-ui/core/LinearProgress'
+import {Button,TextField} from '@material-ui/core';
 import {useStateValue} from '../contexts/StateProvider'
 import './CreateConfessions.css'
-import DateTimeSelect from './DateTimeSelect'
 
 function CreateConfessions() {
     //get the user from the provider
@@ -14,16 +11,15 @@ function CreateConfessions() {
     //store confession
     const [confession,setConfession] = useState('')
 
-    const handlePost = () => {
+    const handlePost = (e) => {
         DataBase.collection('confessions').add({
             confession:confession,
             user_id:user.uid,
             timestamp:firebase.firestore.FieldValue.serverTimestamp(),
         })
+        setConfession('')
 
     }
-
-
     return (
         <div className="createConfessions">
                 <form className="createConfessions__form">

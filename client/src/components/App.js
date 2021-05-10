@@ -32,6 +32,7 @@ import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FeedEvents from './FeedEvents'
 import CreatConfessons from './CreateConfessions'
+import BottomNavigationMobile from './BottomNavigationMobile'
 
 
 //====================================Modal styles=========================================
@@ -395,12 +396,11 @@ auth.signOut().then(() => {
 {/* ======================================================================================================================================================= */}
 
                               {/*show image upload only if the user is logged in*/}
-
+                              <BottomNavigationMobile/>
           {/*\used otional so it won't crash if these is no 'user.displayName' at the start and use 'user' instead */}
           {user?.displayName ?
           //if logged in show image upload button
-          
-          (chatInput?(<SendMessage chatId={chatId}/>):(<ImageUpload username={user.displayName}/>)):
+            (chatInput?(<SendMessage chatId={chatId}/>):(<ImageUpload username={user.displayName}/>)):
           //else show sign in /sign up
           (<Modal  open={openRequired} onClose={()=>{setOpenRequired(false)}}>
             <div style={modalStyle} className={classes.paper}>

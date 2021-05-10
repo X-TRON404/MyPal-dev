@@ -30,6 +30,9 @@
   .app__body{
     height: 88vh;
   }
+  .app__speedDialMobile{
+    display: inline;
+  }
 }
 
   @media (min-width: 451px) and (max-width: 2048px) {
@@ -40,6 +43,9 @@
         display: flex;
         height: 88vh;
         overflow-x: hidden;
+      }
+      .app__speedDialMobile{
+        display: none;
       }
   }
 
@@ -62,7 +68,7 @@
   justify-content: space-between;
   /*position: sticky;
   top: 0;*/
-  z-index: 100
+  z-index: 101
   }
   
   .app__bodyUserNotLoggedIn{

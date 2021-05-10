@@ -17,10 +17,6 @@ import SendMessage from './chat/SendMessage'
 //Get material-ui icons
 import SidebarOptions from './SidebarOptions'
 import SearchIcon from '@material-ui/icons/Search';
-import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import ListAltIcon from '@material-ui/icons/ListAlt';
-import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CreateEvent from './CreateEvent'
 import Visibility from '@material-ui/icons/Visibility';
@@ -327,11 +323,6 @@ const handleSignUp= () => {
             {/*pass icons as props to SidebarOptions component*/}
             {/*keep i captial of Icon to let react know you are passing a component*/}
             <SidebarOptions  Icon={SearchIcon}/>
-            <SidebarOptions  Icon={NotificationsNoneIcon}/>
-            {/*when you click this show widgets*/}
-            <SidebarOptions  Icon={ListAltIcon}/>
-            <SidebarOptions  Icon={BookmarkBorderIcon}/>
-            <SidebarOptions  Icon={MoreHorizIcon}/>
       </div>
                                       {/*SpeedDial for mobile view*/}
       <div className="app__speedDialMobile">

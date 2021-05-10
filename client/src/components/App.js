@@ -211,16 +211,6 @@ const handleSignUp= () => {
 
     setOpen(false)
   }
-//==================================================Log out =======================================
-const logout = () => {
-//remove the user from the local storage
-// localStorage.setItem('user','null')
-auth.signOut().then(() => {
-  console.log("sucessfully singned out")
-}).catch((error) => {
-  alert(error.message)
-});
-}
 //===============================================================================================
   return (
     <div className="app">
@@ -307,16 +297,6 @@ auth.signOut().then(() => {
               <Router>
                 <Link to="/" onClick={()=>window.location.href= '/'}><h1>Texx</h1></Link>
               </Router>
-
-                                                {/*sign up/sign in or log out the user*/}
-              { user ?
-                //if user is not null(logged in) then give log out button
-              <Button onClick={logout}>Log out</Button>:
-                //else null (logged out) then give sign in or sign out button
-              <div className="app__loginContainer">
-        
-              </div>
-              }
           </div>
       </Paper>
       <div className="app__sidebarMobile">
@@ -394,9 +374,9 @@ auth.signOut().then(() => {
                 </Router>
 
 {/* ======================================================================================================================================================= */}
-
-                              {/*show image upload only if the user is logged in*/}
+                              {/*Bottom Navigation only applicable to mobile screens*/}
                               <BottomNavigationMobile/>
+                               {/*show image upload only if the user is logged in*/}
           {/*\used otional so it won't crash if these is no 'user.displayName' at the start and use 'user' instead */}
           {user?.displayName ?
           //if logged in show image upload button

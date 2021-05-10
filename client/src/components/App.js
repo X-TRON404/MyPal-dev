@@ -382,7 +382,7 @@ auth.signOut().then(() => {
                           </div>
                         </Route>  
                         <Route path="/createConfessions">
-                          <div className="app__creatConfessons" >
+                          <div className="app__creatConfessions" >
                             {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
                             <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
                               <CreatConfessons/>

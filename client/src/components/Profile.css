@@ -26,7 +26,6 @@
         min-width:400;
         padding: 20px;
         background-color: '#363A3E';
-        
       }
       .profile__headerTop > .MuiIconButton-root {
         margin-left: 300px;
@@ -67,6 +66,16 @@ padding-bottom: 30px;
 .profile__headerTypography{
     color: aliceblue;
     margin-left: 20px;
+}
+.profile__logoutButton {
+    color: aliceblue;
+    background-color:#556ab5;
+    margin-left: 15px;
+    margin-top: 10px;
+
+}
+.profile__logoutButton:hover{
+    background-color:#7389DA;
 }
 
 .profile__footer{

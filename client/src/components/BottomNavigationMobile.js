@@ -27,7 +27,7 @@ function BottomNavigationMobile() {
         <div className="bottomNavigation">
             <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
             <BottomNavigationAction onClick={()=>window.location.href= '/'} label="Home" value="Home" icon={<HomeIcon/>} />
-            <BottomNavigationAction onClick={()=>window.location.href= '/'} label="Confessions" value="Confessions" icon={<WhatshotSharpIcon/>} />
+            <BottomNavigationAction onClick={()=>window.location.href= '/confessionsFeed'} label="Confessions" value="Confessions" icon={<WhatshotSharpIcon/>} />
             <BottomNavigationAction onClick={()=>window.location.href= '/eventsFeed'} label="Event" value="Events" icon={<EventIcon/>} />
             <BottomNavigationAction onClick={()=>window.location.href= '/'} label="Chats" value="Chats" icon={<CommentRoundedIcon />} />
             <BottomNavigationAction onClick={()=>window.location.href= '/'} label="Notifications" value="Notifications" icon={ <NotificationsNoneIcon/>} />

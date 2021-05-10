@@ -102,13 +102,15 @@
   width:100%
 }
 .app__createEvent{
+  flex:1;
   display: flex;
   justify-content: center;
   background-color: #363A3E;
   overflow-y: scroll; 
   width:100%
 }
-.app__createConfessions{
+.app__creatConfessions{
+  flex:1;
   display: flex;
   justify-content: center;
   background-color: #363A3E;

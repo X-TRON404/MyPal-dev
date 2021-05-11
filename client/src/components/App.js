@@ -29,10 +29,10 @@ import BottomNavigationMobile from './BottomNavigationMobile'
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
-import EventIcon from '@material-ui/icons/Event';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import EditIcon from '@material-ui/icons/Edit';
 import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
+import EventIcon from '@material-ui/icons/Event';
 import FeedConfessions from './FeedConfessions';
 
 
@@ -115,7 +115,7 @@ function App() {
   const actions = [
     { icon: <AddPhotoAlternateIcon/>, name: 'Post' },
     { icon: <EventIcon onClick={()=>window.location.href= '/createEvent'}/>, name: 'New event' },
-    { icon: <WhatshotSharpIcon onClick={()=>window.location.href= '/createConfessions'}/>, name: 'confess' },
+    { icon: <WhatshotSharpIcon onClick={()=>window.location.href= '/createConfessions'}/>, name: 'Confess' },
   ];
 
 //====================================Get the user from the local storage on refresh======================
@@ -315,19 +315,20 @@ const handleSignUp= () => {
               <Router>
                 <Link to="/" onClick={()=>window.location.href= '/'}><h1>Texx</h1></Link>
               </Router>
+                                              {/*serachbar for mobile view*/}
+              <div className="app__searchbarMobile">
+            {/*pass icons as props to SidebarOptions component*/}
+            {/*keep i captial of Icon to let react know you are passing a component*/}
+            <div className="app__searchbarMobileInputBox">
+              <Input style={{color:"aliceblue"}} className="app__searchbarMobileInput" type= "text" placeholder="Search Texx"/>
+              <SearchIcon style={{color:"aliceblue"}}/>
+            </div>
+          </div>
                 {/*profile section*/}
               <Avatar className="post__avatar" alt={username} src="/static/images/avatar/1.jpg"  onClick={()=>window.location.href='/profile'} />
            
           </div>
       </Paper>
-      <div className="app__sidebarMobile">
-            {/*pass icons as props to SidebarOptions component*/}
-            {/*keep i captial of Icon to let react know you are passing a component*/}
-            <div className="app__sidebarMobileInputBox">
-              <Input style={{color:"aliceblue"}} className="app__sidebarMobileInput" type= "text" placeholder="Search Texx"/>
-              <SearchIcon style={{color:"aliceblue"}}/>
-            </div>
-      </div>
                                       {/*SpeedDial for mobile view*/}
       <div className="app__speedDialMobile">
             <Backdrop className={classes.backdrop} open={openSpeedDial} />

@@ -5,8 +5,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import PermIdentityIcon from '@material-ui/icons/PermIdentity';
-import ListAltIcon from '@material-ui/icons/ListAlt';
+import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
+import EventIcon from '@material-ui/icons/Event';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import {Button} from '@material-ui/core';
@@ -22,12 +22,15 @@ function Sidebar() {
                 <Link to='/' onClick={()=>window.location.href= '/'}><SidebarOptions active text="Home" Icon={HomeIcon}/></Link>
             </Router>
             <SidebarOptions text="Explore" Icon={SearchIcon}/>
+            <Router>
+                <Link to='/eventsFeed' onClick={()=>window.location.href='/eventsFeed'}><SidebarOptions text="Events" Icon={EventIcon}/></Link>
+            </Router>
+            <Router>
+                <Link to='/confessionsFeed' onClick={()=>window.location.href='/confessionsFeed'}><SidebarOptions text="Confessions" Icon={WhatshotSharpIcon}/></Link>
+            </Router>
             <SidebarOptions text="Notifications" Icon={NotificationsNoneIcon}/>
             <SidebarOptions text="Messages" Icon={MailOutlineIcon}/>
             <SidebarOptions text="Bookmarks" Icon={BookmarkBorderIcon}/>
-            <Router>
-                <Link to='/eventsFeed' onClick={()=>window.location.href='/eventsFeed'}><SidebarOptions text="Events" Icon={ListAltIcon}/></Link>
-            </Router>
             <SidebarOptions text="More" Icon={MoreHorizIcon}/>
             <Router>
                 <Link to='/createEvent' onClick={()=>window.location.href='/createEvent'}><Button variant="outlined"  className="sidebar__event" fullWidth>New event</Button></Link>

@@ -6,10 +6,10 @@
 
 
   @media (min-width: 0px) and (max-width:450px){
-    .app__sidebarMobile{
+    .app__searchbarMobile{
     display: flex;
     width: 100%;
-    background-color: #2E3336;
+    /* background-color: #2E3336; */
     align-items: center;    
     justify-content: flex-end;
     margin-top: 1px;
@@ -21,16 +21,16 @@
     overflow-x: scroll;
     }
     
-    .app__sidebarMobileInputBox{
+    .app__searchbarMobileInputBox{
       display: flex;
       justify-content: center;
       align-items:center;
-      background-color: #191919;
+      /* background-color: #2E3336; */
       padding:10px;
       width: 100%;
       
   }
-  .app__sidebarMobileInputBox>input{
+  .app__searchbarMobileInputBox>input{
     flex:1;
   }
 
@@ -47,10 +47,24 @@
   .app__speedDialMobile{
     display: inline;
   }
+  /*padding for app__header card*/
+  .makeStyles-root-2 {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+    padding-top: 10px !important;
+    padding-bottom: 0px !important;
+  }
+  .makeStyles-root-12{
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+    padding-top: 10px !important;
+    padding-bottom: 0px !important;
+  }
+
 }
 
   @media (min-width: 451px) and (max-width: 2048px) {
-      .app__sidebarMobile{
+      .app__searchbarMobile{
         display:none;
       }
       .app__body{
@@ -60,6 +74,13 @@
       }
       .app__speedDialMobile{
         display: none;
+      }
+        /*padding for app__header card*/
+      .makeStyles-root-2 {
+        padding: 10px !important;
+      }
+      .makeStyles-root-12{
+        padding: 10px !important;
       }
   }
 
@@ -153,6 +174,12 @@
   .app__header > Button {
     color: aliceblue;
   }
-
-  
+  /*speed Dial icon colors*/
+  .MuiBottomNavigationAction-root{
+    color: rgb(169 169 169 / 54%) !important;
+  }
+  /*speed dial navigation bar border-top*/
+  .MuiBottomNavigation-root{
+    border-top: 1px solid;
+  }
 

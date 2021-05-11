@@ -1,17 +1,32 @@
-.imageUpload{
-    z-index: 10;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    position: fixed;
-    bottom: 0;
-    background-color: #1A1A1A;
-    border:none;
+
+
+
+
+  @media (min-width: 0px) and (max-width:450px){
+      /**hide imageUpload for mobileView*/
+    .imageUpload{
+       display: none;
+    }
 }
+
+@media (min-width: 451px) and (max-width:2048px){
+    .imageUpload{
+        z-index: 10;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        position: fixed;
+        bottom: 0;
+        background-color: #1A1A1A;
+        border:none;
+    }
+ 
+}
+
 
 .imageUpload__form > form{
     display: flex;

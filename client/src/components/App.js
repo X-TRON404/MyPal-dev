@@ -115,9 +115,9 @@ function App() {
   const Feed = React.lazy(() => import('./Feed'))
   //actions for speedDial
   const actions = [
-    { icon: <AddPhotoAlternateIcon onClick={()=>window.location.href= '/ImageUploadMobile'}/>, name: 'Post' },
-    { icon: <EventIcon onClick={()=>window.location.href= '/createEvent'}/>, name: 'New event' },
-    { icon: <WhatshotSharpIcon onClick={()=>window.location.href= '/createConfessions'}/>, name: 'Confess' },
+    { icon: <Router><Link><AddPhotoAlternateIcon onClick={()=>window.location.href= '/ImageUploadMobile'}/></Link></Router>, name: 'Post' },
+    { icon: <Router><Link><EventIcon onClick={()=>window.location.href= '/createEvent'}/></Link></Router>, name: 'New event' },
+    { icon: <Router><Link><WhatshotSharpIcon onClick={()=>window.location.href= '/createConfessions'}/></Link></Router>, name: 'Confess' },
   ];
 
 //====================================Get the user from the local storage on refresh======================
@@ -317,17 +317,18 @@ const handleSignUp= () => {
               <Router>
                 <Link to="/" onClick={()=>window.location.href= '/'}><h1>Texx</h1></Link>
               </Router>
+
+
                                               {/*serachbar for mobile view*/}
-              <div className="app__searchbarMobile">
-            {/*pass icons as props to SidebarOptions component*/}
-            {/*keep i captial of Icon to let react know you are passing a component*/}
+            <div className="app__searchbarMobile">
             <div className="app__searchbarMobileInputBox">
               <Input style={{color:"aliceblue"}} className="app__searchbarMobileInput" type= "text" placeholder="Search Texx"/>
               <SearchIcon style={{color:"aliceblue"}}/>
             </div>
           </div>
-                {/*profile section*/}
-              <Avatar className="post__avatar" alt={username} src="/static/images/avatar/1.jpg"  onClick={()=>window.location.href='/profile'} />
+
+                                        {/*profile section*/}
+              <Router><Link><Avatar className="post__avatar" alt={username} src="/static/images/avatar/1.jpg"  onClick={()=>window.location.href='/profile'} /></Link></Router>
            
           </div>
       </Paper>

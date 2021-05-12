@@ -34,6 +34,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
 import EventIcon from '@material-ui/icons/Event';
 import FeedConfessions from './FeedConfessions';
+import ImageUploadMobile from './ImageUploadMobile';
 
 
 //====================================Modal styles=========================================
@@ -113,7 +114,7 @@ function App() {
   const Feed = React.lazy(() => import('./Feed'))
   //actions for speedDial
   const actions = [
-    { icon: <AddPhotoAlternateIcon/>, name: 'Post' },
+    { icon: <AddPhotoAlternateIcon onClick={()=>window.location.href= '/ImageUploadMobile'}/>, name: 'Post' },
     { icon: <EventIcon onClick={()=>window.location.href= '/createEvent'}/>, name: 'New event' },
     { icon: <WhatshotSharpIcon onClick={()=>window.location.href= '/createConfessions'}/>, name: 'Confess' },
   ];
@@ -419,7 +420,15 @@ const handleSignUp= () => {
                               <FeedConfessions/>
                             </Suspense>
                           </div>
-                        </Route> 
+                        </Route>
+                        <Route path="/ImageUploadMobile">
+                          <div className="app__ImageUploadMobile" >
+                            {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
+                            <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
+                              <ImageUploadMobile username={user.displayName}/>
+                            </Suspense>
+                          </div>
+                        </Route>  
                     </Switch>
                 </Router>
 

@@ -1,5 +1,24 @@
 
+  @media (min-width: 0px) and (max-width:450px){
+    .widgetsChat__headerTitle{
+        background-color: #363a3e;
+        padding-bottom: 8px;
+        margin-bottom: 2px;
+        padding-top: 8px;
+        color: aliceblue;
+    }
+}
+
+@media (min-width: 451px) and (max-width: 2048px) {
+    .widgetsChat__headerTitle{
+        background-color: #1a1a1a;
+        padding-bottom: 5px;
+        margin-bottom: 2px;
+    }
+    
+}
 .widgetsChat{
+flex: 1;
 display: flex;
 flex-direction:column;
 position: relative;
@@ -9,28 +28,46 @@ color: grey;
 margin-bottom: 30px;
 min-width: fit-content;
 overflow-y: scroll;
-
 }
-
  .MuiBadge-root{
     margin-left: 10px ;
 }
 
 .widgetsChat__online{
+    background-color: #363A3E;
+    width:100%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .widgetsChat__onlineMembers{
+    width:100%;
     display: flex;
     flex-direction:column;
     align-items: center;
     
 }
+.widgetsChat__onlineBox{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    background-color: #1b1b1b;
+    border-radius: 0px;
+    height: 69px;
+    margin-bottom: 1px;
+    min-width: 300px;
+}
+
 .widgetsChat__offline{
+    width:100%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .widgetsChat__offlineMembers{
+    width:100%;
     opacity: 0.4;
     display: flex;
     flex-direction:column;

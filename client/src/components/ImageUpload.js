@@ -113,14 +113,16 @@ function ImageUpload({username}) {
             <div className="imageUpload__form">
                 <form onSubmit={(e)=>{e.preventDefault()}}>
                         {/*input the image and caption from the user*/}
-                        
+                                                                {/*image input*/}
                         <input className="imageUpload__fileInput" accept="image/*" id="image-button-file" type="file" placeholder="Choose a file" onChange={handleChange} />
                         <label htmlFor="image-button-file">
                             <IconButton color="primary" aria-label="upload picture" component="span">
                                 <AddPhotoAlternateIcon/>
                             </IconButton>
                         </label>
-                        
+                                                            {/*selected image preview*/}
+                        {image&&(<img className="imageUpload__preview" width="20px" height="20px" src={URL.createObjectURL(image)}/>)}
+                                                             {/*image caption*/}
                         <Input style={{color:"aliceblue"}}  className="imageUpload__caption" type="text" placeholder="Enter a caption..." onChange={(e)=>setCaption(e.target.value)} value={caption}/>
                         <IconButton className="imageUpload___iconButton" disabled = {!image} variant ='contained' color="primary" type ='submit' onClick={handleUpload}>
                             <SendIcon/>

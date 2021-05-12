@@ -9,6 +9,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import './BottomNavigationMobile.css'
 import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import { Card, Paper } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -24,15 +25,17 @@ function BottomNavigationMobile() {
       setValue(newValue);
     };
     return (
+      <Paper elevation={10}>
         <div className="bottomNavigation">
             <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
             <BottomNavigationAction onClick={()=>window.location.href= '/'} label="Home" value="Home" icon={<HomeIcon/>} />
             <BottomNavigationAction onClick={()=>window.location.href= '/confessionsFeed'} label="Confessions" value="Confessions" icon={<WhatshotSharpIcon/>} />
             <BottomNavigationAction onClick={()=>window.location.href= '/eventsFeed'} label="Event" value="Events" icon={<EventIcon/>} />
-            <BottomNavigationAction onClick={()=>window.location.href= '/'} label="Chats" value="Chats" icon={<CommentRoundedIcon />} />
+            <BottomNavigationAction onClick={()=>window.location.href= '/chatsFeed'} label="Chats" value="Chats" icon={<CommentRoundedIcon />} />
             <BottomNavigationAction onClick={()=>window.location.href= '/'} label="Notifications" value="Notifications" icon={ <NotificationsNoneIcon/>} />
             </BottomNavigation>
         </div>
+      </Paper>
     )
 }
 

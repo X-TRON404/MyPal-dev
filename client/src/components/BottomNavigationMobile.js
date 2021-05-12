@@ -10,6 +10,7 @@ import './BottomNavigationMobile.css'
 import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import { Card, Paper } from '@material-ui/core';
+import {BrowserRouter, Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -26,13 +27,14 @@ function BottomNavigationMobile() {
     };
     return (
       <Paper elevation={10}>
-        <div className="bottomNavigation">
+        <div className="bottomNavigation"> 
             <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-            <BottomNavigationAction onClick={()=>window.location.href= '/'} label="Home" value="Home" icon={<HomeIcon/>} />
-            <BottomNavigationAction onClick={()=>window.location.href= '/confessionsFeed'} label="Confessions" value="Confessions" icon={<WhatshotSharpIcon/>} />
-            <BottomNavigationAction onClick={()=>window.location.href= '/eventsFeed'} label="Event" value="Events" icon={<EventIcon/>} />
-            <BottomNavigationAction onClick={()=>window.location.href= '/chatsFeed'} label="Chats" value="Chats" icon={<CommentRoundedIcon />} />
-            <BottomNavigationAction onClick={()=>window.location.href= '/'} label="Notifications" value="Notifications" icon={ <NotificationsNoneIcon/>} />
+            {/*Added routers here so that instead of pushing the entire app.js to rerender when we click it will only re-render the specific component inside the app__body <Router>*/}
+            <BrowserRouter><Link><BottomNavigationAction onClick={()=>window.location.href= '/'} label="Home" value="Home" icon={<HomeIcon/>} /></Link></BrowserRouter>
+            <BrowserRouter><Link><BottomNavigationAction onClick={()=>window.location.href= '/confessionsFeed'} label="Confessions" value="Confessions" icon={<WhatshotSharpIcon/>} /></Link></BrowserRouter>
+            <BrowserRouter><Link><BottomNavigationAction onClick={()=>window.location.href= '/eventsFeed'} label="Event" value="Events" icon={<EventIcon/>} /></Link></BrowserRouter>
+            <BrowserRouter><Link><BottomNavigationAction onClick={()=>window.location.href= '/chatsFeed'} label="Chats" value="Chats" icon={<CommentRoundedIcon />} /></Link></BrowserRouter>
+            <BrowserRouter><Link><BottomNavigationAction onClick={()=>window.location.href= '/'} label="Notifications" value="Notifications" icon={ <NotificationsNoneIcon/>} /></Link></BrowserRouter>
             </BottomNavigation>
         </div>
       </Paper>

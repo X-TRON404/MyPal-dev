@@ -29,6 +29,18 @@ margin-bottom: 30px;
 min-width: fit-content;
 overflow-y: scroll;
 }
+/*=======================Hide scrollbars===========================*/
+/* Hide scrollbar for Chrome, Safari and Opera */
+.widgetsChat::-webkit-scrollbar {
+    display: none;
+}
+.widgetsChat{
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+
+/*==================================================*/
+
  .MuiBadge-root{
     margin-left: 10px ;
 }

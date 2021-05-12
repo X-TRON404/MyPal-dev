@@ -139,6 +139,7 @@ function CreateEvent() {
                             </IconButton>
                             {imageThumbnail?"Image selected":"Choose a thumnail image"}
                         </label>  
+                        {imageThumbnail&&(<img width="100px" height="100px" src={URL.createObjectURL(imageThumbnail)}/>)}
                         {/*change the 'dateTime' from the <DateTimeSelect/> component*/}
                         <DateTimeSelect changeDate={dateTime => setdateTime(dateTime)} dateTime={dateTime}/>
                         <TextField placeholder="Enter a decription..." className = "createEvent__textarea" onChange={(e)=>setDescription(e.target.value)} value={description}

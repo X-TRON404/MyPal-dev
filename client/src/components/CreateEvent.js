@@ -132,7 +132,6 @@ function CreateEvent() {
                         <Input style={{color:"aliceblue"}}  className="createEvent__title" type="text" placeholder="Enter a the name for the event..." onChange={(e)=>setTitle(e.target.value)} value={title}/>
                         {/*if image is selected then show selected else show choose an image*/}
                         <input className="createEvent__fileInput" accept="image/*"  id="imageThumbnail-button-file" type="file" onChange={handleImageChange} />
-                        {console.log(imageThumbnail)}
                         <label htmlFor="imageThumbnail-button-file" style={{color:"gray"}}>
                             <IconButton color="primary" aria-label="upload thumbnail" component="span">
                                 <AddPhotoAlternateIcon /> 

@@ -65,4 +65,6 @@ flex: 0 !important;
     margin-right: 30px;
 
 }
-
+.imageUpload__preview{
+    margin-right: 10px;
+}

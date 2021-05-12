@@ -125,7 +125,7 @@ function ImageUploadMobile({username}) {
                         {image&&(<img className="imageUploadMobile__preview" width="80px" height="80px" src={URL.createObjectURL(image)}/>)}
                                                         {/*image caption*/}
                         <Input style={{color:"aliceblue"}}  className="imageUploadMobile__caption" type="text" placeholder="Enter a caption..." onChange={(e)=>setCaption(e.target.value)} value={caption}/>
-                        <Button className="imageUploadMobile___iconButton" disabled = {!image} variant ='contained' color="primary" type ='submit' onClick={handleUpload}>
+                        <Button style={{color:"gray"}}  className="imageUploadMobile___iconButton" disabled = {!image} variant ='contained' color="primary" type ='submit' onClick={handleUpload}>
                             POST
                         </Button>
                 </form>

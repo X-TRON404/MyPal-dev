@@ -1,0 +1,63 @@
+
+
+
+
+  @media (min-width: 0px) and (max-width:450px){
+  .imageUploadMobile{
+    z-index: 10;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #1A1A1A;
+    border: none;
+    height: 90vh;
+}
+}
+
+@media (min-width: 451px) and (max-width:2048px){
+    /**hide imageUpload for desktopView*/
+    .imageUploadMobile{
+        display: none;
+     }
+
+}
+
+
+.imageUploadMobile__form > form{
+  display: flex;
+  flex-direction: column; 
+  width: 100%; 
+  justify-content: space-between;
+}
+
+.imageUploadMobile__caption{
+margin-top:90px ;
+flex: 1;
+}
+
+.imageUploadMobile__fileInput{
+flex: 0 !important;
+padding:10px;
+display: none !important;
+}
+
+
+.imageUploadMobile__iconButton{
+flex: 0 !important;
+}
+
+
+.imageUploadMobile__progressModal{
+  width: 100px;
+  margin-top:500px;
+  align-items: center !important;
+  width: 100%;
+}
+.imageUploadMobile__uploadProgress{
+  margin-top: 400px;
+  width: 100%;
+  margin-left: 30px;
+  margin-right: 30px;
+
+}
+

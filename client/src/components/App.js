@@ -35,6 +35,7 @@ import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
 import EventIcon from '@material-ui/icons/Event';
 import FeedConfessions from './FeedConfessions';
 import ImageUploadMobile from './ImageUploadMobile';
+import WidgetsChat from './chat/WidgetsChat'
 
 
 //====================================Modal styles=========================================
@@ -310,7 +311,7 @@ const handleSignUp= () => {
       </Modal>
 
                                               {/*header*/}
-      <Paper className={classes.root} elevation={3}>
+      <Paper className={classes.root} elevation={8}>
           <div className="app__header">
               {/* <img className="app__headerImage" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png" alt="ig-logo"/> */}
               <Router>
@@ -429,6 +430,14 @@ const handleSignUp= () => {
                             </Suspense>
                           </div>
                         </Route>  
+                        <Route path="/chatsFeed">
+                          <div className="app__chatsFeed" >
+                            {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
+                            <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
+                              <WidgetsChat/>
+                            </Suspense>
+                          </div>
+                        </Route> 
                     </Switch>
                 </Router>
 

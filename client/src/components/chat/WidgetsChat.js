@@ -19,15 +19,16 @@ import { Unsubscribe } from '@material-ui/icons';
 //==================================================Card Styles==============================================
 const useStyles = makeStyles((theme) => ({
   root: {
+    flex:1,
     display: 'flex',
-    minWidth: 250,
+    minWidth:  314,
     height:60,
     background: '#1A1A1A',
     '&:hover': {
        background: '#363A3E',
     },
     border:'1px grey',
-    marginBottom:'5px',
+    marginBottom:'2px',
   },
   details: {
     display: 'flex',
@@ -83,8 +84,8 @@ function WidgetsChat() {
 //==========================================Online members===========================================================
         <div className="widgetsChat">
             <div className="widgetsChat__online">
-                 <p>Online<span><Badge color="primary" overlap="circle"  variant="dot"></Badge></span></p>
-                 <div className="widgetsChat__onlineMembers">
+                 <p className="widgetsChat__headerTitle">Online<span><Badge color="primary" overlap="circle"  variant="dot"></Badge></span></p>
+                 {/* <div className="widgetsChat__onlineMembers"> */}
             {
                 chats.map((chat)=>(
                 <BrowserRouter>
@@ -98,8 +99,8 @@ function WidgetsChat() {
                                                         chatInput:true,
                                                         
                                                         }); window.location.href= `/chats/${chat.chat_user_id}` }}>
-                                    <ButtonBase>
-                                        <Card className={classes.root}>
+                            <div className="widgetsChat__onlineBox">
+                                <ButtonBase>
                                                 <Avatar className={classes.avatar} alt={'d'} src="/static/images/avatar/1.jpg"></Avatar>
                                                     <Badge
                                                         overlap="circle"
@@ -119,8 +120,8 @@ function WidgetsChat() {
                                                             </Typography>
                                                         </CardContent>
                                                 </div>
-                                        </Card>
-                                    </ButtonBase>
+                                </ButtonBase>
+                            </div>
                             </Link>
                 </BrowserRouter>
                 
@@ -128,13 +129,12 @@ function WidgetsChat() {
             }
                  
                  </div>
-            </div>
+            {/* </div> */}
                                                         {/* offline members */}
             <div className="widgetsChat__offline">
-                 <p>Offline<span><Badge color="secondary" overlap="circle"  variant="dot"></Badge></span></p> 
+                 <p className="widgetsChat__headerTitle">Offline<span><Badge color="secondary" overlap="circle"  variant="dot"></Badge></span></p> 
                  <div className="widgetsChat__offlineMembers">
-                 <ButtonBase>
-                    <Card className={classes.root}>
+                 {/* <div className="widgetsChat__onlineBox">
                             <Avatar className={classes.avatar} alt={'d'} src="/static/images/avatar/1.jpg"></Avatar>
                             <div className={classes.details}>
                                     <CardContent className={classes.content}>
@@ -146,68 +146,7 @@ function WidgetsChat() {
                                         </Typography>
                                     </CardContent>
                             </div>
-                        </Card>
-                    </ButtonBase>
-                    <ButtonBase>
-                        <Card className={classes.root}>
-                            <Avatar className={classes.avatar} alt={'d'} src="/static/images/avatar/1.jpg"></Avatar>
-                            <div className={classes.details}>
-                                    <CardContent className={classes.content}>
-                                        <Typography component="p" variant="p">
-                                            User
-                                        </Typography>
-                                        <Typography className={classes.typoStatus} variant="caption">
-                                            status
-                                        </Typography>
-                                    </CardContent>
-                            </div>
-                        </Card>
-                    </ButtonBase>
-                    <ButtonBase>
-                        <Card className={classes.root}>
-                            <Avatar className={classes.avatar} alt={'d'} src="/static/images/avatar/1.jpg"></Avatar>
-                            <div className={classes.details}>
-                                    <CardContent className={classes.content}>
-                                        <Typography component="p" variant="p">
-                                            User
-                                        </Typography>
-                                        <Typography className={classes.typoStatus} variant="caption">
-                                            status
-                                        </Typography>
-                                    </CardContent>
-                            </div>
-                        </Card>
-                    </ButtonBase>
-                    <ButtonBase>
-                        <Card className={classes.root}>
-                            <Avatar className={classes.avatar} alt={'d'} src="/static/images/avatar/1.jpg"></Avatar>
-                            <div className={classes.details}>
-                                    <CardContent className={classes.content}>
-                                        <Typography component="p" variant="p">
-                                            User
-                                        </Typography>
-                                        <Typography className={classes.typoStatus} variant="caption">
-                                            status
-                                        </Typography>
-                                    </CardContent>
-                            </div>
-                        </Card>
-                    </ButtonBase>
-                    <ButtonBase>
-                        <Card className={classes.root}>
-                            <Avatar className={classes.avatar} alt={'d'} src="/static/images/avatar/1.jpg"></Avatar>
-                            <div className={classes.details}>
-                                    <CardContent className={classes.content}>
-                                        <Typography component="p" variant="p">
-                                            User
-                                        </Typography>
-                                        <Typography className={classes.typoStatus} variant="caption">
-                                            status
-                                        </Typography>
-                                    </CardContent>
-                            </div>
-                        </Card>
-                    </ButtonBase>
+                     </div> */}
                  </div>
             </div>
         </div>

@@ -166,7 +166,6 @@
   overflow-y: scroll; 
   width:100%
 }
-
 .app__signup{
     display: flex;
     flex-direction: column;
@@ -191,3 +190,56 @@
     border-top: 1px solid;
   }
 
+/*========================hide scrollbar for different browsers======================*/
+/* Hide scrollbar for Chrome, Safari and Opera */
+.app__feed::-webkit-scrollbar {
+  display: none;
+}
+.app__eventsFeed::-webkit-scrollbar {
+  display: none;
+}
+.app__chat::-webkit-scrollbar {
+  display: none;
+}
+.app__profile::-webkit-scrollbar {
+  display: none;
+}
+.app__createEvent::-webkit-scrollbar {
+  display: none;
+}
+.app__creatConfessions::-webkit-scrollbar {
+  display: none;
+}
+.app__confessionsFeed::-webkit-scrollbar {
+  display: none;
+}
+/*------------------------------------------------------------------------------------*/
+.app__feed{
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+.app__eventsFeed{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  }
+.app__chat{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  }
+.app__profile{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  }
+.app__createEvent{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  }
+.app__creatConfessions {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  }
+.app__confessionsFeed{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  }
+/*====================================================================================*/

@@ -15,16 +15,12 @@ import { actionTypes } from '../contexts/reducer';
 import firebase from 'firebase/app'
 import SendMessage from './chat/SendMessage'
 //Get material-ui icons
-import SidebarOptions from './SidebarOptions'
 import SearchIcon from '@material-ui/icons/Search';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import CreateEvent from './CreateEvent'
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import FeedEvents from './FeedEvents'
-import CreatConfessons from './CreateConfessions'
 import BottomNavigationMobile from './BottomNavigationMobile'
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
@@ -33,9 +29,6 @@ import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import EditIcon from '@material-ui/icons/Edit';
 import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
 import EventIcon from '@material-ui/icons/Event';
-import FeedConfessions from './FeedConfessions';
-import ImageUploadMobile from './ImageUploadMobile';
-import WidgetsChat from './chat/WidgetsChat'
 
 
 //====================================Modal styles=========================================
@@ -63,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   display: 'flex',
   objectFit: 'contain',
   backgroundColor: '#363A3E',
-  padding: '20px',
+  padding:'10px',
   position: 'sticky',
   zIndex: 100, 
 },
@@ -113,6 +106,13 @@ function App() {
   //lazy loading
   const Profile = React.lazy(() => import('./Profile'))
   const Feed = React.lazy(() => import('./Feed'))
+  const Chat = React.lazy(() => import('./chat/Chat'))
+  const CreateEvent = React.lazy(() => import('./CreateEvent'))
+  const CreateConfessions = React.lazy(() => import('./CreateConfessions'))
+  const FeedEvents = React.lazy(() => import('./FeedEvents'))
+  const FeedConfessions = React.lazy(() => import('./FeedConfessions'))
+  const ImageUploadMobile = React.lazy(() => import('./ImageUploadMobile'))
+  const WidgetsChat = React.lazy(() => import('./chat/WidgetsChat'))
   //actions for speedDial
   const actions = [
     { icon: <Router><Link><AddPhotoAlternateIcon onClick={()=>window.location.href= '/ImageUploadMobile'}/></Link></Router>, name: 'Post' },
@@ -380,7 +380,10 @@ const handleSignUp= () => {
                         </Route>                                                                                                               
                         <Route path="/chats/:chatId">
                           <div className="app__chat">
-                              <Chat/>
+                              {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
+                              <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
+                                <Chat/>
+                              </Suspense>
                           </div>
                           </Route>  
                         <Route path="/profile">
@@ -400,10 +403,10 @@ const handleSignUp= () => {
                           </div>
                         </Route> 
                         <Route path="/createConfessions">
-                          <div className="app__creatConfessions" >
+                          <div className="app__createConfessions" >
                             {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
                             <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
-                              <CreatConfessons/>
+                              <CreateConfessions/>
                             </Suspense>
                           </div>
                         </Route> 
@@ -427,7 +430,7 @@ const handleSignUp= () => {
                           <div className="app__ImageUploadMobile" >
                             {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
                             <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
-                              <ImageUploadMobile username={user.displayName}/>
+                              <ImageUploadMobile username={user?.displayName}/>
                             </Suspense>
                           </div>
                         </Route>  

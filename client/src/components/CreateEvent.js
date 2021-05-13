@@ -150,7 +150,7 @@ function CreateEvent() {
                             variant="outlined"
                             />
                         <Input style={{color:"aliceblue"}}  className="createEvent__venue" type="text" placeholder="Enter a Venue/Link..." onChange={(e)=>setVenue(e.target.value)} value={venue}/>
-                        <Button style={{color:"gray"}} className="createEvent___iButton" disabled = {!imageThumbnail} variant ='contained' color="primary" type ='submit' onClick={handleUpload}>Create the event</Button>
+                        <Button className="createEvent___iButton" disabled = {!imageThumbnail} variant ='contained' color="primary" type ='submit' onClick={handleUpload}>Create the event</Button>
                 </form>
            </div>
         </div>

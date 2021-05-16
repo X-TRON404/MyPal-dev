@@ -25,7 +25,7 @@ const [confessions, setConfessions] = useState([]);
             <div className="feedConfessions__confessions "> 
                  {
                 //render only those posts by id who are newly added to the database dont render the entire post list  
-                confessions.map(({id,confession})=>(<Confessions  key={confession.id} confessionId={confession.id} confession={confession.confession} />))
+                confessions.map(({id,confession})=>(<Confessions  key={id} confessionId={id} confession={confession.confession} />))
                 } 
             </div>    
     </div>

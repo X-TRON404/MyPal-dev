@@ -56,6 +56,7 @@ const postComment = (e) => {
                     (snapshot) =>{
                         //set comments to the data inside the doc
                                 setComments(snapshot.docs.map((doc) => (doc.data())))
+                                console.log(comments)
                     })
 
                 }
@@ -82,14 +83,14 @@ const postComment = (e) => {
                                  <Typography style={{color:'aliceblue'}}>{comments.length} Comments</Typography>
                     </div>
 
-                            <Collapse in={expanded} timeout="auto" unmountOnExit >
+                            {/* <Collapse in={expanded} timeout="auto" unmountOnExit > */}
                             { comments.map((comment) => (
                                     //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
                                     <p style={{color:"#dae1e7"}}><strong>{comment.username+":"}</strong>{comment.text}<span>{" "+convertToDate(comment.timestamp)}</span></p>
                                 ))
                             } 
-                            </Collapse>
-                            
+                            {/* </Collapse>
+                             */}
             </div>
                                                     {/*post the comment to the database*/}
                     {//if the user is logged in then only show the post comment section

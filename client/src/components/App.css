@@ -153,6 +153,7 @@
   
   .app__headerImage{
     object-fit: contain;
+    width: 100px;
   }
 
   .app__loginContainer  > Button {

@@ -29,7 +29,8 @@ import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import EditIcon from '@material-ui/icons/Edit';
 import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
 import EventIcon from '@material-ui/icons/Event';
-
+import WidgetsChat from './chat/WidgetsChat'
+import logo from '../texx_logo.png'
 
 //====================================Modal styles=========================================
 function getModalStyle() {
@@ -112,7 +113,7 @@ function App() {
   const FeedEvents = React.lazy(() => import('./FeedEvents'))
   const FeedConfessions = React.lazy(() => import('./FeedConfessions'))
   const ImageUploadMobile = React.lazy(() => import('./ImageUploadMobile'))
-  const WidgetsChat = React.lazy(() => import('./chat/WidgetsChat'))
+  // const WidgetsChat = React.lazy(() => import('./chat/WidgetsChat'))
   //actions for speedDial
   const actions = [
     { icon: <Router><Link><AddPhotoAlternateIcon onClick={()=>window.location.href= '/ImageUploadMobile'}/></Link></Router>, name: 'Post' },
@@ -279,7 +280,7 @@ const handleSignUp= () => {
         <div style={modalStyle} className={classes.paper}>
           <form className="app__signup">
             <center>
-                TEXX-IMAGE
+            <img className="app__headerImage" src={logo} alt="texx-logo"/>
             </center>
             <p style={{margin:'10px'}} >Enter your credentials to Log in to texx</p>
             <Input style ={{color:'aliceblue',margin:'10px'}} placeholder="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
@@ -313,9 +314,8 @@ const handleSignUp= () => {
                                               {/*header*/}
       <Paper className={classes.root} elevation={8}>
           <div className="app__header">
-              {/* <img className="app__headerImage" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png" alt="ig-logo"/> */}
               <Router>
-                <Link to="/" onClick={()=>window.location.href= '/'}><h1>Texx</h1></Link>
+                <Link to="/" onClick={()=>window.location.href= '/'}><img className="app__headerImage" src={logo} alt="texx-logo"/></Link>
               </Router>
 
 

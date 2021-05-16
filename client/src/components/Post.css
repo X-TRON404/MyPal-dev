@@ -46,11 +46,13 @@ color: aliceblue;
 align-items: center = align the avatar and the username in the center  */
 .post__header{
 display:flex;
+justify-content: space-between;
 align-items: center;
 padding-top: 10px; 
 padding-bottom: 10px;
 }
-.post__header > h3{
+.post__header > .post__userProfile >h3{
+    padding-top:10px;
     color: aliceblue;
 }
 
@@ -76,6 +78,11 @@ color: aliceblue;
 }
 .post__header > button:hover{
     background-color: #7389DA;
+}
+.post__userProfile{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
 }
 
 .post__avatar{

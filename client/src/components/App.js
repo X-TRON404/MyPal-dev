@@ -31,6 +31,7 @@ import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
 import EventIcon from '@material-ui/icons/Event';
 import WidgetsChat from './chat/WidgetsChat'
 import logo from '../texx_logo.png'
+import FeedConfessions from './FeedConfessions'
 
 //====================================Modal styles=========================================
 function getModalStyle() {
@@ -111,7 +112,7 @@ function App() {
   const CreateEvent = React.lazy(() => import('./CreateEvent'))
   const CreateConfessions = React.lazy(() => import('./CreateConfessions'))
   const FeedEvents = React.lazy(() => import('./FeedEvents'))
-  const FeedConfessions = React.lazy(() => import('./FeedConfessions'))
+  // const FeedConfessions = React.lazy(() => import('./FeedConfessions'))
   const ImageUploadMobile = React.lazy(() => import('./ImageUploadMobile'))
   // const WidgetsChat = React.lazy(() => import('./chat/WidgetsChat'))
   //actions for speedDial
@@ -245,7 +246,6 @@ const handleSignUp= () => {
             </center>
             <Input style ={{color:'aliceblue'}} placeholder="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
             <Input style ={{color:'aliceblue'}} placeholder="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <Input style ={{color:'aliceblue'}} placeholder="password" type="text" />
             <Input style ={{color:'aliceblue',margin:'10px'}}
             id="standard-adornment-password"
             placeholder="password"

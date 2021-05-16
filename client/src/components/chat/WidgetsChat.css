@@ -74,6 +74,9 @@ scrollbar-width: none;  /* Firefox */
     margin-bottom: 1px;
     min-width: 300px;
 }
+.widgetsChat__onlineBox:hover{
+    background-color: #2b2b2b;
+}
 
 .widgetsChat__offline{
     width:100%;

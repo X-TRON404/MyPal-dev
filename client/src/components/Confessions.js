@@ -12,12 +12,12 @@ function Confessions({confession,confessionId}) {
     //get the user from the provider
     const [{user}, dispatch] = useStateValue();
     //comments from DataBase
-    const [comments,setComments] = useState([])
+    const [confessionComments,setConfessionComments] = useState([])
     //set comment from input
-    const [comment, setComment] = useState('')
+    const [confessionComment, setConfessionComment] = useState('')
     //for commentsIcon onclick collapse
     const [expanded, setExpanded] =  useState(false);
-
+    
     //commentsIcon onclick collapse
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -33,18 +33,18 @@ function Confessions({confession,confessionId}) {
     return(date.replace(/:\d+ /, ' ')+"hrs ago")
 }
 //======================================Post comments to the database========================================================================================
-const postComment = (e) => {
+const postConfessionComment = (e) => {
     e.preventDefault();
     //add comment to the 'comments' collection of the particular confession 
     DataBase.collection('confessions').doc(confessionId).collection('comments').add(
         {
-         text:comment,
+         text:confessionComment,
          username:user.displayName,
          timestamp:firebase.firestore.FieldValue.serverTimestamp()
         }
     )
     //clear the input after posting
-    setComment('')
+    setConfessionComment('')
 }
 //====================================Get the comments from the database and display=================================================================
     useEffect(() => {
@@ -55,8 +55,8 @@ const postComment = (e) => {
              DataBase.collection('confessions').doc(confessionId).collection('comments').orderBy('timestamp','desc').onSnapshot(
                     (snapshot) =>{
                         //set comments to the data inside the doc
-                                setComments(snapshot.docs.map((doc) => (doc.data())))
-                                console.log(comments)
+                                setConfessionComments(snapshot.docs.map((doc) => (doc.data())))
+                                console.log(confessionComments+" Ccommnets")
                     })
 
                 }
@@ -76,28 +76,28 @@ const postComment = (e) => {
             <div className="confessions__footer">
                                                 {/*display the comments from the database */}
                     <div className="confessions__commentsIcon">
-                                 <IconButton onClick={handleExpandClick} id="comments-icon"  disabled={comments.length===0}>
+                                 <IconButton onClick={handleExpandClick} id="comments-icon"  disabled={confessionComments.length===0}>
                                     <ChatBubbleOutlineRoundedIcon fontsize="small" cursor="pointer" aria-expanded={expanded} aria-label="show more comments"/>
                                  </IconButton>
                                                             {/*no. of comments*/}
-                                 <Typography style={{color:'aliceblue'}}>{comments.length} Comments</Typography>
+                                 <Typography style={{color:'aliceblue'}}>{confessionComments.length} Comments</Typography>
                     </div>
 
-                            {/* <Collapse in={expanded} timeout="auto" unmountOnExit > */}
-                            { comments.map((comment) => (
+                            <Collapse in={expanded} timeout="auto" unmountOnExit >
+                            { confessionComments.map((comment) => (
                                     //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
-                                    <p style={{color:"#dae1e7"}}><strong>{comment.username+":"}</strong>{comment.text}<span>{" "+convertToDate(comment.timestamp)}</span></p>
+                                    <p style={{color:"#dae1e7"}} key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}<span>{" "+convertToDate(comment.timestamp)}</span></p>
                                 ))
                             } 
-                            {/* </Collapse>
-                             */}
+                            </Collapse>
+                            
             </div>
                                                     {/*post the comment to the database*/}
                     {//if the user is logged in then only show the post comment section
                         user &&(
                         <form className="confessions__commentBox">
-                            <Input style={{color:"aliceblue"}} className="confessions__input" type="text" placeholder="Add a comment..." value={comment} onChange={(e)=> setComment(e.target.value)}/>
-                            <IconButton  disabled={!comment}  variant ='contained' color="primary" type ='submit' onClick={postComment}>
+                            <Input style={{color:"aliceblue"}} className="confessions__input" type="text" placeholder="Add a comment..." value={confessionComment} onChange={(e)=> setConfessionComment(e.target.value)}/>
+                            <IconButton  disabled={!confessionComment}  variant ='contained' color="primary" type ='submit' onClick={postConfessionComment}>
                                     <SendIcon/>
                             </IconButton>
                         </form>) 

@@ -92,6 +92,7 @@
   }
   /*CHANGE FEED WIDTH*/
   .app__feed{
+      flex:0.6;
       display: flex;
       justify-content: center;
       padding-left: 15px;

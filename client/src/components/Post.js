@@ -9,13 +9,12 @@ import firebase from 'firebase';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
 import RepeatIcon from '@material-ui/icons/Repeat'
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import PublishIcon from '@material-ui/icons/Publish';
 import SendIcon from '@material-ui/icons/Send';
 import {useStateValue} from '../contexts/StateProvider'
 import FlipMove from 'react-flip-move';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ShareIcon from '@material-ui/icons/Share';
-import SimpleModal from './AvatarHoverModal'
+import PostMenu from './PostMenu'
+
 
 //============================================Comments pop-over styles==================================== 
     const useStyles = makeStyles((theme) => ({
@@ -102,7 +101,7 @@ function Post({postId,username,user_id,caption,imageUrl,likesCount}) {
     const handleHoverModalClose = () => {
         setHoverOpen(false)
     }
-
+    //convert to date
     const convertToDate = (timestamp) => {
         console.log(timestamp)
         let currentDate = firebase.firestore.Timestamp.now();
@@ -321,7 +320,10 @@ const postComment = (e) => {
         <div className="post">
             <div className="post__header" >
                                                {/*avatar managed by@material-ui/core*/}
+                <div className="post__userProfile">
                 <Avatar className="post__avatar" alt={username} src="/static/images/avatar/1.jpg"  onClick={handleHoverModalOpen} />
+                <h3>{username}</h3>
+                </div>
                 <Modal
                         open={hoverOpen}
                         onClose={()=>setHoverOpen(false)}
@@ -330,7 +332,6 @@ const postComment = (e) => {
                     >
                     <center><img style={{width:"fit-content"}} alt={username} src={imageUrl}/></center>
                 </Modal>
-                <h3>{username}</h3>
                 {/*==================================================================================================================================== */}
  
                 {/* {user.uid === user_id && <Button onClick={addToChats}>Add to chats</Button>} */}
@@ -367,7 +368,7 @@ const postComment = (e) => {
 
                     ):
                     //if not present
-                    (<Button key={user_id} onClick={addToChats}>Add  chats</Button>)
+                    (<Button key={user_id} onClick={addToChats}>Add chats</Button>)
                         )    
                             ) 
                                 )
@@ -376,7 +377,10 @@ const postComment = (e) => {
                                     console.log(chat+"chta")
                 })
                 } */}
-                <MoreVertIcon/>
+
+                            {/*Report or bookmarks Menu*/}
+                <PostMenu postId={postId} postUsername={username} postUserId={user_id}/>
+                
              
             {/*===========================================================================================================================================*/}
             </div>
@@ -425,6 +429,7 @@ const postComment = (e) => {
                                         >
                                             <Typography>Click on the icon to load all comments</Typography>
                                         </Popover>
+                                                                 {/*no. of comments*/}
                                 <Typography style={{color:'aliceblue'}}>{comments.length} Comments</Typography>
                             </div>
 

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import Message from './Message'
 import './Chat.css'
 import {DataBase} from '../firebase';
 import {useStateValue} from '../../contexts/StateProvider';
+import { useParams } from 'react-router-dom';
+import SendMessage from './SendMessage'
 
 
 
@@ -14,7 +15,9 @@ function Chat() {
     const [messages,setMessages] = useState([])
     //get the user from the provider  
     const [{user}, dispatch] = useStateValue();
+    //get the slug from the url  (remeber that component using useParams should be inside <Router>)
     const {chatId} = useParams()
+ 
 
 
 
@@ -25,10 +28,17 @@ useEffect(() => {
     if (chatId){
         //here the chat_user_id is taken from the user who posted that particular post to database
         const unsubscribe = DataBase.collection('users').doc(user.uid).collection('chats').doc(chatId).collection('messages').onSnapshot((snapshot)=>(
-            setMessages(snapshot.data())
+            setMessages(snapshot.docs.map((doc) => doc.data()))
         ))
+
+        return () =>{
+            //perform cleanup before re-firing the useEffect
+            unsubscribe();
+          }
     }
+
 }
+
     
 }, [chatId])
 
@@ -40,11 +50,14 @@ useEffect(() => {
                 <div className="chat__header">
                 This is the beggining of your texx with {}
                 </div>
+                
                 {
                     messages.map((message)=>(<Message message={message}/>))
                     
                 }
+                <SendMessage chatId={chatId} />
              </div> 
+             
 
 
     )

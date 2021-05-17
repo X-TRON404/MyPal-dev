@@ -76,10 +76,9 @@ speedDial: {
 //========================================================================================================
 function App() {
   //dispatch for the user
-  const [{chatId,chatInput},dispatch] = useStateValue();
-  console.log(chatId,chatInput)
+  const [{},dispatch] = useStateValue();
   const classes = useStyles();
-
+  //modal styles
   const [modalStyle] = useState(getModalStyle);
   //initially unless fired dont show the model for sign in
   const [openSignIn,setOpenSignIn] = useState(false);
@@ -98,7 +97,7 @@ function App() {
   //flag to keep track of whether the user has logged in or not (user who's signed in )
   const [user,setUser] = useState([]);
   //save userId 
-  const [useId,setUserId] = useState(null)
+  const [userId,setUserId] = useState(null)
   //show password for password field
   const [showPassword,setShowPassword] = useState(false)
   //open speedDial
@@ -360,15 +359,15 @@ const handleSignUp= () => {
 
 
 
-                                                {/*sidebar*/}
+                                               
                            {/* if user does not exists then reduce the opacity of the body */}
       <div className={user?'app__body':'app__bodyUserNotLoggedIn' }>
-
-          <Sidebar/>
-
 {/* =================================================REACT ROUTER COMES HERE================================================================================= */}
 
                 <Router>
+                                          {/*sidebar*/}
+                    <Sidebar/>
+                                            {/*switch*/}
                     <Switch>             
                         <Route exact path="/">
                           <div className="app__feed">
@@ -443,21 +442,23 @@ const handleSignUp= () => {
                           </div>
                         </Route> 
                     </Switch>
+
+                    {/*widgets*/}
+                  <Widgets id={'widget'}/>
+                  {/*Bottom Navigation only applicable to mobile screens*/}
+                  <BottomNavigationMobile/>
                 </Router>
 
 {/* ======================================================================================================================================================= */}
-                              {/*Bottom Navigation only applicable to mobile screens*/}
-                              <BottomNavigationMobile/>
                                {/*show image upload only if the user is logged in*/}
           {/*\used otional so it won't crash if these is no 'user.displayName' at the start and use 'user' instead */}
           {user?.displayName &&
           //if user exists then show image upload button/Send Message
-            (chatInput?(<SendMessage chatId={chatId}/>):(<ImageUpload username={user.displayName}/>))
+          
+            <ImageUpload username={user.displayName}/>
        
           }
-
-                                                {/*widgets*/}
-          <Widgets id={'widget'}/>
+          {console.log(chatInput +" chatInput")}
     </div>
        
     </div>

@@ -1,20 +1,9 @@
 
 //users in sidebar chat (online/offline)
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './WidgetsDummy.css'
-import Badge from '@material-ui/core/Badge';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
-import {ButtonBase} from '@material-ui/core';
-import {Link} from 'react-router-dom';
-import {DataBase} from '../firebase'
-import firebase from 'firebase/app';
-import {useStateValue} from '../../contexts/StateProvider';
-import { Unsubscribe } from '@material-ui/icons';
+import { makeStyles } from '@material-ui/core/styles';
 //==================================================Card Styles==============================================
 const useStyles = makeStyles((theme) => ({
   root: {

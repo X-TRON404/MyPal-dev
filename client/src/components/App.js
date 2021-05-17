@@ -458,7 +458,6 @@ const handleSignUp= () => {
             <ImageUpload username={user.displayName}/>
        
           }
-          {console.log(chatInput +" chatInput")}
     </div>
        
     </div>

@@ -1,9 +1,8 @@
-import React,{useState,useContext} from 'react';
+import React,{useState} from 'react';
 import {storage,DataBase} from './firebase';
 import firebase from 'firebase';
 import './ImageUploadMobile.css'
 import {Button, IconButton, Input, Modal} from '@material-ui/core';
-import SendIcon from '@material-ui/icons/Send';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import LinearProgress from '@material-ui/core/LinearProgress'
 import {useStateValue} from '../contexts/StateProvider'

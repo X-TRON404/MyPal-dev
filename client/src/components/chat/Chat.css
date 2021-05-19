@@ -5,30 +5,43 @@
     flex-direction: column;
     background-color: '#363A3E';
     margin-top:10px;
+    margin-bottom: 70px;
   }
-
-
-.chat__header{
-  color:grey;
-  padding:10px;
+  .chat__sendMessage{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-color: '#363A3E';
+    margin-top:10px;
   }
-  
-
 }  
 @media (min-width: 451px) and (max-width:2048px){  
   .chat{
+
+    background-color: '#363A3E';
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .chat__sendMessage{
     display: flex;
     justify-content: center;
     background-color: '#363A3E';
-    padding-top: 10px;
+    margin-top: 10px;
   }
-
-
-
+    
+} 
 .chat__header{
+  display: flex;
+  justify-content: center;
   color:grey;
-  }
-  
+}
 
-}  
-
+.chat__messages{
+  display: flex;
+  flex-direction: column;
+}
+.chat__body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

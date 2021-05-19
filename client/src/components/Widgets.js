@@ -14,7 +14,7 @@ function Widgets() {
         <div className="widgets"> 
             <div className="widgets__inputBox">
                 <SearchIcon className="widgets__searchIcon"/>
-                <Input style={{color:"aliceblue"}} className="widgets__input" type= "text" placeholder="Search Texx" />
+                <Input style={{color:"aliceblue"}} className="widgets__input" type= "text" placeholder="Search MyPal" />
             </div>
             <div className="widgets___widgetContainer">
                 {/* if user doesnt exists WidgetsChat component wasthrwoing an error hence I Made a fummy component which doesnt have a user object and 

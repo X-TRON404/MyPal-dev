@@ -32,6 +32,7 @@ import EventIcon from '@material-ui/icons/Event';
 import WidgetsChat from './chat/WidgetsChat'
 import logo from '../texx_logo.png'
 import FeedConfessions from './FeedConfessions'
+import {realtime} from './firebase'
 
 //====================================Modal styles=========================================
 function getModalStyle() {
@@ -121,9 +122,8 @@ function App() {
     { icon: <Router><Link><WhatshotSharpIcon onClick={()=>window.location.href= '/createConfessions'}/></Link></Router>, name: 'Confess' },
   ];
 
-//====================================Get the user from the local storage on refresh======================
+  //====================================Get the user from the local storage on refresh======================
   useEffect(()=>{
-
     userFromLocalStorage = localStorage.getItem('user')
     //if there is a user object saved in local storage then set it equal to 'user'
     if (userFromLocalStorage){
@@ -146,6 +146,7 @@ function App() {
       alert(err.message)
     }
   }
+
   },[])
 
 //====================================Authorization state listner=========================================
@@ -172,10 +173,32 @@ function App() {
     }
 
   })
+  //===============Add user status as 'online:true' to database as this component loads=====
+  user && 
+
+    realtime.ref('.info/connected').on('value',snapshot=>{
+
+        //make user status 'offline  in realtime database if user disconnects
+        realtime
+        .ref(`/status/${user.uid}`)
+        .onDisconnect() // Set up the disconnect hook
+        .set('offline') // The value to be set for this key when the client disconnects 
+        .then(() => {
+          //set firestore's user 'online' key to true
+          DataBase.collection('users').doc(user.uid).update({
+            online:true,
+          },console.log(user.uid+" user offline"))
+        })
+
+        //make user status 'online' in realtime database when page component loads 
+        realtime.ref(`/status/${user.uid}`).set('online');
+      })
+
   return () =>{
     //perform cleanup before re-firing the useEffect
     unsubscribe();
   }
+  //========================================================================================
 
 },[user,username])
 //sign up inside sign in
@@ -218,12 +241,13 @@ const handleSignUp= () => {
         //set displayname attribute of user object to username
         displayName:username
       }).then((result)=>{
-          console.log(result)
+          console.log(result+"result after sign up")
           //added the newly created user to our database
           DataBase.collection('users').doc(authUser.user.uid).set({
             email:authUser.user.email,
             displayName:authUser.user.displayName,
             bio:bio,
+            online:true,
             timestamp:firebase.firestore.FieldValue.serverTimestamp(),
            })
           })
@@ -450,14 +474,12 @@ const handleSignUp= () => {
                 </Router>
 
 {/* ======================================================================================================================================================= */}
-                               {/*show image upload only if the user is logged in*/}
-          {/*\used otional so it won't crash if these is no 'user.displayName' at the start and use 'user' instead */}
-          {user?.displayName &&
-          //if user exists then show image upload button/Send Message
-          
-            <ImageUpload username={user.displayName}/>
+                                            {/*post upload*/}
+                {/*Added a conditional here because when the user is logged out user.displayName does not exists and react freaks out*/}
+                {/*this can be a bug for short term as we are just showing the Modal when the user is logged out and the missing imageUpload component will be visible*/}
+                {/*but when instead we will show the homepage it wont be a problem*/}
+                {user && <ImageUpload username={user.displayName}/>}
        
-          }
     </div>
        
     </div>

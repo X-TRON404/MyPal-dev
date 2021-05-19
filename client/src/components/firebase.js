@@ -23,7 +23,8 @@ const firebaseApp = firebase.initializeApp({
 const DataBase = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 const storage = firebaseApp.storage();
+const realtime = firebaseApp.database()
 // const pref = firebaseApp.performance();
 // const analytics = firebaseApp.analytics();
 
-export  {DataBase,auth,storage}; 
+export  {DataBase,auth,storage,realtime}; 

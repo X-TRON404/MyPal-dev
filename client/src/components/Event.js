@@ -13,6 +13,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { DataBase } from './firebase';
 import { useStateValue } from '../contexts/StateProvider';
 import firebase from 'firebase/app'
+import EventsMenu from './EventsMenu'
 
 const useStyles = makeStyles({
   root: {
@@ -87,7 +88,7 @@ useEffect(() => {
                         Venue:{venue}
                     </span>
                 </div>
-                <MoreVertIcon style={{color:'white'}}/>
+                <EventsMenu eventId={eventId} eventUsername={username} eventUserId={user_id}/>
             </div>
             <Card className={classes.root}>
 

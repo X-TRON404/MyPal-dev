@@ -1,0 +1,4 @@
+/*color inside the app bar*/
+.MuiTab-wrapper {
+    color: aliceblue !important;
+}

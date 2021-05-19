@@ -1,5 +1,5 @@
 //structure of standard message
-import React,{ forwardRef } from 'react';//forwardRef keeps track of what is changing
+import React,{ forwardRef, useState } from 'react';//forwardRef keeps track of what is changing
 import {Card,Avatar,CardContent,Typography} from '@material-ui/core';
 import './Message.css';
 import {useStateValue} from '../../contexts/StateProvider';
@@ -13,27 +13,27 @@ const Message = ({message}) => {
     // const isUser = username === message.username 
     //get the user from the provider  
     const [{user}, dispatch] = useStateValue();
-    if (user){
-    const [isUser, setIsUser] = useState(true)
-    setIsUser(user.uid === message.author)
-    }
+    const [isUser, setIsUser] = useState(user.uid === message.author);
+    // if (user){
+    // setIsUser(user.uid === message.author)
+    // }
     return (
         //apply message__user class only if isUser is True
         <div className={`message ${isUser && 'message__user'}`}>
             {/*if isUser True then apply 'message_userCard' else apply 'message_guestCard'*/}
-            <Card className={isUser ? 'message_userCard': 'message_guestCard' }>
+            <div className={isUser ? 'message_userCard': 'message_guestCard' }>
                 <div className="message__header">
                     <Avatar className="message__avatar" alt={'d'} src="/static/images/avatar/1.jpg"></Avatar>
-                    <Typography className="message__username" variant="h">
+                    <p className="message__username" variant="h">
                         {isUser ? 'You': message.authorName || 'Unknown user'}
-                    </Typography>
+                    </p>
                 </div>
-                <CardContent>
-                    <Typography className="message__message" color="#E6E6E6" variant="h5" component="h2">
+                <div>
+                    <p className="message__message" color="#E6E6E6" variant="h5" component="h2">
                         {message.text}
-                    </Typography>
-                </CardContent>
-            </Card>
+                    </p>
+                </div>
+            </div>
         </div>
         )
     

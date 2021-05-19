@@ -10,6 +10,7 @@ import './Profile.css'
 import { Button, Input } from '@material-ui/core';
 import { auth, DataBase } from './firebase';
 import firebase from 'firebase/app'
+import ScrollableTabsButtonAuto from './SwipeTab'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -144,34 +145,7 @@ const logout = () => {
                         <Button className="profile__logoutButton" onClick={logout}>Log out</Button>
                     </div>
                     <div className="profile__footer">
-                    <CardContent>
-                        <Typography variant="h5">
-                            STATS
-                        </Typography>
-                        <div className="profile__footerStats">
-                            <div className="profile__footerStatsPosts">
-                                 
-                                <Typography variant="body2" >
-                                    Posts
-                                </Typography>
-                                <p>{numberOfPosts}</p>
-                                  
-                               
-                            </div>
-                            <div className="profile__footerStatsEvents">
-                                <Typography variant="body2" >
-                                    EVENTS
-                                </Typography>
-                                <p>{'#events'}</p>
-                            </div>
-                            <div className="profile__footerStatsFriends">
-                                <Typography variant="body2" >
-                                    FRIENDS
-                                </Typography>
-                                <p>{'#friends'}</p>
-                            </div>
-                        </div>
-                    </CardContent>
+                           <ScrollableTabsButtonAuto/>
                     </div>
                     </Card>
         </div>

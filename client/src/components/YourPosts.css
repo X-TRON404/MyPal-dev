@@ -1,0 +1,10 @@
+
+/*image inside the grid box*/
+.MuiGridListTile-imgFullHeight {
+    /*make sure images dont go out of their grid boxes*/
+    width: 100% !important;
+}
+/*extra padding to entire grid box*/
+.MuiBox-root-26 {
+    padding: 0px !important;
+}

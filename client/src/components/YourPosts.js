@@ -28,14 +28,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TitlebarGridList() {
+export default function YourPosts() {
     const classes = useStyles();
 
     //get the user from the provider
     const [{user}, dispatch] = useStateValue();
     //posts array
     const [posts, setPosts] = useState([]);
-//====================================Post changes listner=========================================
+//====================================GET user created posts=========================================
     useEffect( () => {
         //grab the posts which belong to the logged in user from the db
         DataBase.collection('posts').where("user_id", "==", user.uid).get()

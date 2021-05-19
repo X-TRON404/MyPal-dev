@@ -43,7 +43,7 @@ function PostMenu({postId,postUsername,postUserId}) {
 
     const handleReport = (e) => {
         e.preventDefault();
-        //add comment to the 'comments' collection of the particular post 
+        //add report collection of the particular post 
         DataBase.collection('posts').doc(postId).collection('Report').doc(postId).set(
             {
              reportedByUsername:user.displayName,
@@ -58,11 +58,11 @@ function PostMenu({postId,postUsername,postUserId}) {
     };
     const handleBookmark = (e) => {
       e.preventDefault();
-      //add comment to the 'comments' collection of the particular post 
+      //add bookmark
       DataBase.collection('users').doc(user.uid).collection('bookmarksPost').doc(postId).set(
           {
            bookmarkPostId:postId,
-           bookmarkPostUser:user.uid,
+           bookmarkPostUsername:postUsername,
            timestamp:firebase.firestore.FieldValue.serverTimestamp()
           }
       ) 

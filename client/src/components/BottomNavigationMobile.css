@@ -2,12 +2,6 @@
   @media (min-width: 0px) and (max-width:450px){
     .bottomNavigation{
         z-index: 1000;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
         margin-top: 10px;
         position: fixed;
         bottom: 0;
@@ -21,6 +15,7 @@
         display:none;
         }
 }
+
 
 
 

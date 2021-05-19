@@ -1,8 +1,13 @@
 .message{
+display: flex;
 padding:10px;
-margin: 10px;
 width:fit-content;
 
+}
+.message__user{
+    display: flex;
+    margin-left:auto ;
+    color:white;
 }
 .message__header{
     display: flex;
@@ -17,11 +22,14 @@ width:fit-content;
 
 .message__username{
     font-size: large;
-    margin-top: 20px !important;
-    margin-left: 20px !important;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 20px;
 }
 .message__message{
     color:white;
+    padding: 5px;
+    padding-left: 15px;
 }
 
 .message__typography{
@@ -38,17 +46,12 @@ width:fit-content;
     padding: 20px;
 }
 
-.message__user{
-    
-    margin-left:auto ;
-    color:white;
-    text-align: right !important;
-}
-
 .message_userCard{
-background-color: #363A3E !important;
+background-color: #2E3236;
+border-radius: 10px;
 }
 
 .message_guestCard{
-background-color: whitesmoke !important;
+background-color: #2d2c2c;
+border-radius: 10px;
 }

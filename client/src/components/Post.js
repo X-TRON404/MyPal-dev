@@ -228,6 +228,16 @@ const addToChats = () => {
         timestamp:firebase.firestore.FieldValue.serverTimestamp(),
 
         })
+    //add the user1 who added user2 to chatlist of user1 to chatlist of user2
+    //also later write the code to send notification to user2 that he has been added to the chatlist by user1
+    DataBase.collection('users').doc(user_id).collection('chats').doc(user.uid).set({
+        chat_username:user.displayName,
+        //user id of the user who wrote the post
+        chat_user_id:user.uid,
+        timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+
+        })
+
     }
     
 } 

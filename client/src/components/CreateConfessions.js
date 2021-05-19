@@ -32,7 +32,7 @@ function CreateConfessions() {
                                     defaultValue="Default Value"
                                     variant="outlined"
                                     />
-                    <Button style={{color:"gray"}} className="createEvent___iButton" disabled = {!confession} variant ='contained' color="primary" type ='submit' onClick={handlePost}>Post</Button>
+                    <Button className="createConfessions___iButton" disabled = {!confession} variant ='contained' color="primary" type ='submit' onClick={handlePost}>Post</Button>
                 </form>
         </div>
         

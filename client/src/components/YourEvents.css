@@ -1,0 +1,10 @@
+.yourevents{
+    display: flex;
+    flex-direction: column;
+}
+.yourevents__event{
+    display: flex;
+    margin-top: 6px;
+    background-color:#3F4347;
+    color: aliceblue;
+}

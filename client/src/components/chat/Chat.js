@@ -26,10 +26,14 @@ function Chat() {
 useEffect(() => {
     if (user){
     if (chatId){
-        //here the chat_user_id is taken from the user who posted that particular post to database
-        const unsubscribe = DataBase.collection('users').doc(user.uid).collection('chats').doc(chatId).collection('messages').onSnapshot((snapshot)=>(
+        //here the chat_user_id (chatId) is taken from the user (user.uid) who posted that particular post to database
+        const unsubscribe = DataBase.collection('users').doc(user.uid).collection('chats').doc(chatId).collection('messages').orderBy('timestamp','asc').onSnapshot((snapshot)=>(
             setMessages(snapshot.docs.map((doc) => doc.data()))
         ))
+            //get the username of the person we are chatting with 
+            DataBase.collection('users').doc(user.uid).collection('chats').doc(chatId).onSnapshot((snapshot)=>(
+                setChatName(snapshot.data()) )
+            )
 
         return () =>{
             //perform cleanup before re-firing the useEffect
@@ -47,15 +51,20 @@ useEffect(() => {
 
     return (                         
              <div className="chat">
-                <div className="chat__header">
-                This is the beggining of your texx with {}
+                <div className="chat__body">
+                    <div className="chat__header">
+                        This is the beggining of your texx with  {chatName.chat_username}
+                    </div>
+                    <div className="chat__messages">
+                    {
+                        messages.map((message)=>(<Message message={message}/>))
+                        
+                    }
+                    </div>
                 </div>
-                
-                {
-                    messages.map((message)=>(<Message message={message}/>))
-                    
-                }
-                <SendMessage chatId={chatId} />
+                <div className="chat__sendMessage">
+                    <SendMessage chatId={chatId} />
+                </div>
              </div> 
              
 

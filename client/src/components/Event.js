@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -10,6 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import './Event.css'
 import { Paper } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { DataBase } from './firebase';
+import { useStateValue } from '../contexts/StateProvider';
+import firebase from 'firebase/app'
 
 const useStyles = makeStyles({
   root: {
@@ -20,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 function Event({eventId, dateTime, venue, username,title, description, user_id, imageUrl, interestedCount}) {
-
+    const classes = useStyles();
     const convertToDate = (date) => {
         //convert to miliseconds
         let k = date.seconds*1000
@@ -28,8 +31,48 @@ function Event({eventId, dateTime, venue, username,title, description, user_id, 
         dat = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: "long" ,day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(k)
         return dat
     }
-//=====
-    const classes = useStyles();
+    //get the user from the provider
+    const [{user}, dispatch] = useStateValue();
+    //bool to check if the current event is already subscribed or not
+    const [interested,setInterested] = useState(false) 
+    //disable the interested button after click
+    const [onclickDisable,setOnclickDisable] = useState(false)
+
+//===================================Add event to interested====================================
+    const addInterested = () => {
+    DataBase.collection('users').doc(user.uid).collection('interestedEvents').doc(eventId).set(
+        {   eventTitle:title,
+            eventId:eventId,
+            dateTime:dateTime,
+            venue:venue,
+            eventDescription:description,
+            eventOrganizedByName:username,
+            eventOrganizedById:user_id,
+        }
+    )
+    //increase the interested count
+    DataBase.collection('events').doc(eventId).update("interestedCount", firebase.firestore.FieldValue.increment(1))
+
+    setOnclickDisable(true)
+}
+
+//=====================================check if the user already registered for the event ==========================
+useEffect(() => {
+
+    DataBase.collection('users').doc(user.uid).collection('interestedEvents').doc(eventId).get().then((doc) => {
+        if (doc.exists) {
+            setInterested(true)
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+    
+}, [eventId,interested])
+
+//===============================================================================================
     return (
         <div className="event">
             <div className="event__header">
@@ -65,9 +108,13 @@ function Event({eventId, dateTime, venue, username,title, description, user_id, 
 
                 <div className="event__footer">
                     <CardActions className="event__interested">
-                        <Button size="small" >    
+                        {/*if already registered for the event then show registered*/}
+                    {
+                    !interested?(<Button size="small" onClick={addInterested} disabled={onclickDisable}>    
                                 I am Interested
-                        </Button>
+                        </Button>):(<Button disabled={true}>Registered</Button>)
+
+                    }   
                     </CardActions>
     
                     <CardActions className="event__actions">
@@ -86,9 +133,7 @@ function Event({eventId, dateTime, venue, username,title, description, user_id, 
                                         }} >
                             Share with friends
                             </Button>
-                            <Button size="small" >
-                            Learn More
-                            </Button>
+                    <Typography>Interested: {interestedCount}</Typography>
                     </CardActions>
                 </div>
             </Card>

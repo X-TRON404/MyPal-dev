@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import { useStateValue } from '../contexts/StateProvider';
 import { DataBase } from './firebase';
-import './YourPost.css'
+import './YourPosts.css'
 
 
 const useStyles = makeStyles((theme) => ({

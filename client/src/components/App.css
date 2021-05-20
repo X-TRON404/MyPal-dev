@@ -139,8 +139,8 @@
 }
 .app__confessionsFeed{
   flex:1;
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
   background-color: #363A3E;
   overflow-y: scroll; 
   width:100%

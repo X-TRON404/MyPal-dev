@@ -68,6 +68,7 @@ const [displayName,setDisplayName] = useState(user?.displayName);
 // edit bio
 const [bio,setBio] = useState(userInfo?.bio);
 console.log(bio)
+
 //==================================================Log out =======================================
 const logout = () => {
     //remove the user from the local storage
@@ -104,8 +105,6 @@ const logout = () => {
     //close edit mode
     setShowEditInput(false)
     }
-
-
     return (
         <div className="profile">
                 <Card className="profile__card" elevation={1}>
@@ -115,10 +114,10 @@ const logout = () => {
                                 <div className="profle__headerInfo">
                                     {/*if show edit input is true then show the input elements for edit else show normal elements*/}
                                                 {/*username*/}
-                                    {!showEditInput &&<Typography>{user?.displayName}</Typography>}
+                                    {!showEditInput &&<Typography><b>{user?.displayName}</b></Typography>}
                                                 {/*username edit input box*/}
                                     {showEditInput && <Input value={displayName} onChange={(e)=>{setDisplayName(e.target.value)}}/>}
-                                    <Typography>{`Joined on " + ${'Joining date'}`}</Typography>
+                                    <Typography>{`Joined on ${user?.metadata.creationTime.slice(0,17)}`}</Typography>
                                 </div>
                             <IconButton aria-label="settings">
                                 <MoreVertIcon />

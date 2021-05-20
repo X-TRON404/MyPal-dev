@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import YourPosts from './YourPosts'
 import YourEvents from './YourEvents'
+import YourBookmarks from './YourBookmarks'
 import './SwipeTab.css'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -72,7 +73,7 @@ export default function ScrollableTabsButtonAuto() {
         >
           <Tab label="POSTS" {...a11yProps(0)} />
           <Tab label="Events" {...a11yProps(1)} />
-          <Tab label="Friends" {...a11yProps(2)} />
+          <Tab label="Bookmarks" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -82,7 +83,7 @@ export default function ScrollableTabsButtonAuto() {
         <YourEvents/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <YourBookmarks/>
       </TabPanel>
     </div>
   );

@@ -9,16 +9,19 @@
     bottom: 0;
     background-color: #1A1A1A;
     border:none;
+    height: 51px;
 
 }
   .chat__inputForm{
     flex-grow: 100;
     display: flex;
     padding: 10px;
+    padding-left: 20px;
     position: relative;
     bottom: 0;
     border:none;
     color:grey;
+    padding-bottom: 10px;
   }
 
   .sendMessage__input{

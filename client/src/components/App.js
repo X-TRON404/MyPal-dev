@@ -174,25 +174,25 @@ function App() {
 
   })
   //===============Add user status as 'online:true' to database as this component loads=====
-  user && 
+  // user && 
 
-    realtime.ref('.info/connected').on('value',snapshot=>{
+  //   realtime.ref('.info/connected').on('value',snapshot=>{
 
-        //make user status 'offline  in realtime database if user disconnects
-        realtime
-        .ref(`/status/${user.uid}`)
-        .onDisconnect() // Set up the disconnect hook
-        .set('offline') // The value to be set for this key when the client disconnects 
-        .then(() => {
-          //set firestore's user 'online' key to true
-          DataBase.collection('users').doc(user.uid).update({
-            online:true,
-          },console.log(user.uid+" user offline"))
-        })
+  //       //make user status 'offline  in realtime database if user disconnects
+  //       realtime
+  //       .ref(`/status/${user.uid}`)
+  //       .onDisconnect() // Set up the disconnect hook
+  //       .set('offline') // The value to be set for this key when the client disconnects 
+  //       .then(() => {
+  //         //set firestore's user 'online' key to true
+  //         DataBase.collection('users').doc(user.uid).update({
+  //           online:true,
+  //         },console.log(user.uid+" user offline"))
+  //       })
 
-        //make user status 'online' in realtime database when page component loads 
-        realtime.ref(`/status/${user.uid}`).set('online');
-      })
+  //       //make user status 'online' in realtime database when page component loads 
+  //       realtime.ref(`/status/${user.uid}`).set('online');
+  //     })
 
   return () =>{
     //perform cleanup before re-firing the useEffect

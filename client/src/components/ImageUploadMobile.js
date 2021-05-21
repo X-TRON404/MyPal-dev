@@ -6,6 +6,7 @@ import {Button, IconButton, Input, Modal} from '@material-ui/core';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import LinearProgress from '@material-ui/core/LinearProgress'
 import {useStateValue} from '../contexts/StateProvider'
+import AlertDialog from './AlertDialog';
 
 function ImageUploadMobile({username}) {
     //get the user from the provider
@@ -18,6 +19,8 @@ function ImageUploadMobile({username}) {
     const [progress,setProgress] = useState(0); 
     //open the modal 
     const [openProgress,setOpenProgress] = useState(false)
+    //open alert box when a new event is created
+    const [openAlert,setOpenAlert] = useState(false)
 
 
 
@@ -86,9 +89,11 @@ function ImageUploadMobile({username}) {
                             setOpenProgress(false)
                             setCaption("");
                             setImage(null)
+                            
 
                     })
 
+                    setOpenAlert(true)
                 }
 
             )
@@ -107,6 +112,7 @@ function ImageUploadMobile({username}) {
                         <LinearProgress  variant="determinate" className="imageUploadMobile__uploadProgress" value={progress} max="100"/>
                 </Modal>
 
+                <AlertDialog text={"New post is up!"} openAlert={openAlert} changeAlert={al=>{setOpenAlert(al)}}/>
 
                                                         {/*post upload form */}
             <div className="imageUploadMobile__form">
@@ -123,12 +129,12 @@ function ImageUploadMobile({username}) {
                                                     {/*selected image preview*/}
                         {image&&(<img className="imageUploadMobile__preview" width="80px" height="80px" src={URL.createObjectURL(image)}/>)}
                                                         {/*image caption*/}
-                        <Input style={{color:"aliceblue"}}  className="imageUploadMobile__caption" type="text" placeholder="Enter a caption..." onChange={(e)=>setCaption(e.target.value)} value={caption}/>
+                        <Input style={{color:"aliceblue"}}  className="imageUploadMobile__caption" type="text" placeholder="Enter a caption for the new post..." onChange={(e)=>setCaption(e.target.value)} value={caption}/>
                         <Button className="imageUploadMobile___iconButton" disabled = {!image} variant ='contained' color="primary" type ='submit' onClick={handleUpload}>
                             POST
                         </Button>
                 </form>
-           </div>
+           </div> 
         </div>
     )
 }

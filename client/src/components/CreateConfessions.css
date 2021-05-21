@@ -39,3 +39,9 @@
 .createConfessions___iButton{
     margin-top: 10px;
 }
+.createConfessions__textarea > .MuiInputBase-root {
+    color: aliceblue !important;
+}
+.createConfessions__textarea > .MuiFormLabel-root {
+    color: gray;
+}

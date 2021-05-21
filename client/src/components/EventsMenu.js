@@ -14,6 +14,7 @@ import firebase from 'firebase/app'
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
+      zIndex:1000,
     },
     paper:{
       backgroundColor:'#2E3236',

@@ -55,6 +55,7 @@ function PostMenu({postId,postUsername,postUserId,postCaption,postImage}) {
             }
         ) 
       setOpen(false);
+      alert("Thank you for your concern we are looking into the matter!")
     };
     const handleBookmark = (e) => {
       e.preventDefault();
@@ -69,6 +70,7 @@ function PostMenu({postId,postUsername,postUserId,postCaption,postImage}) {
           }
       ) 
     setOpen(false);
+    alert("Added to bookmarks")
   };
   
     function handleListKeyDown(event) {

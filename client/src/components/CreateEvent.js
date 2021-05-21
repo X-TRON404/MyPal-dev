@@ -1,4 +1,4 @@
-import React,{useState,useContext} from 'react';
+import React,{useState} from 'react';
 import {storage,DataBase} from './firebase';
 import firebase from 'firebase';
 import {Button, IconButton, Input, Modal,TextField} from '@material-ui/core';
@@ -7,6 +7,7 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 import {useStateValue} from '../contexts/StateProvider'
 import './CreateEvent.css'
 import DateTimeSelect from './DateTimeSelect'
+import AlertDialog from './AlertDialog'
 
 function CreateEvent() {
     //get the user from the provider
@@ -25,8 +26,10 @@ function CreateEvent() {
     const [venue,setVenue] = useState('')
     //Datetime
     const [dateTime,setdateTime] = useState(new Date())
+    //open alert box when a new event is created
+    const [openAlert,setOpenAlert] = useState(false)
 
-
+    console.log(openAlert)
     //get the name of the first image file you selected (image as a file)
     const handleImageChange = (e) =>{
         if (e.target.files[0]){
@@ -100,8 +103,13 @@ function CreateEvent() {
                             setDescription("");
                             setVenue("")
                             setImageThumbnail(null)
+                            
+                            
+                            
+                            
 
                     })
+                    setOpenAlert(true)
 
                 }
 
@@ -123,7 +131,7 @@ function CreateEvent() {
                                                                         {/*progress bar*/}
                         <LinearProgress  variant="determinate" className="createEvent__uploadProgress" value={progress} max="100"/>
                 </Modal>
-
+                <AlertDialog text={"Your new event is up!"} openAlert={openAlert} changeAlert={al=>{setOpenAlert(al)}}/>
 
                                                         {/*post upload form */}
             <div className="createEvent_formContainer">

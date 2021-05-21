@@ -134,7 +134,7 @@ useEffect(() => {
                                         }} >
                             Share with friends
                             </Button>
-                    <Typography>Interested: {interestedCount}</Typography>
+                    <Typography style={{color:'aliceblue'}}>Interested: {interestedCount}</Typography>
                     </CardActions>
                 </div>
             </Card>

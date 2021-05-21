@@ -99,7 +99,7 @@ const CssTextField = withStyles({
       color: CURRENT_THEME.textInv
     }
     // "& .MuiOutlinedInput-input": {
-    //   color: CURRENT_THEME.textInv
+    //   color: CURRENT_THEME.textInv     
     // },
     // "& .MuiOutlinedInput-root": {
     //   "& fieldset": {
@@ -211,6 +211,8 @@ const materialTheme = createMuiTheme({
 });
 
 function DateTimeSelect(props) {
+  //select the date here with myDate
+  //once date is selected, pass it on to parent component
   const [myDate, setmyDate] = useState();
 
   return (

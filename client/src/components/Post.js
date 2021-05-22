@@ -1,6 +1,6 @@
 //post component
 
-import React , {useState,useEffect,useContext} from 'react'
+import React , {useState,useEffect,useContext, useRef} from 'react'
 import './Post.css'
 import Avatar from '@material-ui/core/Avatar';
 import {Button, Collapse, IconButton, Input, makeStyles, Modal, Popover, Typography } from '@material-ui/core';
@@ -50,7 +50,6 @@ function Post({postId,username,user_id,caption,imageUrl,likesCount}) {
     //store likes from the database for a praticular post in an array (GET from DataBase)
     const [likes, setLikes] = useState([]);
     //input comment for a post from the user  (POST to DataBase)
-    const [like, setLike] = useState(true);
     //change color of the like button on click
     const [favouritesColor, setfavouritesColor] = useState(false)
     //to make sure user likes the post only once
@@ -66,17 +65,23 @@ function Post({postId,username,user_id,caption,imageUrl,likesCount}) {
     const [expanded, setExpanded] =  useState(false);
     //for commentsIcon onhover popup
     const [anchorEl, setAnchorEl] =  useState(null);
-    const [likeCount,setLikeCount] = useState(0)
-    //create a reference to post doc
-    const postRef = DataBase.collection('posts').doc(postId)
-    //firebase increment for incrementing the likecount
-    const increment = firebase.firestore.FieldValue.increment(1)
-    //firebase decrement for decrementing the likecount
-    const decrement = firebase.firestore.FieldValue.increment(-1)
+    //number of likes
+    const [likeCount,setLikeCount] = useState(likesCount)
     //avatar hover modal
     const [hoverOpen, setHoverOpen] = useState(false)
     //modal styles
     const [modalStyle] = useState(getModalStyle);
+    //no. of liked docs
+    const [liked,setLiked] = useState([])
+    //like data of already liked doc
+    const [likedData,setLikedData] = useState([])
+    //if like=true or not
+    const [like, setLike] = useState(false);
+    const [uid,setUid] =useState(user.uid)
+    //like ref
+    const likeCountRef = useRef(0)
+    //
+    const count = useRef(0)
 
     //commentsIcon onclick collapse
     const handleExpandClick = () => {
@@ -103,88 +108,108 @@ function Post({postId,username,user_id,caption,imageUrl,likesCount}) {
     }
     //convert to date
     const convertToDate = (timestamp) => {
-        console.log(timestamp)
+        // console.log(timestamp)
         let currentDate = firebase.firestore.Timestamp.now();
-        console.log(currentDate)
+        // console.log(currentDate)
         let diff = Math.abs(timestamp - currentDate );
         const dateInMillis  = diff * 1000;
         let date = new Date(dateInMillis).toLocaleTimeString();
         return(date.replace(/:\d+ /, ' ')+"hrs ago")
     }
-//==================================================check whether user is present in the chat list=========================================================================
-    const isPresentInChats = (user_id,chats_array) => {
-        for (const chat of chats_array){
-            if (chat[0]===user_id){
-                return true
-            }
-        }
-
-}
 //======================================Post likes to the database===================================================================================
+const postLike = () => {
+    const newLikeValue = !like;
+    const newLikeCount = like ? likeCount - 1 : likeCount + 1;
+    setLike(!like);
 
-    const postLike = (e) => {
-//=======================================liking the document first time=============================
-        if (likes.length===0){
-        console.log("if statement")
-        setLike(true)   
-        postRef.update({ likesCount: increment })
-        // setLikeCount(likeCount=>likeCount+=1)     
-               //add like to the 'postLikes' collection of the particular post 
-        DataBase.collection('posts').doc(postId).collection('postLikes').doc(user.uid).set(
-            {
-                like:true,
-                username:user.displayName,
-                timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+    setLikeCount(newLikeCount);
+    setLike(newLikeValue);
+    DataBase
+    .collection('posts').doc(postId)
+    .collection('postLikes').doc(user.uid)
+    .set(
+      { 
+        like:newLikeValue,
+        username:user.displayName,
+        timestamp:firebase.firestore.FieldValue.serverTimestamp(),
 
-            }
-        ).catch((err)=>{console.log("something wrong happened "+err.message)})
-        
-    }
-
-//=======================================liking the document NOT first time==========================
-
-        else if (likes.length!==0){
-            console.log("else statement")
-            setLike(!like)
-            like?postRef.update({ likesCount: increment }):postRef.update({ likesCount: decrement })
-            // if(like===true){
-            //     (setLikeCount(likeCount=>likeCount+=1))
-            // }
-            // else if(like===false){
-            //     (setLikeCount(likeCount=>likeCount-=1))
-            // }
-            DataBase.collection('posts').doc(postId).collection('postLikes').doc(user.uid).update(
-                {
-                    like:like,
-                    timestamp:firebase.firestore.FieldValue.serverTimestamp()
-                }
-            )
-        
-        }    
-
+      }
+    ).catch((err)=>{console.log("something wrong happened "+err.message)})
 }
-//======================================Get the list of users in chatlist===============================================================================
-useEffect(()=>{
+//====================================Get the comments and likes from the database and display=================================================================
+useEffect(() => {
+       
+    // count.current++
     
-    if (user)
-    {const unsubscribe = DataBase.collection('users').doc(user.uid).collection('chats').orderBy('timestamp','desc').onSnapshot((snapshot)=>{
-                        setChats(snapshot.docs.map((doc) => (doc.data())))
-                    
+    //if a postId is passed
+    if (postId){
+        //get a snapshot listner for 'comments' collection inside the passed 'postId' doc inside the collection 'posts'
+         DataBase.collection('posts').doc(postId).collection('comments').orderBy('timestamp','desc').onSnapshot(
+                (snapshot) =>{
+                    //set comments to the data inside the doc
+                            setComments(snapshot.docs.map((doc) => (doc.data())))
+                })
+
+
+                //get a snapshot listner for 'postLikes' collection inside the passed 'postId' doc inside the collection 'posts'
+        // DataBase.collection('posts').doc(postId).collection('postLikes').orderBy('timestamp','desc').onSnapshot(
+        //         (snapshot) =>{
     
-                    })
-    return  unsubscribe()
+        //                                 setLikes(snapshot.docs.map((doc) => ({id:doc.id,like:doc.data()})))
+                                        
+                                    
+        //                         }   
+        //                 ,
+        //                 error => {
+        //                     console.log(error)
+        //                 }
+
+        //         )
+        
+    //check if the user already liked the doc or not
+    setTimeout(() => {
+            DataBase.collection('posts').doc(postId).collection('postLikes').doc(user.uid).get().then((doc) => {
+                if (doc.exists) {
+                    console.log(doc.data().like)
+                    setLike(doc.data().like)
+                    console.log(like + " 1")
+                    console.log("likedData")
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("Not liked");
+                }
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+        }, 500);
+
+        
+            //    grab the docs which have like=true 
+            setTimeout(() => {
+                DataBase.collection('posts').doc(postId).collection('postLikes').where("like", "==", true).get()
+                .then((querySnapshot) => {
+                    setLikeCount((querySnapshot.docs.map(doc =>doc.data())).length)
+                    console.log(likeCount +" likes count")
+                    likeCountRef.current=likeCount
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+            }, 400);
+                
+
+              
     }
-
-//when postId changes fire the code above
-},[,user_id,user])
-
+    
+    //when postId,user changes or page loads fire the code above
+},[,postId])  
 //========================================================================================================================
 
 useEffect(() => {
     //Run this function when the post component loads or there are changes in user object or chats object 
         //because we want to run this function only after the data from the database has been fetched and the component in which we are mapping this data (Button) that,
         //loads after the component which calls for this function (<Avatar>) is loaded  
-        console.log("running AddButton")
+        // console.log("running AddButton")
             //loop through the object list of 'chats' 
             // if the 'chat_user_id' is already present in the chats object, then set the the second dimension true
             //convert each object into an array and loop through it
@@ -216,6 +241,30 @@ useEffect(() => {
             // console.log(isPresent)
 
         },[,postId,chats,user])
+//==================================================check whether user is present in the chat list=========================================================================
+    const isPresentInChats = (user_id,chats_array) => {
+        for (const chat of chats_array){
+            if (chat[0]===user_id){
+                return true
+            }
+        }
+
+}
+//======================================Get the list of users in chatlist===============================================================================
+useEffect(()=>{
+    
+    if (user)
+    {const unsubscribe = DataBase.collection('users').doc(user.uid).collection('chats').orderBy('timestamp','desc').onSnapshot((snapshot)=>{
+                        setChats(snapshot.docs.map((doc) => (doc.data())))
+                    
+    
+                    })
+    return  unsubscribe()
+    }
+
+//when postId changes fire the code above
+},[,user_id,user])
+
 //======================================Add the selected user to chats list============================================
 const addToChats = () => {
     //if the document by the user_id already exists then it wont change it
@@ -255,74 +304,6 @@ const postComment = (e) => {
     //clear the input after posting
     setComment('')
 }
-//====================================Get the comments and likes from the database and display=================================================================
-    useEffect(() => {
-        
-        //if a postId is passed
-        if (postId){
-            //get a snapshot listner for 'comments' collection inside the passed 'postId' doc inside the collection 'posts'
-             DataBase.collection('posts').doc(postId).collection('comments').orderBy('timestamp','desc').onSnapshot(
-                    (snapshot) =>{
-                        //set comments to the data inside the doc
-                                setComments(snapshot.docs.map((doc) => (doc.data())))
-                    })
-
-    
-                              //get a snapshot listner for 'postLikes' collection inside the passed 'postId' doc inside the collection 'posts'
-                        DataBase.collection('posts').doc(postId).collection('postLikes').orderBy('timestamp','desc').onSnapshot(
-                                (snapshot) =>{
-                 
-                                                        setLikes(snapshot.docs.map((doc) => ({id:doc.id,like:doc.data()})))
-                                                        
-                                                    
-                                               }   
-                                        ,
-                                        error => {
-                                            console.log(error)
-                                        }
-                
-                                )
-                                if(likes.length!==0){
-                                    console.log("if")
-                                    for(const like_doc in likes ){
-                                        // console.log(likes[like_doc].like.like)
-                                        if(likes[like_doc].id === user.uid){
-                                            // setfavouritesColor(likes[like_doc].like.like)
-                                            setLike(likes[like_doc].like.like)
-                                            console.log(like)
-                                        }
-                                    }
-                       
-                                }
-                                else if(likes.length==0){
-                                    console.log("elif")
-                                    // setfavouritesColor(false)
-                                    setLike(false)
-                                 
-                                    
-                                }
-
-                                // for (const like_doc in likes){
-                                  
-                                       
-                                //         if (likes[like_doc].like.like ===true){
-                                        
-                                //             setLikeCount(likeCount=>likeCount+=1)
-
-                                //         }
-                                    
-                                // }
-                                // setLikeCount(Number([...likes.filter(like => like.id === user.uid).length)+1) 
-       
-        
-    
-                  
-        }
-        
-        //when postId,user changes or page loads fire the code above
-},[,postId,user])
-
-
 
 
 //================================================================================================================================================================
@@ -389,7 +370,7 @@ const postComment = (e) => {
                 } */}
 
                             {/*Report or bookmarks Menu*/}
-                <PostMenu postId={postId} postUsername={username} postUserId={user_id}/>
+                <PostMenu postId={postId} postUsername={username} postUserId={user_id} postImage={imageUrl} postCaption={caption}/>
                 
              
             {/*===========================================================================================================================================*/}
@@ -402,13 +383,20 @@ const postComment = (e) => {
 
                             <div className="post__likes">  
                                                                                 {/*like icon*/}
-                                    <FavoriteIcon   fontsize="small" cursor="pointer" onClick={postLike} style={{color:like?'':'red'}} /> 
-                                <FlipMove> 
+                                                                             
+                              
+                                        {like?
+                                            (<Button onClick={postLike} ><FavoriteIcon   fontsize="small" cursor="pointer" style={{color:'red'}}/></Button> ):(<Button onClick={postLike} ><FavoriteIcon   fontsize="small" cursor="pointer"  /> </Button>)
+                                            
+                                        }
+                                    
+                                   
+                                {/* <FlipMove> 
                                         {likes.map((id,like)=>
                                             (<p style={{color:'aliceblue'}} id={id}><strong>{user && (user.displayName===like.username?(like.like?(<strong>You{JSON.stringify(like.like)}</strong>):(<strong></strong>)):(like.username))}</strong></p>)
                                         )}
-                                </FlipMove>
-                                <Typography style={{color:'aliceblue'}}>Liked by {likesCount}</Typography>
+                                </FlipMove> */}
+                                <Typography style={{color:'aliceblue'}}>Liked by {likeCount}</Typography>
                             </div>
                             
                                             {/*collapse  comments*/}
@@ -423,8 +411,8 @@ const postComment = (e) => {
                                             className={classes.popover}
                                             classes={{
                                             paper: classes.paper,
-                                            }}
-                                            open={open}
+                                            }}          
+                                            open={open}        
                                             anchorEl={anchorEl}
                                             anchorOrigin={{
                                             vertical: 'bottom',

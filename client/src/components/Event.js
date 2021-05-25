@@ -102,7 +102,7 @@ useEffect(() => {
                 </div>
 
                 <CardContent className="event__description">
-                    <Typography variant="body2" color="textSecondary" component="p">
+                    <Typography variant="body2" color="textSecondary"  component={'span'}>
                         {description}
                     </Typography>
                 </CardContent>

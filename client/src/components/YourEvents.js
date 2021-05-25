@@ -35,10 +35,10 @@ function YourEvents() {
             {events.map(event=>(
                     <Card className="yourevents__event">
                         <CardContent>
-                            <Typography>Event: {event.title}</Typography>
-                            <Typography>Date: {convertToDate(event.dateTime)}</Typography>
-                            <Typography>Venue: {event.venue}</Typography>
-                            <Typography>Interested people: {event.interestedCount}</Typography>
+                            <Typography  component={'span'}>Event: {event.title}</Typography>
+                            <Typography  component={'span'}>Date: {convertToDate(event.dateTime)}</Typography>
+                            <Typography  component={'span'}>Venue: {event.venue}</Typography>
+                            <Typography  component={'span'}>Interested people: {event.interestedCount}</Typography>
                         </CardContent>
                     </Card>
             ))}

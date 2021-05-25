@@ -40,9 +40,9 @@ function YourBookmarks() {
                    {postBookmarks.map(post=>(
                     <Card className="yourevents__event">
                         <CardContent>
-                            <Typography>Caption: {post.bookmarkPostCaption}</Typography>
+                            <Typography  component={'span'}>Caption: {post.bookmarkPostCaption}</Typography>
                             <img src={post.bookmarkPostImage}/>
-                            <Typography>Posted By: {post.bookmarkPostUsername}</Typography>
+                            <Typography  component={'span'}>Posted By: {post.bookmarkPostUsername}</Typography>
                         </CardContent>
                     </Card>
                      ))}

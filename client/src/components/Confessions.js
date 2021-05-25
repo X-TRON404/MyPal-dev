@@ -80,7 +80,7 @@ const postConfessionComment = (e) => {
                                     <ChatBubbleOutlineRoundedIcon fontsize="small" cursor="pointer" aria-expanded={expanded} aria-label="show more comments"/>
                                  </IconButton>
                                                             {/*no. of comments*/}
-                                 <Typography style={{color:'aliceblue'}}>{confessionComments.length} Comments</Typography>
+                                 <Typography style={{color:'aliceblue'}}  component={'span'}>{confessionComments.length} Comments</Typography>
                     </div>
 
                             <Collapse in={expanded} timeout="auto" unmountOnExit >

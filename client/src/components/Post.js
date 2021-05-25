@@ -354,7 +354,7 @@ const postComment = (e) => {
                     //this is done by mathcing the 'user_id' from 'posts' to chat_user_id (chat[0])
                     //then check bool chat[1] for whether the element is present in an array or not
                     //if the element is not present then show <Add to chats> else show <Chat>
-                    <span>{(chat[0]==user_id) && ((chat[1])?(<Button key={user_id} onClick={addToChats}>Add to chats</Button>):(<Button key={user_id}>Chat</Button>))}</span>
+                    <span id={user_id}>{(chat[0]==user_id) && ((chat[1])?(<Button onClick={addToChats}>Add to chats</Button>):(<Button >Chat</Button>))}</span>
                     ))
 
                     ):
@@ -396,15 +396,15 @@ const postComment = (e) => {
                                             (<p style={{color:'aliceblue'}} id={id}><strong>{user && (user.displayName===like.username?(like.like?(<strong>You{JSON.stringify(like.like)}</strong>):(<strong></strong>)):(like.username))}</strong></p>)
                                         )}
                                 </FlipMove> */}
-                                <Typography style={{color:'aliceblue'}}>Liked by {likeCount}</Typography>
+                                <Typography style={{color:'aliceblue'}}  component={'span'}>Liked by {likeCount}</Typography>
                             </div>
                             
                                             {/*collapse  comments*/}
                                                 {/*Comment icon*/}
                             <div className="post__commentsIcon">
-                                 <IconButton onClick={handleExpandClick} id="comments-icon"   onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose} disabled={comments.length===0}>
+                                 <Button onClick={handleExpandClick} id="comments-icon"   onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose} disabled={comments.length===0}>
                                     <ChatBubbleOutlineRoundedIcon fontsize="small" cursor="pointer" aria-expanded={expanded} aria-label="show more comments"/>
-                                </IconButton>
+                                </Button>
                                             {/*pop over on hover*/}
                                             <Popover 
                                             id="mouse-over-popover"
@@ -432,7 +432,7 @@ const postComment = (e) => {
                             </div>
 
                                                     {/*share icon*/}
-                            <IconButton>
+                            <Button>
                                 <ShareIcon fontsize="small" cursor="pointer" onClick={() => {
                                                 if (navigator.share) {
                                                     navigator.share({
@@ -447,7 +447,7 @@ const postComment = (e) => {
                                                 }
                                             }}> 
                                 </ShareIcon> 
-                            </IconButton>
+                            </Button>
                                                     {/*Re-post icon*/}
                             <IconButton>                       
                                    <RepeatIcon fontsize="small" cursor="pointer"/>
@@ -462,7 +462,7 @@ const postComment = (e) => {
                     <Collapse in={expanded} timeout="auto" unmountOnExit >
                        { comments.map((comment) => (
                             //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
-                            <p style={{color:"#dae1e7"}}><strong>{comment.username+":"}</strong>{comment.text}<span>{" "+convertToDate(comment.timestamp)}</span></p>
+                            <p style={{color:"#dae1e7"}} key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}<span>{" "+convertToDate(comment.timestamp)}</span></p>
                         ))
                        } 
                     </Collapse>

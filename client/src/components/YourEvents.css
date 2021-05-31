@@ -4,7 +4,12 @@
 }
 .yourevents__event{
     display: flex;
+    flex-direction: column;
     margin-top: 6px;
     background-color:#3F4347;
     color: aliceblue;
+}
+.yourevents__eventContent{
+    display:flex;
+    flex-direction: column;
 }

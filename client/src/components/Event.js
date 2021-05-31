@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -13,7 +13,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { DataBase } from './firebase';
 import { useStateValue } from '../contexts/StateProvider';
 import firebase from 'firebase/app'
-import EventsMenu from './EventsMenu'
+import Skeleton from '@material-ui/lab/Skeleton';
+const EventsMenu = React.lazy(()=>import('./EventsMenu'))
 
 const useStyles = makeStyles({
   root: {
@@ -88,7 +89,12 @@ useEffect(() => {
                         Venue:{venue}
                     </span>
                 </div>
-                <EventsMenu eventId={eventId} eventUsername={username} eventUserId={user_id}/>
+                <Suspense fallback={
+                        <div><Skeleton variant="text" />
+                        <Skeleton variant="circle" width={40} height={40} />
+                        <Skeleton variant="rect" width={210} height={118} /></div>} >
+                            <EventsMenu eventId={eventId} eventUsername={username} eventUserId={user_id}/>
+                </Suspense>
             </div>
             <Card className={classes.root}>
 

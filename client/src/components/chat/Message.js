@@ -1,6 +1,6 @@
 //structure of standard message
-import React,{ forwardRef, useState } from 'react';//forwardRef keeps track of what is changing
-import {Card,Avatar,CardContent,Typography} from '@material-ui/core';
+import React,{  useState } from 'react';//forwardRef keeps track of what is changing
+import {Avatar} from '@material-ui/core';
 import './Message.css';
 import {useStateValue} from '../../contexts/StateProvider';
 

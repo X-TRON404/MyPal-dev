@@ -16,7 +16,21 @@
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
     "react-swipeable-views": "^0.13.9",
-    "web-vitals": "^0.2.4"
+    "serve": "^11.3.2",
+    "web-vitals": "^0.2.4",
+    "webpack-manifest-plugin": "^3.1.1",
+    "workbox-background-sync": "^6.1.5",
+    "workbox-broadcast-update": "^6.1.5",
+    "workbox-cacheable-response": "^6.1.5",
+    "workbox-core": "^6.1.5",
+    "workbox-expiration": "^6.1.5",
+    "workbox-google-analytics": "^6.1.5",
+    "workbox-navigation-preload": "^6.1.5",
+    "workbox-precaching": "^6.1.5",
+    "workbox-range-requests": "^6.1.5",
+    "workbox-routing": "^6.1.5",
+    "workbox-strategies": "^6.1.5",
+    "workbox-streams": "^6.1.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,5 +55,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "sw-precache-webpack-plugin": "^1.0.0"
   }
 }

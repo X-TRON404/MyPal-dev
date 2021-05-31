@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -6,10 +6,13 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import YourPosts from './YourPosts'
-import YourEvents from './YourEvents'
-import YourBookmarks from './YourBookmarks'
 import './SwipeTab.css'
+import Skeleton from '@material-ui/lab/Skeleton';
+
+const YourPosts = React.lazy(()=>import('./YourPosts'))
+const YourEvents = React.lazy(()=>import('./YourEvents'))
+const YourBookmarks = React.lazy(()=>import('./YourBookmarks'))
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -77,13 +80,28 @@ export default function ScrollableTabsButtonAuto() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <YourPosts/>
-      </TabPanel>
+          <Suspense fallback={
+                        <div><Skeleton variant="text" />
+                        <Skeleton variant="circle" width={40} height={40} />
+                        <Skeleton variant="rect" width={210} height={118} /></div>} >
+            <YourPosts/>
+          </Suspense>
+          </TabPanel>
       <TabPanel value={value} index={1}>
-        <YourEvents/>
+          <Suspense fallback={
+                        <div><Skeleton variant="text" />
+                        <Skeleton variant="circle" width={40} height={40} />
+                        <Skeleton variant="rect" width={210} height={118} /></div>} >
+                        <YourEvents/>
+          </Suspense>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <YourBookmarks/>
+      <Suspense fallback={
+                        <div><Skeleton variant="text" />
+                        <Skeleton variant="circle" width={40} height={40} />
+                        <Skeleton variant="rect" width={210} height={118} /></div>} >
+                        <YourBookmarks/>
+          </Suspense>
       </TabPanel>
     </div>
   );

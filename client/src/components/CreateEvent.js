@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{Suspense, useState} from 'react';
 import {storage,DataBase} from './firebase';
 import firebase from 'firebase';
 import {Button, IconButton, Input, Modal,TextField} from '@material-ui/core';
@@ -6,8 +6,9 @@ import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import LinearProgress from '@material-ui/core/LinearProgress'
 import {useStateValue} from '../contexts/StateProvider'
 import './CreateEvent.css'
-import DateTimeSelect from './DateTimeSelect'
 import AlertDialog from './AlertDialog'
+import Skeleton from '@material-ui/lab/Skeleton';
+const DateTimeSelect = React.lazy(()=>import('./DateTimeSelect')) 
 
 function CreateEvent() {
     //get the user from the provider
@@ -148,7 +149,12 @@ function CreateEvent() {
                         </label>  
                         {imageThumbnail&&(<img width="100px" height="100px" src={URL.createObjectURL(imageThumbnail)}/>)}
                         {/*change the 'dateTime' from the <DateTimeSelect/> component*/}
-                        <DateTimeSelect changeDate={dateTime => setdateTime(dateTime)} dateTime={dateTime}/>
+                        <Suspense fallback={
+                            <div><Skeleton variant="text" />
+                            <Skeleton variant="circle" width={40} height={40} />
+                            <Skeleton variant="rect" width={210} height={118} /></div>} >
+                                <DateTimeSelect changeDate={dateTime => setdateTime(dateTime)} dateTime={dateTime}/>
+                            </Suspense>                                            
                         <TextField placeholder="Enter a decription..." className = "createEvent__textarea" onChange={(e)=>setDescription(e.target.value)} value={description}
                             id="outlined-multiline-static"
                             label="Multiline description"

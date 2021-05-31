@@ -33,8 +33,8 @@ function YourEvents() {
     return (
         <div className="yourevents">
             {events.map(event=>(
-                    <Card className="yourevents__event">
-                        <CardContent>
+                    <Card className="yourevents__event" key={event.id}>
+                        <CardContent className="yourevents__eventContent">
                             <Typography  component={'span'}>Event: {event.title}</Typography>
                             <Typography  component={'span'}>Date: {convertToDate(event.dateTime)}</Typography>
                             <Typography  component={'span'}>Venue: {event.venue}</Typography>

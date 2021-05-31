@@ -29,9 +29,7 @@ import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import EditIcon from '@material-ui/icons/Edit';
 import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
 import EventIcon from '@material-ui/icons/Event';
-import WidgetsChat from './chat/WidgetsChat'
 import logo from '../texx_logo.png'
-import FeedConfessions from './FeedConfessions'
 import {realtime} from './firebase'
 
 //====================================Modal styles=========================================
@@ -105,6 +103,8 @@ function App() {
   const [openSpeedDial, setOpenSpeedDial] = useState(false);
   //user stored in local storage
   let userFromLocalStorage
+  //
+  let user_Id
   //lazy loading
   const Profile = React.lazy(() => import('./Profile'))
   const Feed = React.lazy(() => import('./Feed'))
@@ -112,9 +112,9 @@ function App() {
   const CreateEvent = React.lazy(() => import('./CreateEvent'))
   const CreateConfessions = React.lazy(() => import('./CreateConfessions'))
   const FeedEvents = React.lazy(() => import('./FeedEvents'))
-  // const FeedConfessions = React.lazy(() => import('./FeedConfessions'))
+  const FeedConfessions = React.lazy(() => import('./FeedConfessions'))
   const ImageUploadMobile = React.lazy(() => import('./ImageUploadMobile'))
-  // const WidgetsChat = React.lazy(() => import('./chat/WidgetsChat'))
+  const WidgetsChat = React.lazy(() => import('./chat/WidgetsChat'))
   //actions for speedDial
   const actions = [
     { icon: <Router><Link><AddPhotoAlternateIcon onClick={()=>window.location.href= '/ImageUploadMobile'}/></Link></Router>, name: 'Post' },
@@ -158,7 +158,7 @@ function App() {
     if (authUser){
       console.log(authUser)
       //capture the user inside the auth state in the 'setuser' variable
-
+      user_Id = authUser.uid
       //=============survive the refresh================
       //you can only store string items in local storage
 
@@ -174,30 +174,27 @@ function App() {
 
   })
   //===============Add user status as 'online:true' to database as this component loads=====
-  // user && 
+  user && 
 
-  //   realtime.ref('.info/connected').on('value',snapshot=>{
+    realtime.ref('.info/connected').on('value',snapshot=>{
 
-  //       //make user status 'offline  in realtime database if user disconnects
-  //       realtime
-  //       .ref(`/status/${user.uid}`)
-  //       .onDisconnect() // Set up the disconnect hook
-  //       .set('offline') // The value to be set for this key when the client disconnects 
-  //       .then(() => {
-  //         //set firestore's user 'online' key to true
-  //         DataBase.collection('users').doc(user.uid).update({
-  //           online:true,
-  //         },console.log(user.uid+" user offline"))
-  //       })
+        //make user status 'offline  in realtime database if user disconnects
+        realtime
+        .ref(`/status/${user_Id}`)
+        .onDisconnect() // Set up the disconnect hook
+        .set('offline') // The value to be set for this key when the client disconnects 
+        .then(() => {
+          //set firestore's user 'online' key to true
+          DataBase.collection('users').doc(user_Id).update({
+            online:true,
+          },console.log(user_Id+" user offline"))
+        })
 
-  //       //make user status 'online' in realtime database when page component loads 
-  //       realtime.ref(`/status/${user.uid}`).set('online');
-  //     })
+        //make user status 'online' in realtime database when page component loads 
+        realtime.ref(`/status/${user_Id}`).set('online');
+      })
 
-  return () =>{
-    //perform cleanup before re-firing the useEffect
-    unsubscribe();
-  }
+
   //========================================================================================
 
 },[user,username])

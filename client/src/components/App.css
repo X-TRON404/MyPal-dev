@@ -114,6 +114,12 @@
   overflow-y: scroll; 
   width:100%
 }
+.app__chatsFeed{
+  display: flex;
+  justify-content: center;
+  background-color: #363A3E;
+  width:100%
+}
 .app__profile{
   display: flex;
   justify-content: center;

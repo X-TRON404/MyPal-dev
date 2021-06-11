@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import Confessions from './Confessions'
+import React, { useEffect, useState, Suspense } from 'react'
 import {DataBase} from './firebase'
 import {useStateValue} from '../contexts/StateProvider'
+import Skeleton from '@material-ui/lab/Skeleton';
 
 
+const Confessions = React.lazy(()=>import('./Confessions'))
 function FeedConfessions(){
 
 //get the user from the provider
@@ -25,7 +26,14 @@ const [confessions, setConfessions] = useState([]);
             <div className="feedConfessions__confessions "> 
                  {
                 //render only those posts by id who are newly added to the database dont render the entire post list  
-                confessions.map(({id,confession})=>(<Confessions  key={id} confessionId={id} confession={confession.confession} />))
+                confessions.map(({id,confession})=>(
+                    <Suspense fallback={
+                        <div><Skeleton variant="text" />
+                        <Skeleton variant="circle" width={40} height={40} />
+                        <Skeleton variant="rect" width={210} height={118} /></div>} key={id}>
+                            <Confessions confessionId={id} confession={confession.confession} />
+                    </Suspense>
+                ))
                 } 
             </div>    
     </div>

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import Event from './Event';
 import {DataBase} from './firebase'
 import {useStateValue} from '../contexts/StateProvider'
 import './FeedEvents.css'
+import { Suspense } from 'react'
+import Skeleton from '@material-ui/lab/Skeleton'
 
+const Event = React.lazy(()=>import('./Event'))
 function FeedEvents() {
 
 //get the user from the provider
@@ -30,7 +32,14 @@ const [events, setEvents] = useState([]);
             <div className="feedEvents__events"> 
                  {
                 //render only those posts by id who are newly added to the database dont render the entire post list  
-                events.map(({id,event})=>(<Event key={event.id} eventId={id} dateTime={event.dateTime} venue={event.venue} title={event.title} username={event.username} user_id={event.user_id} description={event.description} imageUrl={event.imageUrl} interestedCount={event.interestedCount}/>))
+                events.map(({id,event})=>(
+                    <Suspense fallback={
+                        <div><Skeleton variant="text" />
+                        <Skeleton variant="circle" width={40} height={40} />
+                        <Skeleton variant="rect" width={210} height={118} /></div>} key={id}>
+                            <Event key={event.id} eventId={id} dateTime={event.dateTime} venue={event.venue} title={event.title} username={event.username} user_id={event.user_id} description={event.description} imageUrl={event.imageUrl} interestedCount={event.interestedCount}/>
+                    </Suspense>
+                ))
                 } 
             </div>    
     </div>

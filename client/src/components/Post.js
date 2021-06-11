@@ -4,7 +4,7 @@ import React , {useState,useEffect,useContext, useRef} from 'react'
 import './Post.css'
 import Avatar from '@material-ui/core/Avatar';
 import {Button, Collapse, IconButton, Input, makeStyles, Modal, Popover, Typography } from '@material-ui/core';
-import {DataBase} from './firebase'
+import {DataBase, realtime} from './firebase'
 import firebase from 'firebase';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
 import RepeatIcon from '@material-ui/icons/Repeat'
@@ -139,32 +139,17 @@ const postLike = () => {
 //====================================Get the comments and likes from the database and display=================================================================
 useEffect(() => {
        
-    // count.current++
     
     //if a postId is passed
     if (postId){
         //get a snapshot listner for 'comments' collection inside the passed 'postId' doc inside the collection 'posts'
-         DataBase.collection('posts').doc(postId).collection('comments').orderBy('timestamp','desc').onSnapshot(
+        DataBase.collection('posts').doc(postId).collection('comments').orderBy('timestamp','desc').onSnapshot(
                 (snapshot) =>{
                     //set comments to the data inside the doc
                             setComments(snapshot.docs.map((doc) => (doc.data())))
                 })
 
 
-                //get a snapshot listner for 'postLikes' collection inside the passed 'postId' doc inside the collection 'posts'
-        // DataBase.collection('posts').doc(postId).collection('postLikes').orderBy('timestamp','desc').onSnapshot(
-        //         (snapshot) =>{
-    
-        //                                 setLikes(snapshot.docs.map((doc) => ({id:doc.id,like:doc.data()})))
-                                        
-                                    
-        //                         }   
-        //                 ,
-        //                 error => {
-        //                     console.log(error)
-        //                 }
-
-        //         )
         
     //check if the user already liked the doc or not
     setTimeout(() => {
@@ -198,9 +183,10 @@ useEffect(() => {
             }, 400);
                 
 
+            
+            
               
     }
-    
     //when postId,user changes or page loads fire the code above
 },[,postId])  
 //========================================================================================================================
@@ -270,6 +256,9 @@ const addToChats = () => {
     //if the document by the user_id already exists then it wont change it
     //if logged in user 'user.uid' == 'user_id' user who wrote the post  then dont add it to chats list
     if(!(user.uid===user_id)){
+    //==============Add user_id to Firestore as well as to Realtime database=======================
+
+    //===================Add to Firestore============
     DataBase.collection('users').doc(user.uid).collection('chats').doc(user_id).set({
         chat_username:username,
         //user id of the user who wrote the post
@@ -286,6 +275,41 @@ const addToChats = () => {
         timestamp:firebase.firestore.FieldValue.serverTimestamp(),
 
         })
+    
+
+    //===================Add to Realtime============
+    realtime
+    .ref(`/'chats'/${user.uid}/${user_id}`)
+    .set({     
+        chat_username:username,
+        //user id of the user who wrote the post
+        chat_user_id:user_id,
+        timestamp:firebase.firestore.FieldValue.serverTimestamp()},
+        (error) => {
+        if (error) {
+        alert(error.message)
+        } else {
+        
+        }
+    
+    })
+   //add the user1 who added user2 to chatlist of user1 to chatlist of user2
+   //also later write the code to send notification to user2 that he has been added to the chatlist by user1
+   realtime
+   .ref(`/'chats'/${user_id}/${user.uid}`)
+   .set({     
+        chat_username:user.displayName,
+       //user id of the user who wrote the post
+       chat_user_id:user.uid,
+       timestamp:firebase.firestore.FieldValue.serverTimestamp()},
+       (error) => {
+       if (error) {
+       alert(error.message)
+       } else {
+       
+       }
+   
+   })
 
     }
     
@@ -354,7 +378,7 @@ const postComment = (e) => {
                     //this is done by mathcing the 'user_id' from 'posts' to chat_user_id (chat[0])
                     //then check bool chat[1] for whether the element is present in an array or not
                     //if the element is not present then show <Add to chats> else show <Chat>
-                    <span id={user_id}>{(chat[0]==user_id) && ((chat[1])?(<Button onClick={addToChats}>Add to chats</Button>):(<Button >Chat</Button>))}</span>
+                    <span id={chat[0]}>{(chat[0]==user_id) && ((chat[1])?(<Button onClick={addToChats}>Add to chats</Button>):(<Button >Chat</Button>))}</span>
                     ))
 
                     ):

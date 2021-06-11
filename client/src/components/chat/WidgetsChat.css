@@ -8,7 +8,6 @@
         color: grey;
         min-width: fit-content;
         margin-top: 10px;
-        overflow: scroll !important;
         }
 }
 
@@ -20,7 +19,6 @@
         color: grey;
         margin-bottom: 30px;
         min-width: fit-content;
-        overflow: scroll !important;
         }
 }
 

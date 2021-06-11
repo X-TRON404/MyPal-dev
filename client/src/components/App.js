@@ -239,7 +239,7 @@ const handleSignUp= () => {
         displayName:username
       }).then((result)=>{
           console.log(result+"result after sign up")
-          //added the newly created user to our database
+          //added the newly created user to our firestore database for posts 
           DataBase.collection('users').doc(authUser.user.uid).set({
             email:authUser.user.email,
             displayName:authUser.user.displayName,
@@ -247,12 +247,24 @@ const handleSignUp= () => {
             online:true,
             timestamp:firebase.firestore.FieldValue.serverTimestamp(),
            })
+           //add the newly created user to realtime db for messages
+           realtime
+           .ref(`/'users'/${authUser.user.uid}`)
+           .set({displayName : authUser.user.displayName},
+            (error) => {
+            if (error) {
+              alert(error.message)
+            } else {
+              alert("User created successfully")
+            }
+        
           })
-                    })
+        })
     .catch((error)=>{alert(error.message+"from dispatch signup")})
 
     setOpen(false)
-  }
+  })
+}
 //===============================================================================================
   return (
     <div className="app">

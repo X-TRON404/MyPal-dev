@@ -83,7 +83,7 @@ useEffect(() => {
                         {title}
                     </Typography>
                     <span className="event__dateTime">
-                        Date and time:{" "+convertToDate(dateTime)}
+                        Date and time:<b>{" "+ convertToDate(dateTime)}</b>
                     </span>
                     <span  className="event__location">
                         Venue:{venue}
@@ -112,17 +112,17 @@ useEffect(() => {
                 </CardContent>
 
                 <div className="event__footer">
-                    <CardActions className="event__interested">
+                    <div className="event__interested">
                         {/*if already registered for the event then show registered*/}
                     {
                     !interested?(<Button size="small" onClick={addInterested} disabled={onclickDisable}>    
-                                I am Interested
-                        </Button>):(<Button disabled={true}>Registered</Button>)
+                                Interested
+                        </Button>):(<Button size="small" disabled={true}>Registered</Button>)
 
                     }   
-                    </CardActions>
+                    </div>
     
-                    <CardActions className="event__actions">
+                    <div className="event__actions">
                             <Button size="small" onClick={() => {
                                             if (navigator.share) {
                                                 navigator.share({
@@ -136,10 +136,10 @@ useEffect(() => {
                                                 alert("Web Share API is not supported in your browser.")
                                             }
                                         }} >
-                            Share with friends
+                            Share
                             </Button>
-                    <Typography style={{color:'aliceblue'}}>Interested: {interestedCount}</Typography>
-                    </CardActions>
+                    <div className="event__interestedInterestedCount">Interested: {interestedCount}</div>
+                    </div>
                 </div>
             </Card>
         </div>

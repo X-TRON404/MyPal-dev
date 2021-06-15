@@ -24,7 +24,7 @@ const sendMessage = () => {
                    //push create a unique id for each new doc 
                    .push({
                        text:input,
-                       timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+                       timestamp:firebase.database.ServerValue.TIMESTAMP,
                        author:user.uid,
                        authorName:user.displayName,
                        imageUrl:"",},
@@ -42,7 +42,7 @@ const sendMessage = () => {
                        //push create a unique id for each new doc 
                        .push({     
                                text:input,
-                               timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+                               timestamp:firebase.database.ServerValue.TIMESTAMP,
                                author:user.uid,
                                authorName:user.displayName,
                                imageUrl:"",

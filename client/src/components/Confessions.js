@@ -80,13 +80,13 @@ const postConfessionComment = (e) => {
                                     <ChatBubbleOutlineRoundedIcon fontsize="small" cursor="pointer" aria-expanded={expanded} aria-label="show more comments"/>
                                  </IconButton>
                                                             {/*no. of comments*/}
-                                 <Typography style={{color:'aliceblue'}}  component={'span'}>{confessionComments.length} Comments</Typography>
+                                 <p className="confessions__commentsIconCommentsCount" >{confessionComments.length} Comments</p>
                     </div>
 
                             <Collapse in={expanded} timeout="auto" unmountOnExit >
                             { confessionComments.map((comment) => (
                                     //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
-                                    <p style={{color:"#dae1e7"}} key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}<span>{" "+convertToDate(comment.timestamp)}</span></p>
+                                    <p className="confessions__comments" key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}<span>{" "+convertToDate(comment.timestamp)}</span></p>
                                 ))
                             } 
                             </Collapse>

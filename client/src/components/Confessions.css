@@ -1,3 +1,12 @@
+
+
+@media (min-width: 0px) and (max-width:450px){
+
+}
+@media (min-width:451px) and (max-width:2048px){
+
+}
+
 .confessions{
     display: flex;
     background-color:#363A3E;
@@ -35,17 +44,18 @@
     padding: 20px;
 }
 .confessions__comments{
-    padding: 20px;
-}
-
-.confessions__comments > p{
-color: aliceblue;
+    color: aliceblue;
+    font-size: small;
 }
 
 .confessions__commentBox{
     display: flex;
     padding: 20px;
  
+}
+.confessions__commentsIconCommentsCount{
+    color: aliceblue;
+    font-size: small;
 }
 .confessions__input{
 flex:1;

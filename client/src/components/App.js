@@ -353,15 +353,17 @@ const handleSignUp= () => {
 
                                               {/*serachbar for mobile view*/}
             <div className="app__searchbarMobile">
-            <div className="app__searchbarMobileInputBox">
-              <Input style={{color:"aliceblue"}} className="app__searchbarMobileInput" type= "text" placeholder="Search Texx"/>
-              <SearchIcon style={{color:"aliceblue"}}/>
+              <div className="app__searchbarMobileInputBox">
+                <Input style={{color:"aliceblue",fontSize:'small'}} className="app__searchbarMobileInput" type= "text" placeholder="Search Texx"/>
+                <SearchIcon style={{color:"aliceblue"}}/>
+              </div>
             </div>
-          </div>
 
                                         {/*profile section*/}
-              <Router><Link><Avatar className="post__avatar" alt={username} src="/static/images/avatar/1.jpg"  onClick={()=>window.location.href='/profile'} /></Link></Router>
-           
+              <div className="app__headerProfile">
+                <Router><Link><Avatar className="app__headerAvatar" alt={username} src="/static/images/avatar/1.jpg"  onClick={()=>window.location.href='/profile'} /></Link></Router>
+                <b><p className="app__headerDisplayName">{user?.displayName}</p></b>
+              </div>
           </div>
       </Paper>
                                       {/*SpeedDial for mobile view*/}

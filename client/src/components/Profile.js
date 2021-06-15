@@ -125,11 +125,11 @@ const logout = () => {
                         </div>
                                               {/*Edit button*/}
                         <center className="profile__headerEditButton">
-                            {!showEditInput &&<Button onClick={handleEditInputShow}>Edit Profile</Button>}
+                            {!showEditInput &&<Button size="small" onClick={handleEditInputShow}>Edit Profile</Button>}
                                                 {/*save changes button*/}
                             <div className="profile__headerSaveButton">
-                                {showEditInput && <Button id="saveButton" variant="outlined" color="primary" onClick={handleProfileUpdate}>Save changes</Button>}
-                                {showEditInput && <Button id="discardButton" color="primary" onClick={()=>{setShowEditInput(false)}}>Discard changes</Button>}
+                                {showEditInput && <Button size="small"  id="saveButton" variant="outlined" color="primary" onClick={handleProfileUpdate}>Save changes</Button>}
+                                {showEditInput && <Button size="small"  id="discardButton" color="primary" onClick={()=>{setShowEditInput(false)}}>Discard changes</Button>}
                             </div>
                         </center>
                         <div className="profile__headerTypography">
@@ -141,7 +141,7 @@ const logout = () => {
                         </div>
 
                                             {/*log out button*/}
-                        <Button className="profile__logoutButton" onClick={logout}>Log out</Button>
+                        <Button size="small" className="profile__logoutButton" onClick={logout}>Log out</Button>
                     </div>
                     <div className="profile__footer">
                            <ScrollableTabsButtonAuto/>

@@ -365,7 +365,7 @@ const postComment = (e) => {
                     !(user.uid === user_id) &&  
                     //when there are no chats (chat array is empty)
                     (
-                         (Array.isArray(chats_array) && chats_array.length) === 0 ? (<Button onClick={addToChats}>Add to chats</Button>) : 
+                         (Array.isArray(chats_array) && chats_array.length) === 0 ? (<Button size="small" onClick={addToChats}>Add to chats</Button>) : 
                     (
                     //when there are chats
                     //check if the user is present in the chats_array
@@ -378,12 +378,12 @@ const postComment = (e) => {
                     //this is done by mathcing the 'user_id' from 'posts' to chat_user_id (chat[0])
                     //then check bool chat[1] for whether the element is present in an array or not
                     //if the element is not present then show <Add to chats> else show <Chat>
-                    <span id={chat[0]}>{(chat[0]==user_id) && ((chat[1])?(<Button onClick={addToChats}>Add to chats</Button>):(<Button >Chat</Button>))}</span>
+                    <span id={chat[0]}>{(chat[0]==user_id) && ((chat[1])?(<Button size="small" onClick={addToChats}>Add to chats</Button>):(<Button size="small" >Chat</Button>))}</span>
                     ))
 
                     ):
                     //if not present
-                    (<Button key={user_id} onClick={addToChats}>Add chats</Button>)
+                    (<Button size="small" key={user_id} onClick={addToChats}>Add chats</Button>)
                         )    
                             ) 
                                 )
@@ -420,7 +420,7 @@ const postComment = (e) => {
                                             (<p style={{color:'aliceblue'}} id={id}><strong>{user && (user.displayName===like.username?(like.like?(<strong>You{JSON.stringify(like.like)}</strong>):(<strong></strong>)):(like.username))}</strong></p>)
                                         )}
                                 </FlipMove> */}
-                                <Typography style={{color:'aliceblue'}}  component={'span'}>Liked by {likeCount}</Typography>
+                                <p className="post__likesCount"  component={'span'}>Liked by {likeCount}</p>
                             </div>
                             
                                             {/*collapse  comments*/}
@@ -430,7 +430,7 @@ const postComment = (e) => {
                                     <ChatBubbleOutlineRoundedIcon fontsize="small" cursor="pointer" aria-expanded={expanded} aria-label="show more comments"/>
                                 </Button>
                                             {/*pop over on hover*/}
-                                            <Popover 
+                                            {/* <Popover 
                                             id="mouse-over-popover"
                                             className={classes.popover}
                                             classes={{
@@ -449,10 +449,10 @@ const postComment = (e) => {
                                             onClose={handlePopoverClose}
                                             disableRestoreFocus
                                         >
-                                            <Typography>Click on the icon to load all comments</Typography>
-                                        </Popover>
+                                            <p style={{color:'aliceblue',fontSize:'small'}}>Click on the icon to load all comments</p>
+                                        </Popover> */}
                                                                  {/*no. of comments*/}
-                                <Typography style={{color:'aliceblue'}}>{comments.length} Comments</Typography>
+                                <p className="post__commentsIconCommentsCount">{comments.length} Comments</p>
                             </div>
 
                                                     {/*share icon*/}
@@ -486,7 +486,7 @@ const postComment = (e) => {
                     <Collapse in={expanded} timeout="auto" unmountOnExit >
                        { comments.map((comment) => (
                             //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
-                            <p style={{color:"#dae1e7"}} key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}<span>{" "+convertToDate(comment.timestamp)}</span></p>
+                            <p className="post__commentsComment" key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}<span>{" "+convertToDate(comment.timestamp)}</span></p>
                         ))
                        } 
                     </Collapse>

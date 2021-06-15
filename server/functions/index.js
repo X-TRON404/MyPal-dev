@@ -1,24 +1,32 @@
 const functions = require('firebase-functions');
-const Firestore = require('@google-cloud/firestore');
+const algoliasearch = require('algoliasearch');
+//  get api keys for the algolia from the env variable of cloud functions
+const APP_ID = functions.config().algolia.app;
+const ADMIN_KEY = functions.config().algolia.key;
 
-const firestore = new Firestore();
+//  algolia client
+const client = algoliasearch(APP_ID, ADMIN_KEY);
+const index = client.initIndex('pals');
 
-exports.onUserStatusChanged = functions.database
-  .ref('/status/{userId}') // Reference to the Firebase RealTime database key
-  .onUpdate(event => {
-    const usersRef = firestore.collection('/users'); // Create a reference to the Firestore Collection
-  
-    return event.data.ref.once('value')
-      .then(statusSnapshot => snapShot.val()) // Get the latest value from the Firebase Realtime database
-      .then(status => {
-        // check if the value is 'offline'
-        if (status === 'offline') {
-          // Set the Firestore's document's online value to false
-          usersRef
-            .doc(event.params.userId)
-            .set({
-              online: false
-            }, { merge: true });
-        }
-      })
-  });
+//  ADD algolia index from firestore database when a document is created in firestore:
+exports.addToIndex = functions.firestore.document('users/{userId}').onCreate(snapshot=>{
+  const data = snapshot.data();
+  const objectID = snapshot.id;
+  //  add objectID to algolia index
+  return index.addObject({...data, objectID});
+});
+
+//  UPDATE algolia index from firestore database when a document is updated in firestore
+exports.updateIndex = functions.firestore.document().onUpdate(change =>{
+  //  change.after gives the document after the change
+  const newData = change.after.data();
+  const objectID = change.id;
+  //  update objectID to algolia index
+  return index.saveObject({...newData, objectID});
+});
+
+//  DELETE algolia index from firestore database when a document is deleted in firestore
+exports.updateIndex = functions.firestore.document().onDelete(snapshot =>{
+  //  delete objectID to algolia index
+  return index.deleteObject(snapshot.id);
+});

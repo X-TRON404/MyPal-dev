@@ -7,6 +7,9 @@ import Avatar from '@material-ui/core/Avatar';
 import {Badge, ButtonBase} from '@material-ui/core';
 import {realtime} from '../firebase'
 import Skeleton from '@material-ui/lab/Skeleton';
+import firebase from 'firebase/app'
+import { useStateValue } from '../../contexts/StateProvider';
+
 const  GetRecentMessage = React.lazy( () =>  import('./GetRecentMessage'))
 //==================================================Card Styles==============================================
 const useStyles = makeStyles((theme) => ({
@@ -34,11 +37,15 @@ const useStyles = makeStyles((theme) => ({
   
   }));
     
-function WidgetMember({chat_username,chatId}) {
+function WidgetMember({lastchatAt,chat_username,chatId}) {
     console.log(chat_username,chatId)
+    //get the user from the provider  
+    const [{user}, dispatch] = useStateValue();
     const classes = useStyles();
     //to keep the track if the particular chat is online or not
     const [online,setOnline] = useState('')
+    //get the current user chatting with
+    const [currentChat,setCurrentChat] = useState('')
     useEffect(() => {
         //get online/offline users
    
@@ -47,17 +54,35 @@ function WidgetMember({chat_username,chatId}) {
                         console.log(chatId)
                         console.log(snapshot.val())
                     })
-            
+                  realtime.ref(`'recent_chat'/${user.uid}`).on('value',snapshot=>{
+                    setCurrentChat(snapshot.val());
+                    console.log("CurrentChat "+currentChat)
+                })    
+                
+                
+        return () => {
+          realtime.ref(`'recent_chat'/${user.uid}`).off()
+        }
              
-                  
-             
-     }, [,chatId,chat_username,online])
+     }, [,chatId,chat_username,online,currentChat])
+
+    const sendClick = () => {
+      realtime.ref(`'last_Seen'/${user.uid}/${chatId}`).set(firebase.database.ServerValue.TIMESTAMP)
+      realtime.ref(`'recent_chat'/${user.uid}`).set({
+        chatId:chatId
+      })
+        // realtime.ref(`/'chats'/${user.uid}/${chatId}`).set({
+        //   last_check_out:firebase.database.ServerValue.TIMESTAMP
+        // })
+    }
+
      
     return (
       //==========================================Get Online members===========================================================
+      <ButtonBase onClick={sendClick}>
         <div className={online==='online'?"widgetsChat__online":"widgetsChat__offline"}>
-        <div className="widgetsChat__onlineBox">
-        <ButtonBase>
+          <div className={chatId!=currentChat?"widgetsChat__onlineBox":"widgetsChat__onlineBoxActive"}>
+        
                         <Avatar className={classes.avatar} alt={chat_username} src="/static/images/avatar/1.jpg"></Avatar>
                             <Badge
                               className={classes.badge}
@@ -71,14 +96,14 @@ function WidgetMember({chat_username,chatId}) {
                                     </Typography>
                                     <Suspense fallback={<Skeleton variant="text" />}>
                                       {/*Get recent message*/}
-                                        <GetRecentMessage chatId={chatId}/>
+                                        <GetRecentMessage currentChat={currentChat} lastchatAt={lastchatAt} chatId={chatId}/>
                                     </Suspense>
                                
                                 </CardContent>
                         </div>
-        </ButtonBase>
+          </div>
         </div>
-    </div>
+    </ButtonBase>
     )
 }
 

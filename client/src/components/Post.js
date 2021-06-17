@@ -1,9 +1,9 @@
 //post component
 
-import React , {useState,useEffect,useContext, useRef} from 'react'
+import React , {useState,useEffect, useRef} from 'react'
 import './Post.css'
 import Avatar from '@material-ui/core/Avatar';
-import {Button, Collapse, IconButton, Input, makeStyles, Modal, Popover, Typography } from '@material-ui/core';
+import {Button, Collapse, IconButton, Input, makeStyles, Modal, Popover} from '@material-ui/core';
 import {DataBase, realtime} from './firebase'
 import firebase from 'firebase';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
@@ -11,7 +11,6 @@ import RepeatIcon from '@material-ui/icons/Repeat'
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import SendIcon from '@material-ui/icons/Send';
 import {useStateValue} from '../contexts/StateProvider'
-import FlipMove from 'react-flip-move';
 import ShareIcon from '@material-ui/icons/Share';
 import PostMenu from './PostMenu'
 
@@ -258,23 +257,23 @@ const addToChats = () => {
     if(!(user.uid===user_id)){
     //==============Add user_id to Firestore as well as to Realtime database=======================
 
-    //===================Add to Firestore============
-    DataBase.collection('users').doc(user.uid).collection('chats').doc(user_id).set({
-        chat_username:username,
-        //user id of the user who wrote the post
-        chat_user_id:user_id,
-        timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+    // //===================Add to Firestore============
+    // DataBase.collection('users').doc(user.uid).collection('chats').doc(user_id).set({
+    //     chat_username:username,
+    //     //user id of the user who wrote the post
+    //     chat_user_id:user_id,
+    //     timestamp:firebase.firestore.FieldValue.serverTimestamp(),
 
-        })
-    //add the user1 who added user2 to chatlist of user1 to chatlist of user2
-    //also later write the code to send notification to user2 that he has been added to the chatlist by user1
-    DataBase.collection('users').doc(user_id).collection('chats').doc(user.uid).set({
-        chat_username:user.displayName,
-        //user id of the user who wrote the post
-        chat_user_id:user.uid,
-        timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+    //     })
+    // //add the user1 who added user2 to chatlist of user1 to chatlist of user2
+    // //also later write the code to send notification to user2 that he has been added to the chatlist by user1
+    // DataBase.collection('users').doc(user_id).collection('chats').doc(user.uid).set({
+    //     chat_username:user.displayName,
+    //     //user id of the user who wrote the post
+    //     chat_user_id:user.uid,
+    //     timestamp:firebase.firestore.FieldValue.serverTimestamp(),
 
-        })
+    //     })
     
 
     //===================Add to Realtime============
@@ -284,7 +283,8 @@ const addToChats = () => {
         chat_username:username,
         //user id of the user who wrote the post
         chat_user_id:user_id,
-        timestamp:firebase.firestore.FieldValue.serverTimestamp()},
+        timestamp:firebase.database.ServerValue.TIMESTAMP,
+        lastchatAt:firebase.database.ServerValue.TIMESTAMP},
         (error) => {
         if (error) {
         alert(error.message)
@@ -301,7 +301,8 @@ const addToChats = () => {
         chat_username:user.displayName,
        //user id of the user who wrote the post
        chat_user_id:user.uid,
-       timestamp:firebase.firestore.FieldValue.serverTimestamp()},
+       timestamp:firebase.database.ServerValue.TIMESTAMP,
+       lastchatAt:firebase.database.ServerValue.TIMESTAMP},
        (error) => {
        if (error) {
        alert(error.message)
@@ -420,7 +421,7 @@ const postComment = (e) => {
                                             (<p style={{color:'aliceblue'}} id={id}><strong>{user && (user.displayName===like.username?(like.like?(<strong>You{JSON.stringify(like.like)}</strong>):(<strong></strong>)):(like.username))}</strong></p>)
                                         )}
                                 </FlipMove> */}
-                                <p className="post__likesCount"  component={'span'}>Liked by {likeCount}</p>
+                                <p className="post__likesCount"  component={'span'}>Likes {likeCount}</p>
                             </div>
                             
                                             {/*collapse  comments*/}

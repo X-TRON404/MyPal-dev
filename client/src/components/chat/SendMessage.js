@@ -55,6 +55,18 @@ const sendMessage = () => {
                            }
                        
                        })
+                    //post the time at which we sent a text to that user/received a text from that user lately
+                    realtime.ref(`/'chats'/${user.uid}/${chatId}`).update(
+                        {
+                            lastchatAt:firebase.database.ServerValue.TIMESTAMP
+                        }
+                    )
+                    realtime.ref(`/'chats'/${chatId}/${user.uid}`).update(
+                        {
+                            lastchatAt:firebase.database.ServerValue.TIMESTAMP
+                        }
+                    )
+                    
 
         setInput('');
     }

@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   }));
     
 function WidgetMember({lastchatAt,chat_username,chatId}) {
-    console.log(chat_username,chatId)
+    // console.log(chat_username,chatId)
     //get the user from the provider  
     const [{user}, dispatch] = useStateValue();
     const classes = useStyles();
@@ -51,12 +51,12 @@ function WidgetMember({lastchatAt,chat_username,chatId}) {
    
         chatId && realtime.ref(`/status/${chatId}`).on('value',snapshot=>{
                         setOnline(snapshot.val());
-                        console.log(chatId)
-                        console.log(snapshot.val())
+                        // console.log(chatId)
+                        // console.log(snapshot.val())
                     })
                   realtime.ref(`'recent_chat'/${user.uid}`).on('value',snapshot=>{
                     setCurrentChat(snapshot.val());
-                    console.log("CurrentChat "+currentChat)
+                    // console.log("CurrentChat "+currentChat)
                 })    
                 
                 

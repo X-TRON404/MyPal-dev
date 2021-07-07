@@ -1,0 +1,133 @@
+
+
+
+  @media (min-width: 0px) and (max-width:450px){
+    .userProfile{
+        display: flex;
+        justify-content: center;
+        background-color: '#363A3E';
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      .userProfile__headerTop{
+          padding-top: 10px;
+      }
+      .userProfile__headerTop > .MuiIconButton-root {
+        margin-left: 30px;
+        margin-top: -30px;
+    }
+    .userProfile__footer{
+        background-color: #3F4347;
+        height: 57vh;
+        /*make posts scrollable*/
+        overflow-y: scroll;
+        padding-bottom: 60px;
+    
+    }
+  }
+
+  @media (min-width: 451px) and (max-width:2048px){
+    .userProfile{
+        display: flex;
+        justify-content: center;
+        max-width:500;
+        min-width:400;
+        padding: 20px;
+        background-color: '#363A3E';
+      }
+      .userProfile__headerTop > .MuiIconButton-root {
+        margin-left: 300px;
+        margin-top: -30px;
+    }
+    .userProfile__footer{
+        background-color: #3F4347;
+        height: 57vh;
+        /*make posts scrollable*/
+        overflow-y: scroll;
+    }
+  }
+.userProfile{
+    background-color: '#363A3E';
+}
+
+.userProfile__header{
+color: aliceblue;
+background-color: #33373B;
+padding-bottom: 30px;
+}
+.userProfile__headerTop{
+    display: flex;
+    background-color:#33373B;
+}
+
+.userProfile__headerEditButton> button{
+    color: aliceblue;
+    background-color:#556ab5;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.userProfile__headerEditButton> button:hover{
+    background-color:#7389DA;
+}
+.userProfile__headerSaveButton{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.userProfile__headerSaveButton > #saveButton{
+    color: aliceblue;
+    margin-bottom: 10px;
+}
+.userProfile__headerSaveButton > #discardButton{
+    color: aliceblue;
+    background-color: #556ab5;
+}
+.userProfile__headerSaveButton > #discardButton:hover{
+    background-color:#7389DA;
+}
+.userProfile__headerInfo{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.userProfile__headerTypography{
+    color: aliceblue;
+    margin-left: 20px;
+}
+.userProfile__logoutButton {
+    color: aliceblue;
+    background-color:#556ab5;
+    margin-left: 15px;
+    margin-top: 10px;
+
+}
+.userProfile__logoutButton:hover{
+    background-color:#7389DA;
+}
+
+.userProfile__footer > .MuiCardContent-root:last-child{
+    color: aliceblue;
+
+}
+.userProfile__footerStats{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+}
+.userProfile__footerStatsEvents .userProfile__footerStatsFriends .userProfile__footerStatsPosts{
+    display: flex;
+    flex-direction: column;
+}
+/*========================hide scrollbar for different browsers======================*/
+/* Hide scrollbar for Chrome, Safari and Opera */
+.userProfile__footer::-webkit-scrollbar {
+    display: none;
+  }
+/*------------------------------------------------------------------------------------*/
+.userProfile__footer{
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}

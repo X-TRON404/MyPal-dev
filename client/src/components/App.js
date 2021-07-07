@@ -31,6 +31,8 @@ import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
 import EventIcon from '@material-ui/icons/Event';
 import logo from '../texx_logo.png'
 import {realtime} from './firebase'
+import Home from './Home'
+import UserProfile from './UserProfile';
 
 //====================================Modal styles=========================================
 function getModalStyle() {
@@ -388,17 +390,14 @@ const handleSignUp= () => {
                 />
               ))}
             </SpeedDial>
-      </div>
-
-
-
-
-
-                                               
+      </div>                                               
                            {/* if user does not exists then reduce the opacity of the body */}
       <div className={user?'app__body':'app__bodyUserNotLoggedIn' }>
 {/* =================================================REACT ROUTER COMES HERE================================================================================= */}
-
+                  {!user&& 
+                          <Home/>
+                          
+                    }
                 <Router>
                                           {/*sidebar*/}
                     <Sidebar/>
@@ -419,7 +418,15 @@ const handleSignUp= () => {
                                 <Chat/>
                               </Suspense>
                           </div>
-                          </Route>  
+                          </Route>
+                        <Route path="/pals/:palId">
+                          <div className="app__chat">
+                              {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
+                              <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
+                                <UserProfile/>
+                              </Suspense>
+                          </div>
+                        </Route>    
                         <Route path="/profile">
                           <div className="app__profile" >
                             {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}

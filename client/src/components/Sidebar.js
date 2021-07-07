@@ -23,8 +23,8 @@ function Sidebar() {
             <Link to='/eventsFeed'><SidebarOptions text="Events" Icon={EventIcon}/></Link>
             <Link to='/confessionsFeed' onClick={()=>window.location.href='/confessionsFeed'}><SidebarOptions text="Confessions" Icon={WhatshotSharpIcon}/></Link>
             <SidebarOptions text="Notifications" Icon={NotificationsNoneIcon}/>
-            <SidebarOptions text="Messages" Icon={MailOutlineIcon}/>
-            <SidebarOptions text="Bookmarks" Icon={BookmarkBorderIcon}/>
+            {/* <SidebarOptions text="Messages" Icon={MailOutlineIcon}/> */}
+            <Link to='/profile' onClick={()=>window.location.href='/profile'}><SidebarOptions text="Bookmarks" Icon={BookmarkBorderIcon}/></Link>
             <SidebarOptions text="More" Icon={MoreHorizIcon}/>
             <Link to='/createEvent' onClick={()=>window.location.href='/createEvent'}><Button variant="outlined"  className="sidebar__event" fullWidth>New event</Button></Link>
             <Link to='/createConfessions' onClick={()=>window.location.href='/createConfessions'}><Button variant="outlined"  className="sidebar__event" fullWidth>Write an annonymous confession</Button></Link>

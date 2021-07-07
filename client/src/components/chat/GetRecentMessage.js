@@ -40,7 +40,7 @@ useEffect(() => {
                     messagesArray.push(child.val())
                 })
                 setMessages(messagesArray.reverse())
-                console.log(messages[0])
+                // console.log(messages[0])
                 // console.log("messages array "+ messagesArray)
                 
                 });
@@ -60,7 +60,7 @@ useEffect(() => {
             }
 
 
-            {console.log("unreadMessages"+ unreadMessages)}
+            // {console.log("unreadMessages"+ unreadMessages)}
         },500)
 
     
@@ -75,7 +75,7 @@ useEffect(() => {
     return (
         <div className="getRecentMessage">
             {/*later on add count of unread messages*/}
-            {console.log(recentChat)}
+            {/* {console.log(recentChat)} */}
             {/*if chatId is the same as the chat with which we are chatting now then unread messages are 0*/}
         <StyledBadge badgeContent={countUnread} color="primary">
             {/*Get recent message*/}

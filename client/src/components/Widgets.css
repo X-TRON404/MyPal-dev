@@ -70,6 +70,13 @@ color: aliceblue;
 }
 .widgets__search__hit__content{
     margin:5px;
+}
+.widgets__search__hit__avatar{
+    height: 32px !important;
+    width: 32px !important;
+}
+.widgets__search__hit__displayName{
+    color:aliceblue;
     font-size: small;
 }
 .widgets__search__hit__bio{

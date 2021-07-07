@@ -9,6 +9,7 @@ import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC'
 // const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis)
 
 const useStyles = makeStyles((theme) => ({
+    //keep the avatar size small
     small: {
       width: theme.spacing(2),
       height: theme.spacing(2),

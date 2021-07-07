@@ -61,17 +61,18 @@ color: aliceblue;
     align-items: center;
     background-color: #1b1b1b;
     border-radius: 0px;
-    height: 69px;
+    height: 60px;
     margin-bottom: 1px;
     padding-left: 5px;
-    min-width: 300px;
+    min-width: 200px;
     overflow-x: hidden;
     overflow-y: hidden;
 }
 .widgets__search__hit__content{
     margin:5px;
+    font-size: small;
 }
 .widgets__search__hit__bio{
-    font-size: small;
+    font-size: x-small;
     color: gray;
 }

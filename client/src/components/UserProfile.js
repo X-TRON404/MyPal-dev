@@ -11,6 +11,7 @@ import { Button, Input } from '@material-ui/core';
 import { auth, DataBase } from './firebase';
 import firebase from 'firebase/app'
 import { useParams } from 'react-router-dom';
+import Chip from '@material-ui/core/Chip';
 import UserScrollableTabsButtonAuto from './UserSwipeTab';
 
 
@@ -37,6 +38,14 @@ const useStyles = makeStyles((theme) => ({
         marginBottom:10,
         marginRight:10,
       },
+  chips:{
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    '& > *': {
+      margin: theme.spacing(0.5),
+    },
+  },
 }));
 
 function UserProfile() {
@@ -72,7 +81,7 @@ const [bio,setBio] = useState(userInfo?.bio);
 
     return (
         <div className="userProfile">
-                <Card className="userProfile__card" elevation={1}>
+
                     <div className="userProfile__header">
                         <div className="userProfile__headerTop">
                                 <Avatar className={classes.avatar} alt={'username'} src="/static/images/avatar/1.jpg" ></Avatar>
@@ -82,9 +91,9 @@ const [bio,setBio] = useState(userInfo?.bio);
                                     {<Typography><b>{userInfo?.displayName}</b></Typography>}
                                     {/* <Typography>{`Joined on ${user?.metadata.creationTime.slice(0,17)}`}</Typography> */}
                                 </div>
-                            <IconButton aria-label="settings">
+                            {/* <IconButton aria-label="settings">
                                 <MoreVertIcon />
-                            </IconButton>
+                            </IconButton> */}
                         </div>
                        
                         <div className="userProfile__headerTypography">
@@ -93,10 +102,11 @@ const [bio,setBio] = useState(userInfo?.bio);
                             <Typography>Interests</Typography>
                         </div>
                     </div>
+                    {userInfo?.institute && <Chip size="small" label={userInfo?.institute} />}
                     <div className="userProfile__footer">
                            <UserScrollableTabsButtonAuto palId />
                     </div>
-                    </Card>
+                 
         </div>
     )
 }

@@ -271,7 +271,8 @@ const handleSignUp= () => {
     .catch((error)=>{alert(error.message+"from dispatch signup")})
 
     setOpen(false)
-  })
+  })//catch error if data filled is not in the proper format
+  .catch((error)=>{alert(error.message)})
 }
 //===============================================================================================
   return (

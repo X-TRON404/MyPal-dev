@@ -107,7 +107,6 @@ const logout = () => {
     }
     return (
         <div className="profile">
-                <Card className="profile__card" elevation={1}>
                     <div className="profile__header">
                         <div className="profile__headerTop">
                                 <Avatar className={classes.avatar} alt={'username'} src="/static/images/avatar/1.jpg" ></Avatar>
@@ -119,9 +118,9 @@ const logout = () => {
                                     {showEditInput && <Input value={displayName} onChange={(e)=>{setDisplayName(e.target.value)}}/>}
                                     <Typography>{`Joined on ${user?.metadata.creationTime.slice(0,17)}`}</Typography>
                                 </div>
-                            <IconButton aria-label="settings">
+                            {/* <IconButton aria-label="settings">
                                 <MoreVertIcon />
-                            </IconButton>
+                            </IconButton> */}
                         </div>
                                               {/*Edit button*/}
                         <center className="profile__headerEditButton">
@@ -146,7 +145,6 @@ const logout = () => {
                     <div className="profile__footer">
                            <ScrollableTabsButtonAuto/>
                     </div>
-                    </Card>
         </div>
     )
 }

@@ -3,7 +3,7 @@ import './App.css';
 import {auth, DataBase} from './firebase'
 import {makeStyles} from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
-import { Avatar, Backdrop, Button, Input, Paper } from '@material-ui/core';
+import { Avatar, Backdrop, Button, FormControl, Input, InputLabel, MenuItem, Paper } from '@material-ui/core';
 import ImageUpload from './ImageUpload';
 import Sidebar from './Sidebar';
 import Widgets from './Widgets';
@@ -33,6 +33,7 @@ import logo from '../texx_logo.png'
 import {realtime} from './firebase'
 import Home from './Home'
 import UserProfile from './UserProfile';
+import Search from './Search';
 
 //====================================Modal styles=========================================
 function getModalStyle() {
@@ -71,7 +72,11 @@ speedDial: {
   position: 'fixed',
   bottom: theme.spacing(12),
   right: theme.spacing(2),
-}
+},
+formControl: {
+  margin: theme.spacing(1),
+  minWidth: 120,
+},
 
 }));
 //========================================================================================================
@@ -211,6 +216,7 @@ const handleSignUp= () => {
     e.preventDefault();
     auth.signInWithEmailAndPassword(email,password)
     .then((result)=>{
+      //dispatch user to state management
       dispatch(
           {
           type:actionTypes.SET_USER,
@@ -356,8 +362,11 @@ const handleSignUp= () => {
                                               {/*serachbar for mobile view*/}
             <div className="app__searchbarMobile">
               <div className="app__searchbarMobileInputBox">
-                <Input style={{color:"aliceblue",fontSize:'small'}} className="app__searchbarMobileInput" type= "text" placeholder="Search Texx"/>
-                <SearchIcon style={{color:"aliceblue"}}/>
+              <Router>
+                <Search/>
+              </Router>
+                {/* <Input style={{color:"aliceblue",fontSize:'small'}} className="app__searchbarMobileInput" type= "text" placeholder="Search Texx"/>
+                <SearchIcon style={{color:"aliceblue"}}/> */}
               </div>
             </div>
 

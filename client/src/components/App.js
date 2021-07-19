@@ -109,6 +109,8 @@ function App() {
   const [showPassword,setShowPassword] = useState(false)
   //open speedDial
   const [openSpeedDial, setOpenSpeedDial] = useState(false);
+  //select institute in sign up
+  const [institute,setInstitute] = useState('')
   //user stored in local storage
   let userFromLocalStorage
   //
@@ -263,6 +265,7 @@ const handleSignUp= () => {
             displayName:authUser.user.displayName,
             bio:bio,
             online:true,
+            institute:institute,
             timestamp:firebase.firestore.FieldValue.serverTimestamp(),
            })
            //add the newly created user to realtime db for messages
@@ -318,6 +321,22 @@ const handleSignUp= () => {
             }
           />
             <Input style ={{color:'aliceblue'}} placeholder="Add your biography" type="text" value={bio} onChange={(e)=>setBio(e.target.value)}/>
+            {/*select institute*/}
+          <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-label">Institute</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={institute}
+                onChange={(e)=>{setInstitute(e.target.value)}}
+              >
+                <MenuItem value={'MIT'}>MIT</MenuItem>
+                <MenuItem value={'KMC'}>KMC</MenuItem>
+                <MenuItem value={'MSAP'}>MSAP</MenuItem>
+                <MenuItem value={'MAHE'}>MAHE</MenuItem>
+                {console.log(institute)}
+              </Select>
+          </FormControl>
             <Button style ={{color:'aliceblue'}} onClick={signUp}>Sign up</Button>
           </form>
         </div>

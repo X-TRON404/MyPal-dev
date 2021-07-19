@@ -4,10 +4,12 @@
   @media (min-width: 0px) and (max-width:450px){
     .profile{
         display: flex;
+        flex-direction: column;
         justify-content: center;
         background-color: '#363A3E';
         padding-left: 10px;
         padding-right: 10px;
+        min-width: 92%;
       }
       .profile__headerTop{
           padding-top: 10px;
@@ -29,11 +31,12 @@
   @media (min-width: 451px) and (max-width:2048px){
     .profile{
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        max-width:500;
-        min-width:400;
+        min-width:90%;
         padding: 20px;
         background-color: '#363A3E';
+        margin-top: 10px;
       }
       .profile__headerTop > .MuiIconButton-root {
         margin-left: 300px;

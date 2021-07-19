@@ -33,6 +33,7 @@ import logo from '../texx_logo.png'
 import {realtime} from './firebase'
 import Home from './Home'
 import UserProfile from './UserProfile';
+import Select from '@material-ui/core/Select';
 import Search from './Search';
 
 //====================================Modal styles=========================================
@@ -246,6 +247,15 @@ const handleSignUp= () => {
         //set displayname attribute of user object to username
         displayName:username
       }).then((result)=>{
+          //dispatch user to state management
+          dispatch(
+            {
+            type:actionTypes.SET_USER,
+            user:result.user
+            }
+          );
+        localStorage.setItem('user',JSON.stringify(result.user))
+
           console.log(result+"result after sign up")
           //added the newly created user to our firestore database for posts 
           DataBase.collection('users').doc(authUser.user.uid).set({

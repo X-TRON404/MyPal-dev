@@ -30,7 +30,7 @@ function UserEvents({palId}) {
     },[,palId]);
     return (
         <div className="yourevents">
-            {events.map(event=>(
+            {events.length!=0?(events.map(event=>(
                     <Card className="yourevents__event" key={event.id}>
                         <CardContent className="yourevents__eventContent">
                             <Typography  component={'span'}>Event: {event.title}</Typography>
@@ -39,7 +39,7 @@ function UserEvents({palId}) {
                             <Typography  component={'span'}>Interested people: {event.interestedCount}</Typography>
                         </CardContent>
                     </Card>
-            ))}
+            ))):(<h4 style={{color:'aliceblue'}}>Empty.Just like this tab.</h4>)}
         </div>
     )
 }

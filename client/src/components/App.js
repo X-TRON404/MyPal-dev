@@ -433,11 +433,10 @@ const handleSignUp= () => {
                            {/* if user does not exists then reduce the opacity of the body */}
       <div className={user?'app__body':'app__bodyUserNotLoggedIn' }>
 {/* =================================================REACT ROUTER COMES HERE================================================================================= */}
-                  {!user&& 
-                          <Home/>
-                          
-                    }
-                <Router>
+                  
+        {/* if user is logged out then show the home page */}
+        {!user? (<Home/>):
+                (<Router>
                                           {/*sidebar*/}
                     <Sidebar/>
                                             {/*switch*/}
@@ -528,7 +527,8 @@ const handleSignUp= () => {
                   <Widgets id={'widget'}/>
                   {/*Bottom Navigation only applicable to mobile screens*/}
                   <BottomNavigationMobile/>
-                </Router>
+                </Router>)
+          }
 
 {/* ======================================================================================================================================================= */}
                                             {/*post upload*/}

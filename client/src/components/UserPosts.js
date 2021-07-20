@@ -49,7 +49,7 @@ export default function UserPosts({palId}) {
 
   return (
       <GridList cellHeight={180} className={classes.gridList}>
-            {posts.map((post) => (
+            {posts.length!=0?(posts.map((post) => (
             <GridListTile key={post.id}>
                 <img src={post.post.imageUrl} alt={post.post.caption} />
                 <GridListTileBar
@@ -61,7 +61,7 @@ export default function UserPosts({palId}) {
                 }
                 />
             </GridListTile>
-            ))}
+            ))):(<h3 style={{color:'aliceblue'}}>Just like your life, EMPTY</h3>)}
       </GridList>
   );
 }

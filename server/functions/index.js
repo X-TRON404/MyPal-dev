@@ -13,11 +13,12 @@ exports.addToIndex = functions.firestore.document('users/{userId}').onCreate(sna
   const data = snapshot.data();
   const objectID = snapshot.id;
   //  add objectID to algolia index
-  return index.addObject({...data, objectID});
+  //  using saveObject addObject does not exists in the new version
+  return index.saveObject({...data, objectID});
 });
 
 //  UPDATE algolia index from firestore database when a document is updated in firestore
-exports.updateIndex = functions.firestore.document().onUpdate(change =>{
+exports.updateIndex = functions.firestore.document('users/{userId}').onUpdate(change =>{
   //  change.after gives the document after the change
   const newData = change.after.data();
   const objectID = change.id;
@@ -26,7 +27,7 @@ exports.updateIndex = functions.firestore.document().onUpdate(change =>{
 });
 
 //  DELETE algolia index from firestore database when a document is deleted in firestore
-exports.updateIndex = functions.firestore.document().onDelete(snapshot =>{
+exports.updateIndex = functions.firestore.document('users/{userId}').onDelete(snapshot =>{
   //  delete objectID to algolia index
   return index.deleteObject(snapshot.id);
 });

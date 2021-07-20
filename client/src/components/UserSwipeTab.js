@@ -11,7 +11,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 
 const UserPosts = React.lazy(()=>import('./UserPosts'))
 const UserEvents = React.lazy(()=>import('./UserEvents'))
-const YourBookmarks = React.lazy(()=>import('./YourBookmarks'))
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -76,7 +76,6 @@ export default function UserScrollableTabsButtonAuto({palId}) {
         >
           <Tab label="POSTS" {...a11yProps(0)} />
           <Tab label="Events" {...a11yProps(1)} />
-          <Tab label="Bookmarks" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -93,14 +92,6 @@ export default function UserScrollableTabsButtonAuto({palId}) {
                         <Skeleton variant="circle" width={40} height={40} />
                         <Skeleton variant="rect" width={210} height={118} /></div>} >
                         <UserEvents palId/>
-          </Suspense>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-      <Suspense fallback={
-                        <div><Skeleton variant="text" />
-                        <Skeleton variant="circle" width={40} height={40} />
-                        <Skeleton variant="rect" width={210} height={118} /></div>} >
-                        <YourBookmarks/>
           </Suspense>
       </TabPanel>
     </div>

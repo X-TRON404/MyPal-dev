@@ -32,6 +32,20 @@
     height: 69px;
     margin-bottom: 1px;
     min-width: 300px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.widgetsChat__onlineBoxActive{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    background-color: grey;
+    border-radius: 0px;
+    height: 69px;
+    margin-bottom: 1px;
+    min-width: 300px;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 .widgetsChat__onlineBox:hover{
     background-color: #2b2b2b;
@@ -59,6 +73,7 @@ scrollbar-width: none;  /* Firefox */
     text-align: center;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 .widgetsChat__onlineMembers{

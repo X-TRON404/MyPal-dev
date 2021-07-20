@@ -37,8 +37,9 @@ export default function YourPosts() {
     const [posts, setPosts] = useState([]);
 //====================================GET user created posts=========================================
     useEffect( () => {
+      if (user){
         //grab the posts which belong to the logged in user from the db
-        DataBase.collection('posts').where("user_id", "==", user.uid).get()
+        DataBase.collection('posts').where("user_id", "==", user?.uid).get()
         .then((querySnapshot) => {
             setPosts(querySnapshot.docs.map(doc =>({id:doc.id,post:doc.data()})))
             console.log(posts)
@@ -46,13 +47,13 @@ export default function YourPosts() {
         .catch((error) => {
             console.log("Error getting documents: ", error);
         });
-        
-    },[user]);
+              }
+    },[,user]);
     
 
   return (
       <GridList cellHeight={180} className={classes.gridList}>
-            {posts.map((post) => (
+            {posts.length!=0?(posts.map((post) => (
             <GridListTile key={post.id}>
                 <img src={post.post.imageUrl} alt={post.post.caption} />
                 <GridListTileBar
@@ -64,7 +65,7 @@ export default function YourPosts() {
                 }
                 />
             </GridListTile>
-            ))}
+            ))):(<h4 style={{color:'aliceblue'}}>Empty. Nothing to see here</h4>)}
       </GridList>
   );
 }

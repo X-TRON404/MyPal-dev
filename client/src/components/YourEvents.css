@@ -3,8 +3,8 @@
     flex-direction: column;
 }
 .yourevents__event{
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     margin-top: 6px;
     background-color:#3F4347;
     color: aliceblue;

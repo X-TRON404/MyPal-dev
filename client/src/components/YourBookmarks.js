@@ -22,17 +22,18 @@ function YourBookmarks() {
     }
 
     useEffect(() => {
-        DataBase.collection('users').doc(user.uid).collection('bookmarksPost').orderBy('timestamp','desc').onSnapshot(
+        if (user){
+        DataBase.collection('users').doc(user?.uid).collection('bookmarksPost').orderBy('timestamp','desc').onSnapshot(
             (snapshot) =>{
                     setEventBookmarks(snapshot.docs.map((doc) => doc.data()))
                         })
 
-        DataBase.collection('users').doc(user.uid).collection('bookmarksEvents').orderBy('timestamp','desc').onSnapshot(
+        DataBase.collection('users').doc(user?.uid).collection('bookmarksEvents').orderBy('timestamp','desc').onSnapshot(
             (snapshot) =>{
                 setPostBookmarks(snapshot.docs.map((doc) => doc.data()))
                 console.log(postBookmarks)
                         })
-                        
+                }           
     }, [,user])
     return (
         <div className="bookmarks">

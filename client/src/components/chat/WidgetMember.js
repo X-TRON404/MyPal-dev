@@ -71,6 +71,7 @@ function WidgetMember({lastchatAt,chat_username,chatId}) {
       realtime.ref(`'recent_chat'/${user.uid}`).set({
         chatId:chatId
       })
+      // window.location.href=`/chats/${chatId}`
         // realtime.ref(`/'chats'/${user.uid}/${chatId}`).set({
         //   last_check_out:firebase.database.ServerValue.TIMESTAMP
         // })
@@ -79,8 +80,7 @@ function WidgetMember({lastchatAt,chat_username,chatId}) {
      
     return (
       //==========================================Get Online members===========================================================
-      <ButtonBase onClick={sendClick}>
-        <div className={online==='online'?"widgetsChat__online":"widgetsChat__offline"}>
+      <ButtonBase onClick={sendClick} className={"widgetsChat__online"}>
           <div className={chatId!=currentChat?"widgetsChat__onlineBox":"widgetsChat__onlineBoxActive"}>
         
                         <Avatar className={classes.avatar} alt={chat_username} src="/static/images/avatar/1.jpg"></Avatar>
@@ -102,7 +102,6 @@ function WidgetMember({lastchatAt,chat_username,chatId}) {
                                 </CardContent>
                         </div>
           </div>
-        </div>
     </ButtonBase>
     )
 }

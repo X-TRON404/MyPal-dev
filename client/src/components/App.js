@@ -253,17 +253,21 @@ const handleSignUp= () => {
         authUser.user.updateProfile({
         //set displayname attribute of user object to username
         displayName:username
-      }).then((result)=>{
-          //dispatch user to state management
-          dispatch(
+      })            
+      console.log(authUser+ "result after sign up")
+      
+      //sign in
+      auth.signInWithEmailAndPassword(authUser.user.email,password)
+      .then((result)=>{
+        //dispatch user to state management
+        dispatch(
             {
             type:actionTypes.SET_USER,
             user:result.user
             }
           );
         localStorage.setItem('user',JSON.stringify(result.user))
-
-          console.log(result+"result after sign up")
+      })
           //added the newly created user to our firestore database for posts 
           DataBase.collection('users').doc(authUser.user.uid).set({
             email:authUser.user.email,
@@ -285,9 +289,6 @@ const handleSignUp= () => {
             }
         
           })
-        })
-    .catch((error)=>{alert(error.message+"from dispatch signup")})
-
     setOpen(false)
   })//catch error if data filled is not in the proper format
   .catch((error)=>{alert(error.message)})

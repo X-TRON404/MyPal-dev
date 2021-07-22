@@ -400,8 +400,8 @@ const postComment = (e) => {
              
             {/*===========================================================================================================================================*/}
             </div>
-            {/* always run onLoad inside an img tag */}
-            <img className="post__image" src={imageUrl} alt={username+" "+caption} />
+            {/* if post doesnt have image then dont show the image*/}
+            {imageUrl=='no-image'?(<></>):(<img className="post__image" src={imageUrl} alt={username+" "+caption} />)}
             <h4 className="post__text"><strong>{username+" "}</strong>:{" "+caption}</h4>
             <div className="post__footer">
                                                      

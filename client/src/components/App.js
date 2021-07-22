@@ -50,7 +50,12 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: 400,
+    [theme.breakpoints.down("xs")]: {
+      width: 250,
+    },
+    [theme.breakpoints.between("sm", "lg")]: {
+      width: 450,
+    },
     backgroundColor:'#2E3336',
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
@@ -528,7 +533,7 @@ const handleSignUp= () => {
                   {/*Bottom Navigation only applicable to mobile screens*/}
                   <BottomNavigationMobile/>
                 </Router>)
-          }
+        }
 
 {/* ======================================================================================================================================================= */}
                                             {/*post upload*/}

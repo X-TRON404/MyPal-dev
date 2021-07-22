@@ -81,9 +81,9 @@ useEffect(() => {
     return (                         
              <div className="chat" >
                 <div className="chat__body">
-                    <div className="chat__header" >
+                        <center>
                         This is the beggining of your texx with  {chatName.chat_username}
-                    </div>
+                        </center>
                         <div className="chat__messages" ref={messageScrollRef}>
                         {
                             messages.map((message)=>(

@@ -30,10 +30,8 @@
   }
     
 } 
-.chat__header{
-  display: flex;
-  justify-content: center;
-  color:grey;
+.chat__body>center{
+  color:gray;
 }
 
 .chat__messages{

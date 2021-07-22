@@ -132,9 +132,9 @@ function App() {
   const WidgetsChat = React.lazy(() => import('./chat/WidgetsChat'))
   //actions for speedDial
   const actions = [
-    { icon: <Router><Link><AddPhotoAlternateIcon onClick={()=>window.location.href= '/ImageUploadMobile'}/></Link></Router>, name: 'Post' },
-    { icon: <Router><Link><EventIcon onClick={()=>window.location.href= '/createEvent'}/></Link></Router>, name: 'New event' },
-    { icon: <Router><Link><WhatshotSharpIcon onClick={()=>window.location.href= '/createConfessions'}/></Link></Router>, name: 'Confess' },
+    { icon: <AddPhotoAlternateIcon onClick={()=>window.location.href= '/ImageUploadMobile'}/>, name: 'Post' },
+    { icon: <EventIcon onClick={()=>window.location.href= '/createEvent'}/>, name: 'New event' },
+    { icon: <WhatshotSharpIcon onClick={()=>window.location.href= '/createConfessions'}/>, name: 'Confess' },
   ];
 
   //====================================Get the user from the local storage on refresh======================
@@ -426,10 +426,9 @@ const handleSignUp= () => {
             >
               {actions.map((action) => (
                 <SpeedDialAction
-                  key={action.name}
-                  icon={action.icon}
-                  tooltipTitle={action.name}
-                  tooltipOpen
+                key={action.name}
+                icon={action.icon}
+                tooltipTitle={action.name}
                   onClick={()=>{setOpenSpeedDial(true)}}
                 />
               ))}

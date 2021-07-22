@@ -1,6 +1,6 @@
 
-
-@media (min-width: 0px) and (max-width:450px){
+/*small smartphones iphone5/SE*/
+@media (min-width: 0px) and (max-width:360px){
     .widgetsChat__headerTitle{
         background-color: #1a1a1a;
         padding-bottom: 8px;
@@ -9,7 +9,44 @@
         color: aliceblue;
         /* border-radius: 8px; */
     }
+    .widgetsChat__onlineBox{
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        /* background-color: #1b1b1b; */
+        border-radius: 0px;
+        height: 69px;
+        margin-bottom: 1px;
+        min-width: 320px;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        border-bottom: 1px solid gray;
+    }
 }
+
+/*medium and large sized smartphones*/
+@media (min-width: 361px) and (max-width:450px){
+    .widgetsChat__headerTitle{
+        background-color: #1a1a1a;
+        padding-bottom: 8px;
+        margin-bottom: 2px;
+        padding-top: 8px;
+        color: aliceblue;
+    }
+    .widgetsChat__onlineBox{
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        border-radius: 0px;
+        height: 69px;
+        margin-bottom: 1px;
+        min-width: 370px;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        border-bottom: 1px solid gray;
+    }
+}
+
 
 @media (min-width: 451px) and (max-width: 2048px) {
     .widgetsChat__headerTitle{
@@ -20,20 +57,19 @@
         margin-right: 2px; */
         /* border-radius: 8px; */
     }
+    .widgetsChat__onlineBox{
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        background-color: #1b1b1b;
+        border-radius: 0px;
+        height: 69px;
+        margin-bottom: 1px;
+        min-width: 300px;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
     
-}
-
-.widgetsChat__onlineBox{
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    background-color: #1b1b1b;
-    border-radius: 0px;
-    height: 69px;
-    margin-bottom: 1px;
-    min-width: 300px;
-    overflow-x: hidden;
-    overflow-y: hidden;
 }
 .widgetsChat__onlineBoxActive{
     display: flex;
@@ -68,7 +104,6 @@ scrollbar-width: none;  /* Firefox */
 
 .widgetsChat__online{
     flex:1;
-    background-color: #000000;
     width:100%;
     text-align: center;
     display: flex;
@@ -83,9 +118,8 @@ scrollbar-width: none;  /* Firefox */
     align-items: center;
     
 }
-.widgetsChat__offline{
+/* .widgetsChat__offline{
     flex:1;
-    background-color: #000000;
     width:100%;
     text-align: center;
     display: flex;
@@ -98,4 +132,4 @@ scrollbar-width: none;  /* Firefox */
     display: flex;
     flex-direction:column;
     align-items: center;
-}
+} */

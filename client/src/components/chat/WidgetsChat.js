@@ -89,7 +89,6 @@ function WidgetsChat() {
     return (
 //==========================================ALL CHATS LIST===========================================================
         <div className="widgetsChat">
-          CHATS
           {chats.length!==0 &&  
                 (chats.map((chat)=>(
                     <Suspense fallback={

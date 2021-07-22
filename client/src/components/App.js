@@ -522,6 +522,7 @@ const handleSignUp= () => {
                           <div className="app__chatsFeed" >
                             {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
                             <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
+                              <center>CHATS</center>
                               <WidgetsChat/>
                             </Suspense>
                           </div>

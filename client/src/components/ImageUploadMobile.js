@@ -22,7 +22,7 @@ function ImageUploadMobile({username}) {
     //open alert box when a new event is created
     const [openAlert,setOpenAlert] = useState(false)
     //post button enabled if image or caption is selected
-    const enabled =  caption=='' || !image
+    const enabled =  caption!='' || image
 
 
     //get the name of the first image file you selected (image as a file)

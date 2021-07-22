@@ -21,7 +21,8 @@ function ImageUploadMobile({username}) {
     const [openProgress,setOpenProgress] = useState(false)
     //open alert box when a new event is created
     const [openAlert,setOpenAlert] = useState(false)
-
+    //post button enabled if image or caption is selected
+    const enabled =  caption=='' || !image
 
 
     //get the name of the first image file you selected (image as a file)
@@ -99,7 +100,22 @@ function ImageUploadMobile({username}) {
             )
     }
     else{
-        alert("No image selected")
+        //if no image just text
+        console.log("No image selected")
+        DataBase.collection('posts').add({
+            //set the attribute to the time stamp of the server which serves the file
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            //set the cation attribute to the cation user entered   
+                caption:caption,
+            //set image url attribute to the 'url' we got from the getDownloadURL() method
+                imageUrl:'no-image',
+            //get the username as a prop from the 'App.js' file
+                username:username,
+            //post the id of the user from 'user' object  
+                user_id:user.uid,
+            //initially set likesCount to 0 
+                likesCount:0
+            })
     }
 }
 
@@ -130,7 +146,7 @@ function ImageUploadMobile({username}) {
                         {image&&(<img className="imageUploadMobile__preview" width="80px" height="80px" src={URL.createObjectURL(image)}/>)}
                                                         {/*image caption*/}
                         <Input style={{color:"aliceblue"}}  className="imageUploadMobile__caption" type="text" placeholder="Enter a caption for the new post..." onChange={(e)=>setCaption(e.target.value)} value={caption}/>
-                        <Button className="imageUploadMobile___iconButton" disabled = {!image} variant ='contained' color="primary" type ='submit' onClick={handleUpload}>
+                        <Button className="imageUploadMobile___iconButton" disabled = {!enabled} variant ='contained' color="primary" type ='submit' onClick={handleUpload}>
                             POST
                         </Button>
                 </form>

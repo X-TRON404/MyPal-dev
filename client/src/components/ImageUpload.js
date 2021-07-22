@@ -22,6 +22,8 @@ function ImageUpload({username}) {
     const [openProgress,setOpenProgress] = useState(false)
     //open alert box when a new event is created
     const [openAlert,setOpenAlert] = useState(false)
+    //post button enabled if image or caption is selected
+    const enabled =  caption=='' || !image
 
 
 
@@ -99,7 +101,25 @@ function ImageUpload({username}) {
             )
     }
     else{
-        alert("No image selected")
+        //if no image just text
+        console.log("No image selected")
+        DataBase.collection('posts').add({
+            //set the attribute to the time stamp of the server which serves the file
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            //set the cation attribute to the cation user entered   
+                caption:caption,
+            //set image url attribute to the 'url' we got from the getDownloadURL() method
+                imageUrl:'no-image',
+            //get the username as a prop from the 'App.js' file
+                username:username,
+            //post the id of the user from 'user' object  
+                user_id:user.uid,
+            //initially set likesCount to 0 
+                likesCount:0
+            })
+
+            setCaption("");
+            setImage(null)
     }
 }
 
@@ -128,7 +148,7 @@ function ImageUpload({username}) {
                         {image&&(<img className="imageUpload__preview" width="20px" height="20px" src={URL.createObjectURL(image)}/>)}
                                                              {/*image caption*/}
                         <Input style={{color:"aliceblue"}}  className="imageUpload__caption" type="text" placeholder="Enter a caption for the new post..." onChange={(e)=>setCaption(e.target.value)} value={caption}/>
-                        <IconButton className="imageUpload___iconButton" disabled = {!image} variant ='contained' color="primary" type ='submit' onClick={handleUpload}>
+                        <IconButton className="imageUpload___iconButton" disabled = {!enabled} variant ='contained' color="primary" type ='submit' onClick={handleUpload}>
                             <SendIcon/>
                         </IconButton>
                 </form>

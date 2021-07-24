@@ -116,6 +116,8 @@ function ImageUploadMobile({username}) {
             //initially set likesCount to 0 
                 likesCount:0
             })
+            setCaption("");
+            setOpenAlert(true)
     }
 }
 

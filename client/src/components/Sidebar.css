@@ -11,8 +11,8 @@
     background-color: #2E3236;
     /* sidebar will always take 30% of the screen */
     flex:0.3;
-    /*dont be less that 300px*/                                      /*SIDEBAR WIDTH*/         
-    min-width: 300px;
+    /*dont be less that 340px*/                                      /*SIDEBAR WIDTH*/         
+    min-width: 340px;
     padding-left: 20px;
     padding-right: 20px;
 

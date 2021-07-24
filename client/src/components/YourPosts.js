@@ -53,7 +53,8 @@ export default function YourPosts() {
 
   return (
       <GridList cellHeight={180} className={classes.gridList}>
-            {posts.length!=0?(posts.map((post) => (
+            {posts.length!=0?(                            
+            posts.filter(post=>(post.post.imageUrl!='no-image')).map((post) => (
             <GridListTile key={post.id}>
                 <img src={post.post.imageUrl} alt={post.post.caption} />
                 <GridListTileBar

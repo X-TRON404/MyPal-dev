@@ -505,7 +505,7 @@ const handleSignUp= () => {
                         <Route path="/confessionsFeed">
                           <div className="app__confessionsFeed" >
                             {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
-                            <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
+                            <Suspense fallback={<div><center><CircularProgress disableShrink /></center></div>}>
                               <FeedConfessions/>
                             </Suspense>
                           </div>

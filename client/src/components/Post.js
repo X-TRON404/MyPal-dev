@@ -3,11 +3,10 @@
 import React , {useState,useEffect, useRef} from 'react'
 import './Post.css'
 import Avatar from '@material-ui/core/Avatar';
-import {Button, Collapse, IconButton, Input, makeStyles, Modal, Popover} from '@material-ui/core';
+import {Button, Collapse, IconButton, Input, makeStyles, Modal} from '@material-ui/core';
 import {DataBase, realtime} from './firebase'
 import firebase from 'firebase';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
-import RepeatIcon from '@material-ui/icons/Repeat'
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import SendIcon from '@material-ui/icons/Send';
 import {useStateValue} from '../contexts/StateProvider'
@@ -46,14 +45,6 @@ function Post({postId,username,user_id,caption,imageUrl,likesCount}) {
     const [comments, setComments] = useState([]);
     //input comment for a post from the user  (POST to DataBase)
     const [comment, setComment] = useState('');
-    //store likes from the database for a praticular post in an array (GET from DataBase)
-    const [likes, setLikes] = useState([]);
-    //input comment for a post from the user  (POST to DataBase)
-    //change color of the like button on click
-    const [favouritesColor, setfavouritesColor] = useState(false)
-    //to make sure user likes the post only once
-    const [firstTimeLike,setFirstTimeLike] = useState(true) 
-    const [likeColor,setLikeColor] = useState('')
     //to store users in chat list after getting them from the database
     const [chats,setChats] = useState([]) 
     //the problem with let here is  it is making everything empty after 
@@ -70,17 +61,11 @@ function Post({postId,username,user_id,caption,imageUrl,likesCount}) {
     const [hoverOpen, setHoverOpen] = useState(false)
     //modal styles
     const [modalStyle] = useState(getModalStyle);
-    //no. of liked docs
-    const [liked,setLiked] = useState([])
-    //like data of already liked doc
-    const [likedData,setLikedData] = useState([])
     //if like=true or not
     const [like, setLike] = useState(false);
     const [uid,setUid] =useState(user.uid)
     //like ref
     const likeCountRef = useRef(0)
-    //
-    const count = useRef(0)
 
     //commentsIcon onclick collapse
     const handleExpandClick = () => {
@@ -401,8 +386,8 @@ const postComment = (e) => {
             {/*===========================================================================================================================================*/}
             </div>
             {/* if post doesnt have image then dont show the image*/}
-            {imageUrl=='no-image'?(<></>):(<img className="post__image" src={imageUrl} alt={username+" "+caption} />)}
-            <h4 className="post__text"><strong>{username+" "}</strong>:{" "+caption}</h4>
+            {imageUrl==='no-image'?(<></>):(<img className="post__image" src={imageUrl} alt={username?(username+" "):('')+" "+caption?(caption):('')} />)}
+            <h4 className="post__text"><strong>{username?(username+": "):('')}</strong>{" "+caption?(caption):('')}</h4>
             <div className="post__footer">
                                                      
 
@@ -463,31 +448,24 @@ const postComment = (e) => {
                                                     navigator.share({
                                                             title: document.title,
                                                             text: caption,
-                                                            url: window.location.href,
+                                                            url: window.location.href + `share/posts/${postId}`,
                                                         })
                                                         .then(() => console.log('Successful share'))
-                                                        .catch((error) => alert('Error sharing', error));
+                                                        .catch((error) => console.log('Error sharing', error));
                                                 } else {
                                                     alert("Web Share API is not supported in your browser.")
                                                 }
                                             }}> 
                                 </ShareIcon> 
                             </Button>
-                                                    {/*Re-post icon*/}
-                            <IconButton>                       
-                                   <RepeatIcon fontsize="small" cursor="pointer"/>
-                            </IconButton>
-
-                            
-                         
-                                                 
+                                   
             </div>
                                               {/*display the comments from the database */}
             <div className="post__comments">
                     <Collapse in={expanded} timeout="auto" unmountOnExit >
                        { comments.map((comment) => (
                             //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
-                            <p className="post__commentsComment" key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}<span>{" "+convertToDate(comment.timestamp)}</span></p>
+                            <p className="post__commentsComment" key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}</p>
                         ))
                        } 
                     </Collapse>

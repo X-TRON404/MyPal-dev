@@ -130,6 +130,7 @@ function App() {
   const FeedConfessions = React.lazy(() => import('./FeedConfessions'))
   const ImageUploadMobile = React.lazy(() => import('./ImageUploadMobile'))
   const WidgetsChat = React.lazy(() => import('./chat/WidgetsChat'))
+  const PostSharingContainer = React.lazy(() => import('./PostSharingContainer'))
   //actions for speedDial
   const actions = [
     { icon: <AddPhotoAlternateIcon onClick={()=>window.location.href= '/ImageUploadMobile'}/>, name: 'Post' },
@@ -524,6 +525,14 @@ const handleSignUp= () => {
                             <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
                               <center>CHATS</center>
                               <WidgetsChat/>
+                            </Suspense>
+                          </div>
+                        </Route> 
+                        <Route path="/share/posts/:postId">
+                          <div className="app__sharingPosts" >
+                            {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
+                            <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
+                              <PostSharingContainer/>
                             </Suspense>
                           </div>
                         </Route> 

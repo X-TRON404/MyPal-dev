@@ -4,10 +4,11 @@ import { useStateValue } from '../contexts/StateProvider';
 import './Confessions.css'
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import {Collapse, IconButton, Input, Typography } from '@material-ui/core';
+import {Collapse, IconButton, Input} from '@material-ui/core';
 import { DataBase } from './firebase';
 import firebase from 'firebase';
 import SendIcon from '@material-ui/icons/Send';
+import ShareIcon from '@material-ui/icons/Share';
 
 function Confessions({confession,confessionId,likesCount}) {
     //get the user from the provider
@@ -162,6 +163,24 @@ const postLike = () => {
                                 ))
                             } 
                             </Collapse>
+
+                                                                        {/*share icon*/}
+                            <Button onClick={() => {
+                                                if (navigator.share) {
+                                                    navigator.share({
+                                                            title: document.title,
+                                                            text: confession,
+                                                            url: window.location.href + `share/confessions/${confessionId}`,
+                                                        })
+                                                        .then(() => console.log('Successful share'))
+                                                        .catch((error) => console.log('Error sharing', error));
+                                                } else {
+                                                    alert("Web Share API is not supported in your browser.")
+                                                }
+                                            }}>
+                                <ShareIcon fontsize="small" cursor="pointer"> 
+                                </ShareIcon> 
+                            </Button>
                             
             </div>
                                                     {/*post the comment to the database*/}

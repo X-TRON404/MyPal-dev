@@ -119,7 +119,7 @@ function ImageUpload({username}) {
             })
 
             setCaption("");
-            setImage(null)
+            setOpenAlert(true)
     }
 }
 

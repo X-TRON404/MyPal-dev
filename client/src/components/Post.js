@@ -442,8 +442,7 @@ const postComment = (e) => {
                             </div>
 
                                                     {/*share icon*/}
-                            <Button>
-                                <ShareIcon fontsize="small" cursor="pointer" onClick={() => {
+                            <Button onClick={() => {
                                                 if (navigator.share) {
                                                     navigator.share({
                                                             title: document.title,
@@ -455,7 +454,8 @@ const postComment = (e) => {
                                                 } else {
                                                     alert("Web Share API is not supported in your browser.")
                                                 }
-                                            }}> 
+                                            }}>
+                                <ShareIcon fontsize="small" cursor="pointer"> 
                                 </ShareIcon> 
                             </Button>
                                    

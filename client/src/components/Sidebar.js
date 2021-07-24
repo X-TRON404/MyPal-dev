@@ -18,16 +18,16 @@ function Sidebar() {
         <div className="sidebar">
             {/*pass icons as props to SidebarOptions component*/}
             {/*keep i captial of Icon to let react know you are passing a component*/}
-            <Link to='/'><SidebarOptions active text="Home" Icon={HomeIcon}/></Link>
+            <Link to='/' style={{ textDecoration: 'none' }}><SidebarOptions active text="Home" Icon={HomeIcon}/></Link>
             <SidebarOptions text="Explore" Icon={SearchIcon}/>
-            <Link to='/eventsFeed'><SidebarOptions text="Events" Icon={EventIcon}/></Link>
-            <Link to='/confessionsFeed' onClick={()=>window.location.href='/confessionsFeed'}><SidebarOptions text="Confessions" Icon={WhatshotSharpIcon}/></Link>
+            <Link to='/eventsFeed' style={{ textDecoration: 'none' }}><SidebarOptions text="Events" Icon={EventIcon}/></Link>
+            <Link to='/confessionsFeed' onClick={()=>window.location.href='/confessionsFeed'} style={{ textDecoration: 'none' }}><SidebarOptions text="Confessions" Icon={WhatshotSharpIcon}/></Link>
             <SidebarOptions text="Notifications" Icon={NotificationsNoneIcon}/>
             {/* <SidebarOptions text="Messages" Icon={MailOutlineIcon}/> */}
-            <Link to='/profile' onClick={()=>window.location.href='/profile'}><SidebarOptions text="Bookmarks" Icon={BookmarkBorderIcon}/></Link>
+            <Link to='/profile' onClick={()=>window.location.href='/profile'} style={{ textDecoration: 'none' }}><SidebarOptions text="Bookmarks" Icon={BookmarkBorderIcon}/></Link>
             <SidebarOptions text="More" Icon={MoreHorizIcon}/>
-            <Link to='/createEvent' onClick={()=>window.location.href='/createEvent'}><Button variant="outlined"  className="sidebar__event" fullWidth>New event</Button></Link>
-            <Link to='/createConfessions' onClick={()=>window.location.href='/createConfessions'}><Button variant="outlined"  className="sidebar__event" fullWidth>Write an annonymous confession</Button></Link>
+            <Link to='/createEvent' onClick={()=>window.location.href='/createEvent'} style={{ textDecoration: 'none' }}><Button variant="outlined"  className="sidebar__event" fullWidth>New event</Button></Link>
+            <Link to='/createConfessions' onClick={()=>window.location.href='/createConfessions'} style={{ textDecoration: 'none' }}><Button variant="outlined"  className="sidebar__event" fullWidth>Write an annonymous confession</Button></Link>
         </div>
     )
 }

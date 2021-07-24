@@ -96,7 +96,7 @@ function WidgetsChat() {
                         <Skeleton variant="circle" width={40} height={40} />
                         <Skeleton variant="rect" width={210} height={50} /></div>} key={chat.key}>
                       
-                        <Link to={`/chats/${chat.chat_user_id}`} >
+                        <Link to={`/chats/${chat.chat_user_id}`} style={{ textDecoration: 'none' }}>
                           <WidgetMember lastchatAt={chat.lastchatAt} chatId={chat.chat_user_id} chat_username= {chat.chat_username} />
                         </Link>
 

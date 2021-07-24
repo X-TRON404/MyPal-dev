@@ -60,7 +60,7 @@ const Results = connectStateResults(({ searchState }) =>
 
   const Hit = ({ hit }) => (
     //using window.location.href cause outside of Router
-  <Link to={`/pals/${hit.objectID}`} onClick={()=>window.location.href=`/pals/${hit.objectID}`}>
+  <Link to={`/pals/${hit.objectID}`} onClick={()=>window.location.href=`/pals/${hit.objectID}`} style={{ textDecoration: 'none' }}>
     <div className="widgets__search__hit">
         <Avatar className="widgets__search__hit__avatar" alt={hit.displayName} src={hit.displayName}></Avatar>
         <div className="widgets__search__hit__content">

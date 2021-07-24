@@ -28,7 +28,6 @@
     flex-direction: column;
     background-color:#2E3336;
     width: 100%;
-    min-width: 650px;
     margin-top: 20px;
 }
 .event__dateTime {

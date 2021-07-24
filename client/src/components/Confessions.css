@@ -34,10 +34,17 @@
 }
 .confessions__footer{
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: space-evenly;
 }
-
+.confessions__likes{
+    display: flex;
+    flex-direction: column;
+}
+.confessions__likesCount{
+    color: aliceblue;
+    font-size: small;
+  }
 .confessions__commentsIcon{
     display: flex;
     flex-direction: column;

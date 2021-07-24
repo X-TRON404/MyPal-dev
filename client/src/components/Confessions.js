@@ -1,14 +1,15 @@
-import { Avatar } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
+import { Avatar, Button } from '@material-ui/core'
+import React, { useEffect, useRef, useState } from 'react'
 import { useStateValue } from '../contexts/StateProvider';
 import './Confessions.css'
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import {Collapse, IconButton, Input, Typography } from '@material-ui/core';
 import { DataBase } from './firebase';
 import firebase from 'firebase';
 import SendIcon from '@material-ui/icons/Send';
 
-function Confessions({confession,confessionId}) {
+function Confessions({confession,confessionId,likesCount}) {
     //get the user from the provider
     const [{user}, dispatch] = useStateValue();
     //comments from DataBase
@@ -17,6 +18,12 @@ function Confessions({confession,confessionId}) {
     const [confessionComment, setConfessionComment] = useState('')
     //for commentsIcon onclick collapse
     const [expanded, setExpanded] =  useState(false);
+    //if like=true or not
+    const [like, setLike] = useState(false);
+    //number of likes
+    const [likeCount,setLikeCount] = useState(likesCount)
+    //like ref
+    const likeCountRef = useRef(0)
     
     //commentsIcon onclick collapse
     const handleExpandClick = () => {
@@ -46,6 +53,26 @@ const postConfessionComment = (e) => {
     //clear the input after posting
     setConfessionComment('')
 }
+//======================================Post likes to the database===================================================================================
+const postLike = () => {
+    const newLikeValue = !like;
+    const newLikeCount = like ? likeCount - 1 : likeCount + 1;
+    setLike(!like);
+
+    setLikeCount(newLikeCount);
+    setLike(newLikeValue);
+    DataBase
+    .collection('confessions').doc(confessionId)
+    .collection('confessionLikes').doc(user.uid)
+    .set(
+      { 
+        like:newLikeValue,
+        username:user.displayName,
+        timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+
+      }
+    ).catch((err)=>{console.log("something wrong happened "+err.message)})
+}
 //====================================Get the comments from the database and display=================================================================
     useEffect(() => {
         
@@ -56,8 +83,41 @@ const postConfessionComment = (e) => {
                     (snapshot) =>{
                         //set comments to the data inside the doc
                                 setConfessionComments(snapshot.docs.map((doc) => (doc.data())))
-                                console.log(confessionComments+" Ccommnets")
+                                console.log(confessionComments+" commnets")
                     })
+
+                //check if the user already liked the doc or not
+                setTimeout(() => {
+                    DataBase.collection('confessions').doc(confessionId).collection('confessionLikes').doc(user.uid).get().then((doc) => {
+                        if (doc.exists) {
+                            console.log(doc.data().like)
+                            setLike(doc.data().like)
+                            console.log(like + " 1")
+                            console.log("likedData")
+                        } else {
+                            // doc.data() will be undefined in this case
+                            console.log("Not liked");
+                        }
+                    }).catch((error) => {
+                        console.log("Error getting document:", error);
+                    });
+                }, 500);
+
+                
+                    //    grab the docs which have like=true 
+                    setTimeout(() => {
+                        DataBase.collection('confessions').doc(confessionId).collection('confessionLikes').where("like", "==", true).get()
+                        .then((querySnapshot) => {
+                            setLikeCount((querySnapshot.docs.map(doc =>doc.data())).length)
+                            console.log(likeCount +" likes count")
+                            likeCountRef.current=likeCount
+                        })
+                        .catch((error) => {
+                            console.log("Error getting documents: ", error);
+                        });
+                    }, 400);
+            
+            
 
                 }
 
@@ -74,6 +134,18 @@ const postConfessionComment = (e) => {
                 <p style={{color:"aliceblue"}}>{confession}</p>
             </div>
             <div className="confessions__footer">
+
+                            <div className="confessions__likes">  
+                                                                                {/*like icon*/}
+
+                                        {like?
+                                            (<Button onClick={postLike} ><FavoriteIcon   fontsize="small" cursor="pointer" style={{color:'red'}}/></Button> ):(<Button onClick={postLike} ><FavoriteIcon   fontsize="small" cursor="pointer"  /> </Button>)
+                                            
+                                        }
+                                <p className="confessions__likesCount"  component={'span'}>Likes {likeCount}</p>
+                            </div>
+
+
                                                 {/*display the comments from the database */}
                     <div className="confessions__commentsIcon">
                                  <IconButton onClick={handleExpandClick} id="comments-icon"  disabled={confessionComments.length===0}>
@@ -86,7 +158,7 @@ const postConfessionComment = (e) => {
                             <Collapse in={expanded} timeout="auto" unmountOnExit >
                             { confessionComments.map((comment) => (
                                     //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
-                                    <p className="confessions__comments" key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}<span>{" "+convertToDate(comment.timestamp)}</span></p>
+                                    <p className="confessions__comments" key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}</p>
                                 ))
                             } 
                             </Collapse>

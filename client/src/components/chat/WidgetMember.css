@@ -20,7 +20,7 @@
         min-width: 320px;
         overflow-x: hidden;
         overflow-y: hidden;
-        border-bottom: 1px solid gray;
+        border-bottom: 1px solid black;
     }
 }
 
@@ -43,7 +43,7 @@
         min-width: 370px;
         overflow-x: hidden;
         overflow-y: hidden;
-        border-bottom: 1px solid gray;
+        border-bottom: 1px solid black;
     }
 }
 

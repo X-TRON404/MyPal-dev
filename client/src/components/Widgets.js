@@ -22,6 +22,7 @@ function Widgets() {
                 {/* <Input style={{color:"aliceblue"}} className="widgets__input" type= "text" placeholder="Search MyPal" /> */}
             </div>
             <div className="widgets___widgetContainer">
+                <center style={{color:'aliceblue'}}>CHATS</center>
                 {/* if user doesnt exists WidgetsChat component wasthrwoing an error hence I Made a dummy component which doesnt have a user object and 
                 will be rendered during refresh transitions when momentarily user is unavailable instead of throwing an error  */}
                 {user?(<Suspense fallback={<Skeleton variant="rect" width={100} height={500} />}><WidgetsChat/></Suspense>):(<Suspense fallback={<Skeleton variant="rect" width={100} height={400} />}><WigetsDummy/></Suspense>)}

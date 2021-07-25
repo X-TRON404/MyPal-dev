@@ -63,7 +63,6 @@ function EventsMenu({eventId,eventUsername,eventUserId}) {
       DataBase.collection('users').doc(user.uid).collection('bookmarksEvents').doc(eventId).set(
           {
            bookmarkEventUserId:eventId,
-           bookmarkEventUsername:eventUsername,
            timestamp:firebase.firestore.FieldValue.serverTimestamp()
           }
       ) 

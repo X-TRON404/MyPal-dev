@@ -156,13 +156,6 @@ const postLike = () => {
                                  <p className="confessions__commentsIconCommentsCount" >{confessionComments.length} Comments</p>
                     </div>
 
-                            <Collapse in={expanded} timeout="auto" unmountOnExit >
-                            { confessionComments.map((comment) => (
-                                    //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
-                                    <p className="confessions__comments" key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}</p>
-                                ))
-                            } 
-                            </Collapse>
 
                                                                         {/*share icon*/}
                             <Button onClick={() => {
@@ -183,6 +176,15 @@ const postLike = () => {
                             </Button>
                             
             </div>
+            
+                    <Collapse in={expanded} timeout="auto" unmountOnExit >
+                                    { confessionComments.map((comment) => (
+                                            //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
+                                            <p className="confessions__comments" key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}</p>
+                                        ))
+                                    } 
+                    </Collapse>
+
                                                     {/*post the comment to the database*/}
                     {//if the user is logged in then only show the post comment section
                         user &&(

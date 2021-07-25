@@ -383,7 +383,7 @@ const postComment = (e) => {
                 } */}
 
                             {/*Report or bookmarks Menu*/}
-                <PostMenu postId={postId} postUsername={username} postUserId={user_id} postImage={imageUrl} postCaption={caption}/>
+                <PostMenu postId={postId} postUsername={username} postUserId={user_id}/>
                 
              
             {/*===========================================================================================================================================*/}

@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
   
-function PostMenu({postId,postUsername,postUserId,postCaption,postImage}) {
+function PostMenu({postId,postUsername,postUserId}) {
     //get the user from the provider
     const [{user}, dispatch] = useStateValue();
     const classes = useStyles();
@@ -63,9 +63,6 @@ function PostMenu({postId,postUsername,postUserId,postCaption,postImage}) {
       DataBase.collection('users').doc(user.uid).collection('bookmarksPost').doc(postId).set(
           {
            bookmarkPostId:postId,
-           bookmarkPostImage:postImage,
-           bookmarkPostCaption:postCaption,
-           bookmarkPostUsername:postUsername,
            timestamp:firebase.firestore.FieldValue.serverTimestamp()
           }
       ) 

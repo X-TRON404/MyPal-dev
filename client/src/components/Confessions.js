@@ -176,13 +176,15 @@ const postLike = () => {
                             </Button>
                             
             </div>
-            
+
                     <Collapse in={expanded} timeout="auto" unmountOnExit >
+                        <div className="confessions_commentWrapper">
                                     { confessionComments.map((comment) => (
                                             //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
                                             <p className="confessions__comments" key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}</p>
                                         ))
-                                    } 
+                                    }
+                        </div>
                     </Collapse>
 
                                                     {/*post the comment to the database*/}

@@ -463,11 +463,13 @@ const postComment = (e) => {
                                               {/*display the comments from the database */}
             <div className="post__comments">
                     <Collapse in={expanded} timeout="auto" unmountOnExit >
-                       { comments.map((comment) => (
-                            //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
-                            <p className="post__commentsComment" key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}</p>
-                        ))
-                       } 
+                        <div className="post_commentWrapper">
+                            { comments.map((comment) => (
+                                    //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
+                                    <p className="post__commentsComment" key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}</p>
+                                ))
+                            }
+                       </div>
                     </Collapse>
                     
             </div>

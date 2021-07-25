@@ -14,6 +14,9 @@ import { DataBase } from './firebase';
 import { useStateValue } from '../contexts/StateProvider';
 import firebase from 'firebase/app'
 import Skeleton from '@material-ui/lab/Skeleton';
+import ShareIcon from '@material-ui/icons/Share';
+
+
 const EventsMenu = React.lazy(()=>import('./EventsMenu'))
 
 const useStyles = makeStyles({
@@ -123,20 +126,22 @@ useEffect(() => {
                     </div>
     
                     <div className="event__actions">
-                            <Button size="small" onClick={() => {
-                                            if (navigator.share) {
-                                                navigator.share({
-                                                        title: document.title,
-                                                        text: "Event short description",
-                                                        url: window.location.href,
-                                                    })
-                                                    .then(() => console.log('Successful share'))
-                                                    .catch((error) => alert('Error sharing', error));
-                                            } else {
-                                                alert("Web Share API is not supported in your browser.")
-                                            }
-                                        }} >
-                            Share
+                                                                   {/*share icon*/}
+                            <Button onClick={() => {
+                                                if (navigator.share) {
+                                                    navigator.share({
+                                                            title: document.title,
+                                                            text: title,
+                                                            url: window.location.href + `share/events/${eventId}`,
+                                                        })
+                                                        .then(() => console.log('Successful share'))
+                                                        .catch((error) => console.log('Error sharing', error));
+                                                } else {
+                                                    alert("Web Share API is not supported in your browser.")
+                                                }
+                                            }}>
+                                <ShareIcon fontsize="small" cursor="pointer"> 
+                                </ShareIcon> 
                             </Button>
                     <div className="event__interestedInterestedCount">Interested: {interestedCount}</div>
                     </div>

@@ -30,8 +30,7 @@ const useStyles = makeStyles({
 function Event({eventId, dateTime, venue, username,title, description, user_id, imageUrl, interestedCount}) {
     const classes = useStyles();
     const convertToDate = (date) => {
-        //convert to miliseconds
-        let k = date.seconds*1000
+        let k = date
         let dat = Date(k)
         dat = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: "long" ,day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(k)
         return dat

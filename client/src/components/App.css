@@ -66,7 +66,7 @@
       }
       .app__body{
         display: flex;
-        height: 88vh;
+        height: 100vh;
         overflow-x: hidden;
       }
       .app__speedDialMobile{

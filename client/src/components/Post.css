@@ -83,7 +83,11 @@ color: aliceblue;
     flex-direction: row;
     justify-content: flex-start;
 }
-
+.post__userProfile >a{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .post__avatar{
 margin-right: 10px;
 }

@@ -326,7 +326,7 @@ const postComment = (e) => {
                                                {/*avatar managed by@material-ui/core*/}
                 <div className="post__userProfile">
                 <Avatar className="post__avatar" alt={username} src="/static/images/avatar/1.jpg"  onClick={handleHoverModalOpen} />
-                <h3>{username}</h3>
+                <Link to={`/pals/${user_id}`} style={{textDecoration:'none'}}><h3>{username}</h3></Link>
                 </div>
                 <Modal
                         open={hoverOpen}

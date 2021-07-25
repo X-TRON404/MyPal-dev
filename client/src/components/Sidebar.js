@@ -12,8 +12,28 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import {Button} from '@material-ui/core';
 import './Sidebar.css'
 import { BrowserRouter as Router,Link} from 'react-router-dom'
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  root: {
+    background: 'rgb(86,108,183)',
+    '&:hover': {
+        background: 'rgb(111,144,255)',
+     },
+    transition: "background 1s",
+    background: 'linear-gradient(90deg, rgba(86,108,183,0.9290091036414566) 39%, rgba(190,185,249,1) 100%)',
+    border: 'none',
+    color: 'aliceblue',
+    fontWeight: '900',
+    textTransform: 'inherit',
+    borderRadius: '30px',
+    height: '50px !important',
+    marginTop: '20px !important',
+  },
+});
 
 function Sidebar() {
+    const classes = useStyles();
     return (
         <div className="sidebar">
             {/*pass icons as props to SidebarOptions component*/}
@@ -26,8 +46,8 @@ function Sidebar() {
             {/* <SidebarOptions text="Messages" Icon={MailOutlineIcon}/> */}
             <Link to='/profile' onClick={()=>window.location.href='/profile'} style={{ textDecoration: 'none' }}><SidebarOptions text="Bookmarks" Icon={BookmarkBorderIcon}/></Link>
             <SidebarOptions text="More" Icon={MoreHorizIcon}/>
-            <Link to='/createEvent' onClick={()=>window.location.href='/createEvent'} style={{ textDecoration: 'none' }}><Button variant="outlined"  className="sidebar__event" fullWidth>New event</Button></Link>
-            <Link to='/createConfessions' onClick={()=>window.location.href='/createConfessions'} style={{ textDecoration: 'none' }}><Button variant="outlined"  className="sidebar__event" fullWidth>Write an annonymous confession</Button></Link>
+            <Link to='/createEvent' onClick={()=>window.location.href='/createEvent'} style={{ textDecoration: 'none' }}><Button variant="outlined"  className={classes.root} fullWidth>New event</Button></Link>
+            <Link to='/createConfessions' onClick={()=>window.location.href='/createConfessions'} style={{ textDecoration: 'none' }}><Button variant="outlined"   className={classes.root}  fullWidth>Write an annonymous confession</Button></Link>
         </div>
     )
 }

@@ -18,24 +18,15 @@
 
 }
 
-.sidebar__event{
-    background-color: #556ab5 !important;
-    border: none;
-    color: white !important;
-    font-weight: 900 !important;
-    text-transform: inherit !important;
-    border-radius: 30px !important;
-    height: 50px !important;
-    margin-top: 20px !important;
-}
 .sidebar__event:hover{
     background-color: #7389DA !important;
 }
 .sidebar__event > button{
-    background-color: #556ab5 !important;
+    background: rgb(86,108,183);
+    background: linear-gradient(90deg, rgba(86,108,183,0.9290091036414566) 39%, rgba(190,185,249,1) 100%);
 }
 .sidebar__event >button :hover{
-    background-color: #7389DA !important;
+    background: rgb(111,144,255);
 
 }
 

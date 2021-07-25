@@ -131,6 +131,7 @@ function App() {
   const WidgetsChat = React.lazy(() => import('./chat/WidgetsChat'))
   const PostSharingContainer = React.lazy(() => import('./PostSharingContainer'))
   const SearchMobile = React.lazy(() => import('./SearchMobile'))
+  const ConfessionSharingContainer = React.lazy(() => import('./ConfessionSharingContainer'))
   const EventSharingContainer = React.lazy(() => import('./EventSharingContainer'))
   //actions for speedDial
   const actions = [
@@ -543,7 +544,7 @@ const handleSignUp= () => {
                           <div className="app__sharingPosts" >
                             {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
                             <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
-                              <PostSharingContainer/>
+                              <ConfessionSharingContainer/>
                             </Suspense>
                           </div>
                         </Route>

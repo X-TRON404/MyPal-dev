@@ -20,10 +20,12 @@ const Post = React.lazy(() => import('./Post'))
         //Now set the  id=doc.id and post=doc.data to the fields in the 'posts' variable that we defined above
         setPosts(snapshot.docs.map(doc =>({id:doc.id,post:doc.data()})))
             })
+
+
+        
     },[user]);
     return (
     <div className="feed">
-            <div className="feed__posts"> 
                  {
                 //render only those posts by id who are newly added to the database dont render the entire post list  
                 posts.map(({id,post})=>(
@@ -34,8 +36,7 @@ const Post = React.lazy(() => import('./Post'))
                         <Post postId={id} username={post.username} user_id={post.user_id} caption={post.caption} imageUrl={post.imageUrl} likesCount={post.likesCount}>
                         </Post>
                 </Suspense>))
-                } 
-            </div>    
+                }    
     </div>
     )
 }

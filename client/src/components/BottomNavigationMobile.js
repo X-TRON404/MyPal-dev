@@ -13,7 +13,7 @@ import {BrowserRouter, Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor: '#1A1A1A'
+    backgroundColor: '#1A1A1A',
   },
 });
 
@@ -35,7 +35,7 @@ function BottomNavigationMobile() {
     };
     return (
       <Paper elevation={10}>
-        <div className="bottomNavigation"> 
+        <div className="bottomNavigation" style={{position:'fixed'}}> 
             <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
             <BottomNavigationAction component={Link} to ='/' value="Home"  label="Home"  icon={<HomeIcon/>} />
             <BottomNavigationAction component={Link} to= '/confessionsFeed' value="Confessions" label="Confessions" icon={<WhatshotSharpIcon/>} />

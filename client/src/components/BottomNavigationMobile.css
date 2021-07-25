@@ -3,7 +3,6 @@
     .bottomNavigation{
         z-index: 1000;
         margin-top: 10px;
-        position: fixed;
         bottom: 0;
         border:none;
         }

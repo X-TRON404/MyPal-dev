@@ -15,7 +15,7 @@ function PostSharingContainer() {
     useEffect( () => {
         //onSnapshot = listner to changes in posts 
         //everytime the posts change run this code
-        //grab the collection 'posts' from the database and order 'docs' in the collection by timestamp
+        //grab the collection 'Events' from the database with doc = postId 
         DataBase.collection('posts').doc(postId).get().then((doc) => {
             setPostToShare(doc.data())
             console.log(postToShare)

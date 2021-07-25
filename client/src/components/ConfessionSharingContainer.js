@@ -15,7 +15,7 @@ function ConfessionSharingContainer() {
     useEffect( () => {
         //onSnapshot = listner to changes in confession 
         //everytime the confession change run this code
-        //grab the collection 'confessions' from the database and order 'docs' in the collection by timestamp
+        //grab the collection 'Events' from the database with doc = confessionId
         DataBase.collection('confessions').doc(confessionId).get().then((doc) => {
             setConfessionToShare(doc.data())
             console.log(confessionToShare)

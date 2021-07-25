@@ -117,6 +117,14 @@ margin-right: 10px;
     color: aliceblue;
     font-size: small; 
 }
+.post__commentsFirstComment{
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    border-top: 1px solid #919191 ;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 .post_commentWrapper{
     display: flex;
     flex-direction: column;

@@ -441,7 +441,7 @@ const postComment = (e) => {
                                             <p style={{color:'aliceblue',fontSize:'small'}}>Click on the icon to load all comments</p>
                                         </Popover> */}
                                                                  {/*no. of comments*/}
-                                <p className="post__commentsIconCommentsCount">{comments.length} Comments</p>
+                                {comments.length!==0?(<p className="post__commentsIconCommentsCount">Click to view all {comments.length} comments</p>):(<p className="post__commentsIconCommentsCount">{comments.length+ " comments. Be the first one to comment"}</p>)}
                             </div>
 
                                                     {/*share icon*/}
@@ -465,6 +465,8 @@ const postComment = (e) => {
             </div>
                                               {/*display the comments from the database */}
             <div className="post__comments">
+                                            
+                    {/*collapse when comments icon is clicked and show all the comments*/}
                     <Collapse in={expanded} timeout="auto" unmountOnExit >
                         <div className="post_commentWrapper">
                             { comments.map((comment) => (
@@ -474,6 +476,10 @@ const postComment = (e) => {
                             }
                        </div>
                     </Collapse>
+                    {/*if comments icon not clicked and comments are more than zero then show the latest comment*/}
+                    <div className="post__commentsFirstComment">
+                    {!expanded && comments.length!==0 && <p className="post__commentsComment"><Link to={`/pals/${comments[0].user_id}`} style={{textDecoration:'none'}}><strong>{comments[0].username+":"}</strong></Link>{comments[0].text}</p>}
+                    </div>
                     
             </div>
                                                {/*post the comment to the database*/}

@@ -8,8 +8,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import './Event.css'
-import { Paper } from '@material-ui/core';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { DataBase } from './firebase';
 import { useStateValue } from '../contexts/StateProvider';
 import firebase from 'firebase/app'
@@ -117,8 +115,9 @@ useEffect(() => {
                     <div className="event__interested">
                         {/*if already registered for the event then show registered*/}
                     {
-                    !interested?(<Button size="small" onClick={addInterested} disabled={onclickDisable}>    
-                                Interested
+                    !interested?(<Button size="small" onClick={addInterested} disabled={onclickDisable}>  
+                                {/*show registered' when button is clicked else show interested*/}  
+                                {onclickDisable?'Registered':'Interested'}
                         </Button>):(<Button size="small" disabled={true}>Registered</Button>)
 
                     }   

@@ -9,6 +9,7 @@ import { DataBase } from './firebase';
 import firebase from 'firebase';
 import SendIcon from '@material-ui/icons/Send';
 import ShareIcon from '@material-ui/icons/Share';
+import { Link } from 'react-router-dom';
 
 function Confessions({confession,confessionId,likesCount}) {
     //get the user from the provider
@@ -48,6 +49,7 @@ const postConfessionComment = (e) => {
         {
          text:confessionComment,
          username:user.displayName,
+         user_id:user.uid,
          timestamp:firebase.firestore.FieldValue.serverTimestamp()
         }
     )
@@ -69,6 +71,7 @@ const postLike = () => {
       { 
         like:newLikeValue,
         username:user.displayName,
+        user_id:user.uid,
         timestamp:firebase.firestore.FieldValue.serverTimestamp(),
 
       }
@@ -181,7 +184,7 @@ const postLike = () => {
                         <div className="confessions_commentWrapper">
                                     { confessionComments.map((comment) => (
                                             //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
-                                            <p className="confessions__comments" key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}</p>
+                                                <p className="confessions__comments" key={comment.id}><Link to={`/pals/${comment.user_id}`} style={{textDecoration:'none'}}><strong>{comment.username+":"}</strong></Link>{comment.text}</p>
                                         ))
                                     }
                         </div>

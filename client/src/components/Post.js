@@ -12,6 +12,7 @@ import SendIcon from '@material-ui/icons/Send';
 import {useStateValue} from '../contexts/StateProvider'
 import ShareIcon from '@material-ui/icons/Share';
 import PostMenu from './PostMenu'
+import { Link } from 'react-router-dom';
 
 
 //============================================Comments pop-over styles==================================== 
@@ -115,6 +116,7 @@ const postLike = () => {
       { 
         like:newLikeValue,
         username:user.displayName,
+        user_id:user.uid,
         timestamp:firebase.firestore.FieldValue.serverTimestamp(),
 
       }
@@ -308,6 +310,7 @@ const postComment = (e) => {
         {
          text:comment,
          username:user.displayName,
+         user_id:user.uid,
          timestamp:firebase.firestore.FieldValue.serverTimestamp()
         }
     )
@@ -466,7 +469,7 @@ const postComment = (e) => {
                         <div className="post_commentWrapper">
                             { comments.map((comment) => (
                                     //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
-                                    <p className="post__commentsComment" key={comment.id}><strong>{comment.username+":"}</strong>{comment.text}</p>
+                                    <p className="post__commentsComment" key={comment.id}><Link to={`/pals/${comment.user_id}`} style={{textDecoration:'none'}}><strong>{comment.username+":"}</strong></Link>{comment.text}</p>
                                 ))
                             }
                        </div>

@@ -9,6 +9,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import { useStateValue } from '../contexts/StateProvider';
 import { DataBase } from './firebase';
 import './YourPosts.css'
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -57,6 +58,7 @@ export default function YourPosts() {
             posts.filter(post=>(post.post.imageUrl!='no-image')).map((post) => (
             <GridListTile key={post.id}>
                 <img src={post.post.imageUrl} alt={post.post.caption} />
+                <Link to={`/yourposts/${post.id}`}>
                 <GridListTileBar
                 title={post.post.caption}
                 actionIcon={
@@ -65,6 +67,7 @@ export default function YourPosts() {
                     </IconButton>
                 }
                 />
+                </Link>
             </GridListTile>
             ))):(<h4 style={{color:'aliceblue'}}>Empty. Nothing to see here</h4>)}
       </GridList>

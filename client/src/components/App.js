@@ -34,7 +34,6 @@ import {realtime} from './firebase'
 import Home from './Home'
 import UserProfile from './UserProfile';
 import Select from '@material-ui/core/Select';
-import Search from './Search';
 
 //====================================Modal styles=========================================
 function getModalStyle() {
@@ -131,6 +130,7 @@ function App() {
   const ImageUploadMobile = React.lazy(() => import('./ImageUploadMobile'))
   const WidgetsChat = React.lazy(() => import('./chat/WidgetsChat'))
   const PostSharingContainer = React.lazy(() => import('./PostSharingContainer'))
+  const SearchMobile = React.lazy(() => import('./SearchMobile'))
   //actions for speedDial
   const actions = [
     { icon: <AddPhotoAlternateIcon onClick={()=>window.location.href= '/ImageUploadMobile'}/>, name: 'Post' },
@@ -391,20 +391,22 @@ const handleSignUp= () => {
                                               {/*header*/}
       <Paper className={classes.root} elevation={8}>
           <div className="app__header">
+            <div className="app__headerLogo">
               <Router>
                 <Link to="/" onClick={()=>window.location.href= '/'}><img className="app__headerImage" src={logo} alt="texx-logo"/></Link>
               </Router>
+            </div>
 
 
                                               {/*serachbar for mobile view*/}
             <div className="app__searchbarMobile">
-              <div className="app__searchbarMobileInputBox">
+             
               <Router>
-                <Search/>
+                <Link to="/searchMobile" onClick={()=>window.location.href="/searchMobile"}><SearchIcon style={{color:'aliceblue'}}></SearchIcon></Link>
               </Router>
                 {/* <Input style={{color:"aliceblue",fontSize:'small'}} className="app__searchbarMobileInput" type= "text" placeholder="Search Texx"/>
                 <SearchIcon style={{color:"aliceblue"}}/> */}
-              </div>
+           
             </div>
 
                                         {/*profile section*/}
@@ -541,6 +543,14 @@ const handleSignUp= () => {
                             {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
                             <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
                               <PostSharingContainer/>
+                            </Suspense>
+                          </div>
+                        </Route>
+                        <Route path="/searchMobile">
+                          <div className="app__searchMobile" >
+                            {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
+                            <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
+                              <SearchMobile/>
                             </Suspense>
                           </div>
                         </Route>  

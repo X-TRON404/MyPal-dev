@@ -179,6 +179,17 @@
   overflow-y: scroll; 
   width:100%
 }
+.app__yourposts{
+  flex:0.6;
+  display: flex;
+  justify-content: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 20px;
+  background-color: #363A3E;
+  overflow-y: scroll;
+  margin-bottom: 60px; 
+}
 .app__sharingPosts{
   flex:0.6;
   display: flex;

@@ -53,6 +53,7 @@ export default function YourPosts() {
     
 
   return (
+    <div className="yourPosts">
       <GridList cellHeight={180} className={classes.gridList}>
             {posts.length!=0?(                            
             posts.filter(post=>(post.post.imageUrl!='no-image')).map((post) => (
@@ -71,5 +72,6 @@ export default function YourPosts() {
             </GridListTile>
             ))):(<h4 style={{color:'aliceblue'}}>Empty. Nothing to see here</h4>)}
       </GridList>
+    </div>
   );
 }

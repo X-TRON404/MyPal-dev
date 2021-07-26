@@ -1,3 +1,19 @@
+@media (min-width: 0px) and (max-width:450px){
+    .yourPosts{
+        margin-top: 60px;
+        flex: 1;
+    }
+    
+}
+
+
+@media (min-width: 451px) and (max-width:2048px){
+    .yourPosts{
+        margin-top: 10px;
+        margin-bottom: 60px;
+        flex: 1;
+    }
+}   
 
 /*image inside the grid box*/
 .MuiGridListTile-imgFullHeight {
@@ -5,6 +21,6 @@
     width: 100% !important;
 }
 /*extra padding to entire grid box*/
-.MuiBox-root-26 {
+.MuiBox-root-26534 {
     padding: 0px !important;
 }

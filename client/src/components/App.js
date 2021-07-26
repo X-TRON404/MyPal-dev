@@ -565,7 +565,7 @@ const handleSignUp= () => {
                           </div>
                         </Route>
                         <Route path="/yourposts/:postId">
-                          <div className="app__sharingPosts" >
+                          <div className="app__yourposts" >
                             {/*this component was taking time for loading and in the meantime 'user' object was momentarily unavailable which was throwing an error to fix that i included lazy loading*/}
                             <Suspense fallback={<div><CircularProgress disableShrink /></div>}>
                               <PostSharingContainer/>

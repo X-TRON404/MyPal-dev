@@ -1,6 +1,7 @@
 .yourevents{
     display: flex;
     flex-direction: column;
+    margin-bottom: 30px;
 }
 .yourevents__event{
     /* display: flex;

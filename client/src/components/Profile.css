@@ -19,12 +19,14 @@
         margin-top: -30px;
     }
     .profile__footer{
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center;
+        align-items: center; */
         background-color: #3F4347;
-        height: 57vh;
+        height: 100vh;
         /*make posts scrollable*/
         overflow-y: scroll;
-        padding-bottom: 60px;
-    
     }
   }
 
@@ -44,7 +46,7 @@
     }
     .profile__footer{
         background-color: #3F4347;
-        height: 57vh;
+        height: 100vh;
         /*make posts scrollable*/
         overflow-y: scroll;
     }

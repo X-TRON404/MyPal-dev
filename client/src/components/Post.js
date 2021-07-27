@@ -3,7 +3,7 @@
 import React , {useState,useEffect, useRef} from 'react'
 import './Post.css'
 import Avatar from '@material-ui/core/Avatar';
-import {Button, Collapse, IconButton, Input, makeStyles, Modal} from '@material-ui/core';
+import {Button, Collapse, IconButton, Input, makeStyles, Modal, Snackbar} from '@material-ui/core';
 import {DataBase, realtime} from './firebase'
 import firebase from 'firebase';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
@@ -15,6 +15,7 @@ import PostMenu from './PostMenu'
 import { Link } from 'react-router-dom';
 
 
+  
 //============================================Comments pop-over styles==================================== 
     const useStyles = makeStyles((theme) => ({
         popover: {
@@ -24,6 +25,10 @@ import { Link } from 'react-router-dom';
           padding: theme.spacing(1),
           backgroundColor:'#363A3E',
           color:'aliceblue'
+        },
+        snackbar:{
+            bottom:20,
+            zIndex:10000,
         },
       }));
 //=============================================Modal styles============================================
@@ -65,6 +70,8 @@ function Post({postId,username,user_id,caption,imageUrl,likesCount}) {
     //if like=true or not
     const [like, setLike] = useState(false);
     const [uid,setUid] =useState(user.uid)
+    //added to chat notification open/close
+    const [show, setShow] = useState(false);
     //like ref
     const likeCountRef = useRef(0)
 
@@ -97,10 +104,17 @@ function Post({postId,username,user_id,caption,imageUrl,likesCount}) {
         let currentDate = firebase.firestore.Timestamp.now();
         // console.log(currentDate)
         let diff = Math.abs(timestamp - currentDate );
-        const dateInMillis  = diff * 1000;
+        const dateInMillis  = diff;
         let date = new Date(dateInMillis).toLocaleTimeString();
         return(date.replace(/:\d+ /, ' ')+"hrs ago")
     }
+    //close notifications toast
+    const handleCloseNotif = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+        setShow(false);
+    };
 //======================================Post likes to the database===================================================================================
 const postLike = () => {
     const newLikeValue = !like;
@@ -300,7 +314,8 @@ const addToChats = () => {
    })
 
     }
-    
+    //open notification alert
+    setShow(true);
 } 
 //======================================Post comments to the database========================================================================================
 const postComment = (e) => {
@@ -322,6 +337,8 @@ const postComment = (e) => {
 //================================================================================================================================================================
     return (
         <div className="post">
+        <Snackbar className={classes.snackbar} open={show} autoHideDuration={1000}  anchorOrigin={{vertical: "center", horizontal: "center"}} onClose={handleCloseNotif} message="Added to chats"/>
+        
             <div className="post__header" >
                                                {/*avatar managed by@material-ui/core*/}
                 <div className="post__userProfile">
@@ -389,8 +406,8 @@ const postComment = (e) => {
             {/*===========================================================================================================================================*/}
             </div>
             {/* if post doesnt have image then dont show the image*/}
-            {imageUrl==='no-image'?(<></>):(<img className="post__image" src={imageUrl} alt={username?(username+" "):('')+" "+caption?(caption):('')} />)}
-            <h4 className="post__text">{imageUrl==='no-image'?(<></>):(<strong>{username?(username+": "):('')}</strong>)}<span>{" "+caption?(caption):('')}</span></h4>
+            {imageUrl==='no-image'?(<></>):(<img className="post__image" src={imageUrl} alt={username?(username+" "):('--')+" "+caption?(caption):('--')} />)}
+            <h4 className="post__text">{imageUrl==='no-image'?(<></>):(<strong>{username?(username+": "):('--')}</strong>)}<span>{" "+caption?(caption):('--')}</span></h4>
             <div className="post__footer">
                                                      
 

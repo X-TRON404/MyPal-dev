@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
@@ -10,6 +10,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {DataBase} from './firebase'
 import {useStateValue} from '../contexts/StateProvider'
 import firebase from 'firebase/app'
+import AlertDialog from './AlertDialog';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,8 +31,12 @@ function PostMenu({postId,postUsername,postUserId}) {
     //get the user from the provider
     const [{user}, dispatch] = useStateValue();
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-    const anchorRef = React.useRef(null);
+    const [open, setOpen] = useState(false);
+    const anchorRef = useRef(null);
+    //open alert box when reported
+    const [openAlert,setOpenAlert] = useState(false)
+    //open alert box when bookmarked
+    const [openAlertBook,setOpenAlertBook] = useState(false)
   
     const handleToggle = () => {
       setOpen((prevOpen) => !prevOpen);
@@ -44,7 +49,7 @@ function PostMenu({postId,postUsername,postUserId}) {
     const handleReport = (e) => {
         e.preventDefault();
         //add report collection of the particular post 
-        DataBase.collection('posts').doc(postId).collection('Report').doc(postId).set(
+        DataBase.collection('posts').doc(postId).collection('Report').doc(user.uid).set(
             {
              reportedByUsername:user.displayName,
              reportedById:user.uid,
@@ -55,7 +60,7 @@ function PostMenu({postId,postUsername,postUserId}) {
             }
         ) 
       setOpen(false);
-      alert("Thank you for your concern we are looking into the matter!")
+      setOpenAlert(true)
     };
     const handleBookmark = (e) => {
       e.preventDefault();
@@ -67,7 +72,7 @@ function PostMenu({postId,postUsername,postUserId}) {
           }
       ) 
     setOpen(false);
-    alert("Added to bookmarks")
+    setOpenAlertBook(true)
   };
   
     function handleListKeyDown(event) {
@@ -88,6 +93,8 @@ function PostMenu({postId,postUsername,postUserId}) {
     }, [open]);
     return (
     <div className={classes.root}>
+      <AlertDialog text={"Thank you for your concern we are looking into the matter!"} openAlert={openAlert} changeAlert={al=>{setOpenAlert(al)}}/>
+      <AlertDialog text={"Added to bookmarks!"} openAlert={openAlertBook} changeAlert={al=>{setOpenAlertBook(al)}}/>
           <MoreVertIcon style={{color:'aliceblue'}}  ref={anchorRef}
           aria-controls={open ? 'menu-list-grow' : undefined}
           aria-haspopup="true"

@@ -20,7 +20,7 @@ function ImageUpload({username}) {
     const [progress,setProgress] = useState(0); 
     //open the modal 
     const [openProgress,setOpenProgress] = useState(false)
-    //open alert box when a new event is created
+    //open alert box when a new post is created
     const [openAlert,setOpenAlert] = useState(false)
     //post button enabled if image or caption is selected
     const enabled =  caption!='' || image

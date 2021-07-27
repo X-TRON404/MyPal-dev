@@ -1,14 +1,12 @@
-//not including entire firebase bundle 
+//we are not including entire firebase bundle 
 //just including the firebase/app to reduce loading time
-
-
-// This import loads the firebase namespace
 import firebase from 'firebase/app';
 // These imports load individual services into the firebase namespace.
 import 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/storage'
+import 'firebase/messaging';
 
 const firebaseApp = firebase.initializeApp({
     apiKey: "AIzaSyCH-EjSPlON22U5C0a-Eg2dmTeqGzzyeLQ",
@@ -23,8 +21,36 @@ const firebaseApp = firebase.initializeApp({
 const DataBase = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 const storage = firebaseApp.storage();
-const realtime = firebaseApp.database()
-// const pref = firebaseApp.performance();
+const realtime = firebaseApp.database();
+const messaging = firebaseApp.messaging();
+// const perf = firebaseApp.performance();
 // const analytics = firebaseApp.analytics();
 
-export  {DataBase,auth,storage,realtime}; 
+//get permission from the user to allow push notifications to the browser
+const getToken = (setTokenFound) => {
+    return messaging.getToken({vapidKey: process.env.GENERATED_MESSAGING_KEY}).then((currentToken) => {
+      if (currentToken) {
+        console.log('current token for client: ', currentToken);
+        setTokenFound(true);
+        // Track the token -> client mapping, by sending to backend server
+        // show on the UI that permission is secured
+      } else {
+        console.log('No registration token available. Request permission to generate one.');
+        setTokenFound(false);
+        // shows on the UI that permission is required 
+      }
+    }).catch((err) => {
+      console.log('An error occurred while retrieving token. ', err);
+      // catch error while creating client token
+    });
+  }
+
+//=================================Firebase foreground listener=====================
+const onMessageListener = () =>
+  new Promise((resolve) => {
+    messaging.onMessage((payload) => {
+      resolve(payload);
+    });
+});
+
+export  {DataBase,auth,storage,realtime,getToken,onMessageListener}; 

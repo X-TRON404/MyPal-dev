@@ -10,6 +10,11 @@ import firebase from 'firebase';
 import SendIcon from '@material-ui/icons/Send';
 import ShareIcon from '@material-ui/icons/Share';
 import { Link } from 'react-router-dom';
+import { Suspense } from 'react';
+import Skeleton from '@material-ui/lab/Skeleton';
+
+
+const ConfessionsMenu = React.lazy(()=>import('./ConfessionsMenu'))
 
 function Confessions({confession,confessionId,likesCount}) {
     //get the user from the provider
@@ -132,7 +137,11 @@ const postLike = () => {
     return (
         <div className="confessions">
             <div className="confessions__header">
-                <Avatar alt={'username'} src="/static/images/avatar/1.jpg"/> Annonymous
+                <div className="confessions__header__userName"><Avatar alt={'username'} src="/static/images/avatar/1.jpg"/> <span>Annonymous </span></div>
+                <Suspense fallback={
+                        <div><Skeleton variant="text" /></div>} >
+                            <ConfessionsMenu confessionId={confessionId} />
+                </Suspense>
             </div>
             <div className="confessions__confession">
                 <p style={{color:"aliceblue"}}>{confession}</p>

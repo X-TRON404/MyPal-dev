@@ -42,7 +42,8 @@
   
   }
   .app__body{
-    height: 88vh;
+    height: 100vh;
+    overflow-y: scroll;
   }
   .app__speedDialMobile{
     display: inline;

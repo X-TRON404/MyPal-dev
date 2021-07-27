@@ -3,7 +3,7 @@ import './App.css';
 import {auth, DataBase} from './firebase'
 import {makeStyles} from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
-import { Avatar, Backdrop, Button, FormControl, Input, InputLabel, MenuItem, Paper, Snackbar } from '@material-ui/core';
+import { AppBar, Avatar, Backdrop, Button, FormControl, Input, InputLabel, MenuItem,Snackbar } from '@material-ui/core';
 import ImageUpload from './ImageUpload';
 import Sidebar from './Sidebar';
 import Widgets from './Widgets';
@@ -129,16 +129,16 @@ function App() {
   const [isTokenFound, setTokenFound] = useState(false);
   //push notifications open/close
   const [show, setShow] = useState(false);
-  const [notification, setNotification] = useState({title: '', body: ''});
-  getToken(setTokenFound);
+  // const [notification, setNotification] = useState({title: '', body: ''});
+  // getToken(setTokenFound);
 
-  onMessageListener().then(payload => {
-    setShow(true);
-    setNotification({title: payload.notification.title, body: payload.notification.body})
-    console.log(payload);
-  }).catch(err => console.log('failed: ', err));
+  // onMessageListener().then(payload => {
+  //   setShow(true);
+  //   setNotification({title: payload.notification.title, body: payload.notification.body})
+  //   console.log(payload);
+  // }).catch(err => console.log('failed: ', err));
 
-  getToken(setTokenFound);
+  // getToken(setTokenFound);
   //user stored in local storage
   let userFromLocalStorage
   //
@@ -331,7 +331,7 @@ const handleCloseNotif = (event, reason) => {
   return (
     <div className="app">
 
-      <Snackbar open={show} autoHideDuration={6000} onClose={handleCloseNotif}>
+      {/* <Snackbar open={show} autoHideDuration={6000} onClose={handleCloseNotif}>
             <img
               src={logo}
               alt="MyPal-logo"
@@ -344,7 +344,7 @@ const handleCloseNotif = (event, reason) => {
       </Snackbar>
 
       {isTokenFound?(console.log("notifications permission given")):(console.log("notifications permission NOT given"))}
-       
+        */}
                                       {/*Modal for sign up*/}
       <Modal  open={open} onClose={()=>{setOpen(false)}}>
         <div style={modalStyle} className={classes.paper}>
@@ -436,7 +436,7 @@ const handleCloseNotif = (event, reason) => {
       </Modal>
 
                                               {/*header*/}
-      <Paper className={classes.root} elevation={8}>
+      <AppBar position="static" className={classes.root} elevation={8}>
           <div className="app__header">
             <div className="app__headerLogo">
               <Router>
@@ -462,7 +462,7 @@ const handleCloseNotif = (event, reason) => {
                 <b><p className="app__headerDisplayName">{user?.displayName}</p></b>
               </div>
           </div>
-      </Paper>
+      </AppBar>
                                       {/*SpeedDial for mobile view*/}
       <div className="app__speedDialMobile">
             <Backdrop className={classes.backdrop} open={openSpeedDial} />

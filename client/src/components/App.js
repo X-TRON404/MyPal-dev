@@ -3,7 +3,7 @@ import './App.css';
 import {auth, DataBase} from './firebase'
 import {makeStyles} from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
-import { Avatar, Backdrop, Button, FormControl, Input, InputLabel, MenuItem, Paper } from '@material-ui/core';
+import { Avatar, Backdrop, Button, FormControl, Input, InputLabel, MenuItem, Paper, Snackbar } from '@material-ui/core';
 import ImageUpload from './ImageUpload';
 import Sidebar from './Sidebar';
 import Widgets from './Widgets';
@@ -31,9 +31,17 @@ import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
 import EventIcon from '@material-ui/icons/Event';
 import logo from '../texx_logo.png'
 import {realtime} from './firebase'
+import { getToken } from './firebase';
+import { onMessageListener } from './firebase';
 import Home from './Home'
 import UserProfile from './UserProfile';
 import Select from '@material-ui/core/Select';
+import MuiAlert from '@material-ui/lab/Alert';
+
+//custom alert for notifications toast
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 //====================================Modal styles=========================================
 function getModalStyle() {
@@ -60,29 +68,31 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     color:'white'
-  },
-  root: {
-  display: 'flex',
-  objectFit: 'contain',
-  backgroundColor: '#363A3E',
-  padding:'10px',
-  position: 'sticky',
-  zIndex: 100, 
-},
-backdrop: {
-  zIndex: 1,
-  color: '#ffffff',
-},
-speedDial: {
-  position: 'fixed',
-  bottom: theme.spacing(12),
-  right: theme.spacing(2),
-},
-formControl: {
-  margin: theme.spacing(1),
-  minWidth: 120,
-},
-
+    },
+    root: {
+    display: 'flex',
+    objectFit: 'contain',
+    backgroundColor: '#363A3E',
+    padding:'10px',
+    position: 'sticky',
+    zIndex: 100, 
+    },
+    backdrop: {
+      zIndex: 1,
+      color: '#ffffff',
+    },
+    speedDial: {
+      position: 'fixed',
+      bottom: theme.spacing(12),
+      right: theme.spacing(2),
+    },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+    notif:{
+      backgroundColor:'red',
+    },
 }));
 //========================================================================================================
 function App() {
@@ -115,6 +125,20 @@ function App() {
   const [openSpeedDial, setOpenSpeedDial] = useState(false);
   //select institute in sign up
   const [institute,setInstitute] = useState('')
+  //push notifications permissions token:
+  const [isTokenFound, setTokenFound] = useState(false);
+  //push notifications open/close
+  const [show, setShow] = useState(false);
+  const [notification, setNotification] = useState({title: '', body: ''});
+  getToken(setTokenFound);
+
+  onMessageListener().then(payload => {
+    setShow(true);
+    setNotification({title: payload.notification.title, body: payload.notification.body})
+    console.log(payload);
+  }).catch(err => console.log('failed: ', err));
+
+  getToken(setTokenFound);
   //user stored in local storage
   let userFromLocalStorage
   //
@@ -222,6 +246,13 @@ const handleSignUp= () => {
   setOpenSignIn(false)
 
 }
+//close notifications toast
+const handleCloseNotif = (event, reason) => {
+  if (reason === 'clickaway') {
+    return;
+  }
+  setShow(false);
+};
 //====================================sign in the user=========================================
   const signIn = (e) => {
     e.preventDefault();
@@ -299,6 +330,20 @@ const handleSignUp= () => {
 //===============================================================================================
   return (
     <div className="app">
+
+      <Snackbar open={show} autoHideDuration={6000} onClose={handleCloseNotif}>
+            <img
+              src={logo}
+              alt="MyPal-logo"
+            />
+            <strong>{notification.title}</strong>
+            <small>just now</small>
+        <Alert onClose={handleCloseNotif}>
+              {notification.body}
+        </Alert>
+      </Snackbar>
+
+      {isTokenFound?(console.log("notifications permission given")):(console.log("notifications permission NOT given"))}
        
                                       {/*Modal for sign up*/}
       <Modal  open={open} onClose={()=>{setOpen(false)}}>
@@ -395,7 +440,7 @@ const handleSignUp= () => {
           <div className="app__header">
             <div className="app__headerLogo">
               <Router>
-                <Link to="/" onClick={()=>window.location.href= '/'}><img className="app__headerImage" src={logo} alt="texx-logo"/></Link>
+                <Link to="/" onClick={()=>window.location.href= '/'}><img className="app__headerImage" src={logo} alt="MyPal-logo"/></Link>
               </Router>
             </div>
 

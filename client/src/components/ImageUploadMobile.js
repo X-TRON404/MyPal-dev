@@ -142,7 +142,7 @@ function ImageUploadMobile({username}) {
                             <IconButton color="primary" aria-label="upload picture" component="span">
                                 <AddPhotoAlternateIcon/>
                             </IconButton>
-                            {image?"Image selected":"Choose a image to post"}
+                            {image?"Image selected":"Choose an image to post"}
                         </label>
                                                     {/*selected image preview*/}
                         {image&&(<img className="imageUploadMobile__preview" width="80px" height="80px" src={URL.createObjectURL(image)}/>)}

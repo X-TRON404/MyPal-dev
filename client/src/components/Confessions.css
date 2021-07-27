@@ -17,12 +17,20 @@
 }
 .confessions__header{
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #919191;
     color: aliceblue;
     padding: 20px;
 }
+.confessions__header__userName{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.confessions__header__userName > span {
+     margin-left: 10px;
+ }
 .confessions__header > .MuiAvatar-root {
     margin-right: 15px;
 }

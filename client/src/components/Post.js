@@ -407,7 +407,8 @@ const postComment = (e) => {
             </div>
             {/* if post doesnt have image then dont show the image*/}
             {imageUrl==='no-image'?(<></>):(<img className="post__image" src={imageUrl} alt={username?(username+" "):('--')+" "+caption?(caption):('--')} />)}
-            <h4 className="post__text">{imageUrl==='no-image'?(<></>):(<strong>{username?(username+": "):('--')}</strong>)}<span>{" "+caption?(caption):('--')}</span></h4>
+            {/*show username in caption only for image posts*/}
+            <h4 className={imageUrl==='no-image'?("post__text"):("post__textImage")}>{imageUrl==='no-image'?(<></>):(<strong>{username?(username+": "):('')}</strong>)}<span>{" "+caption?(caption):('--')}</span></h4>
             <div className="post__footer">
                                                      
 

@@ -42,6 +42,12 @@ padding-bottom: 20px;
 color: aliceblue;
 
 }
+.post__textImage{
+    padding-left: 20px;
+    padding-left: 20px;
+    padding-top: 15px;
+    color: aliceblue;
+}
 
 /* display:flex = keep avatar and the username in a row 
 align-items: center = align the avatar and the username in the center  */
@@ -171,5 +177,8 @@ color:aliceblue;
     display: flex;
     justify-content:space-between;
     align-items: center;
-    margin:10px 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }

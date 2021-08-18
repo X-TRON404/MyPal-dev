@@ -22,13 +22,6 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import BottomNavigationMobile from './BottomNavigationMobile'
-import SpeedDial from '@material-ui/lab/SpeedDial';
-import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
-import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
-import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
-import EditIcon from '@material-ui/icons/Edit';
-import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
-import EventIcon from '@material-ui/icons/Event';
 import logo from '../texx_logo.png'
 import {realtime} from './firebase'
 import { getToken } from './firebase';
@@ -37,6 +30,7 @@ import Home from './Home'
 import UserProfile from './UserProfile';
 import Select from '@material-ui/core/Select';
 import MuiAlert from '@material-ui/lab/Alert';
+import SpeedDiall from './SpeedDial';
 
 //custom alert for notifications toast
 function Alert(props) {
@@ -121,8 +115,6 @@ function App() {
   const [userId,setUserId] = useState(null)
   //show password for password field
   const [showPassword,setShowPassword] = useState(false)
-  //open speedDial
-  const [openSpeedDial, setOpenSpeedDial] = useState(false);
   //select institute in sign up
   const [institute,setInstitute] = useState('')
   //push notifications permissions token:
@@ -157,12 +149,6 @@ function App() {
   const SearchMobile = React.lazy(() => import('./SearchMobile'))
   const ConfessionSharingContainer = React.lazy(() => import('./ConfessionSharingContainer'))
   const EventSharingContainer = React.lazy(() => import('./EventSharingContainer'))
-  //actions for speedDial
-  const actions = [
-    { icon: <AddPhotoAlternateIcon onClick={()=>window.location.href= '/ImageUploadMobile'}/>, name: 'Post' },
-    { icon: <EventIcon onClick={()=>window.location.href= '/createEvent'}/>, name: 'New event' },
-    { icon: <WhatshotSharpIcon onClick={()=>window.location.href= '/createConfessions'}/>, name: 'Confess' },
-  ];
 
   //====================================Get the user from the local storage on refresh======================
   useEffect(()=>{
@@ -406,7 +392,7 @@ const handleCloseNotif = (event, reason) => {
             <center>
             <img className="app__headerImage" src={logo} alt="texx-logo"/>
             </center>
-            <p style={{margin:'10px'}} >Enter your credentials to Log in to texx</p>
+            <p style={{margin:'10px'}} >Enter your credentials to Log in to MyPal</p>
             <Input style ={{color:'aliceblue',margin:'10px'}} placeholder="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
             <Input style ={{color:'aliceblue',margin:'10px'}}
             id="standard-adornment-password"
@@ -429,7 +415,7 @@ const handleCloseNotif = (event, reason) => {
             }
           />
             <Button style ={{color:'aliceblue',backgroundColor:'#556AB5'}} onClick={signIn}>Sign In</Button>
-            <p style={{margin:'10px'}}>New to texx? Sign up</p>
+            <p style={{margin:'10px'}}>New to MyPal? Sign up</p>
             <Button style ={{color:'aliceblue',backgroundColor:'#556AB5'}} onClick={handleSignUp}>Sign up</Button>
           </form>
         </div>
@@ -462,29 +448,7 @@ const handleCloseNotif = (event, reason) => {
                 <b><p className="app__headerDisplayName">{user?.displayName}</p></b>
               </div>
           </div>
-      </AppBar>
-                                      {/*SpeedDial for mobile view*/}
-      <div className="app__speedDialMobile">
-            <Backdrop className={classes.backdrop} open={openSpeedDial} />
-            <SpeedDial
-              ariaLabel="SpeedDial tooltip example"
-              className={classes.speedDial}
-              hidden={false}
-              icon={<SpeedDialIcon openIcon={<EditIcon/>} />}
-              onClose={()=>{setOpenSpeedDial(false)}}
-              onOpen={()=>{setOpenSpeedDial(true)}}
-              open={openSpeedDial}
-            >
-              {actions.map((action) => (
-                <SpeedDialAction
-                key={action.name}
-                icon={action.icon}
-                tooltipTitle={action.name}
-                  onClick={()=>{setOpenSpeedDial(true)}}
-                />
-              ))}
-            </SpeedDial>
-      </div>                                               
+      </AppBar>                                               
                            {/* if user does not exists then reduce the opacity of the body */}
       <div className={user?'app__body':'app__bodyUserNotLoggedIn' }>
 {/* =================================================REACT ROUTER COMES HERE================================================================================= */}
@@ -492,6 +456,10 @@ const handleCloseNotif = (event, reason) => {
         {/* if user is logged out then show the home page */}
         {!user? (<Home/>):
                 (<Router>
+                                                                      {/*SpeedDial for mobile view*/}
+                    <div className="app__speedDialMobile">
+                        <SpeedDiall></SpeedDiall>
+                    </div>
                                           {/*sidebar*/}
                     <Sidebar/>
                                             {/*switch*/}

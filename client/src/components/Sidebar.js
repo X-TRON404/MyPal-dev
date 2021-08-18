@@ -17,9 +17,6 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   root: {
     background: 'rgb(86,108,183)',
-    '&:hover': {
-        background: 'rgb(111,144,255)',
-     },
     transition: "background 1s",
     background: 'linear-gradient(90deg, rgba(86,108,183,0.9290091036414566) 39%, rgba(190,185,249,1) 100%)',
     border: 'none',
@@ -39,15 +36,17 @@ function Sidebar() {
             {/*pass icons as props to SidebarOptions component*/}
             {/*keep i captial of Icon to let react know you are passing a component*/}
             <Link to='/' style={{ textDecoration: 'none' }}><SidebarOptions active text="Home" Icon={HomeIcon}/></Link>
-            <SidebarOptions text="Explore" Icon={SearchIcon}/>
+            {/* <SidebarOptions text="Explore" Icon={SearchIcon}/> */}
             <Link to='/eventsFeed' style={{ textDecoration: 'none' }}><SidebarOptions text="Events" Icon={EventIcon}/></Link>
-            <Link to='/confessionsFeed' onClick={()=>window.location.href='/confessionsFeed'} style={{ textDecoration: 'none' }}><SidebarOptions text="Confessions" Icon={WhatshotSharpIcon}/></Link>
-            <SidebarOptions text="Notifications" Icon={NotificationsNoneIcon}/>
+            <Link to='/confessionsFeed' style={{ textDecoration: 'none' }}><SidebarOptions text="Confessions" Icon={WhatshotSharpIcon}/></Link>
+            {/* <SidebarOptions text="Notifications" Icon={NotificationsNoneIcon}/> */}
             {/* <SidebarOptions text="Messages" Icon={MailOutlineIcon}/> */}
-            <Link to='/profile' onClick={()=>window.location.href='/profile'} style={{ textDecoration: 'none' }}><SidebarOptions text="Bookmarks" Icon={BookmarkBorderIcon}/></Link>
-            <SidebarOptions text="More" Icon={MoreHorizIcon}/>
-            <Link to='/createEvent' onClick={()=>window.location.href='/createEvent'} style={{ textDecoration: 'none' }}><Button variant="outlined"  className={classes.root} fullWidth>New event</Button></Link>
-            <Link to='/createConfessions' onClick={()=>window.location.href='/createConfessions'} style={{ textDecoration: 'none' }}><Button variant="outlined"   className={classes.root}  fullWidth>Write an annonymous confession</Button></Link>
+            <Link to='/profile' style={{ textDecoration: 'none' }}><SidebarOptions text="Bookmarks" Icon={BookmarkBorderIcon}/></Link>
+            {/* <SidebarOptions text="More" Icon={MoreHorizIcon}/> */}
+            <div className="sidebar__buttons">
+            <Link to='/createEvent' style={{ textDecoration: 'none' }}><Button variant="outlined"  className={classes.root} fullWidth>New event</Button></Link>
+            <Link to='/createConfessions'  style={{ textDecoration: 'none' }}><Button variant="outlined"   className={classes.root}  fullWidth>Write an annonymous confession</Button></Link>
+            </div>
         </div>
     )
 }

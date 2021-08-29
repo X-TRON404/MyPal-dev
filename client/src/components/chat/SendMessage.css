@@ -77,3 +77,11 @@
   }
     
 }
+
+.sendMessage__emojiPicker__show{
+  display: flex;
+  margin-bottom: 80px;
+}
+.sendMessage__emojiPicker__hide{
+  display: none;
+}

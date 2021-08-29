@@ -4,7 +4,7 @@
         display: flex;
         flex-direction:column;
         background-color: #363A3E;
-        border-bottom:0.3px solid lightgray;
+        border-bottom:0.3px solid rgb(110, 110, 110);
         margin-bottom: 30px;
         min-width: fit-content;
         /*if content is bigger than the available space in the container make it scrollable along y-direction*/
@@ -19,7 +19,7 @@
         display: flex;
         flex-direction:column;
         background-color: #363A3E;
-        border-bottom:0.3px solid lightgray;
+        border-bottom:0.3px solid rgb(110, 110, 110);
         margin-bottom: 30px;
         min-width: fit-content;
         /*if content is bigger than the available space in the container make it hidden*/
@@ -131,7 +131,7 @@ margin-right: 10px;
     display: flex;
     flex-direction: column;
     padding-left: 20px;
-    border-top: 1px solid #919191 ;
+    border-top: 1px solid rgb(40, 40, 40) ;
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -139,7 +139,6 @@ margin-right: 10px;
     display: flex;
     flex-direction: column;
     padding-left: 20px;
-    border-top: 1px solid #919191 ;
     padding-top: 10px;
     padding-bottom: 10px;
 
@@ -165,7 +164,7 @@ color:aliceblue;
     flex:1;
     border:none;
     padding: 10px;
-    border-top: 1px solid lightgray;
+    border-top: 1px solid #4a4a4a;
 }
 .post_button{
     flex:0 !important; 

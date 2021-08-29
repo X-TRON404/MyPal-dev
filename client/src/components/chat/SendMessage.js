@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {IconButton, Input } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import firebase from 'firebase/app'
+import { Picker } from 'emoji-mart';
+import 'emoji-mart/css/emoji-mart.css';
 import {useStateValue} from '../../contexts/StateProvider';
 import {InsertEmoticon, MicOutlined} from '@material-ui/icons';
 import {DataBase, realtime} from '../firebase';
 import './SendMessage.css'
+import EmojiSelect from './EmojiSelect';
 
 
 function SendMessage({chatId}) {
@@ -13,7 +16,12 @@ function SendMessage({chatId}) {
     const [{user}, dispatch] = useStateValue();
     //set the input 
     const [input, setInput] = useState('');
-  
+    //show/hide emoji picker menu
+    const [emoMenuVisible,setEmoMenuVisible] = useState(false)
+    //ref to input to focus on the input element after selecting the emoji 
+    const inputRef = useRef();
+    //current element of inputRef
+    const inputRefCurrent = inputRef.current
 //========================================================POST Messages========================================
 
 const sendMessage = () => {
@@ -75,9 +83,16 @@ const sendMessage = () => {
 //=============================================================================================================
     return (
     <div className="sendMessage">
+                                                                {/*emoji select menu*/}
+                                            {/*make the menu visible only when user clicks on emoji icon*/}
+                                            {/*send the reference of the input component to <EmojiSelect/> to .focus() after emoji is selected*/}
+
+                {emoMenuVisible?
+                    (<EmojiSelect inputRefCurrent={inputRefCurrent} addEmojiToInput={(emoji)=>{setInput(input+emoji)}}  EmojiMenuVisibility={(visibility)=>{setEmoMenuVisible(visibility)}} />):(<></>)
+                }
             <form className="chat__inputForm" onSubmit={(e)=>{e.preventDefault()}}>
-                {/* <InsertEmoticon/> */}
-                <Input style={{color:"aliceblue"}} className="sendMessage__input" value={input} onChange={(e)=>setInput(e.target.value)} type="text" placeholder="   Send a texx..."/>
+                <InsertEmoticon className="sendMessage__emojiPicker" onClick={()=>{setEmoMenuVisible(!emoMenuVisible)}} style={{cursor: 'pointer'}}/>
+                <Input inputRef={inputRef} style={{color:"aliceblue"}} className="sendMessage__input" value={input} onChange={(e)=>setInput(e.target.value)} type="text" placeholder="   Send a texx..."/>
                 <IconButton  variant ='contained' color="primary"disabled={!input} onClick={sendMessage} type="submit"><SendIcon /></IconButton>
                 {/* <MicOutlined/> */}
             </form>

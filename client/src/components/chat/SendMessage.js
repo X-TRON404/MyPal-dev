@@ -21,14 +21,16 @@ function SendMessage({chatId}) {
     const inputRef = useRef();
     //current element of inputRef
     const inputRefCurrent = inputRef.current
+
+    //empty input and focus on the input everytime a new chatId is opened
+    useEffect(() => {
+        setInput('')
+        inputRef.current.focus();
+    }
+    ,[chatId])
+    
+
 //========================================================POST Messages========================================
-
-useEffect(() => {
-    setInput('')
-    inputRef.current.focus();
-}
-,[chatId])
-
 const sendMessage = () => {
     if (user){
                    //add message to user1's database (sender)

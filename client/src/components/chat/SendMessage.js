@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import {IconButton, Input } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import firebase from 'firebase/app'
-import { Picker } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
 import {useStateValue} from '../../contexts/StateProvider';
 import {InsertEmoticon, MicOutlined} from '@material-ui/icons';
-import {DataBase, realtime} from '../firebase';
+import {realtime} from '../firebase';
 import './SendMessage.css'
 import EmojiSelect from './EmojiSelect';
 
@@ -91,7 +90,7 @@ const sendMessage = () => {
                     (<EmojiSelect inputRefCurrent={inputRefCurrent} addEmojiToInput={(emoji)=>{setInput(input+emoji)}}  EmojiMenuVisibility={(visibility)=>{setEmoMenuVisible(visibility)}} />):(<></>)
                 }
             <form className="chat__inputForm" onSubmit={(e)=>{e.preventDefault()}}>
-                <InsertEmoticon className="sendMessage__emojiPicker" onClick={()=>{setEmoMenuVisible(!emoMenuVisible)}} style={{cursor: 'pointer'}}/>
+                <InsertEmoticon className="sendMessage__emojiIcon" onClick={()=>{setEmoMenuVisible(!emoMenuVisible)}} style={{cursor: 'pointer'}}/>
                 <Input inputRef={inputRef} style={{color:"aliceblue"}} className="sendMessage__input" value={input} onChange={(e)=>setInput(e.target.value)} type="text" placeholder="   Send a texx..."/>
                 <IconButton  variant ='contained' color="primary"disabled={!input} onClick={sendMessage} type="submit"><SendIcon /></IconButton>
                 {/* <MicOutlined/> */}

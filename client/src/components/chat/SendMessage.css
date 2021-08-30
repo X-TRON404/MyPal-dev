@@ -78,6 +78,9 @@
     
 }
 
+.sendMessage__emojiIcon{
+margin-top: 10px;
+}
 .sendMessage__emojiPicker__show{
   display: flex;
   margin-bottom: 80px;

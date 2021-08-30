@@ -2,7 +2,7 @@ import SpeedDialAction from '@material-ui/lab/SpeedDialAction'
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import WhatshotSharpIcon from '@material-ui/icons/WhatshotSharp';
 import EventIcon from '@material-ui/icons/Event';
@@ -23,8 +23,8 @@ function SpeedDiall() {
    const classes = useStyles();
   //open speedDial
   const [openSpeedDial, setOpenSpeedDial] = useState(false);
-  //current route path
-  const pathname = window.location.pathname
+  //get the current route 
+  const location = useLocation();
   //actions for speedDial
   //add Link to action icons
   const addLink = (to, children) => <Link to={to}>{children}</Link>;
@@ -42,7 +42,7 @@ function SpeedDiall() {
     setOpenSpeedDial(false);
   };
     //hide speedDial for chats route
-    if (pathname.match(/chats/)){
+    if (location.pathname.match(/chats/)){
         return null;
     }
     //else if not chat route then return the speedDial

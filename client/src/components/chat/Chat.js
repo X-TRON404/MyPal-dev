@@ -9,6 +9,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 
 
 
+
 const Message = React.lazy(()=>import('./Message'))
 function Chat() {
     //set the chat name in the
@@ -20,9 +21,7 @@ function Chat() {
     //get the slug from the url  (remeber that component using useParams should be inside <Router>)
     const {chatId} = useParams()
     //
-    const scrollRef = useRef([])
-    //
-    const messageScrollRef = useRef(null)
+    const messageScrollRef = useRef()
 
 //======================================================GET Messages==========================================
 //everytime chat_user_id (which is basically the doc id inside the chat collection) changes pull the messages for that chat_user_id from the database
@@ -66,10 +65,11 @@ useEffect(() => {
 
 //scroll to bottom when new messages are added.
 useEffect(() => {
- 
-        scrollRef.current?.scrollIntoView({ behavior: "smooth" })
-        console.log("scrollHeight "+messageScrollRef.current.scrollHeight)
-        console.log("amount of scroll user has done "+messageScrollRef.current.scrollTop)
+        const scroll =
+        messageScrollRef.current.scrollHeight -
+        messageScrollRef.current.clientHeight;
+        messageScrollRef.current.scrollTo(0, scroll);
+        console.log(messageScrollRef.current.scrollHeight,messageScrollRef.current.clientHeight,scroll)
     }
     //using messages.length because firebase is constantly fetching messages from realtime db which changes messages state constantly
     //but messages.length only changes when a new message is added
@@ -79,8 +79,7 @@ useEffect(() => {
 //=============================================================================================================
 
     return (                         
-             <div className="chat" >
-                <div className="chat__body">
+             <div className="chat">
                         <center>
                         This is the beggining of your texx with  {chatName.chat_username}
                         </center>
@@ -88,17 +87,20 @@ useEffect(() => {
                         {
                             messages.map((message)=>(
                                 <Suspense fallback={
-                                    <div><Skeleton variant="rect" width={210} height={10} /></div>} key={message.key}>
+                                    <div><Skeleton variant="rect" width={400} height={10} />
+                                    <Skeleton variant="rect" width={400} height={10} />
+                                    <Skeleton variant="rect" width={400} height={10} />
+                                    <Skeleton variant="rect" width={400} height={10} />
+                                    <Skeleton variant="rect" width={400} height={10} />
+                                    <Skeleton variant="rect" width={400} height={10} />
+                                    <Skeleton variant="rect" width={400} height={10} />
+                                    </div>} key={message.key}>
                                         <Message message={message} key={message.key}/>
                                 </Suspense>
                                 ))
                             
                         }
                         </div>
-                <div ref={scrollRef}>
-                </div>
-
-                </div>
                 <div className="chat__sendMessage">
                     <SendMessage chatId={chatId} />
                 </div>

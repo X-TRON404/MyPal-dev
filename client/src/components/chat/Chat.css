@@ -79,3 +79,14 @@
   flex-direction: column;
   justify-content: center;
 }
+/*========================hide scrollbar for different browsers======================*/
+/* Hide scrollbar for Chrome, Safari and Opera */
+.chat__messages::-webkit-scrollbar {
+  display: none;
+}
+/*------------------------------------------------------------------------------------*/
+.chat__messages{
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+/*====================================================================================*/

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {IconButton, Input } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import firebase from 'firebase/app'
@@ -22,6 +22,12 @@ function SendMessage({chatId}) {
     //current element of inputRef
     const inputRefCurrent = inputRef.current
 //========================================================POST Messages========================================
+
+useEffect(() => {
+    setInput('')
+    inputRef.current.focus();
+}
+,[chatId])
 
 const sendMessage = () => {
     if (user){

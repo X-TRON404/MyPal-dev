@@ -23,6 +23,8 @@ function SpeedDiall() {
    const classes = useStyles();
   //open speedDial
   const [openSpeedDial, setOpenSpeedDial] = useState(false);
+  //current route path
+  const pathname = window.location.pathname
   //actions for speedDial
   //add Link to action icons
   const addLink = (to, children) => <Link to={to}>{children}</Link>;
@@ -39,7 +41,11 @@ function SpeedDiall() {
   const handleClose = () => {
     setOpenSpeedDial(false);
   };
-
+    //hide speedDial for chats route
+    if (pathname.match(/chats/)){
+        return null;
+    }
+    //else if not chat route then return the speedDial
     return (
         <div className="speedDial">
             <SpeedDial

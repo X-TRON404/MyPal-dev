@@ -1,11 +1,12 @@
-@media (min-width: 0px) and (max-width:450px){  
+@media (min-width: 0px) and (max-width:320px){  
   .chat{
     display: flex;
     flex: 1;
     flex-direction: column;
     background-color: '#363A3E';
     margin-top:10px;
-    margin-bottom: 70px;
+    overflow-y: hidden;
+    max-height:80vh;
   }
   .chat__sendMessage{
     display: flex;
@@ -17,15 +18,41 @@
   .chat__messages{
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    overflow-y: scroll;
+    max-height:73vh;
   }
 }  
+
+@media (min-width: 321px) and (max-width:450px){  
+  .chat{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-color: '#363A3E';
+    margin-top:10px;
+    overflow-y: hidden;
+    max-height:80vh;
+  }
+  .chat__sendMessage{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-color: '#363A3E';
+    margin-top:10px;
+  }
+  .chat__messages{
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    max-height:79vh;
+  }
+}  
+
 @media (min-width: 451px) and (max-width:2048px){  
   .chat{
-
     background-color: '#363A3E';
     margin-top: 10px;
-    margin-bottom: 20px;
+    max-height:75vh;
   }
   .chat__sendMessage{
     display: flex;
@@ -37,11 +64,13 @@
   .chat__messages{
     display: flex;
     flex-direction: column;
-    margin-bottom: 40px;
+    padding-bottom: 40px;
+    overflow-y: scroll;
+    max-height:75vh;
   }
     
 } 
-.chat__body>center{
+.chat>center{
   color:gray;
 }
 

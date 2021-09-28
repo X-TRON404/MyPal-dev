@@ -12,6 +12,9 @@ State management - React Context API \
 Backend - Firebase cloud functions \
 Database - Firebase Realtime, Firestore
 
+Others:
+WebRTC
+
 List of features: \
 1.Share your thoughts with your community on the feed \
 2.Confess anonymously \

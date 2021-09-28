@@ -6,24 +6,33 @@ Making new friends, doing gossips, attending meetups was the best part of colleg
 
 MyPal was created to take the entire experience of your college life online.
 
-Stack: \
-Frontend - React.js \
-State management - React Context API \
-Backend - Firebase cloud functions \
-Database - Firebase Realtime, Firestore
-
-Others:
-WebRTC
-
 List of features: \
 1.Share your thoughts with your community on the feed \
 2.Confess anonymously \
 3.Attend virtual events \
 4.Seamlessly chat with new Pals
 
-Directory Structure: \
-client - has all the ui-components along with calls to firebase for fetching data. \
-server - has firebase functions to react to changes in firestore/firebase-realtime databases.
+# Stack:
+| Stack    | Technology |
+| ---      | ---       |
+| Frontend | React.js         |
+| State management     | React Context API        |
+| Component Library    | material-ui        |
+| Backend     | Firebase cloud functions         |
+| Database     |  Firebase Realtime, Firestore     |
+
+Others:
+WebRTC
+
+Directory Structure: 
+| Directory | Contents |
+| ---      | ---       |
+| client | has all the ui-components along with calls to firebase for fetching data        |
+| server     | has firebase functions to react to changes in firestore/firebase-realtime databases |
+
+
+# Make a local copy
+```https://github.com/X-TRON404/MyPal-dev.git```
 
 # Run locally: 
 ```

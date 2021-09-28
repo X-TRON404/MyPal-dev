@@ -2,7 +2,7 @@
 👾👾👾
 Dev environment of MyPal \
 Covid hit the entire experience of college life badly.
-Making new friends, doing gossips, attending meetups was the best part of college life. \
+Making new friends, doing gossips, attending meetups was the best part of college life.
 
 MyPal was created to take the entire experience of your college life online.
 
@@ -24,6 +24,7 @@ server - has firebase functions to react to changes in firestore/firebase-realti
 
 # Run locally: 
 ```
+cd client
 npm install
 npm start
 ```

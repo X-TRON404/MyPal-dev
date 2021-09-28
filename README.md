@@ -1,6 +1,7 @@
 # MyPal-dev
 👾👾👾
 Dev environment of MyPal \
+![alt text](https://github.com/X-TRON404/MyPal-dev/blob/main/client/src/texx_logo.png)
 Covid hit the entire experience of college life badly.
 Making new friends, doing gossips, attending meetups was the best part of college life.
 

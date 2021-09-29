@@ -33,7 +33,7 @@ Directory Structure:
 
 
 # Make a local copy
-```https://github.com/X-TRON404/MyPal-dev.git```
+```git clone https://github.com/X-TRON404/MyPal-dev.git```
 
 # Run locally: 
 ```

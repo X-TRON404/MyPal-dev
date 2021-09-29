@@ -13,6 +13,8 @@ import { useStateValue } from '../contexts/StateProvider';
 import firebase from 'firebase/app'
 import Skeleton from '@material-ui/lab/Skeleton';
 import ShareIcon from '@material-ui/icons/Share';
+import SpeakerPhoneIcon from '@material-ui/icons/SpeakerPhone';
+import { IconButton } from '@material-ui/core';
 
 
 const EventsMenu = React.lazy(()=>import('./EventsMenu'))
@@ -143,6 +145,7 @@ useEffect(() => {
                             </Button>
                     <div className="event__interestedInterestedCount">Interested: {interestedCount}</div>
                     </div>
+                    <IconButton><SpeakerPhoneIcon style={{color:'white'}}></SpeakerPhoneIcon></IconButton>
                 </div>
             </Card>
         </div>

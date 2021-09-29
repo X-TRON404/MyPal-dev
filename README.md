@@ -43,7 +43,7 @@ npm start
 ```
 
 # Contribution guidelines:
-commit messages:
+commit messages:\
 feat: The new feature you are adding to MyPal \
 fix: A bug fix \
 style: Feature and updates related to styling \

@@ -4,7 +4,7 @@ import SendIcon from '@material-ui/icons/Send';
 import firebase from 'firebase/app'
 import 'emoji-mart/css/emoji-mart.css';
 import {useStateValue} from '../../contexts/StateProvider';
-import {InsertEmoticon, MicOutlined} from '@material-ui/icons';
+import {InsertEmoticon} from '@material-ui/icons';
 import {realtime} from '../firebase';
 import './SendMessage.css'
 import EmojiSelect from './EmojiSelect';

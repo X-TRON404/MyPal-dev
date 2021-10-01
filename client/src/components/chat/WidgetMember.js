@@ -64,7 +64,7 @@ function WidgetMember({lastchatAt,chat_username,chatId}) {
           realtime.ref(`'recent_chat'/${user.uid}`).off()
         }
              
-     }, [,chatId,chat_username,online,currentChat])
+     }, [chatId,chat_username,online,currentChat])
 
     const sendClick = () => {
       realtime.ref(`'last_Seen'/${user.uid}/${chatId}`).set(firebase.database.ServerValue.TIMESTAMP)

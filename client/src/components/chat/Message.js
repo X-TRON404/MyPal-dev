@@ -4,8 +4,6 @@ import {Avatar} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import './Message.css';
 import {useStateValue} from '../../contexts/StateProvider';
-import LinesEllipsis from 'react-lines-ellipsis'
-import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC'
 // const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis)
 
 const useStyles = makeStyles((theme) => ({

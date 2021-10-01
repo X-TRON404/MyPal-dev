@@ -1,4 +1,4 @@
-import React, {useState,useEffect, Suspense,lazy} from 'react';
+import React, {useState,useEffect, Suspense} from 'react';
 import './App.css';
 import {auth, DataBase} from './firebase'
 import {makeStyles} from '@material-ui/core/styles'

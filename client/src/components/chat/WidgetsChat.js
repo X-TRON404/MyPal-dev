@@ -5,10 +5,9 @@ import React, { Suspense, useEffect, useState } from 'react'
 import './WidgetsChat.css'
 import { makeStyles} from '@material-ui/core/styles';
 import {Link} from 'react-router-dom';
-import {DataBase, realtime} from '../firebase'
+import {realtime} from '../firebase'
 import {useStateValue} from '../../contexts/StateProvider';
 import Skeleton from '@material-ui/lab/Skeleton';
-import FlipMove from 'react-flip-move';
 
 const WidgetMember = React.lazy(() => import('./WidgetMember'))
 //==================================================Card Styles==============================================
@@ -51,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
 function WidgetsChat() {
     //get the user from the provider  
     const [{user}, dispatch] = useStateValue();
-    const classes = useStyles();
     const [chats, setChats] = useState([])
     
     useEffect(() => {
@@ -82,7 +80,7 @@ function WidgetsChat() {
         catch (error) {
             console.log(error.message+" coming from widgetsChat getting 'chats'collection ")
             }
-    }, [,user,chats.length]);
+    }, [user,chats.length]);
     // console.log(chats)
 
 

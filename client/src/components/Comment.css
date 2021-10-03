@@ -1,0 +1,13 @@
+.link__username{
+    text-decoration: none;
+}
+
+.link__username:hover{
+    text-decoration: underline;
+}
+
+.post__commentsComment{
+    color: aliceblue;
+    font-size: 0.8em; 
+    padding: 0.2rem;
+}

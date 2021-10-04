@@ -53,3 +53,7 @@ docs: Everything related to documentation
 
 Example commit message: \
 feat: added report confessions option
+
+# Community:
+Join the dev community for contributing to the project
+https://discord.gg/CzvcuUdx

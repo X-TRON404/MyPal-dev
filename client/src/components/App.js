@@ -27,7 +27,7 @@ import {realtime} from './firebase'
 import { getToken } from './firebase';
 import { onMessageListener } from './firebase';
 import Home from './Home'
-import UserProfile from './UserProfile';
+import UserProfile from './user/UserProfile';
 import Select from '@material-ui/core/Select';
 import MuiAlert from '@material-ui/lab/Alert';
 import SpeedDiall from './SpeedDial';

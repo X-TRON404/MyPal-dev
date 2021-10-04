@@ -9,9 +9,9 @@ import Box from '@material-ui/core/Box';
 import './SwipeTab.css'
 import Skeleton from '@material-ui/lab/Skeleton';
 
-const YourPosts = React.lazy(()=>import('./YourPosts'))
-const YourEvents = React.lazy(()=>import('./YourEvents'))
-const YourBookmarks = React.lazy(()=>import('./YourBookmarks'))
+const YourPosts = React.lazy(()=>import('./user/client/YourPosts'))
+const YourEvents = React.lazy(()=>import('./user/client/YourEvents'))
+const YourBookmarks = React.lazy(()=>import('./user/client/YourBookmarks'))
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

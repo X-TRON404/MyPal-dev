@@ -6,10 +6,9 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
-import { useStateValue } from '../contexts/StateProvider';
-import { DataBase } from './firebase';
-import './YourPosts.css'
-import { Link } from 'react-router-dom';
+import { useStateValue } from '../../contexts/StateProvider';
+import { DataBase } from '../firebase';
+import './client/YourPosts.css'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,18 +28,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function YourPosts() {
+export default function UserPosts({palId}) {
     const classes = useStyles();
-
-    //get the user from the provider
-    const [{user}, dispatch] = useStateValue();
     //posts array
     const [posts, setPosts] = useState([]);
 //====================================GET user created posts=========================================
     useEffect( () => {
-      if (user){
         //grab the posts which belong to the logged in user from the db
-        DataBase.collection('posts').where("user_id", "==", user?.uid).get()
+        DataBase.collection('posts').where("user_id", "==", palId).get()
         .then((querySnapshot) => {
             setPosts(querySnapshot.docs.map(doc =>({id:doc.id,post:doc.data()})))
             console.log(posts)
@@ -48,18 +43,15 @@ export default function YourPosts() {
         .catch((error) => {
             console.log("Error getting documents: ", error);
         });
-              }
-    },[,user]);
+        
+    },[,palId]);
     
 
   return (
-    <div className="yourPosts">
       <GridList cellHeight={180} className={classes.gridList}>
-            {posts.length!=0?(                            
-            posts.filter(post=>(post.post.imageUrl!='no-image')).map((post) => (
+            {posts.length!=0?(posts.map((post) => (
             <GridListTile key={post.id}>
                 <img src={post.post.imageUrl} alt={post.post.caption} />
-                <Link to={`/yourposts/${post.id}`}>
                 <GridListTileBar
                 title={post.post.caption}
                 actionIcon={
@@ -68,10 +60,8 @@ export default function YourPosts() {
                     </IconButton>
                 }
                 />
-                </Link>
             </GridListTile>
-            ))):(<h4 style={{color:'aliceblue'}}>Empty. Nothing to see here</h4>)}
+            ))):(<h3 style={{color:'aliceblue'}}>Just like your life, EMPTY</h3>)}
       </GridList>
-    </div>
   );
 }

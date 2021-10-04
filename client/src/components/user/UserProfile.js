@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import './UserProfile.css'
 import { Button, Input } from '@material-ui/core';
-import { auth, DataBase } from './firebase';
+import { auth, DataBase } from '../firebase';
 import firebase from 'firebase/app'
 import { useParams } from 'react-router-dom';
 import Chip from '@material-ui/core/Chip';

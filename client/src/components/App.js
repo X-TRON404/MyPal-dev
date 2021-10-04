@@ -3,7 +3,7 @@ import './App.css';
 import {auth, DataBase} from './firebase'
 import {makeStyles} from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
-import { AppBar, Avatar, Backdrop, Button, FormControl, Input, InputLabel, MenuItem,Snackbar } from '@material-ui/core';
+import { AppBar, Avatar, Backdrop, Button, FormControl, Input, InputLabel, MenuItem, Snackbar } from '@material-ui/core';
 import ImageUpload from './ImageUpload';
 import Sidebar from './Sidebar';
 import Widgets from './Widgets';
@@ -124,6 +124,10 @@ function App() {
   // const [notification, setNotification] = useState({title: '', body: ''});
   // getToken(setTokenFound);
 
+  //alerts as snackbars (show/message)
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
   // onMessageListener().then(payload => {
   //   setShow(true);
   //   setNotification({title: payload.notification.title, body: payload.notification.body})
@@ -171,7 +175,9 @@ function App() {
       }
     
     catch (err){
-      alert(err.message)
+      // alert(err.message)
+      setShowSnackbar(true);
+      setSnackbarMessage(err.message)
     }
   }
 
@@ -258,7 +264,11 @@ const handleCloseNotif = (event, reason) => {
     setPassword('')
 
     })
-    .catch((error) => { alert(error.message)})
+    .catch((error) => { 
+      // alert(error.message)
+      setShowSnackbar(true)
+      setSnackbarMessage(error.message)
+    })
     //close the model
     setOpenSignIn(false)
     
@@ -303,19 +313,42 @@ const handleCloseNotif = (event, reason) => {
            .set({displayName : authUser.user.displayName},
             (error) => {
             if (error) {
-              alert(error.message)
+              // alert(error.message)
+              setShowSnackbar(true);
+              setSnackbarMessage(error.message)
             } else {
-              alert("User created successfully")
+              // alert("User created successfully")
+              setShowSnackbar(true)
+              setSnackbarMessage("User created successfully.")
             }
         
           })
     setOpen(false)
   })//catch error if data filled is not in the proper format
-  .catch((error)=>{alert(error.message)})
+  .catch((error)=>{
+    // alert(error.message)
+    setShowSnackbar(true)
+    setSnackbarMessage(error.message)
+  })
 }
 //===============================================================================================
   return (
     <div className="app">
+
+    <Snackbar
+        anchorOrigin={{
+          horizontal: "center",
+          vertical: "top",
+        }}
+        open={showSnackbar}
+        onClose={()=>{
+          setShowSnackbar(false);
+          setSnackbarMessage("");
+        }}
+        key={ "top" +  "center"}
+        autoHideDuration={800}
+        message={snackbarMessage}
+      />
 
       {/* <Snackbar open={show} autoHideDuration={6000} onClose={handleCloseNotif}>
             <img

@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react'
-import {DataBase} from './firebase'
-import {useStateValue} from '../contexts/StateProvider'
+import {DataBase} from '../firebase'
+import {useStateValue} from '../../contexts/StateProvider'
 import Skeleton from '@material-ui/lab/Skeleton';
 
 function Feed(){
@@ -10,7 +10,7 @@ const [{user}, dispatch] = useStateValue();
 //posts array
 const [posts, setPosts] = useState([]);
 //lazy loading
-const Post = React.lazy(() => import('./Post'))
+const Post = React.lazy(() => import('../Post'))
 //====================================Post changes listner=========================================
     useEffect( () => {
         //onSnapshot = listner to changes in posts 

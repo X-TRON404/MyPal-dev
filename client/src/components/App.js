@@ -141,12 +141,12 @@ function App() {
   let user_Id
   //lazy loading
   const Profile = React.lazy(() => import('./Profile'))
-  const Feed = React.lazy(() => import('./Feed'))
+  const Feed = React.lazy(() => import('./feed/Feed'))
   const Chat = React.lazy(() => import('./chat/Chat'))
   const CreateEvent = React.lazy(() => import('./CreateEvent'))
   const CreateConfessions = React.lazy(() => import('./CreateConfessions'))
-  const FeedEvents = React.lazy(() => import('./FeedEvents'))
-  const FeedConfessions = React.lazy(() => import('./FeedConfessions'))
+  const FeedEvents = React.lazy(() => import('./feed/FeedEvents'))
+  const FeedConfessions = React.lazy(() => import('./feed/FeedConfessions'))
   const ImageUploadMobile = React.lazy(() => import('./ImageUploadMobile'))
   const WidgetsChat = React.lazy(() => import('./chat/WidgetsChat'))
   const PostSharingContainer = React.lazy(() => import('./PostSharingContainer'))

@@ -5,7 +5,7 @@ import {makeStyles} from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
 import { AppBar, Avatar, Backdrop, Button, FormControl, Input, InputLabel, MenuItem, Snackbar } from '@material-ui/core';
 import ImageUpload from './ImageUpload';
-import Sidebar from './Sidebar';
+import Sidebar from './navigation/Sidebar';
 import Widgets from './Widgets';
 import { BrowserRouter as Router ,Link} from 'react-router-dom'
 import {Route,Switch} from 'react-router-dom'
@@ -21,7 +21,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import BottomNavigationMobile from './BottomNavigationMobile'
+import BottomNavigationMobile from './navigation/BottomNavigationMobile'
 import logo from '../texx_logo.png'
 import {realtime} from './firebase'
 import { getToken } from './firebase';
@@ -160,8 +160,8 @@ function App() {
     //if there is a user object saved in local storage then set it equal to 'user'
     if (userFromLocalStorage){
       //JSON.parse will convert stringify to JSON
-      setUser(JSON.parse(userFromLocalStorage))
-      console.log(JSON.parse(userFromLocalStorage))
+      // setUser(JSON.parse(userFromLocalStorage))
+      // console.log(JSON.parse(userFromLocalStorage))
       try {
         
         dispatch(

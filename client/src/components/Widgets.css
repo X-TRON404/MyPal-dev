@@ -1,60 +1,63 @@
-
-
 /* =================================================Hide the widgets for displays smaller than 450px================================================== */
-@media (max-width:450px){
+@media (max-width:450px) {
 
-.widgets{
-    display: none;
-}
-/* ======================================================================================================================= */
+    .widgets {
+        display: none;
+    }
+
+    /* ======================================================================================================================= */
 }
 
-.widgets{
-    flex:0.3;
+.widgets {
+    flex: 0.3;
     /* overflow-y: scroll; */
     background-color: #2E3236;
     min-width: 360px;
 }
-.widgets__inputBox{
+
+.widgets__inputBox {
     margin-top: 5px;
     display: flex;
     flex-direction: column;
-    align-items:center;
+    align-items: center;
     /* background-color: #191919;
     padding:10px;
     border-radius: 20px;
     margin-top:10px;
     margin-left:20px;
     margin-right: 20px; */
-    
+
 }
 
-.widgets__input{
+.widgets__input {
     width: 100%;
 }
-.widgets__searchIcon{
-color: aliceblue;
+
+.widgets__searchIcon {
+    color: aliceblue;
 }
 
-.widgets___widgetContainer{
+.widgets___widgetContainer {
     margin-top: 15px;
-    margin-left:20px;
+    margin-left: 20px;
     margin-right: 20px;
-    padding:10px;
-    background-color:#191919;
-    border-radius:20px;
+    padding: 10px;
+    background-color: #191919;
+    border-radius: 20px;
     height: 80vh;
     overflow-y: scroll;
 }
 
-.widgets__widgetContainer >h2 {
+.widgets__widgetContainer>h2 {
     font-size: 18px;
     font-weight: 800;
 }
-input> .ais-SearchBox-input{
+
+input>.ais-SearchBox-input {
     background-color: #1b1b1b !important;
 
 }
+
 /* .ais-SearchBox-form > button {
     background-color: #2E3236;
     border-radius: 5px;
@@ -62,7 +65,7 @@ input> .ais-SearchBox-input{
     border: none;
 } */
 
-.widgets__search__hit{
+.widgets__search__hit {
     display: flex;
     justify-content: end;
     align-items: center;
@@ -74,18 +77,42 @@ input> .ais-SearchBox-input{
     overflow-x: hidden;
     overflow-y: hidden;
 }
-.widgets__search__hit__content{
-    margin:5px;
+
+.widgets__search__hit__content {
+    margin: 5px;
 }
-.widgets__search__hit__avatar{
+
+.widgets__search__hit__avatar {
     height: 32px !important;
     width: 32px !important;
 }
-.widgets__search__hit__displayName{
-    color:aliceblue;
+
+.widgets__search__hit__displayName {
+    color: aliceblue;
     font-size: small;
 }
-.widgets__search__hit__bio{
+
+.widgets__search__hit__bio {
     font-size: x-small;
     color: gray;
+}
+
+.widgets__search__searchBox input, .widgets__search__searchBox button{
+    padding: 0.5rem;
+    border-radius: 0.8rem;
+}
+.widgets__search__searchBox input::placeholder{
+    font-weight: bold;
+}
+.widgets__search__searchBox input{
+    color: aliceblue;
+    background-color: rgb(54, 54, 54);
+    margin-right: 0.2rem;
+}
+
+.widgets__search__searchBox button{
+    background-color: aliceblue;
+    border: transparent;
+    margin: 0 0.2rem;
+    cursor: pointer;
 }

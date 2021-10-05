@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import {DataBase} from './firebase'
-import {useStateValue} from '../contexts/StateProvider'
+import {DataBase} from '../firebase'
+import {useStateValue} from '../../contexts/StateProvider'
 import './FeedEvents.css'
 import { Suspense } from 'react'
 import Skeleton from '@material-ui/lab/Skeleton'
 
-const Event = React.lazy(()=>import('./Event'))
+const Event = React.lazy(()=>import('../Event'))
 function FeedEvents() {
 
 //get the user from the provider

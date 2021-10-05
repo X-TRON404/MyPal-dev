@@ -1,10 +1,10 @@
 import React, { useEffect, useState, Suspense } from 'react'
-import {DataBase} from './firebase'
-import {useStateValue} from '../contexts/StateProvider'
+import {DataBase} from '../firebase'
+import {useStateValue} from '../../contexts/StateProvider'
 import Skeleton from '@material-ui/lab/Skeleton';
 
 
-const Confessions = React.lazy(()=>import('./Confessions'))
+const Confessions = React.lazy(()=>import('../Confessions'))
 function FeedConfessions(){
 
 //get the user from the provider

@@ -1,10 +1,12 @@
 import { Card, CardContent, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
-import { useStateValue } from '../contexts/StateProvider';
-import { DataBase } from './firebase';
+import { useStateValue } from '../../../contexts/StateProvider';
+import { DataBase } from '../../firebase';
 import './YourEvents.css'
 
-function UserEvents({palId}) {
+function YourEvents() {
+    //get the user from the provider
+    const [{user}, dispatch] = useStateValue();
     //store user's events
     const [events,setEvents] = useState([])
     //convert date
@@ -17,8 +19,9 @@ function UserEvents({palId}) {
     }
     //====================================GET user created events=========================================
     useEffect( () => {
+        if (user){
         //grab the events which belong to the logged in user from the db
-        DataBase.collection('events').where("user_id", "==", palId).get()
+        DataBase.collection('events').where("user_id", "==", user?.uid).get()
         .then((querySnapshot) => {
             setEvents(querySnapshot.docs.map(doc =>doc.data()))
             console.log(events)
@@ -26,8 +29,8 @@ function UserEvents({palId}) {
         .catch((error) => {
             console.log("Error getting documents: ", error);
         });
-        
-    },[,palId]);
+    }
+    },[,user]);
     return (
         <div className="yourevents">
             {events.length!=0?(events.map(event=>(
@@ -39,9 +42,9 @@ function UserEvents({palId}) {
                             <Typography  component={'span'}>Interested people: {event.interestedCount}</Typography>
                         </CardContent>
                     </Card>
-            ))):(<h4 style={{color:'aliceblue'}}>Empty.Just like this tab.</h4>)}
+            ))):(<h4 style={{color:'aliceblue'}}>Empty. Nothing to see here.</h4>)}
         </div>
     )
 }
 
-export default UserEvents
+export default YourEvents

@@ -4,7 +4,7 @@ import {auth, DataBase} from './firebase'
 import {makeStyles} from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
 import { AppBar, Avatar, Backdrop, Button, FormControl, Input, InputLabel, MenuItem, Snackbar } from '@material-ui/core';
-import ImageUpload from './ImageUpload';
+import ImageUpload from './imageUpload/ImageUpload';
 import Sidebar from './navigation/Sidebar';
 import Widgets from './Widgets';
 import { BrowserRouter as Router ,Link} from 'react-router-dom'
@@ -147,7 +147,7 @@ function App() {
   const CreateConfessions = React.lazy(() => import('./confessions/CreateConfessions'))
   const FeedEvents = React.lazy(() => import('./feed/FeedEvents'))
   const FeedConfessions = React.lazy(() => import('./feed/FeedConfessions'))
-  const ImageUploadMobile = React.lazy(() => import('./ImageUploadMobile'))
+  const ImageUploadMobile = React.lazy(() => import('./imageUpload/ImageUploadMobile'))
   const WidgetsChat = React.lazy(() => import('./chat/WidgetsChat'))
   const PostSharingContainer = React.lazy(() => import('./PostSharingContainer'))
   const SearchMobile = React.lazy(() => import('./SearchMobile'))

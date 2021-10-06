@@ -1,13 +1,13 @@
 import React,{useState,useContext} from 'react';
-import {storage,DataBase} from './firebase';
+import {storage,DataBase} from '../firebase';
 import firebase from 'firebase';
 import './ImageUpload.css'
 import {IconButton, Input, Modal} from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import LinearProgress from '@material-ui/core/LinearProgress'
-import {useStateValue} from '../contexts/StateProvider'
-import AlertDialog from './AlertDialog';
+import {useStateValue} from '../../contexts/StateProvider'
+import AlertDialog from '../AlertDialog';
 
 function ImageUpload({username}) {
     //get the user from the provider

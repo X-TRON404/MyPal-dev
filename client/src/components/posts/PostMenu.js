@@ -7,10 +7,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import {DataBase} from './firebase'
-import {useStateValue} from '../contexts/StateProvider'
+import {DataBase} from '../firebase'
+import {useStateValue} from '../../contexts/StateProvider'
 import firebase from 'firebase/app'
-import AlertDialog from './AlertDialog';
+import AlertDialog from '../AlertDialog';
 
 const useStyles = makeStyles((theme) => ({
     root: {

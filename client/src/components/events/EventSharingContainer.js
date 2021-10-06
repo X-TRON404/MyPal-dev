@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useStateValue } from "../../contexts/StateProvider";
 import Event from "./Event";
 import { DataBase } from "../firebase";
-import "../PostSharingContainer.css";
+import "../posts/PostSharingContainer.css";
 
 function EventSharingContainer() {
   //get the slug from the url  (remeber that component using useParams should be inside <Router>)

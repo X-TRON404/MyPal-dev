@@ -12,16 +12,16 @@ import {
   Modal,
   Snackbar,
 } from "@material-ui/core";
-import { DataBase, realtime } from "./firebase";
+import { DataBase, realtime } from "../firebase";
 import firebase from "firebase";
 import ChatBubbleOutlineRoundedIcon from "@material-ui/icons/ChatBubbleOutlineRounded";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import SendIcon from "@material-ui/icons/Send";
-import { useStateValue } from "../contexts/StateProvider";
+import { useStateValue } from "../../contexts/StateProvider";
 import ShareIcon from "@material-ui/icons/Share";
 import PostMenu from "./PostMenu";
 import { Link } from "react-router-dom";
-import { Comment } from "./Comment";
+import { Comment } from "../Comment";
 
 //============================================Comments pop-over styles====================================
 const useStyles = makeStyles((theme) => ({

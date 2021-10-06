@@ -149,7 +149,7 @@ function App() {
   const FeedConfessions = React.lazy(() => import('./feed/FeedConfessions'))
   const ImageUploadMobile = React.lazy(() => import('./imageUpload/ImageUploadMobile'))
   const WidgetsChat = React.lazy(() => import('./chat/WidgetsChat'))
-  const PostSharingContainer = React.lazy(() => import('./PostSharingContainer'))
+  const PostSharingContainer = React.lazy(() => import('./posts/PostSharingContainer'))
   const SearchMobile = React.lazy(() => import('./SearchMobile'))
   const ConfessionSharingContainer = React.lazy(() => import('./confessions/ConfessionSharingContainer'))
   const EventSharingContainer = React.lazy(() => import('./events/EventSharingContainer'))

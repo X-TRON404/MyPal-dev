@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useStateValue } from '../contexts/StateProvider';
 import { DataBase } from './firebase';
-import Post from './Post';
+import Post from './posts/Post';
 
 
 

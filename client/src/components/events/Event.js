@@ -8,8 +8,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import './Event.css'
-import { DataBase } from './firebase';
-import { useStateValue } from '../contexts/StateProvider';
+import { DataBase } from '../firebase';
+import { useStateValue } from '../../contexts/StateProvider';
 import firebase from 'firebase/app'
 import Skeleton from '@material-ui/lab/Skeleton';
 import ShareIcon from '@material-ui/icons/Share';

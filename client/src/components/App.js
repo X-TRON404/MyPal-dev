@@ -144,14 +144,14 @@ function App() {
   const Feed = React.lazy(() => import('./feed/Feed'))
   const Chat = React.lazy(() => import('./chat/Chat'))
   const CreateEvent = React.lazy(() => import('./CreateEvent'))
-  const CreateConfessions = React.lazy(() => import('./CreateConfessions'))
+  const CreateConfessions = React.lazy(() => import('./confessions/CreateConfessions'))
   const FeedEvents = React.lazy(() => import('./feed/FeedEvents'))
   const FeedConfessions = React.lazy(() => import('./feed/FeedConfessions'))
   const ImageUploadMobile = React.lazy(() => import('./ImageUploadMobile'))
   const WidgetsChat = React.lazy(() => import('./chat/WidgetsChat'))
   const PostSharingContainer = React.lazy(() => import('./PostSharingContainer'))
   const SearchMobile = React.lazy(() => import('./SearchMobile'))
-  const ConfessionSharingContainer = React.lazy(() => import('./ConfessionSharingContainer'))
+  const ConfessionSharingContainer = React.lazy(() => import('./confessions/ConfessionSharingContainer'))
   const EventSharingContainer = React.lazy(() => import('./EventSharingContainer'))
 
   //====================================Get the user from the local storage on refresh======================

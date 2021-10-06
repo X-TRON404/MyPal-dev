@@ -1,10 +1,10 @@
 import React,{useState} from 'react';
-import {DataBase} from './firebase';
+import {DataBase} from '../firebase';
 import firebase from 'firebase';
 import {Button,TextField} from '@material-ui/core';
-import {useStateValue} from '../contexts/StateProvider'
+import {useStateValue} from '../../contexts/StateProvider'
 import './CreateConfessions.css'
-import AlertDialog from './AlertDialog';
+import AlertDialog from '../AlertDialog';
 
 function CreateConfessions() {
     //get the user from the provider

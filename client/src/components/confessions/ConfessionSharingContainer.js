@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { useStateValue } from '../contexts/StateProvider';
+import { useStateValue } from '../../contexts/StateProvider';
 import Confessions from './Confessions';
-import { DataBase } from './firebase';
-import './PostSharingContainer.css'
+import { DataBase } from '../firebase';
+import '../posts/PostSharingContainer.css'
 
 function ConfessionSharingContainer() {
     //get the slug from the url  (remeber that component using useParams should be inside <Router>)

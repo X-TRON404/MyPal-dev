@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useStateValue } from '../contexts/StateProvider';
 import { DataBase } from './firebase';
-import Event from './Event';
+import Event from './events/Event';
 
 
 

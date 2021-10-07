@@ -1,18 +1,18 @@
 import { Avatar, Button } from "@material-ui/core";
 import React, { useEffect, useRef, useState } from "react";
-import { useStateValue } from "../contexts/StateProvider";
+import { useStateValue } from "../../contexts/StateProvider";
 import "./Confessions.css";
 import ChatBubbleOutlineRoundedIcon from "@material-ui/icons/ChatBubbleOutlineRounded";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { Collapse, IconButton, Input } from "@material-ui/core";
-import { DataBase } from "./firebase";
+import { DataBase } from "../firebase";
 import firebase from "firebase";
 import SendIcon from "@material-ui/icons/Send";
 import ShareIcon from "@material-ui/icons/Share";
 import { Link } from "react-router-dom";
 import { Suspense } from "react";
 import Skeleton from "@material-ui/lab/Skeleton";
-import { Comment } from "./Comment";
+import { Comment } from "../Comment";
 
 const ConfessionsMenu = React.lazy(() => import("./ConfessionsMenu"));
 

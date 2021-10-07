@@ -5,7 +5,7 @@ import './FeedEvents.css'
 import { Suspense } from 'react'
 import Skeleton from '@material-ui/lab/Skeleton'
 
-const Event = React.lazy(()=>import('../Event'))
+const Event = React.lazy(()=>import('../events/Event'))
 function FeedEvents() {
 
 //get the user from the provider

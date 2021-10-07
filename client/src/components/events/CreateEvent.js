@@ -1,14 +1,14 @@
 import React,{Suspense, useState} from 'react';
-import {storage,DataBase} from './firebase';
+import {storage,DataBase} from '../firebase';
 import firebase from 'firebase';
 import {Button, IconButton, Input, Modal,TextField} from '@material-ui/core';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import LinearProgress from '@material-ui/core/LinearProgress'
-import {useStateValue} from '../contexts/StateProvider'
+import {useStateValue} from '../../contexts/StateProvider'
 import './CreateEvent.css'
-import AlertDialog from './AlertDialog'
+import AlertDialog from '../AlertDialog'
 import Skeleton from '@material-ui/lab/Skeleton';
-const DateTimeSelect = React.lazy(()=>import('./DateTimeSelect')) 
+const DateTimeSelect = React.lazy(()=>import('../DateTimeSelect')) 
 
 function CreateEvent() {
     //get the user from the provider

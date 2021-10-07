@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { useStateValue } from '../contexts/StateProvider';
-import { DataBase } from './firebase';
-import Post from'./Post'
+import { useStateValue } from '../../contexts/StateProvider';
+import { DataBase } from '../firebase';
+import Post from './Post'
 import './PostSharingContainer.css'
 
 function PostSharingContainer() {

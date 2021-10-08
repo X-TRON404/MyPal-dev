@@ -283,3 +283,12 @@ a{
   text-decoration: 'none';
   color: aliceblue;
 }
+
+/* hiding the scroll bar */
+html{
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none; 
+}

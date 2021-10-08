@@ -48,6 +48,16 @@
     overflow-y: scroll;
 }
 
+ /* hiding scrollbar  */
+ .widgets___widgetContainer{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.widgets___widgetContainer::-webkit-scrollbar{
+    display: none;
+}
+
 .widgets__widgetContainer>h2 {
     font-size: 18px;
     font-weight: 800;

@@ -31,7 +31,7 @@ const [confessions, setConfessions] = useState([]);
                         <div><Skeleton variant="text" />
                         <Skeleton variant="circle" width={40} height={40} />
                         <Skeleton variant="rect" width={210} height={118} /></div>} key={id}>
-                            <Confessions confessionId={id} confession={confession.confession} likesCount={confession.likesCount}/>
+                            <Confessions confessionId={id} confession={confession.confession}  timeInMillis={confession?.timestamp?.seconds * 1000} likesCount={confession.likesCount}/>
                     </Suspense>
                 ))
                 } 

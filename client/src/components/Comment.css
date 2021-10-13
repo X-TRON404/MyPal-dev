@@ -11,3 +11,14 @@
     font-size: 0.8em; 
     padding: 0.2rem;
 }
+
+.post__commentsWrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post__commentsWrapper span{
+    color: aliceblue;
+    font-size: 9px;
+}

@@ -33,7 +33,7 @@ const Post = React.lazy(() => import('../posts/Post'))
                     <div><Skeleton variant="text" />
                     <Skeleton variant="circle" width={40} height={40} />
                     <Skeleton variant="rect" width={210} height={118} /></div>} key={id}>
-                        <Post postId={id} username={post.username} user_id={post.user_id} caption={post.caption} imageUrl={post.imageUrl} likesCount={post.likesCount}>
+                        <Post postId={id} username={post.username} user_id={post.user_id} caption={post.caption} imageUrl={post.imageUrl} timeInMillis={post?.timestamp?.seconds * 1000} likesCount={post.likesCount}>
                         </Post>
                 </Suspense>))
                 }    

@@ -13,10 +13,12 @@ import { Link } from "react-router-dom";
 import { Suspense } from "react";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { Comment } from "../Comment";
+import { format } from 'timeago.js'
+
 
 const ConfessionsMenu = React.lazy(() => import("./ConfessionsMenu"));
 
-function Confessions({ confession, confessionId, likesCount }) {
+function Confessions({ confession, confessionId, likesCount, timeInMillis }) {
   //get the user from the provider
   const [{ user }, dispatch] = useStateValue();
   //comments from DataBase
@@ -148,6 +150,7 @@ function Confessions({ confession, confessionId, likesCount }) {
         <div className="confessions__header__userName">
           <Avatar alt={"username"} src="/static/images/avatar/1.jpg" />{" "}
           <span>Annonymous </span>
+          <p>{format(timeInMillis)}</p>
         </div>
         <Suspense
           fallback={
@@ -239,6 +242,7 @@ function Confessions({ confession, confessionId, likesCount }) {
               user_id={comment.user_id}
               username={comment.username}
               text={comment.text}
+              timeInMillis={comment?.timestamp?.seconds * 1000}
             />
           ))}
         </div>

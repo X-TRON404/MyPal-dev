@@ -22,6 +22,7 @@ import ShareIcon from "@material-ui/icons/Share";
 import PostMenu from "./PostMenu";
 import { Link } from "react-router-dom";
 import { Comment } from "../Comment";
+import { format } from 'timeago.js'
 
 //============================================Comments pop-over styles====================================
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +51,7 @@ function getModalStyle() {
 }
 
 //=======================================================================================================
-function Post({ postId, username, user_id, caption, imageUrl, likesCount }) {
+function Post({ postId, username, user_id, timeInMillis, caption, imageUrl, likesCount }) {
   const classes = useStyles();
   //get the user from the provider
   const [{ user }, dispatch] = useStateValue();
@@ -354,6 +355,7 @@ function Post({ postId, username, user_id, caption, imageUrl, likesCount }) {
           <Link to={`/pals/${user_id}`} style={{ textDecoration: "none" }}>
             <h3>{username}</h3>
           </Link>
+          <p>{format(timeInMillis)}</p>
         </div>
         <Modal
           open={hoverOpen}
@@ -543,6 +545,7 @@ function Post({ postId, username, user_id, caption, imageUrl, likesCount }) {
                 user_id={comment.user_id}
                 username={comment.username}
                 text={comment.text}
+                timeInMillis={comment?.timestamp?.seconds * 1000}
               />
             ))}
           </div>
@@ -554,6 +557,7 @@ function Post({ postId, username, user_id, caption, imageUrl, likesCount }) {
               user_id={comments[0].user_id}
               username={comments[0].username}
               text={comments[0].text}
+              timeInMillis={comments[0].timestamp?.seconds * 1000}
             />
           )}
         </div>

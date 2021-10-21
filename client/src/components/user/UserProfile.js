@@ -13,6 +13,7 @@ import firebase from 'firebase/app'
 import { useParams } from 'react-router-dom';
 import Chip from '@material-ui/core/Chip';
 import UserScrollableTabsButtonAuto from './UserSwipeTab';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -102,7 +103,7 @@ const [bio,setBio] = useState(userInfo?.bio);
                             <Typography>Interests</Typography>
                         </div>
                     </div>
-                    {userInfo?.institute && <Chip size="small" label={userInfo?.institute} />}
+                    <span>{userInfo?.institute && <Chip size="x-small" icon={<AccountBalanceIcon />} label={userInfo?.institute} />}</span>
                     <div className="userProfile__footer">
                            <UserScrollableTabsButtonAuto palId />
                     </div>

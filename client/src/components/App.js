@@ -277,6 +277,7 @@ const handleCloseNotif = (event, reason) => {
 //bug:requires sign in after sign up
   const signUp = (e) => {
     e.preventDefault();
+    if(username!==''){
     auth.createUserWithEmailAndPassword(email,password)
     //createUserWithEmailAndPassword will create a user object 
     .then(function(authUser){
@@ -330,6 +331,10 @@ const handleCloseNotif = (event, reason) => {
     setShowSnackbar(true)
     setSnackbarMessage(error.message)
   })
+}
+else{
+  alert("Username cant be empty")
+}
 }
 //===============================================================================================
   return (

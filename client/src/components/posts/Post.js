@@ -156,7 +156,7 @@ function Post({ postId, username, user_id, timeInMillis, caption, imageUrl, like
         .orderBy("timestamp", "desc")
         .onSnapshot((snapshot) => {
           //set comments to the data inside the doc
-          setComments(snapshot.docs.map((doc) => doc.data()));
+          setComments(snapshot.docs.map(doc =>({id:doc.id,comment:doc.data()})));
         });
 
       //check if the user already liked the doc or not
@@ -538,26 +538,28 @@ function Post({ postId, username, user_id, timeInMillis, caption, imageUrl, like
         {/*collapse when comments icon is clicked and show all the comments*/}
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <div className="post_commentWrapper">
-            {comments.map((comment) => (
+            {comments.map((id,comment) => {
               //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
-              <Comment
-                key={comment.id}
-                user_id={comment.user_id}
-                username={comment.username}
-                text={comment.text}
-                timeInMillis={comment?.timestamp?.seconds * 1000}
-              />
-            ))}
+              return(<Comment
+                key={id.id}
+                commentId={id.id}
+                user_id={id.comment.user_id}
+                username={id.comment.username}
+                timeInMillis={id.comment?.timestamp?.seconds * 1000}
+                text={id.comment.text}
+                postId={postId}
+              />)})
+            }
           </div>
         </Collapse>
         {/*if comments icon not clicked and comments are more than zero then show the latest comment*/}
         <div className="post__commentsFirstComment">
           {!expanded && comments.length !== 0 && (
             <Comment
-              user_id={comments[0].user_id}
-              username={comments[0].username}
-              text={comments[0].text}
-              timeInMillis={comments[0].timestamp?.seconds * 1000}
+              user_id={comments[0].comment.user_id}
+              username={comments[0].comment.username}
+              text={comments[0].comment.text}
+              timeInMillis={comments[0].comment.timestamp?.seconds * 1000}
             />
           )}
         </div>

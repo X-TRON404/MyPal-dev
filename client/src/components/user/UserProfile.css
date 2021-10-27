@@ -61,32 +61,6 @@ padding-bottom: 30px;
     background-color:#33373B;
 }
 
-.userProfile__headerEditButton> button{
-    color: aliceblue;
-    background-color:#556ab5;
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
-.userProfile__headerEditButton> button:hover{
-    background-color:#7389DA;
-}
-.userProfile__headerSaveButton{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.userProfile__headerSaveButton > #saveButton{
-    color: aliceblue;
-    margin-bottom: 10px;
-}
-.userProfile__headerSaveButton > #discardButton{
-    color: aliceblue;
-    background-color: #556ab5;
-}
-.userProfile__headerSaveButton > #discardButton:hover{
-    background-color:#7389DA;
-}
 .userProfile__headerInfo{
     display: flex;
     flex-direction: column;
@@ -94,19 +68,33 @@ padding-bottom: 30px;
     margin-top: 20px;
     margin-left: 20px;
 }
+.userProfile__headerInfo> button {
+    background-color: #556ab5;
+    color: aliceblue;
+    margin-left: 55px;
+  }
+  
+  .userProfile__headerInfo > .MuiSvgIcon-root {
+    margin-left: auto;
+    color: aliceblue;
+  }
+  
+  .userProfile__headerInfo > span > button {
+    background-color: #556ab5;
+    color: aliceblue;
+    margin-left: 55px;
+  }
+  
+  .userProfile__headerInfo > span > button:hover {
+    background-color: #7389da;
+  }
+  
+  .userProfile__headerInfo > button:hover {
+    background-color: #7389da;
+  }
 .userProfile__headerTypography{
     color: aliceblue;
     margin-left: 20px;
-}
-.userProfile__logoutButton {
-    color: aliceblue;
-    background-color:#556ab5;
-    margin-left: 15px;
-    margin-top: 10px;
-
-}
-.userProfile__logoutButton:hover{
-    background-color:#7389DA;
 }
 
 .userProfile__footer > .MuiCardContent-root:last-child{

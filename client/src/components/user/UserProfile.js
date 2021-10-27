@@ -7,8 +7,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import './UserProfile.css'
-import { Button, Input } from '@material-ui/core';
-import { auth, DataBase } from '../firebase';
+import { Button, Input, Snackbar } from '@material-ui/core';
+import { auth, DataBase, realtime } from '../firebase';
 import firebase from 'firebase/app'
 import { useParams } from 'react-router-dom';
 import Chip from '@material-ui/core/Chip';
@@ -50,47 +50,105 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function UserProfile() {
-//get user from firebase
-const user = firebase.auth().currentUser
-const classes = useStyles();
-//store the user fields from the database 
-const [userInfo,setUserInfo] = useState([])
-//store the number of posts inside posts collection
-const [numberOfPosts, setNumberOfPosts] = useState(0)
-//get the slug from the url  (remeber that component using useParams should be inside <Router>)
-const {palId} = useParams()
-//===========================================================================================
-useEffect(() => {
-    //load the user info from Database on load or when user changes
-    const unsubscribe = DataBase.collection('users').doc(palId).onSnapshot(snapshot=>{
-                                setUserInfo(snapshot.data());
-                                console.log("userInfo"+ userInfo)
-    })
+  //get user from firebase
+  const user = firebase.auth().currentUser
+  const classes = useStyles();
+  //store the user fields from the database 
+  const [userInfo,setUserInfo] = useState([])
+  //store the number of posts inside posts collection
+  const [numberOfPosts, setNumberOfPosts] = useState(0)
+  //bio
+  const [bio,setBio] = useState(userInfo?.bio);
+  //added to chat notification open/close
+  const [show, setShow] = useState(false);
+  //get the slug from the url  (remeber that component using useParams should be inside <Router>)
+  const {palId} = useParams()
+  //===========================================================================================
+  useEffect(() => {
+      //load the user info from Database on load or when user changes
+      const unsubscribe = DataBase.collection('users').doc(palId).onSnapshot(snapshot=>{
+                                  setUserInfo(snapshot.data());
+      })      
+                        //   DataBase.collection('users').doc(user.uid).collection('posts').onSnapshot(snapshot=>{
+                        //           setNumberOfPosts(snapshot.size)
+                        //   })
+      return () => {
+          unsubscribe()
+      }
+  }, [palId])
+  //=============================================================================================
+    //close notifications toast
+    const handleCloseNotif = (event, reason) => {
+      if (reason === "clickaway") {
+        return;
+      }
+      setShow(false);
+    };
 
-                      //   DataBase.collection('users').doc(user.uid).collection('posts').onSnapshot(snapshot=>{
-                      //           setNumberOfPosts(snapshot.size)
-                      //   })
-    return () => {
-        unsubscribe()
-    }
-}, [,palId])
-//displayName 
-const [displayName,setDisplayName] = useState(userInfo?.displayName);
-//bio
-const [bio,setBio] = useState(userInfo?.bio);
-
-
+  //======================================Add the selected user to chats list============================================
+  const addToChats = () => {
+    //if the document by the palId already exists then it wont change it
+    //if logged in user 'user.uid' == 'palId' user who wrote the post  then dont add it to chats list
+      if (!(user.uid === palId)) {
+        //===================Add to Realtime============
+        realtime.ref(`/'chats'/${user.uid}/${palId}`).set(
+          {
+            chat_username: userInfo?.displayName,
+            //user id of the user who wrote the post
+            chat_user_id: palId,
+            timestamp: firebase.database.ServerValue.TIMESTAMP,
+            lastchatAt: firebase.database.ServerValue.TIMESTAMP,
+          },
+          (error) => {
+            if (error) {
+              alert(error.message);
+            } else {
+            }
+          }
+        );
+        //add the user1 who added user2 to chatlist of user1 to chatlist of user2
+        //also later write the code to send notification to user2 that he has been added to the chatlist by user1
+        realtime.ref(`/'chats'/${palId}/${user.uid}`).set(
+          {
+            chat_username: user.displayName,
+            //user id of the user who wrote the post
+            chat_user_id: user.uid,
+            timestamp: firebase.database.ServerValue.TIMESTAMP,
+            lastchatAt: firebase.database.ServerValue.TIMESTAMP,
+          },
+          (error) => {
+            if (error) {
+              alert(error.message);
+            } else {
+            }
+          }
+        );
+      }
+      //open notification alert
+      setShow(true);
+  }
     return (
         <div className="userProfile">
-
+            <Snackbar
+            className={classes.snackbar}
+            open={show}
+            autoHideDuration={1000}
+            anchorOrigin={{ vertical: "center", horizontal: "center" }}
+            onClose={handleCloseNotif}
+            message="Added to chats"
+          />
                     <div className="userProfile__header">
                         <div className="userProfile__headerTop">
-                                <Avatar className={classes.avatar} alt={'username'} src="/static/images/avatar/1.jpg" ></Avatar>
+                                <Avatar className={classes.avatar} alt={userInfo?.displayName} src={userInfo?.displayName} ></Avatar>
                                 <div className="userProfile__headerInfo">
                                     {/*if show edit input is true then show the input elements for edit else show normal elements*/}
                                                 {/*username*/}
-                                    {<Typography><b>{userInfo?.displayName}</b></Typography>}
-                                    {/* <Typography>{`Joined on ${user?.metadata.creationTime.slice(0,17)}`}</Typography> */}
+                                    <Typography><b>{userInfo?.displayName}</b></Typography>
+                                    <Typography>{`Joined on ${user?.metadata.creationTime.slice(0,17)}`}</Typography>
+                                    {/*dont show add to chats for the user who is signed in (you cant add yourself to chats)*/}
+                                    {!(user.uid === palId) &&
+                                    <Button size="small" onClick={addToChats}>Add to chats</Button>
+                                    }
                                 </div>
                             {/* <IconButton aria-label="settings">
                                 <MoreVertIcon />
@@ -100,7 +158,7 @@ const [bio,setBio] = useState(userInfo?.bio);
                         <div className="userProfile__headerTypography">
                                                 {/*user bio*/}
                             <Typography>{userInfo?.bio}</Typography>
-                            <Typography>Interests</Typography>
+                            {/* <Typography>Interests</Typography> */}
                         </div>
                     </div>
                     <span>{userInfo?.institute && <Chip size="x-small" icon={<AccountBalanceIcon />} label={userInfo?.institute} />}</span>

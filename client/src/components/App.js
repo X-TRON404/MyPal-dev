@@ -302,7 +302,7 @@ const handleCloseNotif = (event, reason) => {
           //added the newly created user to our firestore database for posts 
           DataBase.collection('users').doc(authUser.user.uid).set({
             email:authUser.user.email,
-            displayName:authUser.user.displayName,
+            displayName:username,
             bio:bio,
             online:true,
             institute:institute,
@@ -311,7 +311,7 @@ const handleCloseNotif = (event, reason) => {
            //add the newly created user to realtime db for messages
            realtime
            .ref(`/'users'/${authUser.user.uid}`)
-           .set({displayName : authUser.user.displayName},
+           .set({displayName : username},
             (error) => {
             if (error) {
               // alert(error.message)

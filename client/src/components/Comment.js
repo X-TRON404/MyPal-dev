@@ -69,7 +69,7 @@ export const Comment = ({commentId, user_id, timeInMillis, username, text, postI
                     <strong>{comment.username + ": "}</strong>
                   </Link>
                   {comment.text}
-                  <span> {format(timeInMillis)}</span>
+                  <span> {format(comment.timestamp?.seconds*1000)}</span>
                 </div>
         ))}
       </div>

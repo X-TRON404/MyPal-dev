@@ -21,7 +21,7 @@ function BookmarkedPost({postId}) {
     },[,user,postId]);
     return (
         <div className="bookmarkedPost">
-             <Post postId={postId} username={postToBookmark?.username} user_id={postToBookmark?.user_id} caption={postToBookmark?.caption} imageUrl={postToBookmark?.imageUrl} likesCount={postToBookmark?.likesCount}/>
+             <Post postId={postId} username={postToBookmark?.username} user_id={postToBookmark?.user_id} timeInMillis={postToBookmark?.timestamp?.seconds * 1000}  caption={postToBookmark?.caption} imageUrl={postToBookmark?.imageUrl} likesCount={postToBookmark?.likesCount}/>
         </div>
     )
 }

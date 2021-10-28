@@ -15,6 +15,7 @@ import AlertDialog from '../AlertDialog';
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
+      zIndex:100000,
     },
     paper:{
       backgroundColor:'#2E3236',

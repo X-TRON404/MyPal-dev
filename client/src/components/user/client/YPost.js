@@ -51,10 +51,19 @@ function getModalStyle() {
 }
 
 //=======================================================================================================
-function YPost({ postId, username, user_id, timeInMillis, caption, imageUrl, likesCount }) {
+function YPost({
+  postId,
+  username,
+  user_id,
+  timeInMillis,
+  caption,
+  imageUrl,
+  likesCount,
+  onDelete
+}) {
   const classes = useStyles();
   //get the user from the provider
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
   //store comments from the database for a praticular post in an array (GET from DataBase)
   const [comments, setComments] = useState([]);
   //input comment for a post from the user  (POST to DataBase)
@@ -156,7 +165,7 @@ function YPost({ postId, username, user_id, timeInMillis, caption, imageUrl, lik
         .orderBy("timestamp", "desc")
         .onSnapshot((snapshot) => {
           //set comments to the data inside the doc
-          setComments(snapshot.docs.map(doc =>({id:doc.id,comment:doc.data()})));
+          setComments(snapshot.docs.map(doc => ({ id: doc.id, comment: doc.data() })));
         });
 
       //check if the user already liked the doc or not
@@ -385,14 +394,14 @@ function YPost({ postId, username, user_id, timeInMillis, caption, imageUrl, lik
         {
           //to stop react from freaking out when the user is not logged in
           user &&
-            //Dont show anything for the post which are written by the user who is logged in
-            !(user.uid === user_id) &&
-            //when there are no chats (chat array is empty)
-            ((Array.isArray(chats_array) && chats_array.length) === 0 ? (
-              <Button size="small" onClick={addToChats}>
-                Add to chats
-              </Button>
-            ) : //when there are chats
+          //Dont show anything for the post which are written by the user who is logged in
+          !(user.uid === user_id) &&
+          //when there are no chats (chat array is empty)
+          ((Array.isArray(chats_array) && chats_array.length) === 0 ? (
+            <Button size="small" onClick={addToChats}>
+              Add to chats
+            </Button>
+          ) : //when there are chats
             //check if the user is present in the chats_array
             isPresent ? (
               //if present
@@ -427,6 +436,7 @@ function YPost({ postId, username, user_id, timeInMillis, caption, imageUrl, lik
 
         {/*Report or bookmarks Menu*/}
         <YPostMenu
+          onDelete={onDelete}
           postId={postId}
           postUsername={username}
           postUserId={user_id}
@@ -538,9 +548,9 @@ function YPost({ postId, username, user_id, timeInMillis, caption, imageUrl, lik
         {/*collapse when comments icon is clicked and show all the comments*/}
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <div className="post_commentWrapper">
-            {comments.map((id,comment) => {
+            {comments.map((id, comment) => {
               //here we are accessing the username and text fields of the doc[comment(iterator)] from 'comments' collection of the DataBase
-              return(<Comment
+              return (<Comment
                 key={id.id}
                 commentId={id.id}
                 user_id={id.comment.user_id}
@@ -548,7 +558,8 @@ function YPost({ postId, username, user_id, timeInMillis, caption, imageUrl, lik
                 timeInMillis={id.comment?.timestamp?.seconds * 1000}
                 text={id.comment.text}
                 postId={postId}
-              />)})
+              />)
+            })
             }
           </div>
         </Collapse>

@@ -435,6 +435,7 @@ function YPost({
                 } */}
 
         {/*Report or bookmarks Menu*/}
+        {/*On Delete method removes the post from the ui*/}
         <YPostMenu
           onDelete={onDelete}
           postId={postId}

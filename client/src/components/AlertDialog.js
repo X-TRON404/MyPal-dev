@@ -12,6 +12,7 @@ export default function AlertDialog({
 }) {
   const handleClose = () => {
     changeAlert(false);
+    // In case that this method is passed by props, execute it
     onClose?.()
   };
 

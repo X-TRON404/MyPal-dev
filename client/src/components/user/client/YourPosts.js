@@ -13,6 +13,7 @@ export default function YourPosts() {
   const [posts, setPosts] = useState([]);
 
   const handleGetPosts = async () => {
+    // Get user posts, in case of error, show a console.log
     try {
       const data = await DataBase.collection('posts').where('user_id', '==', user?.uid).get()
       const posts = data.docs.map(doc => ({ id: doc.id, post: doc.data() }))

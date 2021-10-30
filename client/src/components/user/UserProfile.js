@@ -141,14 +141,12 @@ function UserProfile() {
                         <div className="userProfile__headerTop">
                                 <Avatar className={classes.avatar} alt={userInfo?.displayName} src={userInfo?.displayName} ></Avatar>
                                 <div className="userProfile__headerInfo">
-                                    {/*if show edit input is true then show the input elements for edit else show normal elements*/}
-                                                {/*username*/}
                                     <Typography><b>{userInfo?.displayName}</b></Typography>
-                                    <Typography>{`Joined on ${user?.metadata.creationTime.slice(0,17)}`}</Typography>
-                                    {/*dont show add to chats for the user who is signed in (you cant add yourself to chats)*/}
-                                    {!(user.uid === palId) &&
+                                    <p style={{color:'gray'}}font-size="small">{`Joined on ${user?.metadata.creationTime.slice(0,17)}`}</p>
+                                  {/*dont show add to chats for the user who is signed in (you cant add yourself to chats)*/}
+                                                                      {!(user.uid === palId) &&
                                     <Button size="small" onClick={addToChats}>Add to chats</Button>
-                                    }
+                                  }
                                 </div>
                             {/* <IconButton aria-label="settings">
                                 <MoreVertIcon />
